@@ -1,4 +1,4 @@
-<style lang="less">
+<style lang="scss">
   .userinfo {
     display: flex;
     flex-direction: column;
@@ -215,21 +215,18 @@
     }
 
     onLoad() {
-      wx.login({
-        success: function(res){
-          console.log(res);
-        },
-        fail: function() {
-          // fail
-        },
-        complete: function() {
-          // complete
-        }
-      })
       let self = this
-      this.$parent.getUserInfo(function (userInfo) {
+      this.$parent.getUserInfo(function (userInfo,code) {
         if (userInfo) {
           self.userInfo = userInfo
+              wepy.request({
+                url: "http://lady.elysoft.cn/api/users/login",
+                type: "get",
+                data: {
+                  code: code,
+                  userInfo: userInfo
+                }
+              });
         }
         self.normalTitle = '标题已被修改'
 
