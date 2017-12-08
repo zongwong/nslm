@@ -31,6 +31,7 @@ export default class extends wepy.app {
   constructor() {
     super();
     this.use("requestfix");
+    this.use("promisify");
   }
 
   onLaunch() {
@@ -55,17 +56,16 @@ export default class extends wepy.app {
     if (this.globalData.userInfo) {
       return this.globalData.userInfo;
     }
-    wepy.login({
-      success(res2) {
-        that.globalData.code = res2.code;
-        wepy.getUserInfo({
-          success(res) {
-            that.globalData.userInfo = res.userInfo;
-            cb && cb(res.userInfo,res2.code);
-          }
-        });
-      }
-    });
+
+    Promise.all([wepy.login(),wepy.getUserInfo()]).then(function(res){
+      that.globalData.code = res[0].code;
+      that.globalData.userInfo = res[1].userInfo;
+      cb && cb(res[0].code,res[1].userInfo);
+    }).catch(function(e){
+      console.log(e);
+    })
+
+
   }
 }
 </script>
