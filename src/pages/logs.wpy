@@ -1,0 +1,29 @@
+<style lang="scss">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+</style>
+<template>
+  <view class="container">
+    123
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class logs extends wepy.page {
+
+  }
+</script>

@@ -15,12 +15,34 @@ import "wepy-async-function";
 
 export default class extends wepy.app {
   config = {
-    pages: ["pages/index"],
+    pages: ["pages/index", "pages/user", "pages/logs"],
     window: {
       backgroundTextStyle: "light",
-      navigationBarBackgroundColor: "#fff",
-      navigationBarTitleText: "WeChat",
-      navigationBarTextStyle: "black"
+      navigationBarBackgroundColor: "#000",
+      navigationBarTitleText: "女神课程表",
+      navigationBarTextStyle: "white"
+    },
+    tabBar: {
+      list: [
+        {
+          pagePath: "pages/index",
+          text: "首页",
+          iconPath: "images/icon-list.png",
+          selectedIconPath: "images/icon-list-on.png"
+        },
+        {
+          pagePath: "pages/logs",
+          text: "日志",
+          iconPath: "images/icon-course.png",
+          selectedIconPath: "images/icon-course-on.png"
+        },
+        {
+          pagePath: "pages/user",
+          text: "我的",
+          iconPath: "images/icon-user.png",
+          selectedIconPath: "images/icon-user-on.png"
+        }
+      ]
     }
   };
 
@@ -34,38 +56,6 @@ export default class extends wepy.app {
     this.use("promisify");
   }
 
-  onLaunch() {
-    this.testAsync();
-  }
-
-  sleep(s) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve("promise resolved");
-      }, s * 1000);
-    });
-  }
-
-  async testAsync() {
-    const data = await this.sleep(3);
-    console.log(data);
-  }
-
-  getUserInfo(cb) {
-    const that = this;
-    if (this.globalData.userInfo) {
-      return this.globalData.userInfo;
-    }
-
-    Promise.all([wepy.login(),wepy.getUserInfo()]).then(function(res){
-      that.globalData.code = res[0].code;
-      that.globalData.userInfo = res[1].userInfo;
-      cb && cb(res[0].code,res[1].userInfo);
-    }).catch(function(e){
-      console.log(e);
-    })
-
-
-  }
+  onLaunch() {}
 }
 </script>

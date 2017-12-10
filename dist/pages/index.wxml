@@ -1,4 +1,12 @@
 
   <view class="container">
+     
+  <view class="searchbar">
+      <view class="searchbox">
+          <text class="search-icon"/>
+          <input placeholder="输入PK码赢取好友奖金！"/>
+      </view>
+      <view class="searchinfo"/>       
+  </view>
 
   </view>
