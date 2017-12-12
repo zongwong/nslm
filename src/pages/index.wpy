@@ -1,81 +1,81 @@
 <style lang="scss">
-  .userinfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .userinfo-avatar {
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 50%;
-  }
-
-  .userinfo-nickname {
-    color: #aaa;
-  }
+.index-banner{
+  height: 388rpx;
+  padding-left: 18rpx;
+}
+.index-banner image{
+  height: 100%;
+  width: 100%;
+}
 </style>
 <template>
-  <view class="container">
-     <searchBar></searchBar>
+  <view>
+    <searchBar></searchBar>
+    <view class="index-banner">
+      <image src="../images/banner.png"></image>
+    </view> 
+    <tabNav></tabNav>
+
+    <activityList></activityList>
+
   </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
-  import interfaces from '../interface/index'
-  import searchBar from '../components/searchBar'
-  export default class Index extends wepy.page {
-    config = {
-      navigationBarTitleText: '首页'
+import wepy from "wepy";
+import interfaces from "../interface/index";
+
+import activityList from "../components/activityList";
+import searchBar from "../components/searchBar";
+import tabNav from "../components/tabNav";
+
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: "首页"
+  };
+  components = {
+    searchBar: searchBar,
+    tabNav:tabNav,
+    activityList:activityList,
+  };
+
+  data = {};
+
+  computed = {
+    now() {
+      return +new Date();
     }
-    components = {
-      searchBar:searchBar
-    }
+  };
 
-    data = {
+  methods = {};
 
-    }
+  events = {};
 
-    computed = {
-      now () {
-        return +new Date()
-      }
-    }
+  onLoad() {
+    let self = this;
+    // interfaces.login()
+    // this.$parent.getUserInfo(function (code,userInfo) {
+    //   if (userInfo) {
+    //     self.userInfo = userInfo
+    //         wepy.request({
+    //           url: api.users.login.url,
+    //           method: api.users.login.method,
+    //           data: {
+    //             code: code,
+    //             userInfo: userInfo
+    //           }
+    //         });
+    //   }
+    //   self.normalTitle = '标题已被修改'
 
-    methods = {
-   
-    }
+    //   self.setTimeoutTitle = '标题三秒后会被修改'
+    //   setTimeout(() => {
+    //     self.setTimeoutTitle = '到三秒了'
+    //     self.$apply()
+    //   }, 3000)
 
-    events = {
-
-    }
-
-    onLoad() {
-      let self = this
-      // interfaces.login()
-      // this.$parent.getUserInfo(function (code,userInfo) {
-      //   if (userInfo) {
-      //     self.userInfo = userInfo
-      //         wepy.request({
-      //           url: api.users.login.url,
-      //           method: api.users.login.method,
-      //           data: {
-      //             code: code,
-      //             userInfo: userInfo
-      //           }
-      //         });
-      //   }
-      //   self.normalTitle = '标题已被修改'
-
-      //   self.setTimeoutTitle = '标题三秒后会被修改'
-      //   setTimeout(() => {
-      //     self.setTimeoutTitle = '到三秒了'
-      //     self.$apply()
-      //   }, 3000)
-
-      //   self.$apply()
-      // })
-    }
+    //   self.$apply()
+    // })
   }
+}
 </script>

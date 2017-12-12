@@ -1,6 +1,6 @@
 
-  <view class="container">
-     
+  <view>
+    
   <view class="searchbar">
       <view class="searchbox">
           <text class="search-icon"/>
@@ -8,5 +8,25 @@
       </view>
       <view class="searchinfo"/>       
   </view>
+
+    <view class="index-banner">
+      <image src="../images/banner.png"/>
+    </view> 
+    
+  <view class="tabNav">
+      <view  wx:for="{{$tabNav$navs}}" class="tabNav-item {{item.selected?'active':''}}">
+          {{item.text}}
+      </view>
+  </view>
+
+
+    
+  <view class="activityList">
+      <view class="list-item">
+          <image class="item-image" src="../images/default-list.png"/>
+          <view class="item-info"/>
+      </view>
+  </view>
+
 
   </view>

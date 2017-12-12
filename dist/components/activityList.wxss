@@ -1,0 +1,1 @@
+.activityList{padding:18rpx}.activityList .list-item{border:1px solid #ececec;background:#fff;padding:14rpx;display:flex}.activityList .list-item .item-image{width:272rpx;height:154rpx}.activityList .list-item .item-info{flex:1;height:154rpx}

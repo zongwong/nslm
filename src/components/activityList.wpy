@@ -1,0 +1,35 @@
+<style lang="scss">
+    .activityList{
+        padding: 18rpx;
+       .list-item{
+           border: 1px solid #ececec;
+           background: #fff;
+           padding: 14rpx;
+           display:flex;
+           .item-image{
+               width:272rpx;
+               height: 154rpx;
+           }
+           .item-info{
+               flex:1;
+               height: 154rpx;
+           }
+       }
+    }
+</style>
+<template>
+  <view class="activityList">
+      <view class="list-item">
+          <image class="item-image" src="../images/default-list.png"></image>
+          <view class="item-info"></view>
+      </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class ActivityList extends wepy.component{
+      data={
+
+      }
+  }
+</script>

@@ -1,2 +1,4 @@
+@import "./../components/activityList.wxss";
+@import "./../components/tabNav.wxss";
 @import "./../components/searchBar.wxss";
-.userinfo{display:flex;flex-direction:column;align-items:center}.userinfo-avatar{width:80rpx;height:80rpx;border-radius:50%}.userinfo-nickname{color:#aaa}
+.index-banner{height:388rpx;padding-left:18rpx}.index-banner image{height:100%;width:100%}
