@@ -7,27 +7,35 @@
   height: 100%;
   width: 100%;
 }
+.openDaka{
+  width: 108rpx;
+  height: 108rpx;
+  position: fixed;
+  top: 970rpx;
+  right: 16rpx;
+  z-index: 1;
+}
 </style>
 <template>
   <view>
     <searchBar></searchBar>
     <view class="index-banner">
-      <image src="../images/banner.png"></image>
+      <image src="../../images/banner.png"></image>
     </view> 
     <tabNav></tabNav>
 
     <activityList></activityList>
-
+    <image class="openDaka" src="../../images/icon-dk.png"></image> 
   </view>
 </template>
 
 <script>
 import wepy from "wepy";
-import interfaces from "../interface/index";
+import interfaces from "../../interface/index";
 
-import activityList from "../components/activityList";
-import searchBar from "../components/searchBar";
-import tabNav from "../components/tabNav";
+import activityList from "../../components/index/activityList";
+import searchBar from "../../components/index/searchBar";
+import tabNav from "../../components/index/tabNav";
 
 export default class Index extends wepy.page {
   config = {

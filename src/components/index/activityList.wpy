@@ -1,0 +1,81 @@
+<style lang="scss">
+.activityList {
+  padding: 18rpx;
+  .list-item {
+    border: 1px solid #ececec;
+    background: #fff;
+    padding: 14rpx;
+    display: flex;
+    .item-image {
+      width: 272rpx;
+      height: 154rpx;
+      margin-right: 18rpx;
+    }
+    .item-info {
+      line-height: 1;
+      flex: 1;
+      height: 154rpx;
+      .item-title {
+        font-size: 30rpx;
+        width: 390rpx;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 6rpx 0 8rpx 0;
+      }
+      .item-desc {
+        font-size: 26rpx;
+        color: #888;
+        line-height: 1.3;
+        height: 68rpx;
+        overflow: hidden;
+      }
+      .item-other {
+        margin-top: 5rpx;
+        display: flex;
+        font-size: 22rpx;
+        height: 30rpx;
+        color: #ff4a88;
+        line-height: 30rpx;
+        .item-day {
+          background: #ff4a88;
+          color: #fff;
+          border-radius: 15rpx;
+          padding: 0 15rpx;
+          margin-right: 10rpx;
+        }
+        .item-money {
+          border:2rpx solid #ff4a88;
+          box-sizing: border-box;
+          border-radius: 15rpx;
+          padding: 0 15rpx;
+        }
+        .item-people {
+          text-align: right;
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="activityList">
+    <view class="list-item">
+        <image class="item-image" src="../../images/default-list.png"></image>
+        <view class="item-info">
+            <view class="item-title">活动标题啊</view>
+            <view class="item-desc">活动简介啊</view>
+            <view class="item-other">
+              <text class="item-day">30天任务</text><text class="item-money">5元/天</text><text class="item-people">5人已报名</text>
+            </view>
+        </view>
+    </view>
+  </view>
+</template>
+<script>
+import wepy from "wepy";
+export default class ActivityList extends wepy.component {
+  data = {};
+}
+</script>
