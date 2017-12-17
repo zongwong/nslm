@@ -1,0 +1,35 @@
+<style lang="scss">
+.myexchange{
+  .list_item_detail{
+    .bdurl{
+      margin-bottom: 4rpx;
+    }
+  }
+}
+</style>
+<template>
+  <view class="myexchange">
+    <view class="pbcontent">    
+      <view class="list_item">
+        <view class="list_item_info">
+          <image class="list_item_post" src="../../images/detail_bg.png"></image>
+          <view class="list_item_detail">
+            <view class="title singleTextOverflow">一周塑形课程</view>
+            <view class="desc singleTextOverflow greyColor">描述内容</view>
+            <view class="singleTextOverflow bdurl">百度网盘地址:https://pan.baidu.com/asdsadasas搜索</view>
+            <view class="singleTextOverflow pinklight">网盘提取码:1232</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Myexchange extends wepy.page {
+      config = {
+        navigationBarTitleText: "我的兑换"
+      };
+  }
+</script>

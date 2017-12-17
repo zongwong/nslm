@@ -1,0 +1,245 @@
+<style lang="scss">
+.header{
+  height: 86rpx;
+  background: #ff4a88;
+  color:#fff;
+  padding: 0 37rpx;
+  line-height: 86rpx;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.qa_icon{
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background:#fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAbCAYAAACa9mScAAABi0lEQVQ4jaXVP0hVYRzG8Y8HTRwiEGkRxTFyCQpBbDAXRRQcIveyhoSGcBAXG4KcEwIVFd0UREEk2oocpCkQVBqtMAinIsV/Obz3kpzOvefc67Odc573+77n+f1+51T87R6Tojr8xmEhQ5Rw7woG8RFH+IkDfMMEbsYXVMauW7CAJuxjBV9Rg9t4jId4gyEcxyEdWMvtPoA5nMQ2uYFxPEMj7uM0/zoNWMIvtGI6AQA76MQk+jDKv0zGcA0PsJWw+KLO8BQbGEZjhNrcsd7ifQogr1OMoAqPItwVKrKYEZDXB6Fy7ZEQEHwpEXImZNQQ4TPeYbNECKGSUSXW0VUGoEIo+W5Sx2ZVC+qxfhnIKyGX2XIhL3EPU9iOz06aruM1+oVme07yFBdSj9DN/ZgX2v8P/09xIfViGT9ysLWLD7NAajGDPbRhN27IAnkifN36kgBky6Q3d4rVQoYskDv4JPREWZCrwoR/L2ZKg5wIZd0oZkoL9gDNKZ6Smq1sSIQXuHUZSLXwI2stZjoHrSZMpwKaCaYAAAAASUVORK5CYII=) center / 100% no-repeat;
+  background-size: 17rpx 27rpx;
+  margin-top: 21rpx;
+}
+.content{
+  padding:18rpx 16rpx;
+  .item{
+    border: 2rpx solid #f1f1f1;
+    border-radius: 24rpx;
+    background: #fff;
+    padding: 18rpx;
+    margin-bottom: 18rpx;
+    font-size: 24rpx;
+    .post_image{
+      width: 100%;
+      height: 300rpx;
+      border-radius: 12rpx;
+    }
+    .title{
+      font-size: 30rpx;
+      margin: 20rpx 0;
+      font-weight: 600;
+    }
+    .desc{
+      line-height: 34rpx;
+      margin-bottom: 20rpx;
+    }
+    .btn{
+      display: flex;
+      justify-content: space-between;
+      line-height: 46rpx;
+      .right{
+        background: #ff4a88;
+        color: #fff;
+        border-radius: 25rpx;
+        width: 180rpx;
+        text-align: center;
+      }
+    }
+  }
+}
+.modal_mask{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgba(0,0,0,.8);
+  top: 0;
+  left: 0;
+}
+.modal{
+  width: 588rpx;
+  height: 800rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  overflow: hidden;
+  position: fixed;
+  top: 150rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  .modal_header{
+    height: 324rpx;
+    width: 100%;
+    border-bottom: 4rpx solid #ff4a88;
+    position: relative;
+    .h_item{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+    image{
+      z-index: 2;
+    }
+    .post_mask{
+      z-index: 3;
+      background: rgba(0,0,0,.5);
+    }
+    .info{
+      color: #fff;
+      z-index: 4;
+      text-align: center;
+      font-size: 24rpx;
+      line-height: 1;
+      .need_num{
+        font-size: 70rpx;
+        margin: 86rpx 0 10rpx 0;
+        text{
+          font-size: 22rpx;
+        }
+      }
+      .tips_text{
+        margin-bottom: 35rpx;
+      }
+      .tags{
+        text{
+          display: inline-block;
+          border-radius: 30rpx;
+          line-height: 36rpx;
+          border: 2rpx solid #fff;
+          padding: 0 24rpx;
+          max-width: 260rpx;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          &:first-child{
+            border-color: #ff4a88;
+            background: #ff4a88;
+            margin-right: 20rpx;
+          }
+        }
+
+      }
+    }
+  }
+  .modal_body{
+    label{
+      display: flex;
+      border-bottom: 2rpx solid #ececec;
+      padding: 12rpx 24rpx; 
+      font-size: 28rpx;
+      line-height: 52.5rpx;
+      &:last-child{
+        border-bottom: none;
+      }
+      .label_text{
+        width: 120rpx;
+        text-align: center;
+      }
+      .label_input{
+        flex: 1;
+        color: #888;
+        input{
+          width: 100%;
+        }
+      }
+    }
+
+  }
+  .ex_btn{
+    width: 460rpx;
+    background: #ff4a88;
+    color: #fff;
+    line-height: 64rpx;
+    font-size: 26rpx;
+    position: absolute;
+    bottom: 24rpx;
+    left: 50%;
+    margin-left: -230rpx;
+    border-radius: 40rpx;
+  }
+}
+.close{
+  width: 108rpx;
+  height: 108rpx;
+  position: absolute;
+  left: 50%;
+  margin-left: -54rpx;
+  top: 970rpx;
+  background: url(data:image/png;base64,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) center / 100% no-repeat;
+}
+</style>
+<template>
+  <view class="exchange">
+    <view class="header">
+      <view>当前女神勋章：9枚</view>
+      <view class="qa_icon"></view>
+    </view>
+    <!-- 导航 -->
+    <!-- 内容 -->
+    <view class="content">    
+      <view class="item">
+        <image class="post_image" src="../../images/detail_bg.png"></image>
+        <view class="title singleTextOverflow">一周塑形课程</view>
+        <view class="desc greyColor">描述内容</view>
+        <view class="btn">
+          <view class="left pinklight">兑换条件:5枚女神勋章</view>
+          <view class="right"><navigator>去兑换</navigator></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 兑换框 -->
+  <view class="modal_mask">
+    <view class="modal">
+      <view class="modal_header">
+        <image class="h_item" src="../../images/default-list.png"></image>
+        <view class="h_item post_mask"></view>
+        <view class="h_item info">
+          <view class="need_num">10<text>枚</text></view>
+          <view class="tips_text">兑换所需</view>
+          <view class="tags">
+            <text>奖品:女神课程</text>
+            <text>当前女神勋章:4010</text>
+          </view>
+        </view>
+      </view>
+      <view class="modal_body">
+        <label for="name">
+          <view class="label_text">姓名</view>
+          <view class="label_input"><input type="text" id="name" placeholder="请输入姓名"></view>
+        </label>
+        <label for="phone">
+          <view class="label_text">电话</view>
+          <view class="label_input"><input type="text" id="phone" placeholder="请输入电话"></view>
+        </label>
+        <label for="wx">
+          <view class="label_text">微信</view>
+          <view class="label_input"><input type="text" id="wx" placeholder="请输入微信"></view>
+        </label>
+        <label for="address">
+          <view class="label_text">地址</view>
+          <view class="label_input"><input type="text" id="address" placeholder="请输入地址"></view>
+        </label>
+      </view>
+      <button class="ex_btn">确认兑换</button>
+    </view>
+    <view class="close"></view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Exchange extends wepy.page {
+      config = {
+        navigationBarTitleText: "兑换中心"
+      };
+  }
+</script>

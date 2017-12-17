@@ -1,0 +1,112 @@
+<style lang="scss">
+.activehistory{
+  .list_item_info{
+    .status{
+      position: absolute;
+      width: 114rpx;
+      height: 114rpx;
+      z-index: 4;
+      top: 58rpx;
+      right:38rpx;
+    }
+  }
+  .list_item_detail{
+    .desc{
+      border-bottom: none!important;
+      margin-bottom: 0!important;
+    }
+    .time{
+      border-radius: 20rpx;
+      // border: 2rpx solid #ff4a88;
+      color: #ff4a88;
+      display: inline-block;
+      // padding: 0 10rpx;
+      box-sizing: border-box;
+      margin-bottom: 10rpx;
+    }
+    .tags{
+      display: flex;
+      justify-content: space-between;
+      .money{
+        background: #ff4a88;
+        color: #fff;
+        border-radius: 20rpx;
+        line-height: 28rpx;
+        padding: 0 10rpx;
+      }
+      view{
+        &:last-child{
+          text-align: right;
+        }
+      }
+    }
+  }
+  .list_item_data{
+    border-top: 2rpx solid #f2f2f2; 
+    padding: 24rpx 0;
+    margin-top: 24rpx;
+    display: flex;
+    .data_item{
+      flex: 1;
+      border-left:2rpx solid #f2f2f2;
+      text-align: center;
+      &:first-child{
+        border-left: none;
+      }
+      view{
+        color: #a9a9a9;
+        &:first-child{
+          font-weight: bold;
+          font-size: 50rpx;
+        }
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="activehistory">
+    <view class="pbcontent">    
+      <view class="list_item">
+        <view class="list_item_info">
+          <image class="list_item_post" src="../../images/detail_bg.png"></image>
+          <view class="list_item_detail">
+            <view class="title singleTextOverflow">一周塑形课程</view>
+            <view class="desc singleTextOverflow greyColor">描述内容</view>
+            <view><text class="time">2017/11/12-2017/11/23</text></view>
+            <view class="tags">
+              <view><text class="money">￥155.00</text></view>
+              <view><text class="greyColor">999人参与</text></view>
+            </view>
+          </view>
+          <image class="status" src="../../images/status_ok.png"></image>
+          <!-- <image class="status" src="../../images/status_no.png"></image> -->
+        </view>
+        <view class="list_item_data">
+          <view class="data_item">
+            <view>07</view>
+            <view>报名人数</view>
+          </view>
+          <view class="data_item">
+            <view>07</view>
+            <view>参与天数</view>
+          </view>
+          <view class="data_item">
+            <view>07</view>
+            <view>累计奖金</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Mypublish extends wepy.page {
+      config = {
+        navigationBarTitleText: "我的发布"
+      };
+  }
+</script>

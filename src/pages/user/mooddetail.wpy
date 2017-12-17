@@ -1,0 +1,202 @@
+<style lang="scss">
+.mooddetail{
+  background: #fff;
+  overflow: hidden;
+  .mood_item{
+    border-color: #fff;
+    margin-bottom: 0;
+  }
+  .data{
+    height: 177rpx;
+    position: relative;
+    margin-bottom: 18rpx;
+    image{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;;
+    }
+    .data_info{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      padding: 28rpx 48rpx;
+      box-sizing: border-box;
+      display: flex;
+      text-align: center;
+      .data_item{
+        color: #fff;
+        flex: 1;
+        line-height: 1;
+        &:first-child{
+          border-right: 2rpx solid #fff;
+        }
+        .num{
+          font-size: 90rpx;
+        }
+        .text{
+          border: 2rpx solid #fff;
+          border-radius: 40rpx;
+          font-size:22rpx;
+          display: inline-block;
+          padding: 4rpx 12rpx;
+        }
+
+      }
+    }
+  }
+}
+.comment{
+  margin-top: 18rpx;
+  background: #fff;
+  padding: 0 34rpx;
+  margin-bottom: 180rpx;
+  .title{
+    font-size: 32rpx;
+    font-weight: bold;
+    line-height: 80rpx;
+  }
+  .comment_item{
+    border-top: 2rpx solid #eee;
+    padding: 20rpx 0;
+    .userinfo{
+      display: flex;
+      &>image{
+        width: 62rpx;
+        height: 62rpx;
+        border-radius: 50%;
+        margin-right: 18rpx;
+      }
+      &>view{
+        line-height: 62rpx;
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        text{
+          &:last-child{
+            font-size: 24rpx;
+          }
+        }
+      }
+    }
+    .comment_content{
+      font-size: 26rpx;
+      line-height: 34rpx;
+      margin-top: 10rpx;
+      padding-left: 80rpx;
+    }
+  }
+}
+.btns{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 86rpx;
+  border-top: 2rpx solid #f3f3f3;
+  background: #fff;
+  display: flex;
+  view{
+    flex: 1;
+    text-align: center;
+    line-height: 86rpx;
+    font-size: 28rpx;
+    color: #888;
+    &:first-child{
+      border-right: 2rpx solid #f3f3f3;
+    }
+  }
+}
+</style>
+<template>
+  <view class="mooddetail">
+    <view class="mood_list">
+      <view class="mood_item">
+        <view class="mood_item_avatar">
+          <image src="../../images/default_avatar.png"></image>
+        </view>
+        <view class="mood_item_detail">
+          <view class="detail_user">
+            <view class="name"><text>王小花</text></view>
+            <view class="time"><text class="greyColor">2017/22/12</text></view>
+          </view>
+          <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
+          <view class="mood_item_imgs">
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+          </view>
+          <view class="mood_item_btns">
+            <view>
+              <text class="icon icon_pl"></text>
+              <text>9999</text>
+            </view>
+            <view>
+              <text class="icon icon_dz active"></text>
+              <text>9999</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="data">
+      <image src="../../images/moodbg.png"></image>
+      <view class="data_info">
+        <view class="data_item">
+          <view class="num">12</view>
+          <view class="text">累计打卡</view>
+        </view>
+        <view class="data_item">
+          <view class="num">12</view>
+          <view class="text">任务天数</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="comment">
+    <view class="title">评论</view>
+    <view class="comment_box">
+      <view class="comment_item">
+        <view class="userinfo">
+          <image src="../../images/default_avatar.png"></image>
+          <view>
+            <text>昵称</text>
+            <text class="greyColor">2012/23/23</text>
+          </view>
+        </view>
+        <view class="comment_content">
+            123123123123
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="btns">
+    <view>
+      <text class="icon icon_dz active"></text>
+      <text>点赞</text>
+    </view>
+    <view>
+      <text class="icon icon_pl"></text>
+      <text>评论</text>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Mooddetail extends wepy.page {
+      config = {
+        navigationBarTitleText: "心情评论"
+      };
+  }
+</script>

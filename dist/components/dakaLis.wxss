@@ -1,1 +1,0 @@
-.tabNav{height:78rpx;border-bottom:2rpx solid #ebebeb;display:flex;justify-content:space-around;margin:22rpx 0;background:#fff}.tabNav .tabNav-item{height:76rpx;border-bottom:2rpx solid #fff;font-size:26rpx;line-height:76rpx;width:190rpx;text-align:center}.tabNav .tabNav-item.active{border-bottom-color:#ff4a88;color:#ff4a88}

@@ -1,4 +1,0 @@
-@import "./../components/activityList.wxss";
-@import "./../components/tabNav.wxss";
-@import "./../components/searchBar.wxss";
-.index-banner{height:388rpx;padding-left:18rpx}.index-banner image{height:100%;width:100%}

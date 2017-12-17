@@ -1,0 +1,86 @@
+<style lang="scss">
+  .header{
+    position: relative;
+    margin: 24rpx 18rpx;
+    width: 714rpx;
+    height: 320rpx;
+    .bg,.info{
+      width: 714rpx;
+      height: 320rpx;
+      position: absolute;
+      z-index: 1;
+    }
+    .info{
+      color: #fff;
+      text-align: center;
+      .mymoney{
+        font-size: 72rpx;
+        line-height: 1;
+        margin-top: 90rpx;
+        margin-bottom: 16rpx;
+      }
+      .text{
+        font-size: 24rpx;
+        line-height: 1;
+      }
+      .detial{ 
+        font-size: 22rpx;
+        background: #fff;
+        color: #ff4a88;
+        border-radius: 30rpx;
+        width: 120rpx;
+        margin: 60rpx auto 0;
+      }
+    }
+  }
+  .label{
+    display: flex;
+    background: #fff;
+    padding: 30rpx 40rpx;
+    view{
+      font-size: 28rpx;
+      line-height: 52.5rpx;
+      &:first-child{
+        width: 140rpx;
+      }
+      &:last-child{
+        flex: 1;
+        input{
+          width: 100%;
+          color: #a9a9a9;
+        }
+      }
+    }
+  }
+
+</style>
+<template>
+  <view class="money">
+    <view class="header">
+      <image class="bg" src="../../images/moneybg.png"></image>
+      <view class="info">
+        <view class="mymoney">200.00</view>
+        <view class="text">可提现金额</view>
+        <navigator class="detial" url="/pages/user/moneydetail">
+          奖金明细
+        </navigator>
+      </view>
+    </view>
+    <label class="label" for="money">
+      <view>提现金额</view>
+      <view><input type="text" id="money" placeholder="请输入提现金额" placeholder-style="color:#a9a9a9;"></view>  
+    </label>
+    <view class="join">
+      <button>确定提现</button>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Money extends wepy.page {
+      config = {
+        navigationBarTitleText: "提现"
+      };
+  }
+</script>

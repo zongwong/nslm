@@ -1,0 +1,326 @@
+<style lang="scss">
+.form_block {
+  margin-bottom: 12rpx;
+  line-height: 1;
+  background: #fff;
+  .form_title {
+    margin: 0 37rpx;
+    font-size: 30rpx;
+    font-weight: bold;
+    border-bottom: 2rpx solid #f2f2f2;
+    padding: 25rpx 0;
+  }
+  .form_item {
+    font-size: 26rpx;
+    padding: 28rpx 37rpx;
+    border-bottom: 2rpx solid #f2f2f2;
+    display: block;
+  }
+  label.form_item {
+    display: flex;
+    .label_text {
+      text-align: center;
+      width: 108rpx;
+      margin-right: 20rpx;
+      line-height: 52.5rpx;
+    }
+    .label_input {
+      flex: 1;
+      max-width: 546rpx;
+      overflow: hidden;
+      input {
+        width: 100%;
+      }
+      textarea {
+        line-height: 52.5rpx;
+        width: 100%;
+        height: 157.5rpx;
+      }
+      .picker_input {
+        box-sizing: border-box;
+        border: 2rpx solid #eee;
+        background: #f7f7f7;
+        color: #a9a9a9;
+        line-height: 52.5rpx;
+        border-radius: 10rpx;
+        padding: 0 34rpx 0 18rpx;
+        position: relative;
+        & > .arrow {
+          position: absolute;
+          width: 18rpx;
+          height: 100%;
+          top: 0;
+          right: 16rpx;
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAXCAYAAAA/ZK6/AAAA1klEQVQ4jY3TQUrEMABA0TedHsGDeAYPoK0bQdETqOAFRDyCW8G13blRQbyHm5n9nEBFHXQxKYSapsmmSfmPkNDOuq67xAzX+DUxKmzhCjcBZkeNi4BOw7vz3E411jjGvATV4bnGUQmqovkPDvEQUPJM1WD9hQM8jqEh6NE+nlMoBWL0MkRjAD7R4jVGdQbAO/bwFNBHbocY3Yb5dglocIc3nEyBBh2W2MEqB/7FjN9Sm4rHQIv7VJwC2XgIJuMYFMU92C2Ne3CGRUnM5o9rbL7O76kY/gB9akEv/8gPHgAAAABJRU5ErkJggg==)
+            center no-repeat;
+          background-size: 14rpx 23rpx;
+        }
+      }
+    }
+  }
+}
+.post_box {
+  text-align: center;
+  .image {
+    display: inline-block;
+    width: 214rpx;
+    height: 130rpx;
+    border-radius: 14rpx;
+    overflow: hidden;
+    margin-right: 18rpx;
+    margin-bottom: 18rpx;
+    border: 2rpx solid #fff;
+    box-sizing: border-box;
+    position: relative;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+    &.active {
+      border-color: #ff508a;
+      .select {
+        width: 45rpx;
+        height: 49rpx;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
+    }
+    image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.power_block{
+  padding-bottom: 28rpx;
+  margin-bottom: 100rpx;
+}
+.powerset{
+  border: 2rpx solid #ebebeb;
+  border-radius: 10rpx;
+  margin: 0 37rpx 18rpx 37rpx;
+  padding: 22rpx 28rpx;
+  position: relative;
+  .type{
+    font-size: 28rpx;
+    margin-bottom: 18rpx;
+  }
+  .desc{
+    font-size:24rpx;
+    line-height: 34rpx;
+    color: #888;
+    padding-right: 64rpx;
+  }
+  .select{
+    position: absolute;
+    width: 36rpx;
+    height: 36rpx;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2rpx solid #eee;
+    bottom: 14rpx;
+    right: 16rpx;
+  }
+  &.active{
+    border-color: #ff508a;
+    .select{
+      border: none;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAjCAYAAAD8BaggAAAC70lEQVRYhcXYW4jUZRjH8c/Mrq7oJoKIkZVLIouiiwlFHlIM3TxeKMiqG4IiFKIXFnjhhSIodiDRiwi6qQglDfFC8QCe8IAWaFmhwgqrkKUiZJKH3dTp4t2/DnOe3f/M/mCY//99n3mf77zz/p95nieRmv2xbqgGYzAKr6Ie/+FfXMVvuNadhWvLsE1iNt7DuxhUxP4a9uJbXCzHSSlajEvYh5YSYKABa/ALDuD1OICG4yh2orGUBfNoFn7CVtR1F2gazuOdHoCkq1bYsVN4sVyguTiIwTHBpOsNnMHLpQK9jV2KbG0P9RqOyfGFM4GGYjf6VxAm0kjhCUwUAvpSgd83NvWpia7mYEU+oBmYX3GYMa+wczUfzolGtkgLI+lA66sCs3Eh/euo7xeNDsbKTKBxmFwVmH59aL/NtgPpsysjlgiotaow677n3sN0i2FC3HsG1NyLMJGaI6B6jO1lGHgrAmqUEQt6AYaQykjKF3cGDagmDAxBIokXsqamjmbHKj6YUS2YSAOTyLZOpcL7vPEsnVItGHiUxN2s4ZOX2fNjuG6ZwII3qwHzEB1JIQfO1tcnONSVeS6fRnNTJWGgjXCob+BW1nQKXxzm9JXwDK6eyaQcSWM8MPBzBATHc5o8TfHZfi60k0ywdh7jGioBQ0iVnwH9kNfs8RM27eXyDWprWL+AxpfihunAfkh01WV98YcQC3JrQB2fttIwhPsd1CTjgiEUEa0836FOoSLIr/sdwfGffwe4+GBS+CS6Sc+HtqO94Ef/eRAAbt6l7WYcMPANfo1uEhml9HQcVqxeSySeB8+e6S804U40kOn4CDYXXSYemE4sSofJBQQb8F0cHgvoKZbjZOZELqAUlgkVSCXUiSXYkWsy31l5IuS57+NRjDDtmCoUojlVrNnwlXDoDvUQJAorTThXyLCUdkyb0L2YKET0cnbsNj7HCHwkNLQKqpyG1dmu10ChIzIZo4WKob7L5g6u43fh//EsHpfhw/+m1uvkLXReowAAAABJRU5ErkJggg==) center / 100% no-repeat;
+    }
+  }
+}
+</style>
+<template>
+  <view class="start">
+    <view class="form_block">
+      <view class="form_title">封面设置</view>
+      <view class="form_item post_box">
+        <view class="image active">
+          <image src="../../images/post.png"></image>
+          <image class="select" src="../../images/post_select.png"></image>
+        </view>
+        <view class="image">
+          <image src="../../images/post.png"></image>
+        </view>
+        <view class="image">
+          <image src="../../images/post.png"></image>
+        </view>
+        <view class="image">
+          <image src="../../images/post.png"></image>
+        </view>
+        <view class="image">
+          <image src="../../images/post.png"></image>
+        </view>
+        <view class="image">
+          <image src="../../images/post.png"></image>
+        </view>
+        <view class="image">
+          <image src="../../images/post.png"></image>
+        </view>
+        <view class="image">
+          <image src="../../images/post.png"></image>
+        </view>
+        <view class="image">
+          <image src="../../images/post.png"></image>
+        </view>
+       
+      </view>
+    </view>
+    <view class="form_block">
+      <view class="form_title">活动设置</view>
+      <label class="form_item" for="name">
+        <view class="label_text">
+          活动名称
+        </view>
+        <view class="label_input">
+          <input type="text" value="1" id="name">
+        </view>
+
+      </label>
+      <label class="form_item" for="desc">
+        <view class="label_text">
+          活动描述
+        </view>
+        <view class="label_input">
+          <textarea type="text" value="1" id="desc"></textarea>
+        </view>
+      </label>
+      <label class="form_item" for="desc">
+        <view class="label_text">
+          报名截止
+        </view>
+        <view class="label_input">
+            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+              <view class="picker_input">
+                当前选择: {{time}}
+                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+      </label>
+    </view>
+    <view class="form_block">
+      <view class="form_title">任务设置</view>
+
+      <label class="form_item" for="desc">
+        <view class="label_text">
+          保证金
+        </view>
+        <view class="label_input">
+            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+              <view class="picker_input">
+                当前选择: {{time}}
+                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+      </label>
+      <label class="form_item" for="desc">
+        <view class="label_text">
+          开始时间
+        </view>
+        <view class="label_input">
+            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+              <view class="picker_input">
+                当前选择: {{time}}
+                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+      </label>
+      <label class="form_item" for="desc">
+        <view class="label_text">
+          任务天数
+        </view>
+        <view class="label_input">
+            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+              <view class="picker_input">
+                当前选择: {{time}}
+                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+      </label>
+      <label class="form_item" for="desc">
+        <view class="label_text">
+          打卡时段
+        </view>
+        <view class="label_input">
+            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+              <view class="picker_input">
+                当前选择: {{time}}
+                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+      </label>
+    </view>
+    <view class="form_block power_block">
+      <view class="form_title"><text class="pinklight">权限设置</text></view>
+      <view class="powerset active">
+        <view class="type">广场任务</view>
+        <view class="desc">广广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务场任务</view>
+        <view class="select"></view>
+      </view>
+      <view class="powerset">
+        <view class="type">好友PK</view>
+        <view class="desc">广场任务</view>
+        <view class="select"></view>
+      </view>
+    </view>
+    <view class="join">
+      <button>发布活动</button>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+import interfaces from "../../interface/index";
+
+export default class Start extends wepy.page {
+  config = {
+    navigationBarTitleText: "发起打卡"
+  };
+  components = {};
+
+  data = {};
+
+  computed = {
+    now() {
+      return +new Date();
+    }
+  };
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {
+    let self = this;
+    // interfaces.login()
+    // this.$parent.getUserInfo(function (code,userInfo) {
+    //   if (userInfo) {
+    //     self.userInfo = userInfo
+    //         wepy.request({
+    //           url: api.users.login.url,
+    //           method: api.users.login.method,
+    //           data: {
+    //             code: code,
+    //             userInfo: userInfo
+    //           }
+    //         });
+    //   }
+    //   self.normalTitle = '标题已被修改'
+
+    //   self.setTimeoutTitle = '标题三秒后会被修改'
+    //   setTimeout(() => {
+    //     self.setTimeoutTitle = '到三秒了'
+    //     self.$apply()
+    //   }, 3000)
+
+    //   self.$apply()
+    // })
+  }
+}
+</script>

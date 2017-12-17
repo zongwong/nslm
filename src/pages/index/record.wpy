@@ -1,0 +1,307 @@
+<style lang="scss">
+  .header{
+    height: 424rpx;
+    overflow: hidden;
+    position: relative;
+    &>image{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left:0;
+    }
+    .mask{
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,.5);
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left:0;
+    }
+    .info_data{
+      position: absolute;
+      z-index: 3;
+      left:0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      text-align: center;
+      .data_item{
+        display: inline-block;
+        color: #fff;
+        &:first-child{
+          color: #ff508a;
+          .text{
+            border-color: #ff508a;
+          }
+        }
+        &:nth-child(2){
+          margin: 0 90rpx;
+        }
+        .count{
+          font-size: 90rpx;
+          line-height: 1;
+        }
+        .text{
+          display: inline;
+          font-size: 20rpx;
+          border:2rpx solid #fff;
+          border-radius: 15rpx;
+          padding: 0 18rpx;
+        }
+      }
+    }
+  }
+ .userinfo{
+   width: 100%;
+   position: absolute;
+   z-index: 4;
+   left: 0;
+   top: 50%;
+   transform: translateY(-50%);
+   image{
+     width: 100rpx;
+     height: 100rpx;
+     margin:0 auto;
+     display: block;
+     border-radius: 50%;
+   }
+   .nickname{
+     color: #fff;
+     text-align: center;
+     font-size: 30rpx;
+     margin-top: 12rpx;
+   }
+ }
+ .list{
+    margin: 0 37rpx;
+    margin-bottom: 162rpx;
+    .title{
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2rpx solid #ebebeb;
+      font-size: 28rpx;
+      padding: 37rpx 0 18rpx 0;
+      .status{ 
+        background: #52b700;
+        color: #fff;
+        font-size: 24rpx;
+        padding: 2rpx 8rpx;
+        margin-left: 6rpx;
+      }
+    }
+    .item{
+      border: 2rpx solid #ebebeb;
+      margin-top: 18rpx;
+      .item_title{
+        display:flex;
+        justify-content: space-between;
+        height: 60rpx;
+        line-height: 60rpx;
+        font-size: 23rpx;
+        .item_title_left{
+          text{
+            display: inline-block;
+            vertical-align: middle;
+            &:nth-child(2){
+              margin-right: 20rpx;
+            }
+          }
+          .status_icon{  
+            margin-left: 14rpx;
+            margin-right: 10rpx;
+            width: 24rpx;
+            height: 24rpx;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABxUlEQVRIia3WT4gOcRzH8dczVm5LSXYvbEjZkA3JyZ/L4iQXBw5qLyLFbW1bkrQpFyl7d3PgICkpcRApFx60B5dFW3qQG+3uk8Nvpv3t7MyzOzs+NZfv9/d7f+b3nZnvdxrNZtMS1I1tWI9pfMUkfi+2satDbhVO4wz2Y0UuP4vXuJtef4ogjZITHME4+ha7w1STOI9H+URSsPgKHleAwwY8xDU04kS+RGMYrgCO1cBoyrycBeMTHK8BjzWMk3mDbqHmdfTN3Ft1G6tjg7PoqQF/iX6hRLAOF2KDoZrwY8IdX4riQ5nBFmz9D/Dn2BTl+tCfYKAG/GgJPNOuxPJqn8HXdIBDb4KVueB1oe98qQmHrgQ/c8FBTOFQgUkVOLQSfMwF9+ApWjgYmVSFw4cEb/Erl9ibmvxITcaXAf+ON4nQdu8VLIhNzlWEwwO0s3a9GZ8sfODwTmjDp7BxifAZbMdE9iV/xo2SxTsxUgEONzHB/G56Fc8qQMr0xFxPmmcwgxN4UQP+SmjVs0UGhHY7iFtoVwC3cQeH5X4EikbmX1zEbtwX/iLKNC28LfuEmbxg8JcN/VhrcQA70CuMxim8F8rZ6rT5H5ioaPy3oQKvAAAAAElFTkSuQmCC) center / 100% no-repeat;
+          }
+        }
+        .item_title_right{
+          margin-right: 20rpx;
+          text{
+            color: #fff;
+            background: #d4d4d4;
+            border-radius: 10rpx;
+            // padding: 6rpx 18rpx;
+            text-align: center;
+            width: 112rpx;
+            height: 36rpx;
+            line-height: 36rpx;
+            display: inline-block;
+            box-sizing: border-box;
+          }
+        } 
+      }
+      .item_detail{
+        border-top: 2rpx solid #ebebeb;
+        padding: 16rpx 42rpx;
+        .desc{
+          font-size: 26rpx;
+          line-height: 34rpx;
+        }
+        image{
+          width: 274rpx;
+          height: 154rpx;
+          display: block;
+          margin: 16rpx 0;
+        }
+        .pinklight{
+          font-size: 20rpx;
+        }
+      }
+      &.success{
+        .item_title{
+          .item_title_left{
+            .status_icon{
+              background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABwUlEQVRIibXWzYtPURzH8dfc34zMlI1hoRRZzUKTSDGRFRtWslFDFlhQQuzMzsZisiCJhDz8A+QpymNGHkpKio0yKYXVJDONLM65unM7v9/9PYxP3brne77n/TnndJ66tt5WpWXYhEEsiLHveIsH+NiocXeDuo0YwfqKDjzFcdxNVWaJ2Fxcxr0m4LAOd3AdfVUGC/EYO5sAl7UdT7ConkFv7MnqNuC5VkbGv5EUDU7EhE41iNGywXLs6xB8Cg/j/16sKBocRq0D+BEcwKNYznAo/5mDbR3CRzGMY4X4FvRkWIV5swC/ZOYszMeaDAP/AZ5rIItORX3G81mAQ3+G36XgWWEHX62A76iAw2Q3xkvBEbzArlgergO/WAGH8QxvSsE+3MSGaJKPpFU4vM6EOX+XMLlRMFnbBvwDPuUb7VwioWgyJhyAzcLhPHTFC6cX77E0kTiNr1jcJBi+CMt/Ih/BL+yJsLJqLcKnhWmdYOZpeh9HWwDV00HhKlU2gJPYj6k2wJPYjdPFYOrKPIMhPGsBPiZcnRfKFSkDeBUbbMYV/Ejk/MS1mDOElylQo1cF3IpfDUuEZ8uUsKq+4U9Fe38BTZNcWoG86a8AAAAASUVORK5CYII=);
+            }
+          }
+
+        }
+      }
+      &.error{
+        .item_title{
+          .item_title_left{
+            .status_icon{
+              background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAB/ElEQVRIia3WTYhNYRgH8N+de4dSPpJiNjZk4aMoRChJysdKlBULNkI2CCNChoiFBVt2IprkqyQWSpKdj0E2k4XR1WQjjJmxeM+Ze+6Zc+49Lv/deZ/n+T/v83/e93lPqU8hTMBsTMUvfEIvvjULrDSwjcU2bMUSlFP2QbzAVVzBjyySUk4F63AZ05vtMEIv9uB22tCWToiTuPMX5CLfbnRFHCMo7693PI3DaaeCKGGFIOXjkcWERJtwowXiNIaxBdeTCSbinXBK/geqmIX+uAc7c8hP4XwDonNCc9OYgt3Umrwjh+Al9uFQhq0TB/A+J3Y7QaKZ+JDj9B3r8QQHhUMAR4TqluE+xufEz6lgQY4RxuFulORMtFYuSA7zK5jWwCGZZEMiyXLca0IOHW0aj4tkkkWJ78UFyKFSQX8Bx06cFWRpxwWMUetJHqoVvClA3qWmeVmtJ8NqsmXhdakvBFQxKcPhBI4Z3dDk6TqK4xmxX0Q9GMS1nB08EuZL+rTEjV+D5zmx3RiKR8UMvBX0TWLI6IlbBL8xDz1x8Efh2qfRCjlhvPRQP03b8QCrWiSN8RBrBenrdjiAjXj6D+TPsDkmTycgPOKrcVHQvyiGcEmovu5HIEvjn9iLhbgpVJaHAdzCUuyS8fDnPfpJTMZKzEVHtPYZr4R78LVR8B8lgGnyLoUU2gAAAABJRU5ErkJggg==);
+            }
+            .greenColor{
+              color: #e90000;
+            }
+          }
+        }
+      }
+    }
+ }
+.today{
+  background: #ff508a!important;
+}
+</style>
+<template>
+  <view class="record">
+    <view class="header">
+      <image  src="../../images/pkpost.png"></image>
+      <view class="mask"></view>
+      <view class="userinfo">
+        <image src="../../images/detail_bg.png"></image>
+        <view class="nickname">安慰全文</view>
+      </view>
+    </view>
+    <view class="list">
+      <view class="title">
+        <view>打卡进度<text class="status">进行中</text></view>
+        <view class="greyColor">总奖金：300元/7天</view>
+      </view>
+      <view class="item success">
+        <view class="item_title">
+          <view class="item_title_left">
+            <text class="status_icon"></text>
+            <text>11月22日 10:28</text>
+            <text class="greenColor">获得奖金：5元</text>
+          </view>
+          <view class="item_title_right">
+            <text>已打卡</text>
+          </view>
+        </view>
+        <view class="item_detail">
+          <view class="desc greyColor">asdas艾薇请问请问请问请问</view>
+          <image mode="aspectFill" src="../../images/detail_bg.png"></image>
+          <view class="pinklight">任务进度 1/30</view>
+        </view>  
+      </view>
+      <view class="item">
+        <view class="item_title">
+          <view class="item_title_left">
+            <text class="status_icon"></text>
+            <text>11月22日 10:28</text>
+            <text class="greenColor">获得奖金：5元</text>
+          </view>
+          <view class="item_title_right">
+            <text>未打卡</text>
+          </view>
+        </view>
+        <view class="item_detail">
+          <view class="desc greyColor">asdas艾薇请问请问请问请问</view>
+          <image mode="aspectFill" src="../../images/detail_bg.png"></image>
+          <view class="pinklight">任务进度 1/30</view>
+        </view>  
+      </view>
+      <view class="item error">
+        <view class="item_title">
+          <view class="item_title_left">
+            <text class="status_icon"></text>
+            <text>11月22日 10:28</text>
+            <text class="greenColor">扣除奖金：5元</text>
+          </view>
+          <view class="item_title_right">
+            <text>未打卡</text>
+          </view>
+        </view> 
+      </view>
+      <view class="item">
+        <view class="item_title">
+          <view class="item_title_left">
+            <text class="status_icon"></text>
+            <text>11月22日 10:28</text>
+            <text class="greyColor">任务进度：3/30</text>
+          </view>
+          <view class="item_title_right">
+            <text class="today">打卡</text>
+          </view>
+        </view> 
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+import interfaces from "../../interface/index";
+
+export default class Record extends wepy.page {
+  config = {
+    navigationBarTitleText: "好友PK"
+  };
+  components = {};
+
+  data = {};
+
+  computed = {
+    now() {
+      return +new Date();
+    }
+  };
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {
+    let self = this;
+    // interfaces.login()
+    // this.$parent.getUserInfo(function (code,userInfo) {
+    //   if (userInfo) {
+    //     self.userInfo = userInfo
+    //         wepy.request({
+    //           url: api.users.login.url,
+    //           method: api.users.login.method,
+    //           data: {
+    //             code: code,
+    //             userInfo: userInfo
+    //           }
+    //         });
+    //   }
+    //   self.normalTitle = '标题已被修改'
+
+    //   self.setTimeoutTitle = '标题三秒后会被修改'
+    //   setTimeout(() => {
+    //     self.setTimeoutTitle = '到三秒了'
+    //     self.$apply()
+    //   }, 3000)
+
+    //   self.$apply()
+    // })
+  }
+}
+</script>

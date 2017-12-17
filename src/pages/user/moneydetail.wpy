@@ -1,0 +1,54 @@
+<style lang="scss">
+.item{
+  display: flex;
+  justify-content: space-between;
+  border:2rpx solid #ebebeb;
+  margin: 20rpx 18rpx;
+  border-radius: 10rpx;
+  background: #fff;
+  padding: 30rpx 16rpx;
+  // height: 120rpx;
+  box-sizing: border-box;
+  .left{
+    .text{
+      font-size:30rpx;
+      margin-bottom: 8rpx;
+    }
+    .time{
+      font-size:22rpx;
+      color: #888;
+    }
+  }
+  .right{
+    color: #888;
+  }
+  &.add{
+    .right{
+      color: #ff4a88;
+    }
+  }
+}
+
+</style>
+<template>
+  <view class="money">
+    <view class="item add">
+      <view class="left">
+        <view class="text">原因说明</view>
+        <view class="time">2017/11/26 16:11</view>
+      </view>
+      <view class="right">
+        +300
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class MoneyDetail extends wepy.page {
+      config = {
+        navigationBarTitleText: "奖金明细"
+      };
+  }
+</script>

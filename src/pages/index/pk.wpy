@@ -1,0 +1,291 @@
+<style lang="scss">
+  .header{
+    height: 424rpx;
+    overflow: hidden;
+    position: relative;
+    &>image{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left:0;
+    }
+    .mask{
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,.5);
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left:0;
+    }
+    .info_data{
+      position: absolute;
+      z-index: 3;
+      left:0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      text-align: center;
+      .data_item{
+        display: inline-block;
+        color: #fff;
+        &:first-child{
+          color: #ff508a;
+          .text{
+            border-color: #ff508a;
+          }
+        }
+        &:nth-child(2){
+          margin: 0 90rpx;
+        }
+        .count{
+          font-size: 90rpx;
+          line-height: 1;
+        }
+        .text{
+          display: inline;
+          font-size: 20rpx;
+          border:2rpx solid #fff;
+          border-radius: 15rpx;
+          padding: 0 18rpx;
+        }
+      }
+    }
+  }
+  .info_block{
+    font-size: 26rpx;
+    background: #fff;
+    padding: 0 37rpx;
+    margin-bottom: 12rpx;
+    .title{
+      border-bottom: 2rpx solid #f2f2f2;
+      padding: 15rpx 0;
+      font-weight: bold;
+    }
+    .desc{
+      color: #888;
+      padding: 16rpx 0 24rpx 0;
+      line-height: 36rpx;
+    }
+  }
+  .active_block{
+    .userinfo{
+      height: 74rpx;
+      position: relative;
+      width: 100%;
+      image{
+        width: 94rpx;
+        height: 94rpx;
+        border-radius: 50%;
+        border: 10rpx solid #fff;
+        position: absolute;
+        top: -30rpx;
+        left: -10rpx;
+        z-index: 4;
+      }
+      .name{
+        margin-left: 124rpx;
+        font-size: 30rpx;
+        // font-weight: bold;
+        line-height: 74rpx;
+      }
+      .pk_num{
+        width: 326rpx;
+        border: 2rpx solid #ff4a88;
+        height: 36rpx;
+        border-radius: 20rpx;
+        line-height: 1;
+        display: flex;
+        position: absolute;
+        top: 16rpx;
+        right: 0rpx;
+        overflow: hidden;
+        view{
+          padding: 6rpx;
+          font-size: 24rpx;
+          &:first-child{
+            background: #ff4a88;
+            color: #fff;
+          }
+          &:last-child{
+            color: #888;
+          }
+        }
+      }
+    }
+    .title{
+      font-size: 40rpx;
+      font-weight: bold;
+      padding: 40rpx 0 20rpx 0;
+    }
+  }
+  .player_block{
+    padding-bottom: 26rpx;
+    .player{
+      image{
+        width: 62rpx;
+        height: 62rpx;
+        background: #b9b9b9;
+        margin-right: 26rpx;
+        margin-top: 20rpx;
+          &:nth-child(8n){
+            margin-right: 0;
+          }
+      }
+    }
+  }
+  .rule_block{
+    margin-bottom: 160rpx;
+  }
+// pk样式
+.pk{
+  .rule_block{
+    margin-bottom: 12rpx;
+  }
+  .pktext{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 4;
+    view{
+      &:last-child{
+        font-size: 40rpx;
+        font-weight: bold;
+      }
+      &:first-child{
+        font-size: 34rpx;
+      }
+    }
+  }
+  .pk_num{
+      width: 484rpx;
+      position: absolute;
+      z-index: 4;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 30rpx;
+      border: 2rpx solid #ff4a88;
+      height: 52rpx;
+      box-sizing: border-box;
+      border-radius: 30rpx;
+      line-height: 1;
+      display: flex;
+      overflow: hidden;
+      background: #fff;
+      view{
+        padding: 9rpx 10rpx;
+        font-size: 30rpx;
+        &:first-child{
+          background: #ff4a88;
+          color: #fff;
+          padding: 9rpx 24rpx;
+          white-space: nowrap;
+          image{
+            width: 24rpx;
+            height: 24rpx;
+            vertical-align: middle;
+            margin: 0 6rpx;
+          }
+        }
+        &:nth-child(2){
+          background: #fff;
+        }
+        &:last-child{
+          color: #888;
+        }
+      }
+    }
+}
+</style>
+<template>
+  <view class="pk">
+    <view class="header">
+      <image  src="../../images/pkpost.png"></image>
+      <!-- <view class="mask"></view> -->
+      <view class="pktext">
+        <view>xxx 邀请您一起参加</view>
+        <view>一周腹肌特训</view>
+      </view>
+      <view class="pk_num">
+        <view><image src="../../images/pk.png"></image>PK码</view>
+        <view class="pinklight">40339566</view>
+        <view>[点击复制]</view>
+      </view>
+    </view>
+    
+    <view class="info_block rule_block">
+      <view class="title">活动规则</view>
+      <view class="desc">描述描述收到收到是是的描述收到收到是是的描述收到收到是是的描述收到收到是是的描述收到收到是是的描述收到收到是是的收到收到是是的</view>
+    </view>
+    <view class="info_block">
+      <view class="title">报名时间</view>
+      <view class="desc">
+        <view>报名截至：11月14日 12:00</view>
+        <view>开始时间：11月14日 - 11月28日</view>
+        <view>打卡时段：9:00 - 12:00</view>
+        <view>打卡天数：<text class="pinklight">30</text>天</view>
+      </view>
+    </view>
+
+
+    <view class="join">
+      <button>立即挑战他</button>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+import interfaces from "../../interface/index";
+
+export default class Pk extends wepy.page {
+  config = {
+    navigationBarTitleText: "好友PK"
+  };
+  components = {};
+
+  data = {};
+
+  computed = {
+    now() {
+      return +new Date();
+    }
+  };
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {
+    let self = this;
+    // interfaces.login()
+    // this.$parent.getUserInfo(function (code,userInfo) {
+    //   if (userInfo) {
+    //     self.userInfo = userInfo
+    //         wepy.request({
+    //           url: api.users.login.url,
+    //           method: api.users.login.method,
+    //           data: {
+    //             code: code,
+    //             userInfo: userInfo
+    //           }
+    //         });
+    //   }
+    //   self.normalTitle = '标题已被修改'
+
+    //   self.setTimeoutTitle = '标题三秒后会被修改'
+    //   setTimeout(() => {
+    //     self.setTimeoutTitle = '到三秒了'
+    //     self.$apply()
+    //   }, 3000)
+
+    //   self.$apply()
+    // })
+  }
+}
+</script>
