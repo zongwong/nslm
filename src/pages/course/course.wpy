@@ -1,0 +1,71 @@
+<style lang="scss">
+.course{
+  padding: 18rpx;
+  .course_item{
+    height: 177rpx;
+    margin-bottom: 20rpx;
+    image{
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+.course_block{
+  background: #fff;
+  margin-bottom: 14rpx;
+  padding-bottom: 26rpx;
+  .title{
+    border-bottom: 2rpx solid #efefef;
+    line-height: 74rpx;
+    font-weight: bold;
+    font-size: 32rpx;
+    margin: 0 36rpx;
+  }
+  .banner_mood{
+    height: 207rpx;
+    width: 714rpx;
+    margin: 0 auto;
+    display: block;
+  }
+  .food_box{
+    margin: 0 36rpx;
+    background: #f3f3f3;
+    border-radius: 10rpx;
+  }
+}
+</style>
+<template>
+  <view class="course">
+    <navigator class="course_item" url="/pages/course/articlelist">
+      <image src="../../images/course_banner1.png"></image>
+    </navigator>
+    <navigator class="course_item" url="/pages/course/articlelist">
+      <image src="../../images/course_banner2.png"></image>
+    </navigator>
+    <navigator class="course_item" url="/pages/course/articlelist">
+      <image src="../../images/course_banner3.png"></image>
+    </navigator>
+  </view>
+  <view class="course_block">
+    <view class="title">饮食</view>
+    <view class="food_nav"></view>
+    <view class="food_box">
+
+    </view>
+  </view>
+   <view class="course_block">
+    <view class="title">心理</view>
+    <navigator url="/pages/course/articlelist">
+      <image class="banner_mood" src="../../images/course_banner4.png"></image>
+    </navigator>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Course extends wepy.page {
+      config = {
+        navigationBarTitleText: "产后恢复课"
+      };
+  }
+</script>

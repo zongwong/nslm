@@ -1,0 +1,65 @@
+<style lang="scss">
+.articleList{
+  .pbcontent{
+    .list_item{
+      .list_item_info{
+        .list_item_post{
+          border-radius: 16rpx;
+        }
+      }
+      .list_item_detail{
+        .desc{
+          border-bottom: none;
+          height: 60rpx;
+          overflow: hidden;
+        }
+        .data{
+          display: flex;
+          justify-content: space-between;
+          .icon_view{
+            width:26rpx;
+            height: 20rpx;
+            display: inline-block;
+            margin-right: 4rpx;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAUCAYAAACTQC2+AAACbUlEQVRIiZXVX4iOeRQH8M/7jsifElGjkQtpY4mMElJqsLtmtJklkhulpHChUFyIuJBF+ZNs064btghLCWE0k5SQ2JKU/BmbLebGvwal18X5vXnn6XlnOPX09Dy/c77n/M6f7ymUGnf6DumHYSigEx++1bDYy3kBs9GCRwn4PzxHF57iCOb1htWnh7OfsAuT0ncHTuEFShiBKViengfYhLPf6mggDibjT/gDh3G3SkDjsQorcAYnsBKvK5Wy1x2O9uSkrQKkmhO4j7UYiwtYjOuoq+ZoMC6KdOzBHFGXrNTIz0QHmrA1BdiWAu/mqIDjqMd2rMfnDFA9LuNjetoxI6NTwjZswBicLgdVdrQGP+MYtuREO0OkowFXcSn9a8PcHP3dOISZ2AiFUuPOISJFXRiHtzmG9/ADfkk3gam4glcp+lLGpn+yG4ExRVHIodhcxckoTMTfFU7gJv7EaFGTrHSl2wzCxiJGpoN/c5SJdoeXOWedGZ2s3EvvuqKY+hJ2VFF+LG76GwZU/O+LhaIxHlSxLWO2FHFLDFkTluYof8TvokbtWIRmtGIy9uNNjl0Z7yJaC4lUa0Xq+mMW7mSMarBXdGe5U0uiRqsFg1TKOFxLupPxrFDB3g1ist+IVs86I7qrIQG0y0/ZWNGNtViAc3Sf8KtYJmbpmuCrYxmQR/LZoizNgs0HJftz5YMs151EI97jaFKs7wG4LBPwj2CCgmiSvyoV8jirVayGA8mgSczMGdwWa4Kva2K+YAA4L+r4JAtabR/9L7prGtbhV8EEefIpBbFPUFKu9LT44AaWiPmZjh91X+UPBQe+6wXHF/ZBkUO3DPfsAAAAAElFTkSuQmCC) center / 100% no-repeat;
+          }
+          text{
+            vertical-align: middle;
+          }
+          .pinklight{
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="articleList">
+    <view class="pbcontent">    
+      <view class="list_item">
+        <view class="list_item_info">
+          <image class="list_item_post" src="../../images/detail_bg.png"></image>
+          <view class="list_item_detail">
+            <view class="title singleTextOverflow">一周塑形课程</view>
+            <view class="desc greyColor">描述内容</view>
+            <view class="data">
+              <view class="greyColor">2017/22/22</view>
+              <view class="pinklight"><text class="icon_view"></text><text>123</text></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class ArticleList extends wepy.page {
+      config = {
+        navigationBarTitleText: "文章列表"
+      };
+  }
+</script>
