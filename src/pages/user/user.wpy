@@ -91,7 +91,7 @@
       .btn_icon{
         width: 28rpx;
         height: 28rpx;
-        margin-right: 6rpx;-
+        margin-right: 6rpx;
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjJGM0UxQkVBRTIzOTExRTdBM0VCQkU4OTlDMzkzMUYzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjJGM0UxQkVCRTIzOTExRTdBM0VCQkU4OTlDMzkzMUYzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MkYzRTFCRThFMjM5MTFFN0EzRUJCRTg5OUMzOTMxRjMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MkYzRTFCRTlFMjM5MTFFN0EzRUJCRTg5OUMzOTMxRjMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5DswsyAAABlklEQVR42uyWTShFQRTH5z6XwsJK6bFRPlbWNmwQkq/shJKNbCws9LJVkihJlrJ52Skf9SwkO1n6WJISRWy8YiFc/6n/1HS75b47M7t36ldn7sz079w558x4wfCKgPlgGnSDClG4XYJ58BsxVwJ+1EAKeeAI9Ijk1gU2wEPo+xqYBZMgqwQ7NLE7kAMfBQreRIhlwBz9Oj3CJm1RG3gW5jYOlugfgFU1kdIWvVsSGwQ7PKoLMKqfYUrYtVawy0S5BQPgU19gU7ABHDLLH0EveA0vsiWYZrJV82j6mIDKZsCUShpTqwLHjPALjIBrbb4ZbNHPmUZYBvZACwgYxWnEGmWlJoIyC7dZx4IFnv1vk4ngOhijvww242xKKphhRIJRLcTdmESwVusiJzy3wKVgPQVksgwxM2NbkrK4AjVRRe1KMG9SR7Z7aVGwKOhW0HekUR4W/KZfCdodCPZrfiCjOmerktfNGW/qvAUhjx0pzfE9ePL5ppTdfpG/tdFBlLINTsiXua/dZ/ugk7/Wpr3wZf8mB38CDABM9koVeIiOmgAAAABJRU5ErkJggg==) center / 100% no-repeat;
       }
     }
@@ -149,7 +149,6 @@
     }
   }
 }
-
 </style>
 <template>
   <view class="user">
@@ -164,7 +163,7 @@
         <view class="data_item">
           <view>0723</view>
           <view>女神勋章</view>
-          <view><navigator url="/pages/user/money"><text>去兑换</text></navigator></view>
+          <view><navigator url="/pages/user/exchange"><text>去兑换</text></navigator></view>
         </view>
         <view class="data_item">
           <view>07</view>
@@ -177,48 +176,50 @@
         </view>
       </view>
       <view class="publish">
-        <image src="../../images/userbg.png"></image>
-        <view class="btn_box"><text class="btn_icon"></text><text>发布任务</text></view>
+        <navigator url="/pages/index/start">
+          <image src="../../images/userbg.png"></image>
+          <view class="btn_box"><text class="btn_icon"></text><text>发布任务</text></view>
+        </navigator>
       </view>
     </view>
     <view class="navs">
-      <navigator class="nav_item">
+      <navigator class="nav_item" url="/pages/user/mypublish">
         <view class="nav_item_box">
           <text class="nav_icon"></text>
           <text>我的发布</text>
         </view>
       </navigator>
-      <navigator class="nav_item">
+      <navigator class="nav_item" url="/pages/user/mypublish">
         <view class="nav_item_box">
           <text class="nav_icon nav_cy"></text>
           <text>我的参与</text>
         </view>
       </navigator>
-            <navigator class="nav_item">
+      <navigator class="nav_item" url="/pages/user/myvideo">
         <view class="nav_item_box">
           <text class="nav_icon nav_sp"></text>
           <text>我的视频</text>
         </view>
       </navigator>
-      <navigator class="nav_item">
+      <navigator class="nav_item" url="/pages/user/mood">
         <view class="nav_item_box">
           <text class="nav_icon nav_xq"></text>
           <text>我的心情</text>
         </view>
       </navigator>
-            <navigator class="nav_item">
+      <navigator class="nav_item" url="/pages/user/myexchange">
         <view class="nav_item_box">
           <text class="nav_icon nav_dh"></text>
           <text>我的兑换</text>
         </view>
       </navigator>
-      <navigator class="nav_item">
+      <navigator class="nav_item" url="/pages/user/mypublish">
         <view class="nav_item_box">
           <text class="nav_icon nav_zl"></text>
           <text>完善资料</text>
         </view>
       </navigator>
-            <navigator class="nav_item">
+      <navigator class="nav_item" url="/pages/user/mypublish">
         <view class="nav_item_box">
           <text class="nav_icon nav_sc"></text>
           <text>我的收藏</text>

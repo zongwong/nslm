@@ -135,34 +135,11 @@
     <view class="form_block">
       <view class="form_title">封面设置</view>
       <view class="form_item post_box">
-        <view class="image active">
+        <view class="image {{post_id==index?'active':''}}" wx:for="{{9}}" wx:key="post_{{index}}" @tap="selectPost({{index}})">
           <image src="../../images/post.png"></image>
           <image class="select" src="../../images/post_select.png"></image>
         </view>
-        <view class="image">
-          <image src="../../images/post.png"></image>
-        </view>
-        <view class="image">
-          <image src="../../images/post.png"></image>
-        </view>
-        <view class="image">
-          <image src="../../images/post.png"></image>
-        </view>
-        <view class="image">
-          <image src="../../images/post.png"></image>
-        </view>
-        <view class="image">
-          <image src="../../images/post.png"></image>
-        </view>
-        <view class="image">
-          <image src="../../images/post.png"></image>
-        </view>
-        <view class="image">
-          <image src="../../images/post.png"></image>
-        </view>
-        <view class="image">
-          <image src="../../images/post.png"></image>
-        </view>
+
        
       </view>
     </view>
@@ -190,9 +167,9 @@
           报名截止
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <picker mode="date" value="{{signDate}}" @change="signDate">
               <view class="picker_input">
-                当前选择: {{time}}
+                {{signDate}}
                 <view class="arrow"></view>
               </view>
             </picker>
@@ -201,15 +178,14 @@
     </view>
     <view class="form_block">
       <view class="form_title">任务设置</view>
-
       <label class="form_item" for="desc">
         <view class="label_text">
           保证金
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <picker mode="date" value="{{money}}" @change="money">
               <view class="picker_input">
-                当前选择: {{time}}
+                当前选择: {{money}}
                 <view class="arrow"></view>
               </view>
             </picker>
@@ -220,9 +196,9 @@
           开始时间
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <picker mode="date" value="{{startDate}}" @change="startDate">
               <view class="picker_input">
-                当前选择: {{time}}
+                当前选择: {{startDate}}
                 <view class="arrow"></view>
               </view>
             </picker>
@@ -233,9 +209,9 @@
           任务天数
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <picker mode="date" value="{{dayCount}}" @change="dayCount">
               <view class="picker_input">
-                当前选择: {{time}}
+                当前选择: {{dayCount}}
                 <view class="arrow"></view>
               </view>
             </picker>
@@ -257,12 +233,12 @@
     </view>
     <view class="form_block power_block">
       <view class="form_title"><text class="pinklight">权限设置</text></view>
-      <view class="powerset active">
+      <view class="powerset {{access==1?'active':''}}" @tap="slectAccess(1)">
         <view class="type">广场任务</view>
         <view class="desc">广广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务场任务</view>
         <view class="select"></view>
       </view>
-      <view class="powerset">
+      <view class="powerset {{access==2?'active':''}}" @tap="slectAccess(2)">
         <view class="type">好友PK</view>
         <view class="desc">广场任务</view>
         <view class="select"></view>
@@ -284,7 +260,15 @@ export default class Start extends wepy.page {
   };
   components = {};
 
-  data = {};
+  data = {
+    post_id:1,
+    access:1,
+    signDate:'2017-12-20',
+    signTime:'00:00',
+    money:'',
+    startDate:'',
+    dayCount:'',
+  };
 
   computed = {
     now() {
@@ -292,7 +276,19 @@ export default class Start extends wepy.page {
     }
   };
 
-  methods = {};
+  methods = {
+    //封面选择
+    selectPost(post_id){
+      this.post_id = post_id;
+    },
+    //权限选择
+    slectAccess(access) {
+      this.access = access;
+    },
+    signDate(e){
+      this.signDate = e.detail.value;
+    }
+  };
 
   events = {};
 

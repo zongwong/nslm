@@ -1,28 +1,28 @@
 <style lang="scss">
-    .tabNav{
-        height: 78rpx;
-        border-bottom: 2rpx solid #ebebeb;
-        display: flex;
-        justify-content: space-around;
-        margin: 22rpx 0;
-        background: #fff;
-        .tabNav-item{
-            height: 76rpx;
-            border-bottom: 2rpx solid #fff;
-            font-size: 26rpx;
-            line-height: 76rpx;
-            width: 190rpx;
-            text-align: center;
-            &.active{
-                border-bottom-color:#ff4a88;
-                color: #ff4a88;
-            }
-        }
+.tabNav {
+  height: 78rpx;
+  border-bottom: 2rpx solid #ebebeb;
+  display: flex;
+  justify-content: space-around;
+  margin: 22rpx 0;
+  background: #fff;
+  .tabNav-item {
+    height: 76rpx;
+    border-bottom: 2rpx solid #fff;
+    font-size: 26rpx;
+    line-height: 76rpx;
+    width: 190rpx;
+    text-align: center;
+    &.active {
+      border-bottom-color: #ff4a88;
+      color: #ff4a88;
     }
+  }
+}
 </style>
 <template>
   <view class="tabNav">
-      <view wx:for="{{navs}}" class="tabNav-item {{item.selected?'active':''}}">
+      <view wx:for="{{navs}}" class="tabNav-item {{item.selected?'active':''}}" @tap="tap({{index}})">
           {{item.text}}
       </view>
   </view>
@@ -31,18 +31,41 @@
   import wepy from 'wepy'
   export default class TabNav extends wepy.component{
       data={
-          navs:[
-              {
-                  text:'按热度',
-                  selected:true,
-              },{
-                  text:'按时间',
-                  selected:false,
-              },{
-                  text:'按热度',
-                  selected:false,
-              }
-          ]
+        //   navs:[
+        //       {
+        //           text:'按热度',
+        //           selected:true,
+        //       },{
+        //           text:'按时间',
+        //           selected:false,
+        //       },{
+        //           text:'按热度',
+        //           selected:false,
+        //       }
+        //   ]
+      }
+
+      props = {
+          navs:{
+              type:Object
+          }
+      }
+
+      onLoad () {
+          
+      }
+
+      methods = {
+          tap(index) {
+              this.navs.forEach((item,i)=>{
+                  if(i == index){
+                      item.selected = true;
+                  }else{
+                      item.selected = false;
+                  }
+              })
+              this.$emit('navTapEvent', index);
+          }
       }
   }
 </script>

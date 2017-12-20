@@ -51,6 +51,6 @@
 <script>
   import wepy from 'wepy'
   export default class SearchBar extends wepy.component{
-
+      props = {}
   }
 </script>

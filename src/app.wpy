@@ -163,6 +163,16 @@ page{
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWCAYAAADafVyIAAABaUlEQVRIibXVP0hWYRTH8c97DWxxUBRcJRyaAichh0YVFLRFcJCgIUSHoNaEAnHQtRbxv1G6uogu0qKDoygq4VBTQuCgZsh1uPeCXn3/+Hrf3/Yczvl9Hw7nOU8u7ByTUj0G0YUnuMA+ljGJMzTiDbrRhHPs4Ttm4xyQSwE6sIjaNDXWT3zGCGry5BzE4L00oB0rqMpTeB/9xXPsBnGgQXTzLMyJOjCFXAIYQl1G5ola0Z4AXmZsnqgnQDWeVgjwLMBjBMUyy1R9gBPRrFdCxwFCbFYI8CNpzUIFzENMJ4A5HGYM+IqdBPAPr3GZkfkfvOXm9GxgNAPzS/THkFvjOYJvDwQMYy05pAEhBrBapvknfLkeuOuBXaC3DMhHfEgH873gU9GHM1+CcYh3ovbeUqEV8V/UrvECOefow0S+hGI7KMR7vIrNrus3XmCpkEGpS24GbTiKz+towVaxwkclAmAbzaIP/1epRVchQUclmkRjvgAAAABJRU5ErkJggg==);
   }
 }
+//弹层底部关闭
+.close{
+  width: 108rpx;
+  height: 108rpx;
+  position: absolute;
+  left: 50%;
+  margin-left: -54rpx;
+  top: 970rpx;
+  background: url(data:image/png;base64,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) center / 100% no-repeat;
+}
 </style>
 
 <script>
@@ -172,6 +182,7 @@ import "wepy-async-function";
 export default class extends wepy.app {
   config = {
     pages: [
+      "pages/index/index", 
       "pages/course/course", 
       "pages/course/articlelist", 
       "pages/course/articledetail", 
@@ -189,7 +200,6 @@ export default class extends wepy.app {
       "pages/index/pk", 
       "pages/index/start", 
       "pages/index/detail", 
-      "pages/index/index", 
       "pages/course/logs"
     ],
     window: {
@@ -198,28 +208,28 @@ export default class extends wepy.app {
       navigationBarTitleText: "女神课程表",
       navigationBarTextStyle: "white"
     },
-    // tabBar: {
-    //   list: [
-    //     {
-    //       pagePath: "pages/index",
-    //       text: "首页",
-    //       iconPath: "images/icon-list.png",
-    //       selectedIconPath: "images/icon-list-on.png"
-    //     },
-    //     {
-    //       pagePath: "pages/logs",
-    //       text: "日志",
-    //       iconPath: "images/icon-course.png",
-    //       selectedIconPath: "images/icon-course-on.png"
-    //     },
-    //     {
-    //       pagePath: "pages/user",
-    //       text: "我的",
-    //       iconPath: "images/icon-user.png",
-    //       selectedIconPath: "images/icon-user-on.png"
-    //     }
-    //   ]
-    // }
+    tabBar: {
+      list: [
+        {
+          pagePath: "pages/index/index",
+          text: "首页",
+          iconPath: "images/icon-list.png",
+          selectedIconPath: "images/icon-list-on.png"
+        },
+        {
+          pagePath: "pages/course/course",
+          text: "日志",
+          iconPath: "images/icon-course.png",
+          selectedIconPath: "images/icon-course-on.png"
+        },
+        {
+          pagePath: "pages/user/user",
+          text: "我的",
+          iconPath: "images/icon-user.png",
+          selectedIconPath: "images/icon-user-on.png"
+        }
+      ]
+    }
   };
 
   globalData = {
