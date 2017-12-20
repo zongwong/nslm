@@ -43,6 +43,7 @@
         .count{
           font-size: 90rpx;
           line-height: 1;
+          font-family: Pakt;
         }
         .text{
           display: inline;
@@ -165,7 +166,7 @@
       <view class="userinfo">
         <image src="../../images/default-list.png"></image>
         <text class="name">发起人姓名</text>
-        <view class="pk_num">
+        <view class="pk_num" @tap="copyText(40339566)">
           <view>PK码</view>
           <view>40339566</view>
           <view>[点击复制]</view>
@@ -229,35 +230,23 @@ export default class Detail extends wepy.page {
     }
   };
 
-  methods = {};
+  methods = {
+    //点击复制
+    copyText(data) {
+      wx.setClipboardData({
+        data: data,
+        success: function(res) {
+          wx.getClipboardData({
+            success: function(res) {
+              console.log(res.data) 
+            }
+          })
+        }
+      })
+    }
+  };
 
   events = {};
 
-  onLoad() {
-    let self = this;
-    // interfaces.login()
-    // this.$parent.getUserInfo(function (code,userInfo) {
-    //   if (userInfo) {
-    //     self.userInfo = userInfo
-    //         wepy.request({
-    //           url: api.users.login.url,
-    //           method: api.users.login.method,
-    //           data: {
-    //             code: code,
-    //             userInfo: userInfo
-    //           }
-    //         });
-    //   }
-    //   self.normalTitle = '标题已被修改'
-
-    //   self.setTimeoutTitle = '标题三秒后会被修改'
-    //   setTimeout(() => {
-    //     self.setTimeoutTitle = '到三秒了'
-    //     self.$apply()
-    //   }, 3000)
-
-    //   self.$apply()
-    // })
-  }
 }
 </script>
