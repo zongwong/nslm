@@ -1,0 +1,155 @@
+<style lang="scss">
+.coursedetail{
+  .video_info{
+    display: flex;
+    background: #fff;
+    justify-content: space-between;
+    padding: 0 36rpx;
+    line-height: 94rpx;
+    margin-bottom: 12rpx;
+    .name{
+      flex: 1;
+    }
+    .collect{
+      background: #ff4a88;
+      color: #fff;
+      border-radius: 20rpx;
+      height: 34rpx;
+      line-height: 34rpx;
+      padding: 0 36rpx;
+      font-size: 24rpx;
+      margin-top: 30rpx;
+    }
+  }
+  .course_info{
+    padding: 36rpx 36rpx 0;
+    background:#fff;
+    margin-bottom: 12rpx;
+    .post{
+      width:100%;
+      border-radius: 28rpx;
+      height: 340rpx;
+    }
+    .title{
+      font-size: 30rpx;
+      line-height: 74rpx;
+      border-bottom: 2rpx solid #efefef;
+    }
+    .desc{
+      font-size: 28rpx;
+      line-height: 40rpx;
+      padding: 20rpx 0;
+    }
+  }
+}
+
+</style>
+<template>
+<view class="coursedetail">
+  <view class="video">
+    <video src="1"></video>
+  </view>
+  <view class="video_info">
+    <text class="name singleTextOverflow">课程名称</text>
+    <text class="collect">收藏</text> 
+  </view>
+  <view class="course_info">
+    <image class="post" src="../../images/default-list.png"></image>
+    <view class="title">课程介绍</view>
+    <view class="desc greyColor">描述啊实打实大收到</view>
+  </view>
+  <!-- 评论 -->
+  <view class="comment-block">
+    <view class="comment-title">评论</view>
+    <view class="mood_list">
+      <view class="mood_item">
+        <view class="mood_item_avatar">
+          <image src="../../images/default_avatar.png"></image>
+        </view>
+        <view class="mood_item_detail">
+          <view class="detail_user">
+            <view class="name"><text>王小花</text></view>
+            <view class="time"><text class="greyColor">2017/22/12</text></view>
+          </view>
+          <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
+          <view class="mood_item_imgs">
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+          </view>
+        </view>
+      </view>
+      <view class="mood_item">
+        <view class="mood_item_avatar">
+          <image src="../../images/default_avatar.png"></image>
+        </view>
+        <view class="mood_item_detail">
+          <view class="detail_user">
+            <view class="name"><text>王小花</text></view>
+            <view class="time"><text class="greyColor">2017/22/12</text></view>
+          </view>
+          <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
+          <view class="mood_item_imgs">
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+            <image src="../../images/mood.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+  <view class="join">
+    <button>评论</button>
+  </view>
+</view>
+</template>
+
+<script>
+import wepy from "wepy";
+import interfaces from "../../interface/index";
+
+export default class Coursedetail extends wepy.page {
+  config = {
+    navigationBarTitleText: "课程详情"
+  };
+  components = {};
+
+  data = {};
+
+  computed = {
+    now() {
+      return +new Date();
+    }
+  };
+
+  methods = {
+    //点击复制
+    copyText(data) {
+      wx.setClipboardData({
+        data: data,
+        success: function(res) {
+          wx.getClipboardData({
+            success: function(res) {
+              console.log(res.data) 
+            }
+          })
+        }
+      })
+    }
+  };
+
+  events = {};
+
+}
+</script>

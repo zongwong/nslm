@@ -2,14 +2,14 @@ const env = 'production'
 
 const hosts = {
   development: 'http://lady.zdgphp.cn',
-  production: 'http://lady.zdgphp.cn'
+  production: 'http://lady.zdgphp.cn/api'
 }
 
 // api列表
 const api = {
   users: {
     login: {
-      method: 'get',
+      method: 'post',
       url: '/users/login'
     }
   },

@@ -87,7 +87,6 @@
       transform: translate(-50%,-50%);
       text{
         display: inline-block;
-        vertical-align: top;
       }
       .btn_icon{
         width: 28rpx;

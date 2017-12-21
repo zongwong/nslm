@@ -1,0 +1,152 @@
+<style lang="scss">
+page{
+  background: #fff;
+}
+.success{
+  .me-block{
+    .header{
+      height: 400rpx;
+    }
+  }
+}
+.success_info{
+  text-align: center;
+  color: #fff;
+  .icon{
+    width:70rpx;
+    height: 70rpx;
+  }
+  .text{
+    margin-bottom: 8rpx;
+  }
+  .name{
+    display: inline-block;
+    font-size: 28rpx;
+    border-radius: 20rpx;
+    padding: 5px 28rpx;
+    background: #ff4a88;
+    line-height: 1;
+  }
+}
+.course_info{
+  padding: 0 36rpx;
+  .info_item{
+    border-bottom: 2rpx  solid #f4f4f4;
+    padding: 30rpx 0;
+    .title{
+      font-size: 30rpx;
+      margin-bottom: 14rpx;
+      font-weight:500;
+    }
+    .desc{
+      font-size: 24rpx;
+      color: #888;
+      line-height: 34rpx;
+    }
+  }
+}
+</style>
+<template>
+  <view class="success">
+    <view class="me-block">
+      <view class="header">
+        <image mode="top" src="../../images/editbg.png"></image>
+        <view class="mask"></view>
+        <view class="info_data success_info">
+          <image class="icon" src="../../images/ok.png"></image>
+          <view class="text">恭喜兑换成功</view>
+          <view class="name">一周塑形课程</view>
+        </view>
+      </view>
+    </view>
+    <view class="course_info">
+      <view class="info_item">
+        <view class="title">课程描述</view>
+        <view class="desc">气温气温</view>
+      </view>
+      <view class="info_item">
+        <view class="title">领取方式</view>
+        <view class="desc">气温气温</view>
+      </view>
+      <view class="info_item">
+        <view class="title">百度网盘地址</view>
+        <view class="desc">气温气温</view>
+      </view>
+      <view class="info_item">
+        <view class="title">网盘提取码</view>
+        <view class="desc">1234</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+import interfaces from "../../interface/index";
+
+export default class Success extends wepy.page {
+  config = {
+    navigationBarTitleText: "兑换成功"
+  };
+  components = {};
+
+  data = {
+    post_id:1,
+    access:1,
+    signDate:'2017-12-20',
+    signTime:'00:00',
+    money:'',
+    startDate:'',
+    dayCount:'',
+  };
+
+  computed = {
+    now() {
+      return +new Date();
+    }
+  };
+
+  methods = {
+    //封面选择
+    selectPost(post_id){
+      this.post_id = post_id;
+    },
+    //权限选择
+    slectAccess(access) {
+      this.access = access;
+    },
+    signDate(e){
+      this.signDate = e.detail.value;
+    }
+  };
+
+  events = {};
+
+  onLoad() {
+    let self = this;
+    // interfaces.login()
+    // this.$parent.getUserInfo(function (code,userInfo) {
+    //   if (userInfo) {
+    //     self.userInfo = userInfo
+    //         wepy.request({
+    //           url: api.users.login.url,
+    //           method: api.users.login.method,
+    //           data: {
+    //             code: code,
+    //             userInfo: userInfo
+    //           }
+    //         });
+    //   }
+    //   self.normalTitle = '标题已被修改'
+
+    //   self.setTimeoutTitle = '标题三秒后会被修改'
+    //   setTimeout(() => {
+    //     self.setTimeoutTitle = '到三秒了'
+    //     self.$apply()
+    //   }, 3000)
+
+    //   self.$apply()
+    // })
+  }
+}
+</script>

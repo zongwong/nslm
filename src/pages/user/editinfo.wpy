@@ -1,11 +1,31 @@
 <style lang="scss">
-
+  .editinfo{
+    .me-block{
+      .header{
+        height: 376rpx;
+      }
+    } 
+    .info_block{
+      background: #f9f9f9;
+      margin-bottom: 28rpx;
+    }
+    .bottom-block{
+      margin-bottom:150rpx;
+    }
+  }
 </style>
 <template>
-  <view class="start">
-    <view class="form_block">
-       
-    </view>
+  <view class="editinfo">
+    <view class="me-block">
+      <view class="header">
+        <image mode="top" src="../../images/editbg.png"></image>
+      </view>
+      <view class="info_block active_block">
+        <view class="userinfo">
+          <image src="../../images/default_avatar.png"></image>
+          <text class="name">发起人姓名</text>
+        </view>
+      </view>
     </view>
     <view class="form_block">
       <label class="form_item" for="name">
@@ -15,7 +35,6 @@
         <view class="label_input">
           <input type="text" value="1" id="name">
         </view>
-
       </label>
       <label class="form_item" for="height">
         <view class="label_text">
@@ -34,7 +53,7 @@
         </view>
       </label>
     </view>
-    <view class="form_block">
+    <view class="form_block bottom-block">
       <label class="form_item" for="desc">
         <view class="label_text">
           星座

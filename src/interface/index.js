@@ -18,9 +18,12 @@ const interfaces = {
     const res = await wepy.request({
       url: api.users.login.url,
       data: data,
-      method: api.users.login.method
+      method: api.users.login.method,
+      header:{
+        'content-type':'application/x-www-form-urlencoded'
+      }
     })
-    console.log(res)
+    return res;
   }
 
 }

@@ -145,7 +145,6 @@
 <script>
 import wepy from "wepy";
 import interfaces from "../../interface/index";
-
 import activityList from "../../components/index/activityList";
 import tabNav from "../../components/index/tabNav";
 

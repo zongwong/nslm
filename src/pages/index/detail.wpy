@@ -1,127 +1,5 @@
 <style lang="scss">
-  .header{
-    height: 424rpx;
-    overflow: hidden;
-    position: relative;
-    image{
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      left:0;
-    }
-    .mask{
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,.5);
-      position: absolute;
-      z-index: 2;
-      top: 0;
-      left:0;
-    }
-    .info_data{
-      position: absolute;
-      z-index: 3;
-      left:0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 100%;
-      text-align: center;
-      .data_item{
-        display: inline-block;
-        color: #fff;
-        &:first-child{
-          color: #ff508a;
-          .text{
-            border-color: #ff508a;
-          }
-        }
-        &:nth-child(2){
-          margin: 0 90rpx;
-        }
-        .count{
-          font-size: 90rpx;
-          line-height: 1;
-          font-family: Pakt;
-        }
-        .text{
-          display: inline;
-          font-size: 20rpx;
-          border:2rpx solid #fff;
-          border-radius: 15rpx;
-          padding: 0 18rpx;
-        }
-      }
-    }
-  }
-  .info_block{
-    font-size: 26rpx;
-    background: #fff;
-    padding: 0 37rpx;
-    margin-bottom: 12rpx;
-    .title{
-      border-bottom: 2rpx solid #f2f2f2;
-      padding: 15rpx 0;
-      font-weight: bold;
-    }
-    .desc{
-      color: #888;
-      padding: 16rpx 0 24rpx 0;
-      line-height: 36rpx;
-    }
-  }
-  .active_block{
-    .userinfo{
-      height: 74rpx;
-      position: relative;
-      width: 100%;
-      image{
-        width: 94rpx;
-        height: 94rpx;
-        border-radius: 50%;
-        border: 10rpx solid #fff;
-        position: absolute;
-        top: -30rpx;
-        left: -10rpx;
-        z-index: 4;
-      }
-      .name{
-        margin-left: 124rpx;
-        font-size: 30rpx;
-        // font-weight: bold;
-        line-height: 74rpx;
-      }
-      .pk_num{
-        width: 326rpx;
-        border: 2rpx solid #ff4a88;
-        height: 36rpx;
-        border-radius: 20rpx;
-        line-height: 1;
-        display: flex;
-        position: absolute;
-        top: 16rpx;
-        right: 0rpx;
-        overflow: hidden;
-        view{
-          padding: 6rpx;
-          font-size: 24rpx;
-          &:first-child{
-            background: #ff4a88;
-            color: #fff;
-          }
-          &:last-child{
-            color: #888;
-          }
-        }
-      }
-    }
-    .title{
-      font-size: 40rpx;
-      font-weight: bold;
-      padding: 40rpx 0 20rpx 0;
-    }
-  }
+
   .player_block{
     padding-bottom: 26rpx;
     .player{
@@ -143,7 +21,7 @@
 
 </style>
 <template>
-  <view class="detail">
+  <view class="detail me-block">
     <view class="header">
       <image mode="top" src="../../images/detail_bg.png"></image>
       <view class="mask"></view>
