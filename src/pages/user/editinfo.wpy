@@ -1,0 +1,153 @@
+<style lang="scss">
+
+</style>
+<template>
+  <view class="start">
+    <view class="form_block">
+       
+    </view>
+    </view>
+    <view class="form_block">
+      <label class="form_item" for="name">
+        <view class="label_text">
+          年龄(岁)
+        </view>
+        <view class="label_input">
+          <input type="text" value="1" id="name">
+        </view>
+
+      </label>
+      <label class="form_item" for="height">
+        <view class="label_text">
+          身高(cm)
+        </view>
+        <view class="label_input">
+          <input type="text" value="1" id="height">
+        </view>
+      </label>
+      <label class="form_item" for="weight">
+        <view class="label_text">
+          体重(kg)
+        </view>
+        <view class="label_input">
+            <input type="text" value="1" id="weight">
+        </view>
+      </label>
+    </view>
+    <view class="form_block">
+      <label class="form_item" for="desc">
+        <view class="label_text">
+          星座
+        </view>
+        <view class="label_input">
+            <picker mode="date" value="{{money}}" @change="money">
+              <view class="picker_input">
+                当前选择: {{money}}
+                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+      </label>
+      <label class="form_item" for="desc">
+        <view class="label_text">
+          怀孕情况
+        </view>
+        <view class="label_input">
+            <picker mode="date" value="{{startDate}}" @change="startDate">
+              <view class="picker_input">
+                当前选择: {{startDate}}
+                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+      </label>
+      <label class="form_item" for="desc">
+        <view class="label_text">
+          怀孕状态
+        </view>
+        <view class="label_input">
+            <picker mode="date" value="{{dayCount}}" @change="dayCount">
+              <view class="picker_input">
+                当前选择: {{dayCount}}
+                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+      </label>
+    </view>
+    <view class="join">
+      <button>提交</button>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+import interfaces from "../../interface/index";
+
+export default class Editinfo extends wepy.page {
+  config = {
+    navigationBarTitleText: "资料修改"
+  };
+  components = {};
+
+  data = {
+    post_id:1,
+    access:1,
+    signDate:'2017-12-20',
+    signTime:'00:00',
+    money:'',
+    startDate:'',
+    dayCount:'',
+  };
+
+  computed = {
+    now() {
+      return +new Date();
+    }
+  };
+
+  methods = {
+    //封面选择
+    selectPost(post_id){
+      this.post_id = post_id;
+    },
+    //权限选择
+    slectAccess(access) {
+      this.access = access;
+    },
+    signDate(e){
+      this.signDate = e.detail.value;
+    }
+  };
+
+  events = {};
+
+  onLoad() {
+    let self = this;
+    // interfaces.login()
+    // this.$parent.getUserInfo(function (code,userInfo) {
+    //   if (userInfo) {
+    //     self.userInfo = userInfo
+    //         wepy.request({
+    //           url: api.users.login.url,
+    //           method: api.users.login.method,
+    //           data: {
+    //             code: code,
+    //             userInfo: userInfo
+    //           }
+    //         });
+    //   }
+    //   self.normalTitle = '标题已被修改'
+
+    //   self.setTimeoutTitle = '标题三秒后会被修改'
+    //   setTimeout(() => {
+    //     self.setTimeoutTitle = '到三秒了'
+    //     self.$apply()
+    //   }, 3000)
+
+    //   self.$apply()
+    // })
+  }
+}
+</script>

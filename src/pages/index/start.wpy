@@ -1,64 +1,4 @@
 <style lang="scss">
-.form_block {
-  margin-bottom: 12rpx;
-  line-height: 1;
-  background: #fff;
-  .form_title {
-    margin: 0 37rpx;
-    font-size: 30rpx;
-    font-weight: bold;
-    border-bottom: 2rpx solid #f2f2f2;
-    padding: 25rpx 0;
-  }
-  .form_item {
-    font-size: 26rpx;
-    padding: 28rpx 37rpx;
-    border-bottom: 2rpx solid #f2f2f2;
-    display: block;
-  }
-  label.form_item {
-    display: flex;
-    .label_text {
-      text-align: center;
-      width: 108rpx;
-      margin-right: 20rpx;
-      line-height: 52.5rpx;
-    }
-    .label_input {
-      flex: 1;
-      max-width: 546rpx;
-      overflow: hidden;
-      input {
-        width: 100%;
-      }
-      textarea {
-        line-height: 52.5rpx;
-        width: 100%;
-        height: 157.5rpx;
-      }
-      .picker_input {
-        box-sizing: border-box;
-        border: 2rpx solid #eee;
-        background: #f7f7f7;
-        color: #a9a9a9;
-        line-height: 52.5rpx;
-        border-radius: 10rpx;
-        padding: 0 34rpx 0 18rpx;
-        position: relative;
-        & > .arrow {
-          position: absolute;
-          width: 18rpx;
-          height: 100%;
-          top: 0;
-          right: 16rpx;
-          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAXCAYAAAA/ZK6/AAAA1klEQVQ4jY3TQUrEMABA0TedHsGDeAYPoK0bQdETqOAFRDyCW8G13blRQbyHm5n9nEBFHXQxKYSapsmmSfmPkNDOuq67xAzX+DUxKmzhCjcBZkeNi4BOw7vz3E411jjGvATV4bnGUQmqovkPDvEQUPJM1WD9hQM8jqEh6NE+nlMoBWL0MkRjAD7R4jVGdQbAO/bwFNBHbocY3Yb5dglocIc3nEyBBh2W2MEqB/7FjN9Sm4rHQIv7VJwC2XgIJuMYFMU92C2Ne3CGRUnM5o9rbL7O76kY/gB9akEv/8gPHgAAAABJRU5ErkJggg==)
-            center no-repeat;
-          background-size: 14rpx 23rpx;
-        }
-      }
-    }
-  }
-}
 .post_box {
   text-align: center;
   .image {
@@ -139,8 +79,6 @@
           <image src="../../images/post.png"></image>
           <image class="select" src="../../images/post_select.png"></image>
         </view>
-
-       
       </view>
     </view>
     <view class="form_block">

@@ -9,9 +9,9 @@
   height: 100%;
   
 }
-  .alert{
+.alert{
 
-  }
+}
 </style>
 <template>
   <view class="alertMask">

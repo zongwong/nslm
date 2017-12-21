@@ -42,6 +42,7 @@
       view{
         &:first-child{
           font-size: 70rpx;
+          font-family: 'Pakt';
         }
         &:nth-child(2){
           color: #7a7a7a;
@@ -153,10 +154,12 @@
 <template>
   <view class="user">
     <view class="header">
-      <view class="avatar">
-        <image src="../../images/default-list.png"></image>
-        <view class="edit"></view>
-      </view>
+      <navigator url="/pages/user/editinfo" style="display:inline;">
+        <view class="avatar">
+            <image src="../../images/default_avatar.png"></image>
+            <view class="edit"></view>
+        </view>
+      </navigator>
       <view class="nickname">1231231</view>
       <view class="desc">qweqweqwe</view>
       <view class="data">
@@ -213,7 +216,7 @@
           <text>我的兑换</text>
         </view>
       </navigator>
-      <navigator class="nav_item" url="/pages/user/mypublish">
+      <navigator class="nav_item" url="/pages/user/editinfo">
         <view class="nav_item_box">
           <text class="nav_icon nav_zl"></text>
           <text>完善资料</text>
