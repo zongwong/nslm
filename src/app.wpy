@@ -1,6 +1,7 @@
 <style lang="scss">
 page{
   background: #f9f9f9;
+  position: relative;
 }
 @font-face {
     font-family: 'Pakt';
@@ -212,11 +213,13 @@ page{
       overflow: hidden;
       input {
         width: 100%;
+        color:#888;
       }
       textarea {
         line-height: 52.5rpx;
         width: 100%;
         height: 157.5rpx;
+        color:#888;
       }
       .picker_input {
         box-sizing: border-box;
@@ -407,10 +410,12 @@ import interfaces from "./interface/index";
 export default class extends wepy.app {
   config = {
     pages: [
+      "pages/course/doctor",
+      "pages/course/mentality",
+      "pages/user/user",
       "pages/user/success",
       "pages/course/coursedetail",
       "pages/course/courselist",
-      "pages/user/user", 
       "pages/user/editinfo", 
       "pages/index/index", 
       "pages/course/course", 
@@ -428,8 +433,7 @@ export default class extends wepy.app {
       "pages/index/record", 
       "pages/index/pk", 
       "pages/index/start", 
-      "pages/index/detail", 
-      "pages/course/logs"
+      "pages/index/detail"
     ],
     window: {
       backgroundTextStyle: "light",
@@ -463,7 +467,8 @@ export default class extends wepy.app {
   };
 
   globalData = {
-    userInfo: null
+    userInfo: null,
+    test:1
   };
 
   constructor() {
@@ -473,8 +478,9 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
-    // let res = interfaces.login();
-    // console.log(res)
+    interfaces.login();
+    let userInfo = wepy.getStorageSync('userInfo')
+    this.globalData.userInfo = userInfo
   }
 }
 </script>

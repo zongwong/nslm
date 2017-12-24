@@ -1,7 +1,11 @@
 <style lang="scss">
 .index-banner{
   height: 388rpx;
-  padding-left: 18rpx;
+  padding: 0 18rpx;
+  swiper{
+    height: 100%;
+    width: 100%;
+  }
 }
 .index-banner image{
   height: 100%;
@@ -55,62 +59,9 @@
         border-radius: 50%;
     }
 }
-//pk弹层
-.pkMoadl{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,.8);
-  z-index: 10;
-  .pkContent{
-    background:#fff;
-    width: 592rpx;
-    height: 670rpx;
-    border-radius: 30rpx;
-    position: absolute;
-    top: 178rpx;
-    left: 94rpx;
-    box-sizing: border-box;
-    padding-right: 50rpx;
-    .icon_fly{
-      position: absolute;
-      top: -80rpx;
-      left: -70rpx;
-      width: 310rpx;
-      height: 662rpx;
-    }
-    .title{
-      font-size: 54rpx;
-      line-height: 1;
-      margin: 84rpx 0 14rpx 0;
-      color: #ff508a;
-      text-align: right;
-    }
-    .desc{
-      font-size: 30rpx;
-      text-align: right;
-      line-height: 1;
-      margin-bottom: 30rpx;
-    }
-    .content{
-      font-size: 28rpx;
-      color: #a9a9a9;
-      padding-left: 176rpx;
-      text-indent: 2em;
-      text-align: justify;
-      padding-bottom: 10rpx;
-      max-height: 410rpx;
-      overflow: hidden;
-    }
-  }
-  .close{
-    top: 880rpx;
-    z-index: 11;
-  }
+.tabNav{
+    margin: 22rpx 0;
 }
-
 </style>
 <template>
   <view>
@@ -122,32 +73,34 @@
       <view class="searchinfo" @tap="pkModal(1)"></view>       
     </view>
     <view class="index-banner">
-      <image src="../../images/banner.png"></image>
+      <swiper autoplay="true" indicator-dots="true" indicator-active-color="#fff">
+        <block wx:for="{{3}}" wx:key="swiper_{{index}}">
+          <navigator url="/pages/index/detail" hover-class="none">
+            <swiper-item>
+                <image src="../../images/banner.png" />
+            </swiper-item>
+          </navigator>
+        </block>
+      </swiper>
     </view> 
     <tabNav :navs="typeNavs"></tabNav>
-    <activityList ></activityList>
+    <!-- 列表 -->
+    <repeat for="{{activeList}}" key="index" index="index" item="item">
+        <activityList :item="item"></activityList>
+    </repeat>
     <navigator url="/pages/index/start"><image class="openDaka" src="../../images/icon-dk.png"></image></navigator> 
-    <!-- pk码说明弹层 -->
-    <view class="pkMoadl" wx:if="{{pkHelp}}">
-      <view class="pkContent">
-        <image class="icon_fly" src="../../images/pkbg.png"></image>
-        <view class="title">什么是PK码</view>
-        <view class="desc">邀请好友PK的密码</view>
-        <view class="content">
-          跑步锻炼是人们最常采用的一种身体锻炼方式，这主要是因为跑步技术要求简单，无需特殊的场地、服装或器械。无论在健身房、运动场或马路上，甚至在田野间、树林中均可进行跑步锻炼。可以自己掌握跑步的速度、距离和路线。关注健身与跑步，是对体能最基本的要求，要跑步，要先健身，加强体魄，避免跑步影响身体健康。
-        </view>
-      </view>
-      <view class="close" @tap="pkModal(0)"></view>
-    </view>
+    <explain :status.sync="status"></explain>
   </view>
 </template>
 
 <script>
-import wepy from "wepy";
-import interfaces from "../../interface/index";
-import activityList from "../../components/index/activityList";
-import tabNav from "../../components/index/tabNav";
-
+import wepy from "wepy"
+import interfaces from "../../interface/index"
+import activityList from "../../components/index/activityList"
+import tabNav from "../../components/index/tabNav"
+import explain from "../../components/public/explain"
+import http from "../../utils/request"
+import api from "../../config"
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: "首页"
@@ -155,6 +108,7 @@ export default class Index extends wepy.page {
   components = {
     tabNav:tabNav,
     activityList:activityList,
+    explain:explain
   };
 
   data = {
@@ -170,7 +124,9 @@ export default class Index extends wepy.page {
             selected:false,
         }
     ],
-    pkHelp:false,
+    tabIndex: 1,
+    status:false,
+    activeList: []
   };
 
   computed = {
@@ -180,15 +136,11 @@ export default class Index extends wepy.page {
   };
 
   methods = {
-    //pk码说明
-    pkModal(flag) {
-      if(flag==1){
-        this.pkHelp = true;
-      }else{
-        this.pkHelp = false;
-      }
+    // pk码说明
+    pkModal() {
+        this.status = true
     },
-    //搜索
+    // 搜索
     searchConfirm(event) {
       let value = event.detail.value;
       // async search(){}
@@ -201,36 +153,30 @@ export default class Index extends wepy.page {
   };
 
   events = {
+    //tab事件
     'navTapEvent':(index) => {
-      console.log(index)
+      this.tabIndex = (index + 1)
+      this.getActiveList(this.tabIndex)
     }
   };
 
   onLoad() {
-    let self = this;
-    // interfaces.login()
-    // this.$parent.getUserInfo(function (code,userInfo) {
-    //   if (userInfo) {
-    //     self.userInfo = userInfo
-    //         wepy.request({
-    //           url: api.users.login.url,
-    //           method: api.users.login.method,
-    //           data: {
-    //             code: code,
-    //             userInfo: userInfo
-    //           }
-    //         });
-    //   }
-    //   self.normalTitle = '标题已被修改'
-
-    //   self.setTimeoutTitle = '标题三秒后会被修改'
-    //   setTimeout(() => {
-    //     self.setTimeoutTitle = '到三秒了'
-    //     self.$apply()
-    //   }, 3000)
-
-    //   self.$apply()
-    // })
+    this.getActiveList(this.tabIndex)
+  }
+  // 获取活动列表
+  async getActiveList(sort) {
+    // 1按热度2按时间3已结束
+    const { data } = await http({
+      method: api.activity.list.method,
+      url: api.activity.list.url,
+      data: {
+        sort: sort
+      }
+    })
+    if(data.code){
+      this.activeList = data.info
+      this.$apply()
+    }
   }
 }
 </script>

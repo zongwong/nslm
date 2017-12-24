@@ -1,0 +1,219 @@
+<style lang="scss">
+.mentality{
+  margin-bottom: 150rpx;
+  overflow: hidden;
+  .banner{
+    height: 392rpx;
+    padding: 24rpx 19rpx;
+    swiper{
+      width:100%;
+      height: 100%;
+      image{
+        width:100%;
+        height: 100%;
+      }
+    }
+  }
+  .area-block{
+    background: #fff;
+    padding: 0 37.5rpx;
+    margin-bottom: 12rpx;
+    .title{
+      font-size: 32rpx;
+      line-height: 80rpx;
+      border-bottom: 2rpx solid #efefef;
+      .more{
+        float: right;
+        font-size: 26rpx;
+        color: #888;
+        text-decoration: underline;
+      }
+    }
+  }
+  .articlelist{
+    .article{
+      padding: 20rpx 0;
+      border-bottom: 2rpx solid #efefef;
+      display: flex;
+      &:last-child{
+        border-bottom: none;
+      }
+      .article_post{
+        width: 160rpx;
+        height: 90rpx;
+        margin-right: 18rpx;
+      }
+      .article_info{
+        flex:1;
+        padding-top: 12rpx;
+        overflow: hidden;
+        .article_title{
+          font-size: 26rpx;
+        }
+        .article_desc{
+          color: #888;
+          font-size: 24rpx;
+        }
+      }
+
+    }
+
+  }
+  .action-block{
+    padding: 26rpx 37.5rpx;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    image{
+      width:100%;
+      height: 100%;
+    }
+    .test{
+      width:100%;
+      height: 159rpx;
+      margin-bottom: 14rpx;
+    }
+    .course{
+      width:330rpx;
+      height: 160rpx;
+    }
+    .fm{
+      width:330rpx;
+      height: 160rpx;
+    }
+  }
+  .doctors{
+    width: 100%;
+    padding: 28rpx 0;
+    .scroll{
+      height: 100%;
+      width: 100%;
+      white-space: nowrap;
+    }
+    .adoctor{
+      display: inline-block;
+      border-radius: 10rpx;
+      overflow: hidden;
+      height: 214rpx;
+      width: 170rpx;
+      border: 2rpx solid #efefef;
+      margin-right: 38rpx;
+      box-sizing: border-box;
+      .doctor_avatar{
+        width: 100%;
+        height: 170rpx;
+        display: block;
+      }
+      .doctor_name{
+        width: 100%;
+        height: 40rpx;
+        font-size: 28rpx;
+        line-height: 40rpx;
+        text-align: center;
+        background: #ff4a88;
+        color: #fff;
+      }
+    }
+  }
+
+
+}
+</style>
+<template>
+  <view class="mentality">
+    <view class="banner">
+      <swiper autoplay="true" indicator-dots="true" indicator-active-color="#fff">
+        <block wx:for="{{3}}" wx:key="swiper_{{index}}">
+          <navigator url="/pages/index/detail" hover-class="none">
+            <swiper-item>
+                <image src="../../images/banner.png" />
+            </swiper-item>
+          </navigator>
+        </block>
+      </swiper>
+    </view> 
+    <view class="area-block">
+      <view class="title">热门文章 <navigator class="more">更多</navigator></view>
+      <view class="articlelist">
+        <navigator class="article" url="/pages/course/articledetail" wx:for="{{3}}" wx:key="article_{{index}}">
+          <image class="article_post" src="../../images/default-list.png"></image>
+          <view class="article_info">
+            <view class="article_title singleTextOverflow">文章标题</view>
+            <view class="article_desc singleTextOverflow">文章描述</view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+    <view class="area-block action-block">
+      <navigator class="test">
+        <image src="../../images/testbg.png"></image>
+      </navigator>
+      <navigator class="course">
+        <image src="../../images/coursebg.png"></image>
+      </navigator>
+      <navigator class="fm">
+        <image src="../../images/fmbg.png"></image>
+      </navigator>
+    </view>
+    <view class="area-block">
+      <view class="title">心理咨询师—在线咨询</view>
+      <view class="doctors">
+          <scroll-view class="scroll" scroll-x>
+            <navigator class="adoctor" wx:for="{{7}}">
+              <image class="doctor_avatar" mode="aspectFill" src="../../images/doctor.png"></image>
+              <view class="doctor_name">张一声</view>
+            </navigator>
+          </scroll-view>
+      </view>
+    </view>
+
+    <view>
+      <view class="mood_list">
+        <view class="mood_item">
+          <view class="mood_item_avatar">
+            <image src="../../images/default_avatar.png"></image>
+          </view>
+          <view class="mood_item_detail">
+            <view class="detail_user">
+              <view class="name"><text>王小花</text></view>
+              <view class="time"><text class="greyColor">2017/22/12</text></view>
+            </view>
+            <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
+            <view class="mood_item_imgs">
+              <image src="../../images/mood.png"></image>
+              <image src="../../images/mood.png"></image>
+              <image src="../../images/mood.png"></image>
+              <image src="../../images/mood.png"></image>
+              <image src="../../images/mood.png"></image>
+              <image src="../../images/mood.png"></image>
+              <image src="../../images/mood.png"></image>
+              <image src="../../images/mood.png"></image>
+            </view>
+            <view class="mood_item_btns">
+              <view>
+                <text class="icon icon_pl"></text>
+                <text>9999</text>
+              </view>
+              <view>
+                <text class="icon icon_dz active"></text>
+                <text>9999</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="join" @tap="createActive">
+      <button>发布心情</button>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Mentality extends wepy.page {
+
+  }
+</script>

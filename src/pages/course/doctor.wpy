@@ -1,0 +1,18 @@
+<style lang="scss">
+.doctor{
+}
+</style>
+<template>
+  <view class="doctor">
+    
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Doctor extends wepy.page {
+      config = {
+        navigationBarTitleText: "心理咨询"
+      };
+  }
+</script>

@@ -1,5 +1,5 @@
 <style lang="scss">
-
+.detail{
   .player_block{
     padding-bottom: 26rpx;
     .player{
@@ -18,71 +18,64 @@
   .rule_block{
     margin-bottom: 160rpx;
   }
-
+}
 </style>
 <template>
   <view class="detail me-block">
     <view class="header">
-      <image mode="top" src="../../images/detail_bg.png"></image>
+      <image mode="top" src="{{activity.img}}"></image>
       <view class="mask"></view>
       <view class="info_data">
         <view class="data_item">
-          <view class="count">150</view>
+          <view class="count">{{activity.price*activity.days}}</view>
           <view class="text">总奖金</view>
         </view>
         <view class="data_item">
-          <view class="count">05</view>
+          <view class="count">{{activity.price}}</view>
           <view class="text">当日可分奖金</view>
         </view>
         <view class="data_item">
-          <view class="count">30</view>
+          <view class="count">{{activity.days}}</view>
           <view class="text">任务天数</view>
         </view>
       </view>
     </view>
     <view class="info_block active_block">
       <view class="userinfo">
-        <image src="../../images/default-list.png"></image>
-        <text class="name">发起人姓名</text>
-        <view class="pk_num" @tap="copyText(40339566)">
+        <image src="{{activity.u_avatarurl}}"></image>
+        <text class="name">{{activity.u_nickname}}</text>
+        <view class="pk_num" @tap="copyText({{activity.pk}})">
           <view>PK码</view>
-          <view>40339566</view>
+          <view>{{activity.pk}}</view>
           <view>[点击复制]</view>
         </view>
       </view>
-      <view class="title singleTextOverflow">活动白哦提啊啊收到</view>
-      <view class="desc">描述收到收到是是的</view>
+      <view class="title singleTextOverflow">{{activity.title}}</view>
+      <!-- <view class="desc">{{activity.content}}</view> -->
     </view>
     <view class="info_block">
       <view class="title">报名时间</view>
       <view class="desc">
-        <view>报名截至：11月14日 12:00</view>
-        <view>开始时间：11月14日 - 11月28日</view>
-        <view>打卡时段：9:00 - 12:00</view>
-        <view>打卡天数：<text class="pinklight">30</text>天</view>
+        <view>报名截至：{{activity.c_time}}</view>
+        <view>开始时间：{{activity.start_time}} - {{activity.end_time}}</view>
+        <view>打卡时段：{{activity.sign_start_time}} - {{activity.sign_end_time}}</view>
+        <view>打卡天数：<text class="pinklight">{{activity.days}}</text>天</view>
       </view>
     </view>
     <view class="info_block player_block">
-      <view class="title"><text class="pinklight">30</text>人已报名</view>
+      <view class="title"><text class="pinklight">{{activity.join_num}}</text>人已报名</view>
        <view class="player">
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
-          <image src="../../images/default-list.png"></image>
+          <image src="../../images/default_avatar.png"></image>
+          <image src="../../images/default_avatar.png"></image>
+          <image src="../../images/default_avatar.png"></image>
+          <image src="../../images/default_avatar.png"></image>
+          <image src="../../images/default_avatar.png"></image>
+          <image src="../../images/default_avatar.png"></image>
        </view>
     </view>
     <view class="info_block rule_block">
       <view class="title">活动规则</view>
-      <view class="desc">描述描述收到收到是是的描述收到收到是是的描述收到收到是是的描述收到收到是是的描述收到收到是是的描述收到收到是是的收到收到是是的</view>
+      <view class="desc">{{activity.content}}</view>
     </view>
     <view class="join">
       <button>立即报名 150元</button>
@@ -93,14 +86,16 @@
 <script>
 import wepy from "wepy";
 import interfaces from "../../interface/index";
-
+import http from "../../utils/request"
+import api from "../../config"
 export default class Detail extends wepy.page {
   config = {
     navigationBarTitleText: "活动详情"
   };
-  components = {};
 
-  data = {};
+  data = {
+    activity: null,
+  };
 
   computed = {
     now() {
@@ -111,20 +106,28 @@ export default class Detail extends wepy.page {
   methods = {
     //点击复制
     copyText(data) {
-      wx.setClipboardData({
-        data: data,
-        success: function(res) {
-          wx.getClipboardData({
-            success: function(res) {
-              console.log(res.data) 
-            }
-          })
-        }
-      })
+      interfaces.copyText(data)
     }
   };
 
   events = {};
 
+  onLoad(options) {
+    this.getActivityInfo(options.id)
+  }
+  // 获取活动详情
+  async getActivityInfo(id) {
+    const { data } = await http({
+      url: api.activity.info.url,
+      method: api.activity.info.method,
+      data: {
+        aid: id
+      }
+    },true)
+    if (data.code) {
+      this.activity = data.info
+      this.$apply()
+    }
+  }
 }
 </script>

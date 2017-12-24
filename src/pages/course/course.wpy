@@ -36,13 +36,13 @@
 </style>
 <template>
   <view class="course">
-    <navigator class="course_item" url="/pages/course/articlelist">
+    <navigator class="course_item" url="/pages/course/articlelist" hover-class="none">
       <image src="../../images/course_banner1.png"></image>
     </navigator>
-    <navigator class="course_item" url="/pages/course/articlelist">
+    <navigator class="course_item" url="/pages/course/articlelist" hover-class="none">
       <image src="../../images/course_banner2.png"></image>
     </navigator>
-    <navigator class="course_item" url="/pages/course/articlelist">
+    <navigator class="course_item" url="/pages/course/articlelist" hover-class="none">
       <image src="../../images/course_banner3.png"></image>
     </navigator>
   </view>

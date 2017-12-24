@@ -88,7 +88,7 @@
           活动名称
         </view>
         <view class="label_input">
-          <input type="text" value="1" id="name">
+          <input type="text" value="{{title}}" id="name" @input="titleInput" placeholder="请填写活动标题">
         </view>
 
       </label>
@@ -97,7 +97,7 @@
           活动描述
         </view>
         <view class="label_input">
-          <textarea type="text" value="1" id="desc"></textarea>
+          <textarea type="text" value="{{desrc}}" id="desc" @input="desrcInput" placeholder="请填写活动描述"></textarea>
         </view>
       </label>
       <label class="form_item" for="desc">
@@ -105,10 +105,16 @@
           报名截止
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{signDate}}" @change="signDate">
+            <picker mode="date" value="{{signDate}}" @change="signDate" placeholder="日期">
               <view class="picker_input">
                 {{signDate}}
-                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+        <view class="label_input">
+            <picker mode="time" value="{{signTime}}" @change="signTime" placeholder="时间">
+              <view class="picker_input">
+                {{signTime}}
               </view>
             </picker>
         </view>
@@ -121,9 +127,9 @@
           保证金
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{money}}" @change="money">
+            <picker mode="selector" value="{{price}}" @change="money" range="{{range}}">
               <view class="picker_input">
-                当前选择: {{money}}
+                {{price}}
                 <view class="arrow"></view>
               </view>
             </picker>
@@ -134,9 +140,9 @@
           开始时间
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{startDate}}" @change="startDate">
+            <picker mode="date" value="{{start_time}}" @change="startDate">
               <view class="picker_input">
-                当前选择: {{startDate}}
+                {{start_time}}
                 <view class="arrow"></view>
               </view>
             </picker>
@@ -147,9 +153,9 @@
           任务天数
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{dayCount}}" @change="dayCount">
+            <picker mode="selector" value="{{days}}" @change="dayCount" range="{{range}}">
               <view class="picker_input">
-                当前选择: {{dayCount}}
+                {{days}}
                 <view class="arrow"></view>
               </view>
             </picker>
@@ -160,9 +166,17 @@
           打卡时段
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+            <picker mode="time" value="{{sign_start_time}}" @change="signStartTime">
               <view class="picker_input">
-                当前选择: {{time}}
+                {{sign_start_time}}
+                <view class="arrow"></view>
+              </view>
+            </picker>
+        </view>
+        <view class="label_input">
+            <picker mode="time" value="{{sign_end_time}}" @change="signEndTime">
+              <view class="picker_input">
+                {{sign_end_time}}
                 <view class="arrow"></view>
               </view>
             </picker>
@@ -171,18 +185,18 @@
     </view>
     <view class="form_block power_block">
       <view class="form_title"><text class="pinklight">权限设置</text></view>
-      <view class="powerset {{access==1?'active':''}}" @tap="slectAccess(1)">
+      <view class="powerset {{type==1?'active':''}}" @tap="slectAccess(1)">
         <view class="type">广场任务</view>
         <view class="desc">广广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务场任务</view>
         <view class="select"></view>
       </view>
-      <view class="powerset {{access==2?'active':''}}" @tap="slectAccess(2)">
+      <view class="powerset {{type==2?'active':''}}" @tap="slectAccess(2)">
         <view class="type">好友PK</view>
         <view class="desc">广场任务</view>
         <view class="select"></view>
       </view>
     </view>
-    <view class="join">
+    <view class="join" @tap="createActive">
       <button>发布活动</button>
     </view>
   </view>
@@ -191,7 +205,8 @@
 <script>
 import wepy from "wepy";
 import interfaces from "../../interface/index";
-
+import api from "../../config"
+import http from "../../utils/request"
 export default class Start extends wepy.page {
   config = {
     navigationBarTitleText: "发起打卡"
@@ -199,13 +214,21 @@ export default class Start extends wepy.page {
   components = {};
 
   data = {
-    post_id:1,
-    access:1,
-    signDate:'2017-12-20',
-    signTime:'00:00',
-    money:'',
-    startDate:'',
-    dayCount:'',
+    range:[7,15,30,60,150,365],
+    post_id:1,    
+    type:1,
+    img:'',
+    title:'',
+    desrc:'',
+    signDate: '日期',
+    signTime: '时间',
+    price:'5元/天',
+    end_time:'',
+    start_time:'任务开始日期',
+    days:'30天',
+    sign_start_time:'打卡开始时间',
+    sign_end_time:'打卡截止时间',
+
   };
 
   computed = {
@@ -215,46 +238,83 @@ export default class Start extends wepy.page {
   };
 
   methods = {
-    //封面选择
-    selectPost(post_id){
+    // 标题设置
+    titleInput(e) {
+      this.title = e.detail.value
+    },
+    // 描述设置
+    desrcInput(e) {
+      this.desrc = e.detail.value
+    },
+    // 封面选择
+    async selectPost(post_id){
       this.post_id = post_id;
+      let data = await interfaces.uploadImg();
+      data = JSON.parse(data)
+      console.log(typeof data)
+      console.log(data)
+      if(data.code){
+        this.img = data.info
+        this.$apply()
+      }
     },
-    //权限选择
+    // 权限选择
     slectAccess(access) {
-      this.access = access;
+      this.type = access;
     },
+    // 报名日期
     signDate(e){
       this.signDate = e.detail.value;
+    },
+    // 报名小时
+    signTime(e){
+      this.signTime = e.detail.value;
+    },
+    // 保证金
+    money(e) {
+      this.price = this.range[e.detail.value];
+    },
+    // 开始时间
+    startDate(e) {
+      this.start_time = e.detail.value;
+    },
+    // 任务天数
+    dayCount(e) {
+      this.days = this.range[e.detail.value];
+    },
+    // 打卡开始时间
+    signStartTime(e) {
+      this.sign_start_time = e.detail.value;
+    },
+    // 打开截止时间
+    signEndTime(e) {
+      this.sign_end_time = e.detail.value;
+    },
+    // 提交活动
+    createActive() {
+      const { data } = http({
+        method: api.activity.add.method,
+        url: api.activity.add.url,
+        data: {
+          type:this.type,
+          img:this.img,
+          title:this.title,
+          desrc:this.desrc,
+          price:this.price,
+          end_time:this.signDate+' '+this.signTime,
+          start_time:this.start_time,
+          days:this.days,
+          sign_start_time:this.sign_start_time,
+          sign_end_time:this.sign_end_time
+        }
+      },true)
     }
   };
 
   events = {};
 
   onLoad() {
-    let self = this;
-    // interfaces.login()
-    // this.$parent.getUserInfo(function (code,userInfo) {
-    //   if (userInfo) {
-    //     self.userInfo = userInfo
-    //         wepy.request({
-    //           url: api.users.login.url,
-    //           method: api.users.login.method,
-    //           data: {
-    //             code: code,
-    //             userInfo: userInfo
-    //           }
-    //         });
-    //   }
-    //   self.normalTitle = '标题已被修改'
-
-    //   self.setTimeoutTitle = '标题三秒后会被修改'
-    //   setTimeout(() => {
-    //     self.setTimeoutTitle = '到三秒了'
-    //     self.$apply()
-    //   }, 3000)
-
-    //   self.$apply()
-    // })
+    
   }
 }
 </script>

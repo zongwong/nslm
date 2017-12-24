@@ -1,0 +1,99 @@
+<style lang="scss">
+// 说明弹层
+.pkMoadl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  .pkContent {
+    background: #fff;
+    width: 592rpx;
+    height: 670rpx;
+    border-radius: 30rpx;
+    position: absolute;
+    top: 178rpx;
+    left: 94rpx;
+    box-sizing: border-box;
+    padding-right: 50rpx;
+    .icon_fly {
+      position: absolute;
+      top: -80rpx;
+      left: -70rpx;
+      width: 310rpx;
+      height: 662rpx;
+    }
+    .title {
+      font-size: 54rpx;
+      line-height: 1;
+      margin: 84rpx 0 14rpx 0;
+      color: #ff508a;
+      text-align: right;
+    }
+    .desc {
+      font-size: 30rpx;
+      text-align: right;
+      line-height: 1;
+      margin-bottom: 30rpx;
+    }
+    .content {
+      font-size: 28rpx;
+      color: #a9a9a9;
+      padding-left: 176rpx;
+      text-indent: 2em;
+      text-align: justify;
+      padding-bottom: 10rpx;
+      max-height: 410rpx;
+      overflow: hidden;
+    }
+  }
+  .close {
+    top: 880rpx;
+    z-index: 11;
+  }
+}
+</style>
+<template>
+    <!-- 说明弹层 -->
+    <view class="pkMoadl" wx:if="{{status}}">
+        <view class="pkContent">
+        <image class="icon_fly" src="../../images/pkbg.png"></image>
+        <view class="title">{{title}}</view>
+        <view class="desc">{{desc}}</view>
+        <view class="content">{{content}}</view>
+        </view>
+        <view class="close" @tap="close"></view>
+    </view>
+</template>
+<script>
+import wepy from "wepy";
+
+export default class Explain extends wepy.component {
+  props = {
+    status: {
+      type: Boolean,
+      default: false,
+      twoWay: true
+    },
+    title: {
+      type: String,
+      default: "什么是PK码"
+    },
+    desc: {
+      type: String,
+      default: "邀请好友PK的密码"
+    },
+    content: {
+      type: String,
+      default: "PK码是好友之间PK的验证凭证。PK活动仅参与活动的好友可见，区别于广场活动。1、创建打卡活动时，选择好友PK，系统是自动生成含PK码的图片，发送给多个好友邀请其参与PK活动。2、好友收到图片后，复制PK码，识别二维码可进入活动首页，输入PK码，即可报名参加好友PK活动。"
+    }
+  };
+  methods = {
+    close() {
+        this.status = false
+    }
+  };
+}
+</script>

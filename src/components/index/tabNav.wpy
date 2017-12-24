@@ -4,7 +4,6 @@
   border-bottom: 2rpx solid #ebebeb;
   display: flex;
   justify-content: space-around;
-  margin: 22rpx 0;
   background: #fff;
   .tabNav-item {
     height: 76rpx;
@@ -22,7 +21,7 @@
 </style>
 <template>
   <view class="tabNav">
-      <view wx:for="{{navs}}" class="tabNav-item {{item.selected?'active':''}}" @tap="tap({{index}})">
+      <view wx:for="{{navs}}" wx:key="tab_{{index}}" class="tabNav-item {{item.selected?'active':''}}" @tap="tap({{index}})">
           {{item.text}}
       </view>
   </view>
@@ -31,18 +30,7 @@
   import wepy from 'wepy'
   export default class TabNav extends wepy.component{
       data={
-        //   navs:[
-        //       {
-        //           text:'按热度',
-        //           selected:true,
-        //       },{
-        //           text:'按时间',
-        //           selected:false,
-        //       },{
-        //           text:'按热度',
-        //           selected:false,
-        //       }
-        //   ]
+
       }
 
       props = {

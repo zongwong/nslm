@@ -1,6 +1,6 @@
 <style lang="scss">
 .activityList {
-  padding: 18rpx;
+  padding: 0 18rpx 18rpx;
   .list-item {
     border: 1px solid #ececec;
     background: #fff;
@@ -61,14 +61,14 @@
 </style>
 <template>
   <view class="activityList">
-    <navigator url="/pages/index/detail">
+    <navigator url="/pages/index/detail?id={{item.id}}">
       <view class="list-item">
-          <image class="item-image" src="../../images/default-list.png"></image>
+          <image class="item-image" src="{{item.img}}"></image>
           <view class="item-info">
-              <view class="item-title">活动标题啊</view>
-              <view class="item-desc">活动简介啊</view>
+              <view class="item-title">{{item.title}}</view>
+              <view class="item-desc">{{item.content}}</view>
               <view class="item-other">
-                <text class="item-day">30天任务</text><text class="item-money">5元/天</text><text class="item-people">5人已报名</text>
+                <text class="item-day">{{item.days}}天任务</text><text class="item-money">{{item.price}}元/天</text><text class="item-people">{{item.join_num}}人已报名</text>
               </view>
           </view>
       </view>
@@ -78,6 +78,10 @@
 <script>
 import wepy from "wepy";
 export default class ActivityList extends wepy.component {
-  data = {};
+  props = {
+    item:{
+      type: Object
+    }
+  };
 }
 </script>

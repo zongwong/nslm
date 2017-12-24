@@ -1,4 +1,7 @@
 <style lang="scss">
+.user{
+    overflow: hidden;
+}
 .header{
   background: #fff;
   overflow: hidden;
@@ -155,7 +158,7 @@
     <view class="header">
       <navigator url="/pages/user/editinfo" style="display:inline;">
         <view class="avatar">
-            <image src="../../images/default_avatar.png"></image>
+            <image src="{{userInfo.avatarUrl}}"></image>
             <view class="edit"></view>
         </view>
       </navigator>
@@ -165,7 +168,7 @@
         <view class="data_item">
           <view>0723</view>
           <view>女神勋章</view>
-          <view><navigator url="/pages/user/exchange"><text>去兑换</text></navigator></view>
+          <view><navigator url="/pages/user/exchange" hover-class="none"><text>去兑换</text></navigator></view>
         </view>
         <view class="data_item">
           <view>07</view>
@@ -174,7 +177,7 @@
         <view class="data_item">
           <view>07</view>
           <view>累计奖金 </view>
-          <view><navigator url="/pages/user/money"><text>去提现</text></navigator></view>
+          <view><navigator url="/pages/user/money" hover-class="none"><text>去提现</text></navigator></view>
         </view>
       </view>
       <view class="publish">
@@ -232,10 +235,21 @@
 </template>
 
 <script>
-  import wepy from 'wepy'
+  import wepy from "wepy"
+  import alert from "../../components/public/alert"
   export default class user extends wepy.page {
       config = {
         navigationBarTitleText: "我的"
-      };
+      }
+      data = {
+        userInfo: null,
+      }
+      onLoad() {
+        this.userInfo = this.$parent.globalData.userInfo
+        setTimeout(()=>{
+          this.alertStatus = 'open'
+          this.$apply()
+        },6000)
+      }
   }
 </script>

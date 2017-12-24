@@ -1,69 +1,72 @@
 <style lang="scss">
-.header{
-  height: 86rpx;
-  background: #ff4a88;
-  color:#fff;
-  padding: 0 37rpx;
-  line-height: 86rpx;
-  font-size: 26rpx;
-  display: flex;
-  justify-content: space-between;
-}
-.qa_icon{
-  width: 44rpx;
-  height: 44rpx;
-  border-radius: 50%;
-  background:#fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAbCAYAAACa9mScAAABi0lEQVQ4jaXVP0hVYRzG8Y8HTRwiEGkRxTFyCQpBbDAXRRQcIveyhoSGcBAXG4KcEwIVFd0UREEk2oocpCkQVBqtMAinIsV/Obz3kpzOvefc67Odc573+77n+f1+51T87R6Tojr8xmEhQ5Rw7woG8RFH+IkDfMMEbsYXVMauW7CAJuxjBV9Rg9t4jId4gyEcxyEdWMvtPoA5nMQ2uYFxPEMj7uM0/zoNWMIvtGI6AQA76MQk+jDKv0zGcA0PsJWw+KLO8BQbGEZjhNrcsd7ifQogr1OMoAqPItwVKrKYEZDXB6Fy7ZEQEHwpEXImZNQQ4TPeYbNECKGSUSXW0VUGoEIo+W5Sx2ZVC+qxfhnIKyGX2XIhL3EPU9iOz06aruM1+oVme07yFBdSj9DN/ZgX2v8P/09xIfViGT9ysLWLD7NAajGDPbRhN27IAnkifN36kgBky6Q3d4rVQoYskDv4JPREWZCrwoR/L2ZKg5wIZd0oZkoL9gDNKZ6Smq1sSIQXuHUZSLXwI2stZjoHrSZMpwKaCaYAAAAASUVORK5CYII=) center / 100% no-repeat;
-  background-size: 17rpx 27rpx;
-  margin-top: 21rpx;
-}
-.content{
-  padding:18rpx 16rpx;
-  .item{
-    border: 2rpx solid #f1f1f1;
-    border-radius: 24rpx;
-    background: #fff;
-    padding: 18rpx;
-    margin-bottom: 18rpx;
-    font-size: 24rpx;
-    .post_image{
-      width: 100%;
-      height: 300rpx;
-      border-radius: 12rpx;
-    }
-    .title{
-      font-size: 30rpx;
-      margin: 20rpx 0;
-      font-weight: 600;
-    }
-    .desc{
-      line-height: 34rpx;
-      margin-bottom: 20rpx;
-    }
-    .btn{
-      display: flex;
-      justify-content: space-between;
-      line-height: 46rpx;
-      .right{
-        background: #ff4a88;
-        color: #fff;
-        border-radius: 25rpx;
-        width: 180rpx;
-        text-align: center;
+.exchange {
+  .header {
+    height: 86rpx;
+    background: #ff4a88;
+    color: #fff;
+    padding: 0 37rpx;
+    line-height: 86rpx;
+    font-size: 26rpx;
+    display: flex;
+    justify-content: space-between;
+  }
+  .qa_icon {
+    width: 44rpx;
+    height: 44rpx;
+    border-radius: 50%;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAbCAYAAACa9mScAAABi0lEQVQ4jaXVP0hVYRzG8Y8HTRwiEGkRxTFyCQpBbDAXRRQcIveyhoSGcBAXG4KcEwIVFd0UREEk2oocpCkQVBqtMAinIsV/Obz3kpzOvefc67Odc573+77n+f1+51T87R6Tojr8xmEhQ5Rw7woG8RFH+IkDfMMEbsYXVMauW7CAJuxjBV9Rg9t4jId4gyEcxyEdWMvtPoA5nMQ2uYFxPEMj7uM0/zoNWMIvtGI6AQA76MQk+jDKv0zGcA0PsJWw+KLO8BQbGEZjhNrcsd7ifQogr1OMoAqPItwVKrKYEZDXB6Fy7ZEQEHwpEXImZNQQ4TPeYbNECKGSUSXW0VUGoEIo+W5Sx2ZVC+qxfhnIKyGX2XIhL3EPU9iOz06aruM1+oVme07yFBdSj9DN/ZgX2v8P/09xIfViGT9ysLWLD7NAajGDPbRhN27IAnkifN36kgBky6Q3d4rVQoYskDv4JPREWZCrwoR/L2ZKg5wIZd0oZkoL9gDNKZ6Smq1sSIQXuHUZSLXwI2stZjoHrSZMpwKaCaYAAAAASUVORK5CYII=) center / 100% no-repeat;
+    background-size: 17rpx 27rpx;
+    background-color: #fff;
+    margin-top: 21rpx;
+  }
+  .content {
+    padding: 18rpx 16rpx;
+    .item {
+      border: 2rpx solid #f1f1f1;
+      border-radius: 24rpx;
+      background: #fff;
+      padding: 18rpx;
+      margin-bottom: 18rpx;
+      font-size: 24rpx;
+      .post_image {
+        width: 100%;
+        height: 300rpx;
+        border-radius: 12rpx;
+      }
+      .title {
+        font-size: 30rpx;
+        margin: 20rpx 0;
+        font-weight: 600;
+      }
+      .desc {
+        line-height: 34rpx;
+        margin-bottom: 20rpx;
+      }
+      .btn {
+        display: flex;
+        justify-content: space-between;
+        line-height: 46rpx;
+        .right {
+          background: #ff4a88;
+          color: #fff;
+          border-radius: 25rpx;
+          width: 180rpx;
+          text-align: center;
+        }
       }
     }
   }
 }
-.modal_mask{
+.modal_mask {
   position: fixed;
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: rgba(0,0,0,.8);
+  background: rgba(0, 0, 0, 0.8);
   top: 0;
   left: 0;
 }
-.modal{
+.modal {
   width: 588rpx;
   height: 800rpx;
   border-radius: 30rpx;
@@ -73,43 +76,43 @@
   top: 150rpx;
   left: 50%;
   transform: translateX(-50%);
-  .modal_header{
+  .modal_header {
     height: 324rpx;
     width: 100%;
     border-bottom: 4rpx solid #ff4a88;
     position: relative;
-    .h_item{
+    .h_item {
       position: absolute;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
     }
-    image{
+    image {
       z-index: 2;
     }
-    .post_mask{
+    .post_mask {
       z-index: 3;
-      background: rgba(0,0,0,.5);
+      background: rgba(0, 0, 0, 0.5);
     }
-    .info{
+    .info {
       color: #fff;
       z-index: 4;
       text-align: center;
       font-size: 24rpx;
       line-height: 1;
-      .need_num{
+      .need_num {
         font-size: 70rpx;
         margin: 86rpx 0 10rpx 0;
-        text{
+        text {
           font-size: 22rpx;
         }
       }
-      .tips_text{
+      .tips_text {
         margin-bottom: 35rpx;
       }
-      .tags{
-        text{
+      .tags {
+        text {
           display: inline-block;
           border-radius: 30rpx;
           line-height: 36rpx;
@@ -119,41 +122,39 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          &:first-child{
+          &:first-child {
             border-color: #ff4a88;
             background: #ff4a88;
             margin-right: 20rpx;
           }
         }
-
       }
     }
   }
-  .modal_body{
-    label{
+  .modal_body {
+    label {
       display: flex;
       border-bottom: 2rpx solid #ececec;
-      padding: 12rpx 24rpx; 
+      padding: 12rpx 24rpx;
       font-size: 28rpx;
       line-height: 52.5rpx;
-      &:last-child{
+      &:last-child {
         border-bottom: none;
       }
-      .label_text{
+      .label_text {
         width: 120rpx;
         text-align: center;
       }
-      .label_input{
+      .label_input {
         flex: 1;
         color: #888;
-        input{
+        input {
           width: 100%;
         }
       }
     }
-
   }
-  .ex_btn{
+  .ex_btn {
     width: 460rpx;
     background: #ff4a88;
     color: #fff;
@@ -166,15 +167,15 @@
     border-radius: 40rpx;
   }
 }
-
 </style>
 <template>
   <view class="exchange">
     <view class="header">
       <view>当前女神勋章：9枚</view>
-      <view class="qa_icon"></view>
+      <view class="qa_icon" @tap="exModal"></view>
     </view>
     <!-- 导航 -->
+    <tabNav :navs="navs"></tabNav>
     <!-- 内容 -->
     <view class="content">    
       <view class="item">
@@ -183,13 +184,13 @@
         <view class="desc greyColor">描述内容</view>
         <view class="btn">
           <view class="left pinklight">兑换条件:5枚女神勋章</view>
-          <view class="right"><navigator>去兑换</navigator></view>
+          <view class="right" @tap="exChange(1,1)">去兑换</view>
         </view>
       </view>
     </view>
   </view>
   <!-- 兑换框 -->
-  <view class="modal_mask">
+  <view class="modal_mask" wx:if="{{changeModal}}">
     <view class="modal">
       <view class="modal_header">
         <image class="h_item" src="../../images/default-list.png"></image>
@@ -199,39 +200,139 @@
           <view class="tips_text">兑换所需</view>
           <view class="tags">
             <text>奖品:女神课程</text>
-            <text>当前女神勋章:4010</text>
+            <text>当前女神勋章:9</text>
           </view>
         </view>
       </view>
       <view class="modal_body">
         <label for="name">
           <view class="label_text">姓名</view>
-          <view class="label_input"><input type="text" id="name" placeholder="请输入姓名"></view>
+          <view class="label_input"><input type="text" id="name" placeholder="请输入姓名" value="{{name}}" @input="nameInput"></view>
         </label>
         <label for="phone">
           <view class="label_text">电话</view>
-          <view class="label_input"><input type="text" id="phone" placeholder="请输入电话"></view>
+          <view class="label_input"><input type="text" id="phone" placeholder="请输入电话" value="{{wx}}" @input="phoneInput"></view>
         </label>
         <label for="wx">
           <view class="label_text">微信</view>
-          <view class="label_input"><input type="text" id="wx" placeholder="请输入微信"></view>
+          <view class="label_input"><input type="text" id="wx" placeholder="请输入微信" value="{{phone}}" @input="wxInput"></view>
         </label>
         <label for="address">
           <view class="label_text">地址</view>
-          <view class="label_input"><input type="text" id="address" placeholder="请输入地址"></view>
+          <view class="label_input"><input type="text" id="address" placeholder="请输入地址" value="{{address}}" @input="addressInput"></view>
         </label>
       </view>
-      <button class="ex_btn">确认兑换</button>
+      <button class="ex_btn" @tap="submitChange">确认兑换</button>
     </view>
-    <view class="close"></view>
+    <view class="close" @tap="exChange(0)"></view>
   </view>
+  <!-- 说明 -->
+  <explain :status.sync="status" :title="exTitle" :desc="exDesc" :content="exContent"></explain>
 </template>
 
 <script>
-  import wepy from 'wepy'
-  export default class Exchange extends wepy.page {
-      config = {
-        navigationBarTitleText: "兑换中心"
-      };
+import wepy from "wepy"
+import explain from "../../components/public/explain"
+import tabNav from "../../components/index/tabNav"
+import api from "../../config"
+import http from "../../utils/request"
+export default class Exchange extends wepy.page {
+  config = {
+    navigationBarTitleText: "兑换中心"
   }
+  components = {
+    explain: explain,
+    tabNav: tabNav
+  }
+  data = {
+    status: false,
+    exTitle: "女神勋章",
+    exDesc: "用于兑换课程和礼物",
+    exContent:
+      "1、女神勋章是女神们自律积极、年轻活力、变美蜕变、尊贵身份的象征；2、女神勋章可通过参加活动，并完成打卡任务获得；3、女神勋章可以用来兑换女神蜕变课程和礼物；",
+    changeModal: false,
+    navs: [
+      {
+        text: "美术",
+        selected: true
+      },
+      {
+        text: "语言",
+        selected: false
+      },
+      {
+        text: "瑜伽",
+        selected: false
+      },
+      {
+        text: "饮食",
+        selected: false
+      }
+    ],
+    courseId: "",
+    name: "",
+    wx: "",
+    phone: "",
+    address: "",
+    tabIndex: 1
+  }
+  methods = {
+    // 女神币说明
+    exModal() {
+      this.status = true;
+    },
+    // 兑换框
+    exChange(status, id) {
+      if (status == 1) {
+        this.changeModal = true;
+        this.courseId = id;
+      } else {
+        this.changeModal = false;
+        this.courseId = "";
+      }
+    },
+    // 表单
+    nameInput(e) {
+      this.name = e.detail.value
+    },
+    phoneInput(e) {
+      this.phone = e.detail.value
+    },
+    wxInput(e) {
+      this.wx = e.detail.value
+    },
+    addressInput(e) {
+      this.address = e.detail.value
+    },
+    // 兑换
+    submitChange() {
+      const { data } = http({
+        url: '',
+        method: '',
+        data: {
+          courseId:this.courseId,
+          name:this.name,
+          wx:this.wx,
+          phone:this.phone,
+          address:this.address,
+        }
+      })
+    }
+  }
+  events = {
+    navTapEvent(index) {
+      this.tabIndex = (index+1)
+    }
+  }
+  // 获取兑换列表
+  getCourseList() {
+    const { data } = http({
+      url: '',
+      method: '',
+      data: {
+        
+      }
+    })
+  }
+}
 </script>

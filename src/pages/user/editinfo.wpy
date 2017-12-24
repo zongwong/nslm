@@ -22,18 +22,18 @@
       </view>
       <view class="info_block active_block">
         <view class="userinfo">
-          <image src="../../images/default_avatar.png"></image>
-          <text class="name">发起人姓名</text>
+          <image src="{{userInfo.avatarUrl}}"></image>
+          <text class="name">{{userInfo.nickName}}</text>
         </view>
       </view>
     </view>
     <view class="form_block">
-      <label class="form_item" for="name">
+      <label class="form_item" for="age">
         <view class="label_text">
           年龄(岁)
         </view>
         <view class="label_input">
-          <input type="text" value="1" id="name">
+          <input type="text" value="{{age}}" id="age" @input="ageInput">
         </view>
       </label>
       <label class="form_item" for="height">
@@ -41,7 +41,7 @@
           身高(cm)
         </view>
         <view class="label_input">
-          <input type="text" value="1" id="height">
+          <input type="text" value="{{height}}" id="height" @input="heightInput">
         </view>
       </label>
       <label class="form_item" for="weight">
@@ -49,45 +49,45 @@
           体重(kg)
         </view>
         <view class="label_input">
-            <input type="text" value="1" id="weight">
+            <input type="text" value="{{weight}}" id="weight" @input="weightInput">
         </view>
       </label>
     </view>
     <view class="form_block bottom-block">
-      <label class="form_item" for="desc">
+      <label class="form_item" for="constellation">
         <view class="label_text">
           星座
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{money}}" @change="money">
+            <picker mode="selector" value="{{constellation}}" @change="constellation" range="{{constellationRange}}">
               <view class="picker_input">
-                当前选择: {{money}}
+                 {{constellation}}
                 <view class="arrow"></view>
               </view>
             </picker>
         </view>
       </label>
-      <label class="form_item" for="desc">
+      <label class="form_item" for="pregnancy">
         <view class="label_text">
           怀孕情况
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{startDate}}" @change="startDate">
+            <picker mode="selector" value="{{pregnancy}}" @change="pregnancy" range="{{pregnancyRange}}">
               <view class="picker_input">
-                当前选择: {{startDate}}
+                {{pregnancy}}
                 <view class="arrow"></view>
               </view>
             </picker>
         </view>
       </label>
-      <label class="form_item" for="desc">
+      <label class="form_item" for="pregnancyStatus">
         <view class="label_text">
           怀孕状态
         </view>
         <view class="label_input">
-            <picker mode="date" value="{{dayCount}}" @change="dayCount">
+            <picker mode="selector" value="{{pregnancyStatus}}" @change="pregnancyStatus" range="{{pregnancyStatusRange}}">
               <view class="picker_input">
-                当前选择: {{dayCount}}
+                {{pregnancyStatus}}
                 <view class="arrow"></view>
               </view>
             </picker>
@@ -108,65 +108,56 @@ export default class Editinfo extends wepy.page {
   config = {
     navigationBarTitleText: "资料修改"
   };
-  components = {};
 
   data = {
-    post_id:1,
-    access:1,
-    signDate:'2017-12-20',
-    signTime:'00:00',
-    money:'',
-    startDate:'',
-    dayCount:'',
-  };
-
-  computed = {
-    now() {
-      return +new Date();
-    }
+    userInfo: null,
+    age: "12",
+    weight: "11",
+    height: "133",
+    constellation: "请选择星座",
+    pregnancy: "请选择怀孕情况",
+    pregnancyStatus: "请选择怀孕状态",
+    constellationRange: ['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座'],
+    pregnancyRange: ['未怀孕','已怀孕','备孕中'],
+    pregnancyStatusRange: ['无','1-4周','1-3个月','3-6个月','6-9个月','10个月以上'],
   };
 
   methods = {
-    //封面选择
-    selectPost(post_id){
-      this.post_id = post_id;
+    ageInput(e) {
+      this.age = e.detail.value
     },
-    //权限选择
-    slectAccess(access) {
-      this.access = access;
+    weightInput(e) {
+      this.weight = e.detail.value
     },
-    signDate(e){
-      this.signDate = e.detail.value;
+    heightInput(e) {
+      this.height = e.detail.value
+    },
+    constellation(e) {
+      this.constellation = this.constellationRange[e.detail.value]
+    },
+    pregnancy(e) {
+      this.pregnancy = this.pregnancyRange[e.detail.value]
+    },
+    pregnancyStatus(e) {
+      this.pregnancyStatus = this.pregnancyStatusRange[e.detail.value]
+    },
+    async saveUserInfo() {
+      const { data } = await http({
+        method: api.user.save.method,
+        url: api.user.save.url,
+        data: {
+          age: this.age,
+          weight: this.weight,
+          height: this.height,
+          constellation: this.constellation,
+          pregnancy: this.pregnancy
+        }
+      })
     }
   };
 
-  events = {};
-
   onLoad() {
-    let self = this;
-    // interfaces.login()
-    // this.$parent.getUserInfo(function (code,userInfo) {
-    //   if (userInfo) {
-    //     self.userInfo = userInfo
-    //         wepy.request({
-    //           url: api.users.login.url,
-    //           method: api.users.login.method,
-    //           data: {
-    //             code: code,
-    //             userInfo: userInfo
-    //           }
-    //         });
-    //   }
-    //   self.normalTitle = '标题已被修改'
-
-    //   self.setTimeoutTitle = '标题三秒后会被修改'
-    //   setTimeout(() => {
-    //     self.setTimeoutTitle = '到三秒了'
-    //     self.$apply()
-    //   }, 3000)
-
-    //   self.$apply()
-    // })
+    this.userInfo = this.$parent.globalData.userInfo
   }
 }
 </script>
