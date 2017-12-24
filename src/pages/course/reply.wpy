@@ -1,0 +1,27 @@
+<style lang="scss">
+.reply{
+  .block{
+    background: #fff;
+    margin-bottom: 20rpx;
+  }
+}
+</style>
+<template>
+  <view class="reply">
+    <view class="block">
+      <textarea name="" id=""></textarea>
+    </view>
+    <view class="block">
+      <textarea name="" id=""></textarea>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Reply extends wepy.page {
+      config = {
+        navigationBarTitleText: "填写内容"
+      };
+  }
+</script>

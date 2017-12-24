@@ -1,10 +1,142 @@
 <style lang="scss">
 .doctor{
+  .doctor_box{
+    border: 2rpx solid #efefef;
+    border-radius: 30rpx;
+    background: #fff;
+    margin: 22rpx 36rpx;
+    height: 330rpx;
+    padding: 0 26rpx;
+    .doctor_info{
+      border-bottom: 2rpx solid #efefef;
+      padding: 24rpx 0;
+      display: flex;
+      justify-content: center;
+      font-size: 28rpx;
+      line-height: 1;
+      .doctor_avatar{
+        width: 126rpx;
+        height: 126rpx;
+        border-radius: 50%;
+        margin-right: 26rpx;
+      }
+      .name{
+        margin-bottom: 12rpx;
+        margin-top: 29rpx;
+      }
+      .job{
+        color: #888;
+      }
+
+    }
+    .doctor_desc{
+      padding: 26rpx 0;
+      color: #888;
+      font-size: 24rpx;
+      line-height: 34rpx;
+    }
+  }
+  .reply{
+    background: #fff;
+    padding: 0 36rpx;
+    .reply_item{
+      display: flex;
+      padding: 24rpx 0;
+      .reply_avatar{
+        width: 62rpx;
+        height: 62rpx;
+        border-radius: 50%;
+        margin-right: 18rpx;
+      }
+      .reply_info{
+        border-bottom: 2rpx solid #efefef;
+        font-size: 28rpx;
+        line-height: 38rpx;
+        flex: 1;
+        .name{
+          font-weight: bold;
+          &.me{
+            color: #ff508a;
+          }
+        }
+        .conent{
+          color: #888;
+          margin-top: 6rpx;
+        }
+        .time{
+          color: #a9a9a9;
+          font-size: 22rpx;
+          margin: 16rpx 0 24rpx 0;
+        }
+      }
+      &:last-child{
+        .reply_info{
+          border-bottom: none;
+        }
+      }
+    }
+
+  }
+  .join{
+    padding: 12rpx 36rpx;
+    display: flex;
+    justify-content: center;
+    .reply_input{
+      border: 2rpx solid #efefef;
+      border-radius: 30rpx;
+      height: 60rpx;
+      margin-right: 15rpx;
+      line-height: 60rpx;
+      color: #888888;
+      font-size: 30rpx;
+      padding: 0 30rpx;
+      flex: 1;
+    }
+    .reply_submit{
+      color: #fff;
+      background: #ff508a;
+      border-radius: 30rpx;
+      height: 64rpx;
+      padding: 0 60rpx;
+      font-size: 30rpx;
+      line-height: 64rpx;
+    }
+  }
 }
 </style>
 <template>
   <view class="doctor">
-    
+    <view class="doctor_box">
+      <view class="doctor_info">
+        <image class="doctor_avatar" src="../../images/default_avatar.png"></image>
+        <view>
+          <view class="name">刘医生</view>
+          <view class="job">心理咨询师</view>
+        </view>
+      </view>
+      <view class="doctor_desc">吊炸天</view>
+    </view>
+    <view class="reply">
+      <view class="reply_item">
+        <image class="reply_avatar" src="../../images/default_avatar.png"></image>
+        <view class="reply_info">
+          <view class="name">留一声</view>
+          <view class="conent">你好</view>
+          <view class="time">2012-22-22</view>
+        </view>
+      </view>
+      <view class="reply_item">
+        <image class="reply_avatar" src="../../images/default_avatar.png"></image>
+        <view class="reply_info">
+          <view class="name me">留一声</view>
+          <view class="conent">你好</view>
+          <view class="time">2012-22-22</view>
+        </view>
+      </view>
+    </view>
+    <view class="join" @tap="createActive">
+      <input class="reply_input" type="text" value="问题"> <view class="reply_submit">提交</view>
+    </view>
   </view>
 </template>
 
