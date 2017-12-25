@@ -38,9 +38,9 @@
 <template>
   <view class="articleList">
     <view class="pbcontent">    
-      <view class="list_item">
+      <navigator class="list_item" url="/pages/course/articledetail">
         <view class="list_item_info">
-          <image class="list_item_post" src="../../images/detail_bg.png"></image>
+          <image class="list_item_post" src="{{imgs.detailbg}}"></image>
           <view class="list_item_detail">
             <view class="title singleTextOverflow">一周塑形课程</view>
             <view class="desc greyColor">描述内容</view>
@@ -50,7 +50,7 @@
             </view>
           </view>
         </view>
-      </view>
+      </navigator>
     </view>
   </view>
 </template>
@@ -61,5 +61,11 @@
       config = {
         navigationBarTitleText: "文章列表"
       };
+      data = {
+        imgs: null
+      }
+      onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+      }
   }
 </script>

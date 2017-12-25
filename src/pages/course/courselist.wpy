@@ -1,6 +1,7 @@
 <style lang="scss">
 .listbox{
   text-align: center;
+  margin-top: 26rpx;
   .list-item{
     width: 326rpx;
     height: 240rpx;
@@ -30,6 +31,10 @@
         color: #fff;
         text-align: center;
         font-size: 30rpx;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
       }
     }
     .info{
@@ -48,9 +53,10 @@
 </style>
 <template>
   <view class="courselist">
+    <tabNav :navs="navs"></tabNav>
     <view class="listbox">
       <navigator class="list-item" wx:for="{{8}}" wx:key="item_{{index}}" url="/pages/course/coursedetail">
-        <image class="post" src="../../images/default-list.png"></image>
+        <image class="post" src="{{imgs.defaultlist}}"></image>
         <view class="text">
           <view class="coursename">课程名称</view>
         </view>
@@ -65,9 +71,28 @@
 
 <script>
   import wepy from 'wepy'
+  import tabNav from "../../components/index/tabNav"
   export default class Courselist extends wepy.page {
       config = {
         navigationBarTitleText: "女神课堂"
       };
+      components = {
+        tabNav: tabNav
+      }
+      data = {
+        imgs: null,
+        navs: [
+          {
+            text:'按热度',
+            selected:true,
+          },{
+            text:'按时间',
+            selected:false,
+          }
+        ]
+      }
+      onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+      }
   }
 </script>

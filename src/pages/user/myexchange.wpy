@@ -10,7 +10,7 @@
 <template>
   <view class="myexchange">
     <view class="pbcontent">    
-      <view class="list_item">
+      <navigator class="list_item" url="/pages/user/success">
         <view class="list_item_info">
           <image class="list_item_post" src="../../images/detail_bg.png"></image>
           <view class="list_item_detail">
@@ -20,7 +20,7 @@
             <view class="singleTextOverflow pinklight">网盘提取码:1232</view>
           </view>
         </view>
-      </view>
+      </navigator>
     </view>
   </view>
 </template>

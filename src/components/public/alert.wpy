@@ -67,7 +67,7 @@
           <view class="content">{{content}}</view>
         </view>
         <view class="btns">
-          <view class="alertbtn">去邀请</view>
+          <view class="alertbtn" @tap="close">{{btn}}</view>
         </view>
       </view>
   </view>
@@ -79,7 +79,8 @@
     props = {
       status:{
         type: String,
-        default: 'open',
+        default: 'close',
+        twoWay: true
       },
       icon:{
         type: String,
@@ -93,7 +94,15 @@
         type: String,
         default: '邀请好友对战,奖励更多哦!',
       },
+      btn: {
+        type: String,
+        default: '去邀请'
+      }
     }
-
+    methods = {
+      close() {
+        this.status = 'close'
+      }
+    }
   }
 </script>

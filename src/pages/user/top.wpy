@@ -56,7 +56,7 @@ page{
 <template>
   <view class="top">
     <view class="header">
-      <image src="../../images/topbg.png"></image>
+      <image src="{{imgs.topbg}}"></image>
     </view>
     <view class="top_list">
       <view class="top_item">
@@ -85,5 +85,11 @@ page{
       config = {
         navigationBarTitleText: "排行榜"
       };
+      data = {
+        imgs: null
+      }
+      onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+      }
   }
 </script>

@@ -205,7 +205,7 @@
 <template>
   <view class="pk">
     <view class="header">
-      <image  src="../../images/pkpost.png"></image>
+      <image  src="{{imgs.pkpost}}"></image>
       <!-- <view class="mask"></view> -->
       <view class="pktext">
         <view>xxx 邀请您一起参加</view>
@@ -249,7 +249,9 @@ export default class Pk extends wepy.page {
   };
   components = {};
 
-  data = {};
+  data = {
+    imgs: null
+  };
 
   computed = {
     now() {
@@ -262,30 +264,7 @@ export default class Pk extends wepy.page {
   events = {};
 
   onLoad() {
-    let self = this;
-    // interfaces.login()
-    // this.$parent.getUserInfo(function (code,userInfo) {
-    //   if (userInfo) {
-    //     self.userInfo = userInfo
-    //         wepy.request({
-    //           url: api.users.login.url,
-    //           method: api.users.login.method,
-    //           data: {
-    //             code: code,
-    //             userInfo: userInfo
-    //           }
-    //         });
-    //   }
-    //   self.normalTitle = '标题已被修改'
-
-    //   self.setTimeoutTitle = '标题三秒后会被修改'
-    //   setTimeout(() => {
-    //     self.setTimeoutTitle = '到三秒了'
-    //     self.$apply()
-    //   }, 3000)
-
-    //   self.$apply()
-    // })
+   this.imgs = this.$parent.globalData.imgs
   }
 }
 </script>

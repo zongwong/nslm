@@ -77,7 +77,7 @@
         <block wx:for="{{3}}" wx:key="swiper_{{index}}">
           <navigator url="/pages/index/detail" hover-class="none">
             <swiper-item>
-                <image src="../../images/banner.png" />
+                <image src="{{imgs.banner}}" />
             </swiper-item>
           </navigator>
         </block>
@@ -126,7 +126,8 @@ export default class Index extends wepy.page {
     ],
     tabIndex: 1,
     status:false,
-    activeList: []
+    activeList: [],
+    imgs: null
   };
 
   computed = {
@@ -162,6 +163,7 @@ export default class Index extends wepy.page {
 
   onLoad() {
     this.getActiveList(this.tabIndex)
+    this.imgs = this.$parent.globalData.imgs
   }
   // 获取活动列表
   async getActiveList(sort) {

@@ -27,7 +27,7 @@
 </style>
 <template>
   <view class="articledetail">
-    <image class="post" src="../../images/article_post.png"></image>
+    <image class="post" src="{{imgs.articlepost}}"></image>
     <view class="article">
       <view class="title singleTextOverflow">wqeqw</view>
       <view class="content greyColor">
@@ -43,5 +43,11 @@
     config = {
       navigationBarTitleText: "文章详情"
     };
+    data = {
+      imgs: null
+    }
+    onLoad() {
+      this.imgs = this.$parent.globalData.imgs
+    }
   }
 </script>

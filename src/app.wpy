@@ -203,9 +203,10 @@ page{
     display: flex;
     .label_text {
       text-align: center;
-      width: 108rpx;
+      width: 4em;
       margin-right: 20rpx;
       line-height: 52.5rpx;
+      white-space: nowrap;
     }
     .label_input {
       flex: 1;
@@ -410,6 +411,7 @@ import interfaces from "./interface/index";
 export default class extends wepy.app {
   config = {
     pages: [
+      "pages/index/record", 
       "pages/index/index", 
       "pages/course/reply",
       "pages/course/doctor",
@@ -431,7 +433,6 @@ export default class extends wepy.app {
       "pages/user/exchange", 
       "pages/user/money", 
       "pages/user/moneydetail",
-      "pages/index/record", 
       "pages/index/pk", 
       "pages/index/start", 
       "pages/index/detail"
@@ -453,7 +454,7 @@ export default class extends wepy.app {
         },
         {
           pagePath: "pages/course/course",
-          text: "日志",
+          text: "产后恢复课",
           iconPath: "images/icon-course.png",
           selectedIconPath: "images/icon-course-on.png"
         },
@@ -468,7 +469,31 @@ export default class extends wepy.app {
   };
 
   globalData = {
-    userInfo: null
+    userInfo: null,
+    imgs: {
+      'post': 'http://lady.zdgphp.cn/src/images/post.png',
+      'cbone': 'http://lady.zdgphp.cn/src/images/course_banner1.png',
+      'cbtwo': 'http://lady.zdgphp.cn/src/images/course_banner2.png',
+      'cbthree': 'http://lady.zdgphp.cn/src/images/course_banner3.png',
+      'cbfour': 'http://lady.zdgphp.cn/src/images/course_banner4.png',
+      'fly': 'http://lady.zdgphp.cn/src/images/pkbg.png',
+      'userbg': 'http://lady.zdgphp.cn/src/images/userbg.png',
+      'coursebg': 'http://lady.zdgphp.cn/src/images/coursebg.png',
+      'fmbg': 'http://lady.zdgphp.cn/src/images/fmbg.png',
+      'testbg': 'http://lady.zdgphp.cn/src/images/testbg.png',
+      'banner': 'http://lady.zdgphp.cn/src/images/banner.png',
+      'editbg': 'http://lady.zdgphp.cn/src/images/editbg.png',
+      'moodbg': 'http://lady.zdgphp.cn/src/images/moodbg.png',
+      'pkpost': 'http://lady.zdgphp.cn/src/images/pkpost.png',
+      'topbg': 'http://lady.zdgphp.cn/src/images/topbg.png',
+      'vobg': 'http://lady.zdgphp.cn/src/images/vobg.png',
+      'moneybg': 'http://lady.zdgphp.cn/src/images/moneybg.png',
+      'doctor': 'http://lady.zdgphp.cn/src/images/doctor.png',
+      'detailbg': 'http://lady.zdgphp.cn/src/images/detail_bg.png',
+      'defaultlist': 'http://lady.zdgphp.cn/src/images/default-list.png',
+      'articlepost': 'http://lady.zdgphp.cn/src/images/article_post.png',
+      'mood': 'http://lady.zdgphp.cn/src/images/mood.png'
+    }
   };
 
   constructor() {
@@ -477,7 +502,7 @@ export default class extends wepy.app {
     this.use("promisify");
   }
 
-  onLaunch() {
+  async onLaunch() {
     interfaces.login();
     let userInfo = wepy.getStorageSync('userInfo')
     this.globalData.userInfo = userInfo

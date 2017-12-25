@@ -1,6 +1,5 @@
 <style lang="scss">
 .mentality{
-  margin-bottom: 150rpx;
   overflow: hidden;
   .banner{
     height: 392rpx;
@@ -115,8 +114,6 @@
       }
     }
   }
-
-
 }
 </style>
 <template>
@@ -126,17 +123,17 @@
         <block wx:for="{{3}}" wx:key="swiper_{{index}}">
           <navigator url="/pages/index/detail" hover-class="none">
             <swiper-item>
-                <image src="../../images/banner.png" />
+                <image src="{{imgs.banner}}" />
             </swiper-item>
           </navigator>
         </block>
       </swiper>
     </view> 
     <view class="area-block">
-      <view class="title">热门文章 <navigator class="more">更多</navigator></view>
+      <view class="title">热门文章 <navigator class="more" url="/pages/course/articlelist">更多</navigator></view>
       <view class="articlelist">
         <navigator class="article" url="/pages/course/articledetail" wx:for="{{3}}" wx:key="article_{{index}}">
-          <image class="article_post" src="../../images/default-list.png"></image>
+          <image class="article_post" src="{{imgs.defaultlist}}"></image>
           <view class="article_info">
             <view class="article_title singleTextOverflow">文章标题</view>
             <view class="article_desc singleTextOverflow">文章描述</view>
@@ -145,29 +142,28 @@
       </view>
     </view>
     <view class="area-block action-block">
-      <navigator class="test">
-        <image src="../../images/testbg.png"></image>
-      </navigator>
-      <navigator class="course">
-        <image src="../../images/coursebg.png"></image>
-      </navigator>
-      <navigator class="fm">
-        <image src="../../images/fmbg.png"></image>
-      </navigator>
+      <view class="test" @tap="alertModal('心理测试')">
+        <image src="{{imgs.testbg}}"></image>
+      </view>
+      <view class="course" @tap="alertModal('心理课程')">
+        <image src="{{imgs.coursebg}}"></image>
+      </view>
+      <view class="fm" @tap="alertModal('心理FM')">
+        <image src="{{imgs.fmbg}}"></image>
+      </view>
     </view>
     <view class="area-block">
       <view class="title">心理咨询师—在线咨询</view>
       <view class="doctors">
           <scroll-view class="scroll" scroll-x>
-            <navigator class="adoctor" wx:for="{{7}}">
-              <image class="doctor_avatar" mode="aspectFill" src="../../images/doctor.png"></image>
+            <navigator class="adoctor" url="/pages/course/doctor"  wx:for="{{7}}" wx:key="doctor_{{index}}">
+              <image class="doctor_avatar" mode="aspectFill" src="{{imgs.doctor}}"></image>
               <view class="doctor_name">张一声</view>
             </navigator>
           </scroll-view>
       </view>
     </view>
-
-    <view>
+    <view style="margin-bottom: 150rpx;">
       <view class="mood_list">
         <view class="mood_item">
           <view class="mood_item_avatar">
@@ -180,14 +176,8 @@
             </view>
             <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
             <view class="mood_item_imgs">
-              <image src="../../images/mood.png"></image>
-              <image src="../../images/mood.png"></image>
-              <image src="../../images/mood.png"></image>
-              <image src="../../images/mood.png"></image>
-              <image src="../../images/mood.png"></image>
-              <image src="../../images/mood.png"></image>
-              <image src="../../images/mood.png"></image>
-              <image src="../../images/mood.png"></image>
+              <image src="{{imgs.mood}}"></image>
+              <image src="{{imgs.mood}}"></image>
             </view>
             <view class="mood_item_btns">
               <view>
@@ -203,17 +193,45 @@
         </view>
       </view>
     </view>
-
-
     <view class="join" @tap="createActive">
       <button>发布心情</button>
     </view>
   </view>
+  <alert 
+    :status.sync = "status" 
+    :icon = "icon"
+    :title.sync = "title"
+    :content = "content"
+    :btn = "btn"
+  ></alert>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import alert from "../../components/public/alert"
   export default class Mentality extends wepy.page {
-
+    config = {
+      navigationBarTitleText: "心理课程"
+    }
+    components = {
+      alert: alert
+    }
+    data = {
+      imgs: null,
+      status: 'close',
+      icon: '../../images/waiting.png',
+      title: '心理FM正在开发中',
+      content: '精彩功能 敬请期待!',
+      btn: '确定'
+    }
+    methods = {
+      alertModal(title) {
+        this.title = title+'正在开发中'
+        this.status = 'open'
+      }
+    }
+    onLoad() {
+      this.imgs = this.$parent.globalData.imgs
+    }
   }
 </script>

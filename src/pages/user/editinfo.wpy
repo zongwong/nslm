@@ -18,7 +18,7 @@
   <view class="editinfo">
     <view class="me-block">
       <view class="header">
-        <image mode="top" src="../../images/editbg.png"></image>
+        <image mode="top" src="{{imgs.editbg}}"></image>
       </view>
       <view class="info_block active_block">
         <view class="userinfo">
@@ -120,6 +120,7 @@ export default class Editinfo extends wepy.page {
     constellationRange: ['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座'],
     pregnancyRange: ['未怀孕','已怀孕','备孕中'],
     pregnancyStatusRange: ['无','1-4周','1-3个月','3-6个月','6-9个月','10个月以上'],
+    imgs: null
   };
 
   methods = {
@@ -158,6 +159,7 @@ export default class Editinfo extends wepy.page {
 
   onLoad() {
     this.userInfo = this.$parent.globalData.userInfo
+    this.imgs = this.$parent.globalData.imgs
   }
 }
 </script>

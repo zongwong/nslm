@@ -57,7 +57,7 @@
 <template>
   <view class="money">
     <view class="header">
-      <image class="bg" src="../../images/moneybg.png"></image>
+      <image class="bg" src="{{imgs.moneybg}}"></image>
       <view class="info">
         <view class="mymoney">200.00</view>
         <view class="text">可提现金额</view>
@@ -68,10 +68,10 @@
     </view>
     <label class="label" for="money">
       <view>提现金额</view>
-      <view><input type="text" id="money" placeholder="请输入提现金额" placeholder-style="color:#a9a9a9;"></view>  
+      <view><input type="number" id="money" @input="moneyInput" placeholder="请输入提现金额" placeholder-style="color:#a9a9a9;"></view>  
     </label>
     <view class="join">
-      <button>确定提现</button>
+      <button @tap="getMoney">确定提现</button>
     </view>
   </view>
 </template>
@@ -82,5 +82,43 @@
       config = {
         navigationBarTitleText: "提现"
       };
+      data = {
+        imgs: null,
+        money: '',
+      }
+      methods = {
+        moneyInput(e) {
+          this.money = e.detail.value
+        },
+        // 提现
+        async getMoney() {
+          if (this.money) {
+            const res = await wepy.showModal({
+              title: '提示',
+              content: `确定提现${this.money}元?`
+            })
+            if(res.confirm){
+              const { data } = await http({
+                url: '',
+                method: '',
+                data: {
+
+                }
+              })
+
+              if(data.code){
+                await wepy.showToast({
+                  title:'提现成功'
+                })
+              }
+
+            }
+            
+          }
+        },
+      }
+      onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+      }
   }
 </script>

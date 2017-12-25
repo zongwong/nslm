@@ -28,44 +28,136 @@
     display: block;
   }
   .food_box{
-    margin: 0 36rpx;
     background: #f3f3f3;
     border-radius: 10rpx;
+    margin: 26rpx 36rpx 29rpx;
+    text-align: center;
+    position: relative;
+    height: 372rpx;
+    .food_bg{
+      width: 675rpx;
+      height: 366rpx;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+    }
+    .content_box{
+      width: 100%;
+      height: 372rpx;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: 2;
+    }
+    .food_item{
+      padding: 0 70rpx 0 60rpx;
+      border-bottom: 2rpx solid #fff;
+      line-height: 60rpx;
+      display: flex;
+      justify-content: space-between;
+      .food_name{
+        font-size: 28rpx;
+        font-weight: bold;
+      }
+      .food_je{
+        font-size: 24rpx;
+      }
+    }
+    .food_btn{
+      background: #ff508a;
+      color: #fff;
+      border-radius: 30rpx;
+      line-height: 46rpx;
+      font-size: 28rpx;
+      margin: 18rpx auto 12rpx;
+      width: 182rpx;
+      .icon{
+        display: inline-block;
+        vertical-align: top;
+        height: 46rpx;
+        width: 27rpx;
+        background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAYCAYAAAALQIb7AAACLElEQVRIib2VOWiUYRCGn81qxHgFMZ5FLBRJVBCUCBEtJQixCmKljUJArCRKLEQw4FFZqIiFoIWIIAjaeGDjGUhAFC1EBAuPWHjEC4nmsfhn45+f7G7cVQem+Gbemfc7Xr7JqYzDmoF2oBVYCEwFPgGvgH7gCtBbtotayleq1/1tg2pfxG6pb1O5frWtVL9iibx6QP2hfldPqC0Rz2Kb1B71XZCeVaeUIpubCk5Qz0fhTbWxzOkLPlO9EHX31Rljka0IwMYIHo/1qSInKed7o/6qWpMlm60OqyfVjgBeVHMVEBW8J/p0peM5EzU+AOpDM5OAJuDDeGRaxPLAHWA5sDhUS00krwGN4c+Ac8Ag0FEh2U+gG6gDOkeiccT1jraP6iV1SRVXifpEfZR+M9TaEMQ+tdVEkdWQFPxIbH5Bmuxf+SL1mFqXFsh/sZrykL9PlieRf2cJbCXWDGwh+bhH3iynvlTvVvlGOXWzeib6FWxnViCnTT7eeVWQLY3mQybToWCXs2TrInG4ytO1mHzC26LfF5PRNDELvK1+VZurJGxQX6vP1d1BujYLWqZ+Ux+q9RUS1ao3gqA9dbW7xgJvj2SfyUT4E6Lp8T6qB1PxDnVOsaIuk7EzoG4yM5eKeJv6NIiOOsaIKlW8Ie5d9bG6R12lTov85Lj2HWpv4N6rW4v1LLfbenW/+sbRNpxZD6iH1Fml+o33b8wDa4DVwHygAfgMvADukQzKoXJNfgHLmOLQv2S+owAAAABJRU5ErkJggg==) 0 center no-repeat;
+        background-size: 27rpx 24rpx;
+      }
+    }
+    .food_tips{
+      font-size: 22rpx;
+      padding-bottom: 20rpx;
+    }
   }
 }
 </style>
 <template>
   <view class="course">
-    <navigator class="course_item" url="/pages/course/articlelist" hover-class="none">
-      <image src="../../images/course_banner1.png"></image>
+    <navigator class="course_item" url="/pages/course/courselist" hover-class="none">
+      <image src="{{imgs.cbone}}"></image>
     </navigator>
-    <navigator class="course_item" url="/pages/course/articlelist" hover-class="none">
-      <image src="../../images/course_banner2.png"></image>
+    <navigator class="course_item" url="/pages/course/courselist" hover-class="none">
+      <image src="{{imgs.cbtwo}}"></image>
     </navigator>
-    <navigator class="course_item" url="/pages/course/articlelist" hover-class="none">
-      <image src="../../images/course_banner3.png"></image>
+    <navigator class="course_item" url="/pages/course/courselist" hover-class="none">
+      <image src="{{imgs.cbthree}}"></image>
     </navigator>
   </view>
   <view class="course_block">
     <view class="title">饮食</view>
-    <view class="food_nav"></view>
+    <view class="food_nav">
+      <tabNav :navs="navs"></tabNav>
+    </view>
     <view class="food_box">
-
+      <image class="food_bg" src="../../images/foodbg.png"></image>
+      <view class="content_box">
+        <block wx:for="{{4}}" wx:key="food_{{index}}">
+        <view class="food_item">
+          <text class="food_name">酸奶</text>
+          <text class="food_je">100kg</text>
+        </view>
+        </block>
+        <view class="food_btn"><text class="icon"></text>换一换</view>
+        <view class="food_tips">*建议早餐摄入量不超过270千卡*</view>
+      </view>
     </view>
   </view>
    <view class="course_block">
     <view class="title">心理</view>
-    <navigator url="/pages/course/articlelist">
-      <image class="banner_mood" src="../../images/course_banner4.png"></image>
+    <navigator url="/pages/course/mentality">
+      <image class="banner_mood" src="{{imgs.cbfour}}"></image>
     </navigator>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import tabNav from "../../components/index/tabNav"
   export default class Course extends wepy.page {
       config = {
         navigationBarTitleText: "产后恢复课"
       };
+      components = {
+        tabNav: tabNav
+      }
+      data = {
+        navs: [
+          {
+              text:'早餐',
+              selected:true,
+          },{
+              text:'午餐',
+              selected:false,
+          },{
+              text:'加餐',
+              selected:false,
+          },
+          {
+              text:'晚餐',
+              selected:false,
+          }
+        ],
+        imgs: null
+      }
+      async onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+      }
   }
 </script>

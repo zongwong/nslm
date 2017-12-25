@@ -127,14 +127,9 @@
           </view>
           <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
           <view class="mood_item_imgs">
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
           </view>
           <view class="mood_item_btns">
             <view>
@@ -150,7 +145,7 @@
       </view>
     </view>
     <view class="data">
-      <image src="../../images/moodbg.png"></image>
+      <image src="{{imgs.moodbg}}"></image>
       <view class="data_info">
         <view class="data_item">
           <view class="num">12</view>
@@ -198,5 +193,11 @@
       config = {
         navigationBarTitleText: "心情评论"
       };
+      data = {
+        imgs: null
+      }
+      async onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+      }
   }
 </script>

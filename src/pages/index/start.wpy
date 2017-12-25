@@ -1,8 +1,16 @@
 <style lang="scss">
+.start{
+  overflow: hidden;
+}
 .post_box {
   text-align: center;
+  box-sizing:border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   .image {
     display: inline-block;
+    vertical-align: top;
     width: 214rpx;
     height: 130rpx;
     border-radius: 14rpx;
@@ -75,8 +83,8 @@
     <view class="form_block">
       <view class="form_title">封面设置</view>
       <view class="form_item post_box">
-        <view class="image {{post_id==index?'active':''}}" wx:for="{{9}}" wx:key="post_{{index}}" @tap="selectPost({{index}})">
-          <image src="../../images/post.png"></image>
+        <view class="image {{post_id==index?'active':''}}" wx:for="{{9}}" wx:key="post_{{index}}" @tap="selectPost({{index}},{{imgs.post}})">
+          <image src="{{imgs.post}}"></image>
           <image class="select" src="../../images/post_select.png"></image>
         </view>
       </view>
@@ -104,14 +112,14 @@
         <view class="label_text">
           报名截止
         </view>
-        <view class="label_input">
+        <view class="label_input" style="margin-right:20rpx;">
             <picker mode="date" value="{{signDate}}" @change="signDate" placeholder="日期">
               <view class="picker_input">
                 {{signDate}}
               </view>
             </picker>
         </view>
-        <view class="label_input">
+        <view class="label_input" style="margin-right:50rpx;">
             <picker mode="time" value="{{signTime}}" @change="signTime" placeholder="时间">
               <view class="picker_input">
                 {{signTime}}
@@ -127,7 +135,7 @@
           保证金
         </view>
         <view class="label_input">
-            <picker mode="selector" value="{{price}}" @change="money" range="{{range}}">
+            <picker mode="selector" value="{{price}}" @change="money" range="{{moneyRange}}">
               <view class="picker_input">
                 {{price}}
                 <view class="arrow"></view>
@@ -153,7 +161,7 @@
           任务天数
         </view>
         <view class="label_input">
-            <picker mode="selector" value="{{days}}" @change="dayCount" range="{{range}}">
+            <picker mode="selector" value="{{days}}" @change="dayCount" range="{{dayRange}}">
               <view class="picker_input">
                 {{days}}
                 <view class="arrow"></view>
@@ -165,19 +173,20 @@
         <view class="label_text">
           打卡时段
         </view>
-        <view class="label_input">
+        <view class="label_input" style="">
             <picker mode="time" value="{{sign_start_time}}" @change="signStartTime">
               <view class="picker_input">
                 {{sign_start_time}}
-                <view class="arrow"></view>
+                <!-- <view class="arrow"></view> -->
               </view>
             </picker>
         </view>
-        <view class="label_input">
+        <view style="line-height:52rpx;margin:0 10rpx;">-</view>
+        <view class="label_input" style="margin-right:50px;">
             <picker mode="time" value="{{sign_end_time}}" @change="signEndTime">
               <view class="picker_input">
                 {{sign_end_time}}
-                <view class="arrow"></view>
+                <!-- <view class="arrow"></view> -->
               </view>
             </picker>
         </view>
@@ -214,21 +223,22 @@ export default class Start extends wepy.page {
   components = {};
 
   data = {
-    range:[7,15,30,60,150,365],
+    moneyRange:['5元/天','10元/天','30元/天','60元/天','150元/天','365元/天'],
+    dayRange:['7天','15天','30天','60天','150天','365天'],
     post_id:1,    
     type:1,
     img:'',
-    title:'',
-    desrc:'',
+    title:'请填写活动标题',
+    desrc:'请填写活动描述',
     signDate: '日期',
     signTime: '时间',
     price:'5元/天',
     end_time:'',
     start_time:'任务开始日期',
     days:'30天',
-    sign_start_time:'打卡开始时间',
-    sign_end_time:'打卡截止时间',
-
+    sign_start_time:'开始时间',
+    sign_end_time:'截止时间',
+    imgs: null
   };
 
   computed = {
@@ -247,16 +257,17 @@ export default class Start extends wepy.page {
       this.desrc = e.detail.value
     },
     // 封面选择
-    async selectPost(post_id){
-      this.post_id = post_id;
-      let data = await interfaces.uploadImg();
-      data = JSON.parse(data)
-      console.log(typeof data)
-      console.log(data)
-      if(data.code){
-        this.img = data.info
-        this.$apply()
-      }
+    async selectPost(post_id,src){
+      this.img = src
+      this.post_id = post_id
+      // let data = await interfaces.uploadImg();
+      // data = JSON.parse(data)
+      // console.log(typeof data)
+      // console.log(data)
+      // if(data.code){
+      //   this.img = data.info
+      //   this.$apply()
+      // }
     },
     // 权限选择
     slectAccess(access) {
@@ -272,7 +283,7 @@ export default class Start extends wepy.page {
     },
     // 保证金
     money(e) {
-      this.price = this.range[e.detail.value];
+      this.price = this.moneyRange[e.detail.value];
     },
     // 开始时间
     startDate(e) {
@@ -280,7 +291,7 @@ export default class Start extends wepy.page {
     },
     // 任务天数
     dayCount(e) {
-      this.days = this.range[e.detail.value];
+      this.days = this.dayRange[e.detail.value];
     },
     // 打卡开始时间
     signStartTime(e) {
@@ -291,8 +302,8 @@ export default class Start extends wepy.page {
       this.sign_end_time = e.detail.value;
     },
     // 提交活动
-    createActive() {
-      const { data } = http({
+    async createActive() {
+      const { data } =await http({
         method: api.activity.add.method,
         url: api.activity.add.url,
         data: {
@@ -300,21 +311,31 @@ export default class Start extends wepy.page {
           img:this.img,
           title:this.title,
           desrc:this.desrc,
-          price:this.price,
+          price:parseInt(this.price),
           end_time:this.signDate+' '+this.signTime,
           start_time:this.start_time,
-          days:this.days,
+          days:parseInt(this.days),
           sign_start_time:this.sign_start_time,
           sign_end_time:this.sign_end_time
         }
       },true)
+
+      if (data.code) {
+        await wepy.showModal({
+          title: '提示',
+          content: '活动创建成功',
+        })
+        wepy.switchTab({
+          url: '/pages/index/index'
+        })
+      }
     }
   };
 
   events = {};
 
   onLoad() {
-    
+    this.imgs = this.$parent.globalData.imgs
   }
 }
 </script>
