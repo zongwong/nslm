@@ -1,18 +1,70 @@
 <style lang="scss">
 .reply{
+  margin-top: 20rpx;
   .block{
     background: #fff;
     margin-bottom: 20rpx;
+    .reply_content{
+      width: 100%;
+      height: 364rpx;
+      box-sizing: border-box;
+      padding: 20rpx 36rpx;
+    }
+  }
+  .img_block{
+    padding: 34rpx 36rpx;
+    display: flex;
+    flex-wrap: wrap;
+    .img_box{
+      background: #e8e8e8;
+      border-radius: 14rpx;
+      margin-right: 20rpx;
+      margin-bottom: 20rpx;
+      width: 154rpx;
+      height: 154rpx;
+      position: relative;
+      image{
+        width: 100%;
+        height: 100%;
+        border-radius: 14rpx;
+      }
+      &.add{
+        background: #ffffff;
+        border: 2rpx solid #e8e8e8;
+        color: #e8e8e8;
+        text-align: center;
+        line-height: 140rpx;
+        box-sizing: border-box;
+        font-size: 82rpx;
+      }
+      .close_btn{
+        position: absolute;
+        width: 30rpx;
+        height: 30rpx;
+        background: #ff508a;
+        border-radius: 50%;
+        top: -10rpx;
+        right: -10rpx;
+        color: #fff;
+        font-size: 20rpx;
+        text-align: center;
+        line-height: 30rpx;
+      }
+    }
   }
 }
 </style>
 <template>
   <view class="reply">
     <view class="block">
-      <textarea name="" id=""></textarea>
+      <textarea class="reply_content" placeholder="编辑内容,限100字以内"></textarea>
     </view>
-    <view class="block">
-      <textarea name="" id=""></textarea>
+    <view class="block img_block">
+      <view class="img_box">
+        <image src="../../images/foodbg.png"></image>
+        <view class="close_btn">X</view>
+      </view>
+      <view class="img_box add">+</view>
     </view>
   </view>
 </template>

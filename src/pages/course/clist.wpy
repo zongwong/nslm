@@ -1,0 +1,86 @@
+<style lang="scss">
+.video_item{
+  border: 2rpx solid #ebebeb;
+  border-radius: 15rpx;
+  background: #fff;
+  margin: 28rpx 37rpx;
+  overflow: hidden;
+  .video_box{
+    position: relative;
+    video{
+      width: 100%;
+      height: 320rpx;
+    }
+    image{
+      width: 100%;
+      height: 320rpx;
+    }
+  }
+  .video_info{
+    display: flex;
+    justify-content: space-between;
+    line-height: 60rpx;
+    padding: 0 26rpx;
+    .title{
+      font-size: 30rpx;
+      font-weight: bold;
+      max-width: 480rpx;
+    }
+    .time{
+      font-size: 24rpx;
+    }
+  }
+}
+
+</style>
+<template>
+  <view class="myvideo">
+    <navigator class="video_item" wx:for="{{cList}}" wx:key="video_{{index}}" url="/pages/course/coursedetail?id={{item.id}}">
+      <view class="video_box">
+        <!-- <image src="{{imgs.vobg}}"></image> -->
+        <video src="" class="videoTag" poster="{{item.img}}" objectFit="cover"></video>
+      </view>
+      <view class="video_info">
+        <text class="title singleTextOverflow">{{item.title}}</text>
+        <text class="time greyColor">01:23:11</text>
+      </view>
+    </navigator>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import http from "../../utils/request"
+  import api from "../../config"
+  export default class Clist extends wepy.page {
+      config = {
+        navigationBarTitleText: "课程列表"
+      };
+      data = {
+        imgs: null,
+        cList: null
+      }
+      async onLoad(options) {
+        this.imgs = this.$parent.globalData.imgs
+        this.getClist(options.id)
+      }
+      async getClist(id) {
+        const { data } = await http({
+          url: api.course.clist.url,
+          method: api.course.clist.method,
+          data: {
+            type: id
+          }
+        },true)
+        if ( data.code ) {
+          this.cList = data.info
+          this.$apply()
+        }else{
+          wepy.showModal({
+            title: '提示',
+            content: data.msg
+          })
+        }
+      }
+  }
+</script>

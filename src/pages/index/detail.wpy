@@ -78,7 +78,7 @@
       <view class="desc">{{activity.content}}</view>
     </view>
     <view class="join">
-      <button>立即报名 150元</button>
+      <button @tap="join">立即报名 150元</button>
     </view>
   </view>
 </template>
@@ -107,6 +107,22 @@ export default class Detail extends wepy.page {
     //点击复制
     copyText(data) {
       interfaces.copyText(data)
+    },
+    // 报名
+    async join() {
+      const { data } = await http({
+        url: api.activity.join.url,
+        method: api.activity.join.method,
+        data: {
+          aid: this.activity.id
+        }
+      },true)
+      if( data.code ){
+        wepy.showModal({
+          title: '提示',
+          content: '参加成功',
+        })
+      }
     }
   };
 

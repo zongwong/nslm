@@ -1,7 +1,6 @@
 <style lang="scss">
 .listbox{
-  text-align: center;
-  margin-top: 26rpx;
+  margin: 26rpx 36rpx 0;
   .list-item{
     width: 326rpx;
     height: 240rpx;
@@ -55,10 +54,10 @@
   <view class="courselist">
     <tabNav :navs="navs"></tabNav>
     <view class="listbox">
-      <navigator class="list-item" wx:for="{{8}}" wx:key="item_{{index}}" url="/pages/course/coursedetail">
+      <navigator class="list-item" wx:for="{{courseList}}" wx:key="item_{{index}}" url="/pages/course/clist?id={{item.id}}">
         <image class="post" src="{{imgs.defaultlist}}"></image>
         <view class="text">
-          <view class="coursename">课程名称</view>
+          <view class="coursename">{{item.name}}</view>
         </view>
         <view class="info">
           <text class="greyColor">2017/11/21</text>
@@ -72,6 +71,8 @@
 <script>
   import wepy from 'wepy'
   import tabNav from "../../components/index/tabNav"
+  import http from "../../utils/request"
+  import api from "../../config"
   export default class Courselist extends wepy.page {
       config = {
         navigationBarTitleText: "女神课堂"
@@ -80,7 +81,9 @@
         tabNav: tabNav
       }
       data = {
+        type:'',
         imgs: null,
+        courseList: null,
         navs: [
           {
             text:'按热度',
@@ -91,8 +94,23 @@
           }
         ]
       }
-      onLoad() {
+      onLoad(options) {
         this.imgs = this.$parent.globalData.imgs
+        this.type = options.type
+        this.getCourseList(options.type)
+      }
+      async getCourseList(type) {
+        const { data } = await http({
+          url: api.course.list.url,
+          method: api.course.list.method,
+          data: {
+            parent_type: type
+          }
+        },true)
+        if ( data.code ) {
+          this.courseList = data.info
+          this.$apply()
+        }
       }
   }
 </script>

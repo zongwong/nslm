@@ -74,10 +74,10 @@
     </view>
     <view class="index-banner">
       <swiper autoplay="true" indicator-dots="true" indicator-active-color="#fff">
-        <block wx:for="{{3}}" wx:key="swiper_{{index}}">
+        <block wx:for="{{banner}}" wx:key="swiper_{{index}}">
           <navigator url="/pages/index/detail" hover-class="none">
             <swiper-item>
-                <image src="{{imgs.banner}}" />
+                <image src="{{item.img}}" />
             </swiper-item>
           </navigator>
         </block>
@@ -120,14 +120,15 @@ export default class Index extends wepy.page {
             text:'按时间',
             selected:false,
         },{
-            text:'按热度',
+            text:'已结束',
             selected:false,
         }
     ],
     tabIndex: 1,
     status:false,
     activeList: [],
-    imgs: null
+    imgs: null,
+    banner: null
   };
 
   computed = {
@@ -142,14 +143,27 @@ export default class Index extends wepy.page {
         this.status = true
     },
     // 搜索
-    searchConfirm(event) {
+    async searchConfirm(event) {
       let value = event.detail.value;
-      // async search(){}
-      wx.navigateTo({
-        url: '/pages/index/detail',
-        success: function(res){
-        },
-      })
+      const { data } = await http({
+        url: api.activity.search.url,
+        method: api.activity.search.method,
+        data:{
+          pk: value
+        }
+      },true)
+      if(data.code){
+        wx.navigateTo({
+          url: '/pages/index/detail?id='+data.info.id,
+          success: function(res){
+          }
+        })
+      }else{
+        wepy.showModal({
+          title: '提示',
+          content: data.msg
+        })
+      }
     },
   };
 
@@ -160,10 +174,15 @@ export default class Index extends wepy.page {
       this.getActiveList(this.tabIndex)
     }
   };
-
-  onLoad() {
+  async onLoad() {
     this.getActiveList(this.tabIndex)
     this.imgs = this.$parent.globalData.imgs
+    let data = await interfaces.globalConfig()
+    if ( data.code ){
+      this.banner = data.info.banner
+    }
+    
+   
   }
   // 获取活动列表
   async getActiveList(sort) {

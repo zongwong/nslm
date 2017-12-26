@@ -415,10 +415,10 @@ import interfaces from "./interface/index";
 export default class extends wepy.app {
   config = {
     pages: [
-      // "pages/index/record", 
       "pages/index/index", 
-      "pages/index/record",
       "pages/course/reply",
+      "pages/course/clist",
+      "pages/index/record",
       "pages/course/doctor",
       "pages/course/mentality",
       "pages/user/user",
@@ -510,13 +510,13 @@ export default class extends wepy.app {
 
   async onLaunch() {
     await interfaces.login();
-    let userInfo = wepy.getStorageSync('userInfo')
+    let userInfo =  wepy.getStorageSync('userInfo')
     this.globalData.userInfo = userInfo
     let data = await interfaces.globalConfig()
     if ( data.code ){
       this.globalData.config = data.info
     }
-    console.log(this.globalData)
+    // console.log(this.globalData)
   }
 }
 </script>

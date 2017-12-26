@@ -368,7 +368,8 @@
 <script>
 import wepy from "wepy";
 import interfaces from "../../interface/index";
-
+import http from "../../utils/request"
+import api from "../../config"
 export default class Record extends wepy.page {
   config = {
     navigationBarTitleText: "好友PK"
@@ -376,7 +377,8 @@ export default class Record extends wepy.page {
   components = {};
 
   data = {
-    imgs: null
+    imgs: null,
+    info: null
   };
 
   computed = {
@@ -385,12 +387,39 @@ export default class Record extends wepy.page {
     }
   };
 
-  methods = {};
+  methods = {
+    async sign(aid,img,content) {
+      const {data } = await http({
+        url: api.activity.sign.url,
+        method: api.activity.sign.method,
+        data: {
+          aid: aid,
+          img: img,
+          content: content
+        }
+      },true)
+    },
+    
+  };
 
   events = {};
 
-  onLoad() {
+  async onLoad(options) {
     this.imgs = this.$parent.globalData.imgs
+    await this.getProgress(options.id)
+  }
+  async getProgress(id) {
+    const { data } = await http({
+      url: api.activity.myprogress.url,
+      method: api.activity.myprogress.method,
+      data: {
+        aid:id
+      }
+    },true)
+    if ( data.code ){
+      this.info = data.info
+      this.$apply()
+    }
   }
 }
 </script>

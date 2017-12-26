@@ -130,13 +130,13 @@
       </swiper>
     </view> 
     <view class="area-block">
-      <view class="title">热门文章 <navigator class="more" url="/pages/course/articlelist">更多</navigator></view>
+      <view class="title">热门文章 <navigator class="more" url="/pages/course/articlelist?type=hot">更多</navigator></view>
       <view class="articlelist">
-        <navigator class="article" url="/pages/course/articledetail" wx:for="{{3}}" wx:key="article_{{index}}">
-          <image class="article_post" src="{{imgs.defaultlist}}"></image>
+        <navigator class="article" url="/pages/course/articledetail?id={{item.id}}" wx:for="{{articleList}}" wx:key="article_{{index}}">
+          <image class="article_post" src="{{item.img}}"></image>
           <view class="article_info">
-            <view class="article_title singleTextOverflow">文章标题</view>
-            <view class="article_desc singleTextOverflow">文章描述</view>
+            <view class="article_title singleTextOverflow">{{item.title}}</view>
+            <view class="article_desc singleTextOverflow">{{item.desrc}}</view>
           </view>
         </navigator>
       </view>
@@ -209,6 +209,8 @@
 <script>
   import wepy from 'wepy'
   import alert from "../../components/public/alert"
+  import http from "../../utils/request"
+  import api from "../../config"
   export default class Mentality extends wepy.page {
     config = {
       navigationBarTitleText: "心理课程"
@@ -222,7 +224,8 @@
       icon: '../../images/waiting.png',
       title: '心理FM正在开发中',
       content: '精彩功能 敬请期待!',
-      btn: '确定'
+      btn: '确定',
+      articleList: []
     }
     methods = {
       alertModal(title) {
@@ -230,8 +233,27 @@
         this.status = 'open'
       }
     }
-    onLoad() {
+
+    async onLoad(options) {
       this.imgs = this.$parent.globalData.imgs
+      this.getArticleList()
+    }
+    async getArticleList() {
+      const { data } = await http({
+        url: api.mood.article.url,
+        method: api.mood.article.method,
+        data: {
+        }
+      },true)
+      if ( data.code ) {
+        this.articleList = data.info
+        this.$apply()
+      }else{
+        wepy.showModal({
+          title: '提示',
+          content: data.msg
+        })
+      }
     }
   }
 </script>

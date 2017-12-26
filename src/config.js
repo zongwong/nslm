@@ -14,7 +14,7 @@ const api = {
       url: '/users/login'
     },
     // 编辑资料
-    edit: {
+    save: {
       method: 'post',
       url: '/users/editUserInfo'
     },
@@ -31,7 +31,7 @@ const api = {
     // 我的参与
     join: {
       method: 'post',
-      url: '/users/myJoinAcitivity'
+      url: '/users/myJoinActivity'
     }
   },
   activity: {
@@ -69,7 +69,48 @@ const api = {
     myprogress: {
       method: 'post',
       url: '/activity/clockMy'
+    },
+    // pk搜索
+    search: {
+      method: 'post',
+      url: '/activity/activitySearch'
+    },
+    // share
+    share: {
+      method: 'post',
+      url: '/activity/activityShare'
     }
+  },
+  course: {
+    list: {
+      url: '/study/studyTypeList',
+      method: 'post'
+    },
+    clist: {
+      url: '/study/studyList',
+      method: 'post'
+    },
+    detail: {
+      url: '/study/studyDetail',
+      method: 'post'
+    },
+    // 收藏
+    collect: {
+      url: '/study/studyCollect',
+      method: 'post'
+    }
+  },
+  mood: {
+    // 文章列表
+    article: {
+      url: '/article/articleList',
+      method: 'post'
+    },
+    // 文章详情
+    articledetail: {
+      url: '/article/articleShow',
+      method: 'post'
+    },
   },
   public: {
     // 上传图片

@@ -83,8 +83,8 @@
     <view class="form_block">
       <view class="form_title">封面设置</view>
       <view class="form_item post_box">
-        <view class="image {{post_id==index?'active':''}}" wx:for="{{9}}" wx:key="post_{{index}}" @tap="selectPost({{index}},{{imgs.post}})">
-          <image src="{{imgs.post}}"></image>
+        <view class="image {{post_id==index?'active':''}}" wx:for="{{cover}}" wx:key="post_{{index}}" @tap="selectPost({{index}},{{item.img}})">
+          <image src="{{item.img}}"></image>
           <image class="select" src="../../images/post_select.png"></image>
         </view>
       </view>
@@ -225,11 +225,11 @@ export default class Start extends wepy.page {
   data = {
     moneyRange:['5元/天','10元/天','30元/天','60元/天','150元/天','365元/天'],
     dayRange:['7天','15天','30天','60天','150天','365天'],
-    post_id:1,    
+    post_id:0,    
     type:1,
     img:'',
-    title:'请填写活动标题',
-    desrc:'请填写活动描述',
+    title:'',
+    desrc:'',
     signDate: '日期',
     signTime: '时间',
     price:'5元/天',
@@ -238,7 +238,8 @@ export default class Start extends wepy.page {
     days:'30天',
     sign_start_time:'开始时间',
     sign_end_time:'截止时间',
-    imgs: null
+    imgs: null,
+    cover: null
   };
 
   computed = {
@@ -303,6 +304,8 @@ export default class Start extends wepy.page {
     },
     // 提交活动
     async createActive() {
+
+      
       const { data } =await http({
         method: api.activity.add.method,
         url: api.activity.add.url,
@@ -336,6 +339,7 @@ export default class Start extends wepy.page {
 
   onLoad() {
     this.imgs = this.$parent.globalData.imgs
+    this.cover = this.$parent.globalData.config.cover
   }
 }
 </script>

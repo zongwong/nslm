@@ -27,11 +27,11 @@
 </style>
 <template>
   <view class="articledetail">
-    <image class="post" src="{{imgs.articlepost}}"></image>
+    <image class="post" src="{{info.img}}"></image>
     <view class="article">
-      <view class="title singleTextOverflow">wqeqw</view>
+      <view class="title singleTextOverflow">{{info.title}}</view>
       <view class="content greyColor">
-        asdasdas
+        {{info.content}}
       </view>
     </view>
   </view>
@@ -39,15 +39,37 @@
 
 <script>
   import wepy from 'wepy'
+  import http from "../../utils/request"
+  import api from "../../config"
   export default class Articledetail extends wepy.page {
     config = {
       navigationBarTitleText: "文章详情"
     };
     data = {
-      imgs: null
+      imgs: null,
+      info: null
     }
-    onLoad() {
+    async onLoad(options) {
       this.imgs = this.$parent.globalData.imgs
+      this.getDetail(options.id)
+    }
+    async getDetail(id) {
+      const { data } = await http({
+        url: api.mood.articledetail.url,
+        method: api.mood.articledetail.method,
+        data: {
+          aid: id
+        }
+      },true)
+      if ( data.code ) {
+        this.info = data.info
+        this.$apply()
+      }else{
+        wepy.showModal({
+          title: '提示',
+          content: data.msg
+        })
+      }
     }
   }
 </script>

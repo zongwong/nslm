@@ -90,13 +90,13 @@
 </style>
 <template>
   <view class="course">
-    <navigator class="course_item" url="/pages/course/courselist" hover-class="none">
+    <navigator class="course_item" url="/pages/course/courselist?type=1" hover-class="none">
       <image src="{{imgs.cbone}}"></image>
     </navigator>
-    <navigator class="course_item" url="/pages/course/courselist" hover-class="none">
+    <navigator class="course_item" url="/pages/course/courselist?type=2" hover-class="none">
       <image src="{{imgs.cbtwo}}"></image>
     </navigator>
-    <navigator class="course_item" url="/pages/course/courselist" hover-class="none">
+    <navigator class="course_item" url="/pages/course/courselist?type=3" hover-class="none">
       <image src="{{imgs.cbthree}}"></image>
     </navigator>
   </view>

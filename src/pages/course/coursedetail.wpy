@@ -1,5 +1,9 @@
 <style lang="scss">
 .coursedetail{
+  .video{
+    width: 100%;
+    height: 425rpx;
+  }
   .video_info{
     display: flex;
     background: #fff;
@@ -47,16 +51,16 @@
 <template>
 <view class="coursedetail">
   <view class="video">
-    <video src="1"></video>
+    <video class="videoTag" src="{{info.video}}" objectFit="cover" poster="{{info.img}}"></video>
   </view>
   <view class="video_info">
-    <text class="name singleTextOverflow">课程名称</text>
-    <text class="collect">收藏</text> 
+    <text class="name singleTextOverflow">{{info.title}}</text>
+    <text class="collect" @tap="collect">{{collectText}}</text> 
   </view>
   <view class="course_info">
-    <image class="post" src="../../images/default-list.png"></image>
+    <image class="post" src="{{info.img}}"></image>
     <view class="title">课程介绍</view>
-    <view class="desc greyColor">描述啊实打实大收到</view>
+    <view class="desc greyColor">{{info.desrc}}</view>
   </view>
   <!-- 评论 -->
   <view class="comment-block">
@@ -73,14 +77,9 @@
           </view>
           <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
           <view class="mood_item_imgs">
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
           </view>
         </view>
       </view>
@@ -95,19 +94,13 @@
           </view>
           <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
           <view class="mood_item_imgs">
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
           </view>
         </view>
       </view>
     </view>
-
   </view>
   <view class="join">
     <button>评论</button>
@@ -116,8 +109,10 @@
 </template>
 
 <script>
-import wepy from "wepy";
-import interfaces from "../../interface/index";
+import wepy from "wepy"
+import http from "../../utils/request"
+import api from "../../config"
+import interfaces from "../../interface/index"
 
 export default class Coursedetail extends wepy.page {
   config = {
@@ -125,7 +120,11 @@ export default class Coursedetail extends wepy.page {
   };
   components = {};
 
-  data = {};
+  data = {
+    info: null,
+    imgs: null,
+    collectText: '收藏'
+  };
 
   computed = {
     now() {
@@ -134,22 +133,47 @@ export default class Coursedetail extends wepy.page {
   };
 
   methods = {
-    //点击复制
-    copyText(data) {
-      wx.setClipboardData({
-        data: data,
-        success: function(res) {
-          wx.getClipboardData({
-            success: function(res) {
-              console.log(res.data) 
-            }
-          })
+    // 收藏课程
+    async collect() {
+      const { data } = await http({
+        url: api.course.collect.url,
+        method: api.course.collect.method,
+        data: {
+          sid: this.info.id
         }
-      })
+      },true)
+      if ( data.code ) {
+        this.collectText = '已收藏'
+        this.$apply()
+        wepy.showToast({
+          title: '收藏成功'
+        })
+      }
     }
   };
 
   events = {};
-
+  async onLoad(options) {
+    this.imgs = this.$parent.globalData.imgs
+    this.getDetail(options.id)
+  }
+  async getDetail(id) {
+    const { data } = await http({
+      url: api.course.detail.url,
+      method: api.course.detail.method,
+      data: {
+        sid: id
+      }
+    },true)
+    if ( data.code ) {
+      this.info = data.info
+      this.$apply()
+    }else{
+      wepy.showModal({
+        title: '提示',
+        content: data.msg
+      })
+    }
+  }
 }
 </script>
