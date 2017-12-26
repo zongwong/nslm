@@ -67,33 +67,33 @@
 <template>
   <view class="activehistory">
     <tabNav :navs="navs"></tabNav>
-    <navigator class="pbcontent" url="/pages/index/detail">    
+    <navigator class="pbcontent" url="/pages/index/record?id={{item.id}}" wx:for="{{activity}}" wx:key="item_{{index}}">    
       <view class="list_item">
         <view class="list_item_info">
-          <image class="list_item_post" src="../../images/detail_bg.png"></image>
+          <image class="list_item_post" src="{{item.img}}"></image>
           <view class="list_item_detail">
-            <view class="title singleTextOverflow">一周塑形课程</view>
-            <view class="desc singleTextOverflow greyColor">描述内容</view>
-            <view><text class="time">2017/11/12-2017/11/23</text></view>
+            <view class="title singleTextOverflow">{{item.title}}</view>
+            <view class="desc singleTextOverflow greyColor">{{item.content}}</view>
+            <view><text class="time">{{item.start_time}}-{{item.end_time}}</text></view>
             <view class="tags">
-              <view><text class="money">￥155.00</text></view>
-              <view><text class="greyColor">999人参与</text></view>
+              <view><text class="money">￥{{item.price}}</text></view>
+              <view><text class="greyColor">{{item.join_num}}人参与</text></view>
             </view>
           </view>
-          <image class="status" src="../../images/status_ok.png"></image>
-          <!-- <image class="status" src="../../images/status_no.png"></image> -->
+          <image wx:if="{{item.status==1}}" class="status" src="../../images/status_ok.png"></image>
+          <image wx:if="{{item.status==2}}" class="status" src="../../images/status_no.png"></image>
         </view>
         <view class="list_item_data">
           <view class="data_item">
-            <view>07</view>
+            <view>{{item.join_num}}</view>
             <view>报名人数</view>
           </view>
           <view class="data_item">
-            <view>07</view>
+            <view>{{item.days}}</view>
             <view>参与天数</view>
           </view>
           <view class="data_item">
-            <view>07</view>
+            <view>{{item.total_price}}</view>
             <view>累计奖金</view>
           </view>
         </view>
@@ -106,6 +106,8 @@
 <script>
   import wepy from 'wepy'
   import tabNav from "../../components/index/tabNav"
+  import api from "../../config"
+  import http from "../../utils/request"
   export default class Mypublish extends wepy.page {
       config = {
         navigationBarTitleText: "我的发布"
@@ -114,15 +116,48 @@
         tabNav: tabNav
       }
       data = {
-        navs:[
-        {
+        type: '',
+        is_end: 1,
+        imgs: null,
+        navs:[{
             text:'已报名',
             selected:true,
         },{
             text:'已结束',
             selected:false,
+        }],
+        activity: null,
+      }
+      events = {
+        navTapEvent(index) {
+          console.log(index)
+          this.is_end = (index+1)
+          this.getActivityList(this.is_end)
         }
-        ]
+      }
+      onLoad(options) {
+        this.imgs = this.$parent.globalData.imgs
+        this.type = options.type
+        if( this.type === 'join' ){
+          wepy.setNavigationBarTitle({
+            title: '我的参与'
+          })
+        }
+        this.getActivityList(this.is_end)
+      }
+      async getActivityList() {
+        // 1已报名2已结束
+        const { data } = await http({
+          url: api.users[this.type].url,
+          method: api.users[this.type].method,
+          data: {
+            is_end: this.is_end
+          }
+        },true)
+    
+        this.activity = data.info
+        this.$apply()
+
       }
   }
 </script>

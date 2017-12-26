@@ -1,5 +1,6 @@
 import wepy from 'wepy'
 import api from '../config'
+import http from '../utils/request'
 const interfaces = {
   // 获取用户信息
   async getUserInfo() {
@@ -78,6 +79,14 @@ const interfaces = {
       })
     }
     return res
+  },
+  // 全局配置
+  async globalConfig() {
+    const { data } = await http({
+      url: api.public.global.url,
+      method: api.public.global.method
+    })
+    return data
   }
 }
 export default interfaces

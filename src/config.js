@@ -1,8 +1,8 @@
-const env = 'development'
+const env = 'production'
 
 const hosts = {
   development: 'http://lady.zdgphp.cn/api',
-  production: 'http://lady.zdgphp.cn/api'
+  production: 'https://www.2p98.cn/api'
 }
 
 // api列表
@@ -24,15 +24,15 @@ const api = {
       url: '/users/userInfo'
     },
     // 我的发布
-    mypublish: {
+    publish: {
       method: 'post',
       url: '/users/myActivity'
+    },
+    // 我的参与
+    join: {
+      method: 'post',
+      url: '/users/myJoinAcitivity'
     }
-    // 我的发布
-    // mypublish: {
-    //   method: 'post',
-    //   url: '/users/myActivity'
-    // }
   },
   activity: {
     // 首页活动列表

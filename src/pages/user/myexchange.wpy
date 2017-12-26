@@ -10,9 +10,9 @@
 <template>
   <view class="myexchange">
     <view class="pbcontent">    
-      <navigator class="list_item" url="/pages/user/success">
+      <navigator class="list_item" url="/pages/user/success" wx:for="{{5}}" wx:key="yun_{{index}}">
         <view class="list_item_info">
-          <image class="list_item_post" src="../../images/detail_bg.png"></image>
+          <image class="list_item_post" src="{{imgs.defaultlist}}"></image>
           <view class="list_item_detail">
             <view class="title singleTextOverflow">一周塑形课程</view>
             <view class="desc singleTextOverflow greyColor">描述内容</view>
@@ -31,5 +31,11 @@
       config = {
         navigationBarTitleText: "我的兑换"
       };
+      data = {
+        imgs: null
+      }
+      onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+      }
   }
 </script>

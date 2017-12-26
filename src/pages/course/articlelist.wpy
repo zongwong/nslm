@@ -38,9 +38,9 @@
 <template>
   <view class="articleList">
     <view class="pbcontent">    
-      <navigator class="list_item" url="/pages/course/articledetail">
+      <navigator class="list_item" url="/pages/course/articledetail" wx:for="{{4}}" wx:key="article_{{index}}">
         <view class="list_item_info">
-          <image class="list_item_post" src="{{imgs.detailbg}}"></image>
+          <image class="list_item_post" src="{{imgs.defaultlist}}"></image>
           <view class="list_item_detail">
             <view class="title singleTextOverflow">一周塑形课程</view>
             <view class="desc greyColor">描述内容</view>

@@ -188,13 +188,13 @@
       </view>
     </view>
     <view class="navs">
-      <navigator class="nav_item" url="/pages/user/mypublish">
+      <navigator class="nav_item" url="/pages/user/mypublish?type=publish">
         <view class="nav_item_box">
           <text class="nav_icon"></text>
           <text>我的发布</text>
         </view>
       </navigator>
-      <navigator class="nav_item" url="/pages/user/mypublish">
+      <navigator class="nav_item" url="/pages/user/mypublish?type=join">
         <view class="nav_item_box">
           <text class="nav_icon nav_cy"></text>
           <text>我的参与</text>

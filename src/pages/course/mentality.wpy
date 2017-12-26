@@ -165,7 +165,7 @@
     </view>
     <view style="margin-bottom: 150rpx;">
       <view class="mood_list">
-        <view class="mood_item">
+        <navigator class="mood_item" url="/pages/user/mooddetail">
           <view class="mood_item_avatar">
             <image src="../../images/default_avatar.png"></image>
           </view>
@@ -190,7 +190,7 @@
               </view>
             </view>
           </view>
-        </view>
+        </navigator>
       </view>
     </view>
     <view class="join" @tap="createActive">

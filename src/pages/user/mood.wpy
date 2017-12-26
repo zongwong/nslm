@@ -4,7 +4,7 @@
 <template>
   <view class="mood">
     <view class="mood_list">
-      <view class="mood_item">
+      <navigator class="mood_item" url="/pages/user/mooddetail">
         <view class="mood_item_avatar">
           <image src="../../images/default_avatar.png"></image>
         </view>
@@ -15,14 +15,14 @@
           </view>
           <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
           <view class="mood_item_imgs">
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
-            <image src="../../images/mood.png"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
+            <image src="{{imgs.mood}}"></image>
           </view>
           <view class="mood_item_btns">
             <view>
@@ -35,7 +35,7 @@
             </view>
           </view>
         </view>
-      </view>
+      </navigator>
     </view>
   </view>
 </template>
@@ -46,5 +46,11 @@
       config = {
         navigationBarTitleText: "打卡圈"
       };
+      data = {
+        imgs: null
+      }
+      onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+      }
   }
 </script>

@@ -35,6 +35,10 @@ page{
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.videoTag{
+  width: 100%;
+  height: 100%;
+}
 // 页面底部固定按钮
 .join{
   width: 100%;
@@ -413,6 +417,7 @@ export default class extends wepy.app {
     pages: [
       // "pages/index/record", 
       "pages/index/index", 
+      "pages/index/record",
       "pages/course/reply",
       "pages/course/doctor",
       "pages/course/mentality",
@@ -470,29 +475,30 @@ export default class extends wepy.app {
 
   globalData = {
     userInfo: null,
+    config: null,
     imgs: {
-      'post': 'http://lady.zdgphp.cn/src/images/post.png',
-      'cbone': 'http://lady.zdgphp.cn/src/images/course_banner1.png',
-      'cbtwo': 'http://lady.zdgphp.cn/src/images/course_banner2.png',
-      'cbthree': 'http://lady.zdgphp.cn/src/images/course_banner3.png',
-      'cbfour': 'http://lady.zdgphp.cn/src/images/course_banner4.png',
-      'fly': 'http://lady.zdgphp.cn/src/images/pkbg.png',
-      'userbg': 'http://lady.zdgphp.cn/src/images/userbg.png',
-      'coursebg': 'http://lady.zdgphp.cn/src/images/coursebg.png',
-      'fmbg': 'http://lady.zdgphp.cn/src/images/fmbg.png',
-      'testbg': 'http://lady.zdgphp.cn/src/images/testbg.png',
-      'banner': 'http://lady.zdgphp.cn/src/images/banner.png',
-      'editbg': 'http://lady.zdgphp.cn/src/images/editbg.png',
-      'moodbg': 'http://lady.zdgphp.cn/src/images/moodbg.png',
-      'pkpost': 'http://lady.zdgphp.cn/src/images/pkpost.png',
-      'topbg': 'http://lady.zdgphp.cn/src/images/topbg.png',
-      'vobg': 'http://lady.zdgphp.cn/src/images/vobg.png',
-      'moneybg': 'http://lady.zdgphp.cn/src/images/moneybg.png',
-      'doctor': 'http://lady.zdgphp.cn/src/images/doctor.png',
-      'detailbg': 'http://lady.zdgphp.cn/src/images/detail_bg.png',
-      'defaultlist': 'http://lady.zdgphp.cn/src/images/default-list.png',
-      'articlepost': 'http://lady.zdgphp.cn/src/images/article_post.png',
-      'mood': 'http://lady.zdgphp.cn/src/images/mood.png'
+      'post': 'https://www.2p98.cn/src/images/post.png',
+      'cbone': 'https://www.2p98.cn/src/images/course_banner1.png',
+      'cbtwo': 'https://www.2p98.cn/src/images/course_banner2.png',
+      'cbthree': 'https://www.2p98.cn/src/images/course_banner3.png',
+      'cbfour': 'https://www.2p98.cn/src/images/course_banner4.png',
+      'fly': 'https://www.2p98.cn/src/images/pkbg.png',
+      'userbg': 'https://www.2p98.cn/src/images/userbg.png',
+      'coursebg': 'https://www.2p98.cn/src/images/coursebg.png',
+      'fmbg': 'https://www.2p98.cn/src/images/fmbg.png',
+      'testbg': 'https://www.2p98.cn/src/images/testbg.png',
+      'banner': 'https://www.2p98.cn/src/images/banner.png',
+      'editbg': 'https://www.2p98.cn/src/images/editbg.png',
+      'moodbg': 'https://www.2p98.cn/src/images/moodbg.png',
+      'pkpost': 'https://www.2p98.cn/src/images/pkpost.png',
+      'topbg': 'https://www.2p98.cn/src/images/topbg.png',
+      'vobg': 'https://www.2p98.cn/src/images/vobg.png',
+      'moneybg': 'https://www.2p98.cn/src/images/moneybg.png',
+      'doctor': 'https://www.2p98.cn/src/images/doctor.png',
+      'detailbg': 'https://www.2p98.cn/src/images/detail_bg.png',
+      'defaultlist': 'https://www.2p98.cn/src/images/default-list.png',
+      'articlepost': 'https://www.2p98.cn/src/images/article_post.png',
+      'mood': 'https://www.2p98.cn/src/images/mood.png'
     }
   };
 
@@ -503,9 +509,14 @@ export default class extends wepy.app {
   }
 
   async onLaunch() {
-    interfaces.login();
+    await interfaces.login();
     let userInfo = wepy.getStorageSync('userInfo')
     this.globalData.userInfo = userInfo
+    let data = await interfaces.globalConfig()
+    if ( data.code ){
+      this.globalData.config = data.info
+    }
+    console.log(this.globalData)
   }
 }
 </script>

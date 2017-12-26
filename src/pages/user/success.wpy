@@ -50,7 +50,7 @@ page{
   <view class="success">
     <view class="me-block">
       <view class="header">
-        <image mode="top" src="../../images/editbg.png"></image>
+        <image mode="top" src="{{imgs.editbg}}"></image>
         <view class="mask"></view>
         <view class="info_data success_info">
           <image class="icon" src="../../images/ok.png"></image>
@@ -98,6 +98,7 @@ export default class Success extends wepy.page {
     money:'',
     startDate:'',
     dayCount:'',
+    imgs: null
   };
 
   computed = {
@@ -123,30 +124,7 @@ export default class Success extends wepy.page {
   events = {};
 
   onLoad() {
-    let self = this;
-    // interfaces.login()
-    // this.$parent.getUserInfo(function (code,userInfo) {
-    //   if (userInfo) {
-    //     self.userInfo = userInfo
-    //         wepy.request({
-    //           url: api.users.login.url,
-    //           method: api.users.login.method,
-    //           data: {
-    //             code: code,
-    //             userInfo: userInfo
-    //           }
-    //         });
-    //   }
-    //   self.normalTitle = '标题已被修改'
-
-    //   self.setTimeoutTitle = '标题三秒后会被修改'
-    //   setTimeout(() => {
-    //     self.setTimeoutTitle = '到三秒了'
-    //     self.$apply()
-    //   }, 3000)
-
-    //   self.$apply()
-    // })
+    this.imgs = this.$parent.globalData.imgs
   }
 }
 </script>
