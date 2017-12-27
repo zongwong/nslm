@@ -108,43 +108,93 @@
   <view class="doctor">
     <view class="doctor_box">
       <view class="doctor_info">
-        <image class="doctor_avatar" src="../../images/default_avatar.png"></image>
+        <image class="doctor_avatar" src="{{doctor.img}}"></image>
         <view>
-          <view class="name">刘医生</view>
-          <view class="job">心理咨询师</view>
+          <view class="name">{{doctor.name}}</view>
+          <view class="job">{{doctor.desrc}}</view>
         </view>
       </view>
-      <view class="doctor_desc">吊炸天</view>
+      <view class="doctor_desc">{{doctor.desrc}}</view>
     </view>
     <view class="reply">
-      <view class="reply_item">
-        <image class="reply_avatar" src="../../images/default_avatar.png"></image>
+      <view class="reply_item" wx:for="{{comment}}">
+        <image class="reply_avatar" src="{{item.u_avatarurl}}"></image>
         <view class="reply_info">
-          <view class="name">留一声</view>
-          <view class="conent">你好</view>
-          <view class="time">2012-22-22</view>
-        </view>
-      </view>
-      <view class="reply_item">
-        <image class="reply_avatar" src="../../images/default_avatar.png"></image>
-        <view class="reply_info">
-          <view class="name me">留一声</view>
-          <view class="conent">你好</view>
-          <view class="time">2012-22-22</view>
+          <view class="name">{{item.u_nickname}}</view>
+          <view class="conent">{{item.content}}</view>
+          <view class="time">{{item.c_time}}</view>
         </view>
       </view>
     </view>
     <view class="join" @tap="createActive">
-      <input class="reply_input" type="text" value="问题"> <view class="reply_submit">提交</view>
+      <input class="reply_input" type="text" value="{{myContent}}" @input="myContent"> <view class="reply_submit" @tap="toAsk">提交</view>
     </view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import http from "../../utils/request"
+  import api from "../../config"
   export default class Doctor extends wepy.page {
       config = {
         navigationBarTitleText: "心理咨询"
       };
+      data = {
+        info: null,
+        doctor: null,
+        comment: null,
+        myContent: '',
+      }
+      methods = {
+        myContent(e) {
+          this.myContent = e.detail.value
+        },
+        async toAsk() {
+          if(!this.myContent){
+            return false
+          }
+          const { data } = await http({
+            url: api.mood.ask.url,
+            method: api.mood.ask.method,
+            data: {
+              content: this.myContent,
+              doctor_id: this.doctor.id 
+            }
+          },true)
+          if( data.code ){
+            wepy.showToast({
+              title: '咨询成功'
+            })
+            this.comment.push({
+              c_time: "2017-12-26 22:32:31",
+              content: this.myContent,
+              u_avatarurl: this.$parent.globalData.userInfo.avatarUrl,
+              u_nickname: this.$parent.globalData.userInfo.nickName
+            })
+            this.myContent = ''
+            this.$apply()
+          }
+        }
+      }
+      async onLoad(options) {
+        this.doctor_id = options.id
+        this.getData(options.id)
+      }
+      async getData(doctor_id){
+        const { data } = await http({
+          url: api.mood.doctor.url,
+          method: api.mood.doctor.method,
+          data: {
+            doctor_id: doctor_id
+          }
+        },true)
+        if (data.code) {
+          this.info = data.info
+          this.doctor = data.info.doctor
+          this.comment = data.info.chat_list
+          this.$apply()
+        }
+      }
   }
 </script>

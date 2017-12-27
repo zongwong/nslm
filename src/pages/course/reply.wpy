@@ -52,28 +52,122 @@
       }
     }
   }
+  .tips{
+    text-align: center;
+    font-size: 32rpx;
+    margin-top: 40rpx;
+  }
 }
 </style>
 <template>
   <view class="reply">
     <view class="block">
-      <textarea class="reply_content" placeholder="编辑内容,限100字以内"></textarea>
+      <textarea class="reply_content" placeholder="编辑内容,限100字以内" value="{{content}}" @input="contentInput"></textarea>
     </view>
     <view class="block img_block">
-      <view class="img_box">
-        <image src="../../images/foodbg.png"></image>
-        <view class="close_btn">X</view>
+      <view class="img_box" wx:for="{{myImgs}}" wx:key="img_{{index}}">
+        <image src="{{item}}"></image>
+        <view class="close_btn" @tap="delImg({{index}})">X</view>
       </view>
-      <view class="img_box add">+</view>
+      <view class="img_box add" @tap="addImg">+</view>
     </view>
+    <view class="tips" wx:if="{{type=='sign'}}">这是你坚持的第<text class="pinklight">{{query.day}}</text>天,请继续努力</view>
+  </view>
+  <view class="join" @tap="sign">
+    <button>打卡</button>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import http from "../../utils/request"
+  import api from "../../config"
+  import interfaces from "../../interface/index"
   export default class Reply extends wepy.page {
       config = {
         navigationBarTitleText: "填写内容"
       };
+      data = {
+        query: null,
+        myImgs: [],
+        content: '',
+        type: ''
+      }
+      methods = {
+        // 内容
+        contentInput(e) {
+          this.content = e.detail.value
+        },
+        // 添加图片
+        async addImg() {
+          let data = await interfaces.uploadImg()
+          data = JSON.parse(data)
+          if( data.code ){
+            this.myImgs.push(data.info)
+          }else{
+            wepy.showModal({
+              title: '提示',
+              content: '图片上传失败'
+            })
+          }
+          this.$apply()
+        },
+        // 删除图片
+        delImg(index) {
+          this.myImgs.splice(index,1)
+        },
+        // 打卡 心情
+        async sign() {
+          if(!this.content){
+            wepy.showModal({
+              title: '提示',
+              content: '请填写内容'
+            })
+            return false;
+          }
+          if(!this.myImgs[0]){
+            wepy.showModal({
+              title: '提示',
+              content: '请上传图片'
+            })
+            return false;
+          }
+
+          const { data } = await http({
+            url: api.activity[this.type].url,
+            method: api.activity[this.type].method,
+            data: {
+              aid: this.query.id,
+              content: this.content,
+              img: this.myImgs
+            }
+          },true)
+          if( data.code ){
+            await wepy.showToast({
+              title: '发布成功'
+            })
+            if(this.type=='sign'){            
+              wepy.redirectTo({
+                url: `/pages/user/mood?id=${this.query.id}`
+              })
+            }else{
+              wepy.redirectTo({
+                url: `/pages/course/mentality`
+              })
+            }
+          }else{
+            wepy.showModal({
+              title: '提示',
+              content: data.msg
+            })
+          }
+        }
+      }
+      onLoad(options) {
+        this.query = options
+        this.type = options.type
+        console.log(options)
+        console.log(api)
+      }
   }
 </script>

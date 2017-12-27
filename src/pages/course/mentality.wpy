@@ -132,7 +132,7 @@
     <view class="area-block">
       <view class="title">热门文章 <navigator class="more" url="/pages/course/articlelist?type=hot">更多</navigator></view>
       <view class="articlelist">
-        <navigator class="article" url="/pages/course/articledetail?id={{item.id}}" wx:for="{{articleList}}" wx:key="article_{{index}}">
+        <navigator class="article" url="/pages/course/articledetail?id={{item.id}}" wx:for="{{info.articles}}" wx:key="article_{{index}}">
           <image class="article_post" src="{{item.img}}"></image>
           <view class="article_info">
             <view class="article_title singleTextOverflow">{{item.title}}</view>
@@ -156,27 +156,27 @@
       <view class="title">心理咨询师—在线咨询</view>
       <view class="doctors">
           <scroll-view class="scroll" scroll-x>
-            <navigator class="adoctor" url="/pages/course/doctor"  wx:for="{{7}}" wx:key="doctor_{{index}}">
-              <image class="doctor_avatar" mode="aspectFill" src="{{imgs.doctor}}"></image>
-              <view class="doctor_name">张一声</view>
+            <navigator class="adoctor" url="/pages/course/doctor?id={{item.id}}"  wx:for="{{info.doctor}}" wx:key="doctor_{{index}}">
+              <image class="doctor_avatar" mode="aspectFill" src="{{item.img}}"></image>
+              <view class="doctor_name">{{item.name}}</view>
             </navigator>
           </scroll-view>
       </view>
     </view>
     <view style="margin-bottom: 150rpx;">
       <view class="mood_list">
-        <navigator class="mood_item" url="/pages/user/mooddetail">
+        <navigator class="mood_item" url="/pages/user/mooddetail?id={{item.id}}" wx:for="{{info.mood}}">
           <view class="mood_item_avatar">
-            <image src="../../images/default_avatar.png"></image>
+            <image src="{{item.u_avatarurl}}"></image>
           </view>
           <view class="mood_item_detail">
             <view class="detail_user">
-              <view class="name"><text>王小花</text></view>
-              <view class="time"><text class="greyColor">2017/22/12</text></view>
+              <view class="name"><text>{{item.u_nickname}}</text></view>
+              <view class="time"><text class="greyColor">{{item.c_time}}</text></view>
             </view>
-            <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
+            <view class="mood_item_text greyColor">{{item.content}}</view>
             <view class="mood_item_imgs">
-              <image src="{{imgs.mood}}"></image>
+              <image src="{{item.img}}"></image>
               <image src="{{imgs.mood}}"></image>
             </view>
             <view class="mood_item_btns">
@@ -193,7 +193,7 @@
         </navigator>
       </view>
     </view>
-    <view class="join" @tap="createActive">
+    <view class="join" @tap="toMood">
       <button>发布心情</button>
     </view>
   </view>
@@ -225,18 +225,24 @@
       title: '心理FM正在开发中',
       content: '精彩功能 敬请期待!',
       btn: '确定',
-      articleList: []
+      articleList: [],
+      info: null
     }
     methods = {
       alertModal(title) {
         this.title = title+'正在开发中'
         this.status = 'open'
+      },
+      toMood() {
+        wepy.navigateTo({
+          url: `/pages/course/reply?type=pbmood`
+        })
       }
     }
 
     async onLoad(options) {
       this.imgs = this.$parent.globalData.imgs
-      this.getArticleList()
+      this.getData()
     }
     async getArticleList() {
       const { data } = await http({
@@ -247,6 +253,23 @@
       },true)
       if ( data.code ) {
         this.articleList = data.info
+        this.$apply()
+      }else{
+        wepy.showModal({
+          title: '提示',
+          content: data.msg
+        })
+      }
+    }
+    async getData() {
+      const { data } = await http({
+        url: api.mood.index.url,
+        method: api.mood.index.method,
+        data: {
+        }
+      },true)
+      if ( data.code ) {
+        this.info = data.info
         this.$apply()
       }else{
         wepy.showModal({

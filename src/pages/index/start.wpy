@@ -3,7 +3,6 @@
   overflow: hidden;
 }
 .post_box {
-  text-align: center;
   box-sizing:border-box;
   display: flex;
   flex-wrap: wrap;

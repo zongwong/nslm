@@ -79,6 +79,11 @@ const api = {
     share: {
       method: 'post',
       url: '/activity/activityShare'
+    },
+    // 发表心情
+    pbmood: {
+      url: '/query/createMood',
+      method: 'post'
     }
   },
   course: {
@@ -111,6 +116,26 @@ const api = {
       url: '/article/articleShow',
       method: 'post'
     },
+    // 心理列表
+    index: {
+      url: '/query/index',
+      method: 'post'
+    },
+    // 发表心情
+    pbmood: {
+      url: '/query/index',
+      method: 'post'
+    },
+    // 发布咨询
+    ask: {
+      url: '/query/query',
+      method: 'post'
+    },
+    // 医生内页
+    doctor: {
+      url: '/query/doctorDetail',
+      method: 'post'
+    }
   },
   public: {
     // 上传图片

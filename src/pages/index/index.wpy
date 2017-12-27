@@ -180,6 +180,7 @@ export default class Index extends wepy.page {
     let data = await interfaces.globalConfig()
     if ( data.code ){
       this.banner = data.info.banner
+      this.$apply()
     }
     
    

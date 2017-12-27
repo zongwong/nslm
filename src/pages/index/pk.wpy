@@ -240,31 +240,32 @@
 </template>
 
 <script>
-import wepy from "wepy";
-import interfaces from "../../interface/index";
-
+import wepy from "wepy"
+import interfaces from "../../interface/index"
+import http from "../../utils/request"
+import api from "../../config"
 export default class Pk extends wepy.page {
   config = {
     navigationBarTitleText: "好友PK"
   };
-  components = {};
-
   data = {
     imgs: null
   };
-
-  computed = {
-    now() {
-      return +new Date();
-    }
-  };
-
   methods = {};
 
   events = {};
 
   onLoad() {
    this.imgs = this.$parent.globalData.imgs
+  }
+  async getShareData() {
+    const { data } = await http({
+      url: api.activity.share.url,
+      method: api.activity.share.method
+    })  
+    if ( data.code ){
+
+    }
   }
 }
 </script>

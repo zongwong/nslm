@@ -357,7 +357,7 @@
             <text class="greyColor">任务进度：3/30</text>
           </view>
           <view class="item_title_right">
-            <text class="today">打卡</text>
+            <text class="today" @tap="toSign">打卡</text>
           </view>
         </view> 
       </view>
@@ -378,7 +378,8 @@ export default class Record extends wepy.page {
 
   data = {
     imgs: null,
-    info: null
+    info: null,
+    id: '',
   };
 
   computed = {
@@ -388,17 +389,12 @@ export default class Record extends wepy.page {
   };
 
   methods = {
-    async sign(aid,img,content) {
-      const {data } = await http({
-        url: api.activity.sign.url,
-        method: api.activity.sign.method,
-        data: {
-          aid: aid,
-          img: img,
-          content: content
-        }
-      },true)
-    },
+    toSign(e) {
+      wepy.navigateTo({
+        url: `/pages/course/reply?type=sign&id=${this.id}&days=${this.info.days}`
+      })
+    }
+
     
   };
 
@@ -406,6 +402,8 @@ export default class Record extends wepy.page {
 
   async onLoad(options) {
     this.imgs = this.$parent.globalData.imgs
+    this.id = options.id
+    this.$apply()
     await this.getProgress(options.id)
   }
   async getProgress(id) {

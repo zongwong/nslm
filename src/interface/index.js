@@ -50,10 +50,11 @@ const interfaces = {
     const {
       data
     } = await wepy.uploadFile({
-      url: api.public.upload.url,
+      url: 'http://www.2p98.cn/api/public/uploadImg',
       filePath: temp.tempFilePaths[0],
       name: 'filename'
     })
+    console.log(data)
     return data
   },
   // 支付
@@ -86,6 +87,15 @@ const interfaces = {
       url: api.public.global.url,
       method: api.public.global.method
     })
+    return data
+  },
+  // 获取个人信息
+  async getMyinfo() {
+    const { data } = await http({
+      url: api.users.get.url,
+      method: api.users.get.method,
+      data: { }
+    }, true)
     return data
   }
 }

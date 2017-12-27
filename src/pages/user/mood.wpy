@@ -42,15 +42,32 @@
 
 <script>
   import wepy from 'wepy'
+  import http from "../../utils/request"
+  import api from "../../config"
   export default class Mood extends wepy.page {
       config = {
         navigationBarTitleText: "打卡圈"
       };
       data = {
-        imgs: null
+        imgs: null,
+        circle: null
       }
       onLoad() {
         this.imgs = this.$parent.globalData.imgs
+        this.getDakaCircle()
+      }
+      async getDakaCircle() {
+        const { data } = await http({
+          url: api.activity.circle.url,
+          method: api.activity.circle.method,
+          data: {
+            aid: 5
+          }
+        },true)
+        if (data.code) {
+          this.circle = data.info
+          this.$apply()
+        }
       }
   }
 </script>
