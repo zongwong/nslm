@@ -103,6 +103,21 @@ const api = {
     collect: {
       url: '/study/studyCollect',
       method: 'post'
+    },
+    // 兑换分类
+    excat: {
+      url: '/query/exchangeType',
+      method: 'post'
+    },
+    // 兑换列表
+    exlist: {
+      url: '/query/exchangeList',
+      method: 'post'
+    },
+    // 兑换
+    exchange: {
+      url: '/query/exchange',
+      method: 'post'
     }
   },
   mood: {

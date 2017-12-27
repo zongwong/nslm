@@ -175,16 +175,16 @@
       <view class="qa_icon" @tap="exModal"></view>
     </view>
     <!-- 导航 -->
-    <tabNav :navs="navs"></tabNav>
+    <tabNav :navs.sync="navs"></tabNav>
     <!-- 内容 -->
     <view class="content">    
-      <view class="item">
-        <image class="post_image" src="{{imgs.detailbg}}"></image>
-        <view class="title singleTextOverflow">一周塑形课程</view>
-        <view class="desc greyColor">描述内容</view>
+      <view class="item" wx:for="{{list}}" wx:key="list_{{index}}">
+        <image class="post_image" src="{{item.img}}"></image>
+        <view class="title singleTextOverflow">{{item.title}}</view>
+        <view class="desc greyColor">{{item.desrc}}</view>
         <view class="btn">
-          <view class="left pinklight">兑换条件:5枚女神勋章</view>
-          <view class="right" @tap="exChange(1,1)">去兑换</view>
+          <view class="left pinklight">兑换条件:{{item.medal}}枚女神勋章</view>
+          <view class="right" @tap="exChange(1,{{item.id}})">去兑换</view>
         </view>
       </view>
     </view>
@@ -211,11 +211,11 @@
         </label>
         <label for="phone">
           <view class="label_text">电话</view>
-          <view class="label_input"><input type="text" id="phone" placeholder="请输入电话" value="{{wx}}" @input="phoneInput"></view>
+          <view class="label_input"><input type="text" id="phone" placeholder="请输入电话" value="{{phone}}" @input="phoneInput"></view>
         </label>
         <label for="wx">
           <view class="label_text">微信</view>
-          <view class="label_input"><input type="text" id="wx" placeholder="请输入微信" value="{{phone}}" @input="wxInput"></view>
+          <view class="label_input"><input type="text" id="wx" placeholder="请输入微信" value="{{wx}}" @input="wxInput"></view>
         </label>
         <label for="address">
           <view class="label_text">地址</view>
@@ -248,34 +248,17 @@ export default class Exchange extends wepy.page {
     status: false,
     exTitle: "女神勋章",
     exDesc: "用于兑换课程和礼物",
-    exContent:
-      "1、女神勋章是女神们自律积极、年轻活力、变美蜕变、尊贵身份的象征；2、女神勋章可通过参加活动，并完成打卡任务获得；3、女神勋章可以用来兑换女神蜕变课程和礼物；",
+    exContent: "1、女神勋章是女神们自律积极、年轻活力、变美蜕变、尊贵身份的象征；2、女神勋章可通过参加活动，并完成打卡任务获得；3、女神勋章可以用来兑换女神蜕变课程和礼物；",
     changeModal: false,
-    navs: [
-      {
-        text: "美术",
-        selected: true
-      },
-      {
-        text: "语言",
-        selected: false
-      },
-      {
-        text: "瑜伽",
-        selected: false
-      },
-      {
-        text: "饮食",
-        selected: false
-      }
-    ],
+    navs: [],
     courseId: "",
     name: "",
     wx: "",
     phone: "",
     address: "",
     tabIndex: 1,
-    imgs: null
+    imgs: null,
+    list: []
   }
   methods = {
     // 女神币说明
@@ -306,37 +289,104 @@ export default class Exchange extends wepy.page {
       this.address = e.detail.value
     },
     // 兑换
-    submitChange() {
-      const { data } = http({
-        url: '',
-        method: '',
+    async submitChange() {
+      if(!this.name){
+        wepy.showModal({
+          title: '提示',
+          content: '请输入姓名'
+        })
+        return false
+      }
+      if(!this.wx){
+        wepy.showModal({
+          title: '提示',
+          content: '请输入微信号'
+        })
+        return false
+      }
+      if(!this.phone){
+        wepy.showModal({
+          title: '提示',
+          content: '请输入电话'
+        })
+        return false
+      }
+      if(!this.address){
+        wepy.showModal({
+          title: '提示',
+          content: '请输入地址'
+        })
+        return false
+      }
+      const { data } = await http({
+        url: api.course.exchange.url,
+        method: api.course.exchange.method,
         data: {
-          courseId:this.courseId,
+          exchange_id:this.courseId,
           name:this.name,
-          wx:this.wx,
-          phone:this.phone,
+          wx_num:this.wx,
+          tel:this.phone,
           address:this.address,
         }
-      })
+      },true)
+      if( data.code ){
+        wepy.navigateTo({
+          url: `/pages/user/success?id=${this.courseId}`
+        })
+      }else{
+        wepy.showModal({
+          title: '提示',
+          content: data.info
+        })
+      }
     }
   }
   events = {
     navTapEvent(index) {
       this.tabIndex = (index+1)
+      this.getList()
+    }
+  }
+  // 获取兑换分类
+  async getCat() {
+    const { data } = await http({
+      url: api.course.excat.url,
+      method: api.course.excat.method,
+      data: {}
+    },true)
+    if (data.code){
+      let selected;
+      data.info.forEach((item,index)=>{
+        if(index==0){
+          selected = true
+        }else{
+          selected = false
+        }
+        this.navs.push({
+          text: item.name,
+          selected: selected,
+          id:item.id
+        })
+      })
+      this.$apply()
     }
   }
   // 获取兑换列表
-  getCourseList() {
-    const { data } = http({
-      url: '',
-      method: '',
+  async getList() {
+    const { data } = await http({
+      url: api.course.exlist.url,
+      method: api.course.exlist.method,
       data: {
-        
+        type: this.navs[this.tabIndex-1].id
       }
     })
+    this.list = data.info || [] 
+    this.$apply()
   }
-  onLoad() {
+  async onLoad() {
     this.imgs = this.$parent.globalData.imgs
+    await this.getCat()
+    await this.getList()
   }
 }
 </script>

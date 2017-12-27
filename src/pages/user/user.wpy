@@ -247,7 +247,7 @@
       onLoad() {
         this.userInfo = this.$parent.globalData.userInfo
         this.imgs = this.$parent.globalData.imgs
-
+        this.$apply()
       }
   }
 </script>

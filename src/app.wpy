@@ -416,6 +416,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       "pages/index/index", 
+      "pages/index/pk", 
       "pages/course/reply",
       "pages/course/clist",
       "pages/index/record",
@@ -438,7 +439,6 @@ export default class extends wepy.app {
       "pages/user/exchange", 
       "pages/user/money", 
       "pages/user/moneydetail",
-      "pages/index/pk", 
       "pages/index/start", 
       "pages/index/detail"
     ],

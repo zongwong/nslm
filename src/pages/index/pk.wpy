@@ -208,30 +208,29 @@
       <image  src="{{imgs.pkpost}}"></image>
       <!-- <view class="mask"></view> -->
       <view class="pktext">
-        <view>xxx 邀请您一起参加</view>
-        <view>一周腹肌特训</view>
+        <view>{{info.share_user}} 邀请您一起参加</view>
+        <view>{{info.title}}</view>
       </view>
       <view class="pk_num">
         <view><image src="../../images/pk.png"></image>PK码</view>
-        <view class="pinklight">40339566</view>
+        <view class="pinklight">{{info.pk}}</view>
         <view>[点击复制]</view>
       </view>
     </view>
     
     <view class="info_block rule_block">
       <view class="title">活动规则</view>
-      <view class="desc">描述描述收到收到是是的描述收到收到是是的描述收到收到是是的描述收到收到是是的描述收到收到是是的描述收到收到是是的收到收到是是的</view>
+      <view class="desc">{{info.content}}</view>
     </view>
     <view class="info_block">
       <view class="title">报名时间</view>
       <view class="desc">
-        <view>报名截至：11月14日 12:00</view>
-        <view>开始时间：11月14日 - 11月28日</view>
-        <view>打卡时段：9:00 - 12:00</view>
-        <view>打卡天数：<text class="pinklight">30</text>天</view>
+        <view>报名截至：{{info.end_time}}</view>
+        <view>开始时间：{{info.start_time}} - </view>
+        <view>打卡时段：{{info.sign_start_time}}:00 - {{info.sign_end_time}}:00</view>
+        <view>打卡天数：<text class="pinklight">{{info.days}}</text>天</view>
       </view>
     </view>
-
 
     <view class="join">
       <button>立即挑战他</button>
@@ -249,22 +248,28 @@ export default class Pk extends wepy.page {
     navigationBarTitleText: "好友PK"
   };
   data = {
-    imgs: null
+    imgs: null,
+    info: null
   };
   methods = {};
 
   events = {};
 
-  onLoad() {
+  async onLoad() {
    this.imgs = this.$parent.globalData.imgs
+   this.getShareData(5)
   }
-  async getShareData() {
+  async getShareData(aid) {
     const { data } = await http({
       url: api.activity.share.url,
-      method: api.activity.share.method
-    })  
+      method: api.activity.share.method,
+      data: {
+        aid: aid
+      }
+    },true)  
     if ( data.code ){
-
+      this.info = data.info
+      this.$apply()
     }
   }
 }
