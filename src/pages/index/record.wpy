@@ -265,24 +265,24 @@
 <template>
   <view class="record me-block">
     <view class="header">
-      <image  src="{{imgs.defaultlist}}"></image>
+      <image  src="{{activity.img}}"></image>
       <view class="mask"></view>
-      <view class="userinfo" wx:if="{{0}}">
-        <image src="{{imgs.defaultlist}}"></image>
-        <view class="nickname">安慰全文</view>
-      </view>
+      <!-- <view class="userinfo" wx:if="{{0}}">
+        <image src="{{userInfo.}}"></image>
+        <view class="nickname">{{userInfo.nickName}}</view>
+      </view> -->
       <view class="userdata">
         <view class="days">28</view>
         <view class="txt">累计打卡</view>
-        <view class="alldata">总计天数:30天   |   打卡完成将获得 女神勋章*1 <text class="ns_icon"></text> </view>
+        <view class="alldata">总计天数:{{activity.days}}天   |   打卡完成将获得 女神勋章*1 <text class="ns_icon"></text> </view>
         <view class="progress">
           <view class="progressinner"></view>
         </view>
       </view>
     </view>
     <view class="info_block active_block">
-      <view class="title singleTextOverflow">btasd</view>
-      <view class="desc">1232</view>
+      <view class="title singleTextOverflow">{{activity.title}}</view>
+      <view class="desc">{{activity.desrc}}</view>
     </view>
     <view class="list member_block">
       <view class="title">
@@ -290,18 +290,13 @@
         <navigator url="/pages/user/top" class="top"><text class="top_icon"></text>排行榜</navigator>
       </view>
       <view class="player">
-        <image src="../../images/default_avatar.png"></image>
-        <image src="../../images/default_avatar.png"></image>
-        <image src="../../images/default_avatar.png"></image>
-        <image src="../../images/default_avatar.png"></image>
-        <image src="../../images/default_avatar.png"></image>
-        <image src="../../images/default_avatar.png"></image>
+        <image src="{{item}}" wx:for="{{activity.head_imgs}}" wx:key="player_{{index}}"></image>
       </view>
     </view>
     <view class="list">
       <view class="title">
         <view>打卡进度<text class="status">进行中</text></view>
-        <view class="greyColor">总奖金：300元/7天</view>
+        <view class="greyColor">总奖金：{{activity.days*activity.price}}元/{{activity.days}}天</view>
       </view>
       <view class="item success">
         <view class="item_title">
@@ -312,23 +307,6 @@
           </view>
           <view class="item_title_right">
             <text>已打卡</text>
-          </view>
-        </view>
-        <view class="item_detail">
-          <view class="desc greyColor">asdas艾薇请问请问请问请问</view>
-          <image mode="aspectFill" src="{{imgs.defaultlist}}"></image>
-          <view class="pinklight">任务进度 1/30</view>
-        </view>  
-      </view>
-      <view class="item">
-        <view class="item_title">
-          <view class="item_title_left">
-            <text class="status_icon"></text>
-            <text>11月22日 10:28</text>
-            <text class="greenColor">获得奖金：5元</text>
-          </view>
-          <view class="item_title_right">
-            <text>未打卡</text>
           </view>
         </view>
         <view class="item_detail">
@@ -349,17 +327,24 @@
           </view>
         </view> 
       </view>
-      <view class="item">
+      <view class="item" wx:for="{{recordList}}" wx:key="record_{{index}}">
         <view class="item_title">
           <view class="item_title_left">
             <text class="status_icon"></text>
-            <text>11月22日 10:28</text>
-            <text class="greyColor">任务进度：3/30</text>
+            <text>{{item.date}}</text>
+            <text class="greyColor">任务进度：{{index+1}}/{{activity.days}}</text>
           </view>
           <view class="item_title_right">
-            <text class="today" @tap="toSign">打卡</text>
+            <text wx:if="{{item.status==0||item.status==1}}">未打卡</text>
+            <text wx:if="{{item.status==2}}">已打卡</text>
+            <text wx:if="{{item.status==3}}" class="today" @tap="toSign">打卡</text>
           </view>
         </view> 
+        <view class="item_detail" wx:if="{{item.status==1}}">
+          <view class="desc greyColor">asdas艾薇请问请问请问请问</view>
+          <image mode="aspectFill" src="{{imgs.defaultlist}}"></image>
+          <view class="pinklight">任务进度 1/30</view>
+        </view>  
       </view>
     </view>
   </view>
@@ -369,6 +354,7 @@
 import wepy from "wepy";
 import interfaces from "../../interface/index";
 import http from "../../utils/request"
+import _ from "../../utils/tools"
 import api from "../../config"
 export default class Record extends wepy.page {
   config = {
@@ -380,6 +366,9 @@ export default class Record extends wepy.page {
     imgs: null,
     info: null,
     id: '',
+    activity: null,
+    recordList: [],
+    recorded: null
   };
 
   computed = {
@@ -401,10 +390,44 @@ export default class Record extends wepy.page {
   events = {};
 
   async onLoad(options) {
+    // 数据获取
     this.imgs = this.$parent.globalData.imgs
+    this.userInfo = this.$parent.globalData.userInfo
     this.id = options.id
-    this.$apply()
+    const data = await interfaces.getActivityInfo(options.id)
+    if (data.code) {
+      this.activity = data.info
+      this.$apply()
+    }
     await this.getProgress(options.id)
+    
+    // 记录构建
+    let recordList = []
+    // 0 已改期 1未打卡 2已打卡 3打卡
+    for (let index = 0; index < this.activity.days; index++) {
+      let status = 2 // 默认找到数据就是已打卡
+      let date = _.getNextTime(_.getDate(this.activity.start_time),index)
+      let data = this.recorded[date]
+      if (typeof data === 'undefined'){
+        let rs = _.timeDir(date)
+        if(rs === 1 ){ // 小于今天 改期
+          status = 0
+        } else if(rs === 2 ){ 
+          status = 1
+        }else{
+          status = 3
+        }
+      }
+      recordList.push({
+        date: date,
+        status: status,
+        data: data
+      })
+    }
+    this.recordList = recordList
+    this.$apply()
+
+
   }
   async getProgress(id) {
     const { data } = await http({
@@ -416,6 +439,14 @@ export default class Record extends wepy.page {
     },true)
     if ( data.code ){
       this.info = data.info
+      if(data.info.length){
+        let recorded = {}
+        data.info.forEach((item)=>{
+          let date = _.getDate(item.c_time)
+          recorded[date] = item
+        })
+        this.recorded = recorded
+      }
       this.$apply()
     }
   }

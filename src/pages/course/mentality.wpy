@@ -120,10 +120,10 @@
   <view class="mentality">
     <view class="banner">
       <swiper autoplay="true" indicator-dots="true" indicator-active-color="#fff">
-        <block wx:for="{{3}}" wx:key="swiper_{{index}}">
+        <block wx:for="{{banner}}" wx:key="swiper_{{index}}">
           <navigator url="/pages/index/detail" hover-class="none">
             <swiper-item>
-                <image src="{{imgs.banner}}" />
+                <image src="{{item.img}}" />
             </swiper-item>
           </navigator>
         </block>
@@ -226,7 +226,8 @@
       content: '精彩功能 敬请期待!',
       btn: '确定',
       articleList: [],
-      info: null
+      info: null,
+      banner: null
     }
     methods = {
       alertModal(title) {
@@ -242,7 +243,9 @@
 
     async onLoad(options) {
       this.imgs = this.$parent.globalData.imgs
+      this.banner = this.$parent.globalData.config.heart_banner
       this.getData()
+      this.$apply()
     }
     async getArticleList() {
       const { data } = await http({

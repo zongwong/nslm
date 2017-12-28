@@ -44,7 +44,7 @@
       <view class="userinfo">
         <image src="{{activity.u_avatarurl}}"></image>
         <text class="name">{{activity.u_nickname}}</text>
-        <view class="pk_num" @tap="copyText({{activity.pk}})">
+        <view class="pk_num" @tap="copyText({{activity.pk}})" wx:if="{{activity.type==2}}">
           <view>PK码</view>
           <view>{{activity.pk}}</view>
           <view>[点击复制]</view>
@@ -56,7 +56,7 @@
     <view class="info_block">
       <view class="title">报名时间</view>
       <view class="desc">
-        <view>报名截至：{{activity.c_time}}</view>
+        <view>报名截至：{{activity.end_time}}</view>
         <view>开始时间：{{activity.start_time}} - {{activity.end_time}}</view>
         <view>打卡时段：{{activity.sign_start_time}} - {{activity.sign_end_time}}</view>
         <view>打卡天数：<text class="pinklight">{{activity.days}}</text>天</view>
@@ -65,20 +65,15 @@
     <view class="info_block player_block">
       <view class="title"><text class="pinklight">{{activity.join_num}}</text>人已报名</view>
        <view class="player">
-          <image src="../../images/default_avatar.png"></image>
-          <image src="../../images/default_avatar.png"></image>
-          <image src="../../images/default_avatar.png"></image>
-          <image src="../../images/default_avatar.png"></image>
-          <image src="../../images/default_avatar.png"></image>
-          <image src="../../images/default_avatar.png"></image>
+          <image src="{{item}}" wx:for="{{activity.head_imgs}}"></image>
        </view>
     </view>
     <view class="info_block rule_block">
       <view class="title">活动规则</view>
-      <view class="desc">{{activity.content}}</view>
+      <view class="desc">{{activity.desrc}}</view>
     </view>
     <view class="join">
-      <button @tap="join">立即报名 150元</button>
+      <button @tap="join">立即报名 {{activity.price*activity.days}}元</button>
     </view>
   </view>
 </template>
@@ -128,22 +123,13 @@ export default class Detail extends wepy.page {
 
   events = {};
 
-  onLoad(options) {
-    this.getActivityInfo(options.id)
-  }
-  // 获取活动详情
-  async getActivityInfo(id) {
-    const { data } = await http({
-      url: api.activity.info.url,
-      method: api.activity.info.method,
-      data: {
-        aid: id
-      }
-    },true)
+  async onLoad(options) {
+    const data = await interfaces.getActivityInfo(options.id)
     if (data.code) {
       this.activity = data.info
       this.$apply()
     }
   }
+
 }
 </script>

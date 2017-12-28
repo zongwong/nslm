@@ -97,6 +97,17 @@ const interfaces = {
       data: { }
     }, true)
     return data
+  },
+  // 获取活动详情
+  async getActivityInfo(id) {
+    const { data } = await http({
+      url: api.activity.info.url,
+      method: api.activity.info.method,
+      data: {
+        aid: id
+      }
+    }, true)
+    return data
   }
 }
 export default interfaces
