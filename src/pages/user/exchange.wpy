@@ -171,7 +171,7 @@
 <template>
   <view class="exchange">
     <view class="header">
-      <view>当前女神勋章：9枚</view>
+      <view>当前女神勋章：{{myInfo.medal}}枚</view>
       <view class="qa_icon" @tap="exModal"></view>
     </view>
     <!-- 导航 -->
@@ -196,11 +196,11 @@
         <image class="h_item" src="{{imgs.defaultlist}}"></image>
         <view class="h_item post_mask"></view>
         <view class="h_item info">
-          <view class="need_num">10<text>枚</text></view>
+          <view class="need_num">{{course.medal}}<text>枚</text></view>
           <view class="tips_text">兑换所需</view>
           <view class="tags">
-            <text>奖品:女神课程</text>
-            <text>当前女神勋章:9</text>
+            <text>奖品:{{course.title}}</text>
+            <text>当前女神勋章:{{myInfo.medal}}</text>
           </view>
         </view>
       </view>
@@ -236,6 +236,7 @@ import explain from "../../components/public/explain"
 import tabNav from "../../components/index/tabNav"
 import api from "../../config"
 import http from "../../utils/request"
+import interfaces from "../../interface/index.js"
 export default class Exchange extends wepy.page {
   config = {
     navigationBarTitleText: "兑换中心"
@@ -252,13 +253,15 @@ export default class Exchange extends wepy.page {
     changeModal: false,
     navs: [],
     courseId: "",
+    course:{},
     name: "",
     wx: "",
     phone: "",
     address: "",
     tabIndex: 1,
     imgs: null,
-    list: []
+    list: [],
+    myInfo: null
   }
   methods = {
     // 女神币说明
@@ -267,12 +270,20 @@ export default class Exchange extends wepy.page {
     },
     // 兑换框
     exChange(status, id) {
+      console.log(id)
+      let that = this
       if (status == 1) {
         this.changeModal = true;
         this.courseId = id;
+        this.list.forEach(function(item){
+          if (item.id == id){
+            that.course = item
+          }
+        })
       } else {
         this.changeModal = false;
         this.courseId = "";
+        this.course = {}
       }
     },
     // 表单
@@ -336,7 +347,7 @@ export default class Exchange extends wepy.page {
       }else{
         wepy.showModal({
           title: '提示',
-          content: data.info
+          content: data.msg
         })
       }
     }
@@ -385,6 +396,11 @@ export default class Exchange extends wepy.page {
   }
   async onLoad() {
     this.imgs = this.$parent.globalData.imgs
+    const data = await interfaces.getMyinfo()
+    if ( data.code ){
+      this.myInfo = data.info
+      this.$apply()
+    }
     await this.getCat()
     await this.getList()
   }

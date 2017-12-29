@@ -15,7 +15,7 @@ const interfaces = {
       data: userInfo
     })
     return {
-      userInfo: userInfo,
+      userInfo: JSON.stringify(userInfo),
       code: code
     }
   },

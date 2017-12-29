@@ -272,7 +272,7 @@
         <view class="nickname">{{userInfo.nickName}}</view>
       </view> -->
       <view class="userdata">
-        <view class="days">28</view>
+        <view class="days">{{dayed}}</view>
         <view class="txt">累计打卡</view>
         <view class="alldata">总计天数:{{activity.days}}天   |   打卡完成将获得 女神勋章*1 <text class="ns_icon"></text> </view>
         <view class="progress">
@@ -298,7 +298,7 @@
         <view>打卡进度<text class="status">进行中</text></view>
         <view class="greyColor">总奖金：{{activity.days*activity.price}}元/{{activity.days}}天</view>
       </view>
-      <view class="item success">
+      <!-- <view class="item success">
         <view class="item_title">
           <view class="item_title_left">
             <text class="status_icon"></text>
@@ -326,13 +326,15 @@
             <text>未打卡</text>
           </view>
         </view> 
-      </view>
-      <view class="item" wx:for="{{recordList}}" wx:key="record_{{index}}">
+      </view> -->
+      <view class="item {{item.status==2?'success':''}} {{item.status==0?'error':''}}" wx:for="{{recordList}}" wx:key="record_{{index}}">
         <view class="item_title">
           <view class="item_title_left">
             <text class="status_icon"></text>
             <text>{{item.date}}</text>
-            <text class="greyColor">任务进度：{{index+1}}/{{activity.days}}</text>
+            <text wx:if="{{item.status==2}}" class="greenColor">获得奖金：{{item.reward}}元</text>
+            <text wx:if="{{item.status==0}}" class="greenColor">扣除奖金：{{item.reward}}元</text>
+            <text wx:if="{{item.status==1 || item.status == 3}}" class="greyColor">任务进度：{{index + 1}}/{{activity.days}}</text>
           </view>
           <view class="item_title_right">
             <text wx:if="{{item.status==0||item.status==1}}">未打卡</text>
@@ -340,10 +342,10 @@
             <text wx:if="{{item.status==3}}" class="today" @tap="toSign">打卡</text>
           </view>
         </view> 
-        <view class="item_detail" wx:if="{{item.status==1}}">
-          <view class="desc greyColor">asdas艾薇请问请问请问请问</view>
-          <image mode="aspectFill" src="{{imgs.defaultlist}}"></image>
-          <view class="pinklight">任务进度 1/30</view>
+        <view class="item_detail" wx:if="{{item.status==2}}">
+          <view class="desc greyColor">{{item.data.content}}</view>
+          <image mode="aspectFill" src="{{img.data.img}}"></image>
+          <view class="pinklight">任务进度 {{index + 1}}/30</view>
         </view>  
       </view>
     </view>
@@ -358,17 +360,18 @@ import _ from "../../utils/tools"
 import api from "../../config"
 export default class Record extends wepy.page {
   config = {
-    navigationBarTitleText: "好友PK"
+    navigationBarTitleText: "打卡记录"
   };
   components = {};
 
   data = {
     imgs: null,
-    info: null,
+    info: [],
     id: '',
     activity: null,
     recordList: [],
-    recorded: null
+    recorded: {},
+    dayed: 0
   };
 
   computed = {
@@ -380,7 +383,7 @@ export default class Record extends wepy.page {
   methods = {
     toSign(e) {
       wepy.navigateTo({
-        url: `/pages/course/reply?type=sign&id=${this.id}&days=${this.info.days}`
+        url: `/pages/course/reply?type=sign&id=${this.id}&days=${this.dayed}`
       })
     }
 
@@ -410,11 +413,13 @@ export default class Record extends wepy.page {
       let data = this.recorded[date]
       if (typeof data === 'undefined'){
         let rs = _.timeDir(date)
-        if(rs === 1 ){ // 小于今天 改期
+        if(rs === 1 ){ // 小于今天 过期
           status = 0
         } else if(rs === 2 ){ 
+          // 未来的 -> 未打卡
           status = 1
         }else{
+          // 今天的还未打卡 ->打卡
           status = 3
         }
       }
@@ -439,6 +444,7 @@ export default class Record extends wepy.page {
     },true)
     if ( data.code ){
       this.info = data.info
+      this.dayed = data.info.length
       if(data.info.length){
         let recorded = {}
         data.info.forEach((item)=>{

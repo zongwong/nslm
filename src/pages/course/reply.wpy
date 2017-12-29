@@ -71,7 +71,7 @@
       </view>
       <view class="img_box add" @tap="addImg">+</view>
     </view>
-    <view class="tips" wx:if="{{type=='sign'}}">这是你坚持的第<text class="pinklight">{{query.day}}</text>天,请继续努力</view>
+    <view class="tips" wx:if="{{type=='sign'}}">这是你坚持的第<text class="pinklight">{{query.days}}</text>天,请继续努力</view>
   </view>
   <view class="join" @tap="sign">
     <button>打卡</button>
@@ -103,6 +103,7 @@
           let data = await interfaces.uploadImg()
           data = JSON.parse(data)
           if( data.code ){
+            console.log(data.info)
             this.myImgs.push(data.info)
           }else{
             wepy.showModal({
@@ -125,13 +126,15 @@
             })
             return false;
           }
-          if(!this.myImgs[0]){
+          if(!this.myImgs){
             wepy.showModal({
               title: '提示',
               content: '请上传图片'
             })
             return false;
           }
+
+          // return false;
 
           const { data } = await http({
             url: api.activity[this.type].url,

@@ -81,9 +81,9 @@ page{
 </template>
 
 <script>
-import wepy from "wepy";
-import interfaces from "../../interface/index";
-
+import wepy from "wepy"
+import api from "../../config"
+import http from "../../utils/request"
 export default class Success extends wepy.page {
   config = {
     navigationBarTitleText: "兑换成功"
@@ -91,40 +91,31 @@ export default class Success extends wepy.page {
   components = {};
 
   data = {
-    post_id:1,
-    access:1,
-    signDate:'2017-12-20',
-    signTime:'00:00',
-    money:'',
-    startDate:'',
-    dayCount:'',
-    imgs: null
-  };
-
-  computed = {
-    now() {
-      return +new Date();
-    }
+    imgs: null,
+    info: null
   };
 
   methods = {
-    //封面选择
-    selectPost(post_id){
-      this.post_id = post_id;
-    },
-    //权限选择
-    slectAccess(access) {
-      this.access = access;
-    },
-    signDate(e){
-      this.signDate = e.detail.value;
-    }
+
   };
 
-  events = {};
 
-  onLoad() {
+  onLoad(options) {
     this.imgs = this.$parent.globalData.imgs
+    this.getData(options.id)
+  }
+  async getData(id) {
+    const { data } = await http({
+      url: api.activity.ex.url,
+      method: api.activity.ex.method,
+      data: {
+        aid: id
+      }
+    },true)
+    if ( data.code ){
+      this.info = data.info
+      this.$apply()
+    }
   }
 }
 </script>

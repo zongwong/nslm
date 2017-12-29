@@ -1,75 +1,85 @@
-<style lang="scss">
-  page{
-    background: #fff;
+<style lang="less">
+@import "../../wxParse/wxParse.wxss";
+page {
+  background: #fff;
+}
+.articledetail {
+  padding: 20rpx;
+  .post {
+    width: 100%;
+    height: 355rpx;
+    border-radius: 20rpx;
   }
-  .articledetail{
-    padding: 20rpx;
-    .post{
-      width: 100%;
-      height: 355rpx;
-      border-radius: 20rpx;
+  .article {
+    padding: 0 16rpx;
+    .title {
+      border-bottom: 2rpx solid #efefef;
+      line-height: 86rpx;
+      font-size: 32rpx;
+      // font-weight: bold;
     }
-    .article{
-      padding: 0 16rpx;
-      .title{
-        line-height: 86rpx;
-        font-size: 32rpx;
-        font-weight: bold;
-        border-bottom: 2rpx solid #efefef;
-      }  
-      .content{
-        padding: 24rpx 0;
-        line-height: 34rpx;
-        font-size: 28rpx;
-      }
+    .content {
+      padding: 24rpx 0;
+      line-height: 34rpx;
+      font-size: 28rpx;
     }
   }
+}
+
 </style>
 <template>
+  <import src="../../wxParse/wxParse.wxml"/>
   <view class="articledetail">
     <image class="post" src="{{info.img}}"></image>
     <view class="article">
       <view class="title singleTextOverflow">{{info.title}}</view>
       <view class="content greyColor">
-        {{info.content}}
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
       </view>
     </view>
   </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
-  import http from "../../utils/request"
-  import api from "../../config"
-  export default class Articledetail extends wepy.page {
-    config = {
-      navigationBarTitleText: "文章详情"
-    };
-    data = {
-      imgs: null,
-      info: null
-    }
-    async onLoad(options) {
-      this.imgs = this.$parent.globalData.imgs
-      this.getDetail(options.id)
-    }
-    async getDetail(id) {
-      const { data } = await http({
+var WxParse = require("../../wxParse/wxParse.js");
+import wepy from "wepy";
+import http from "../../utils/request";
+import api from "../../config";
+export default class Articledetail extends wepy.page {
+  config = {
+    navigationBarTitleText: "文章详情"
+  };
+  data = {
+    imgs: null,
+    info: null
+  };
+  async onLoad(options) {
+    this.imgs = this.$parent.globalData.imgs;
+    this.getDetail(options.id);
+  }
+  async getDetail(id) {
+    const { data } = await http(
+      {
         url: api.mood.articledetail.url,
         method: api.mood.articledetail.method,
         data: {
           aid: id
         }
-      },true)
-      if ( data.code ) {
-        this.info = data.info
-        this.$apply()
-      }else{
-        wepy.showModal({
-          title: '提示',
-          content: data.msg
-        })
-      }
+      },
+      true
+    );
+    if (data.code) {
+      this.info = data.info;
+
+      var that = this;
+      WxParse.wxParse('article', 'html', data.info.content, that, 5);
+      this.$apply();
+    } else {
+      wepy.showModal({
+        title: "提示",
+        content: data.msg
+      });
     }
   }
+}
 </script>

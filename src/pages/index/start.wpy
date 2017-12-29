@@ -215,6 +215,7 @@ import wepy from "wepy";
 import interfaces from "../../interface/index";
 import api from "../../config"
 import http from "../../utils/request"
+import _ from "../../utils/tools"
 export default class Start extends wepy.page {
   config = {
     navigationBarTitleText: "发起打卡"
@@ -222,8 +223,8 @@ export default class Start extends wepy.page {
   components = {};
 
   data = {
-    moneyRange:['5元/天','10元/天','30元/天','60元/天','150元/天','365元/天'],
-    dayRange:['7天','15天','30天','60天','150天','365天'],
+    moneyRange:[],
+    dayRange:[],
     post_id:0,    
     type:1,
     img:'',
@@ -231,10 +232,10 @@ export default class Start extends wepy.page {
     desrc:'',
     signDate: '日期',
     signTime: '时间',
-    price:'5元/天',
+    price:'',
     end_time:'',
     start_time:'任务开始日期',
-    days:'30天',
+    days:'',
     sign_start_time:'开始时间',
     sign_end_time:'截止时间',
     imgs: null,
@@ -260,14 +261,6 @@ export default class Start extends wepy.page {
     async selectPost(post_id,src){
       this.img = src
       this.post_id = post_id
-      // let data = await interfaces.uploadImg();
-      // data = JSON.parse(data)
-      // console.log(typeof data)
-      // console.log(data)
-      // if(data.code){
-      //   this.img = data.info
-      //   this.$apply()
-      // }
     },
     // 权限选择
     slectAccess(access) {
@@ -303,8 +296,57 @@ export default class Start extends wepy.page {
     },
     // 提交活动
     async createActive() {
+      // 验证
+      if(!this.title){
+        wepy.showModal({
+          title:'提示',
+          content: '请填写活动名称'
+        })
+        return false
+      }
+      if(!this.desrc){
+        wepy.showModal({
+          title:'提示',
+          content: '请填写活动规则'
+        })
+        return false
+      }
+      if(this.signDate=='日期'){
+        wepy.showModal({
+          title:'提示',
+          content: '请设置报名截止时间'
+        })
+        return false
+      }
+      if(this.start_time =='任务开始日期'){
+        wepy.showModal({
+          title:'提示',
+          content: '请设置任务开始日期'
+        })
+        return false
+      }
+      if(this.sign_start_time =='开始时间'){
+        wepy.showModal({
+          title:'提示',
+          content: '请设置打卡开始时段'
+        })
+        return false
+      }
+      if(this.sign_end_time =='截止时间'){
+        wepy.showModal({
+          title:'提示',
+          content: '请设置打卡截止时段'
+        })
+        return false
+      }
+      if(!_.cpTime(this.sign_start_time,this.sign_end_time)){
+        wepy.showModal({
+          title:'提示',
+          content: '打卡截止时间必须大于开始时间'
+        })
+        return false
+      }
 
-      
       const { data } =await http({
         method: api.activity.add.method,
         url: api.activity.add.url,
@@ -339,6 +381,20 @@ export default class Start extends wepy.page {
   onLoad() {
     this.imgs = this.$parent.globalData.imgs
     this.cover = this.$parent.globalData.config.cover
+    this.img = this.$parent.globalData.config.cover[0]
+    let days = this.$parent.globalData.config.days
+    let money = this.$parent.globalData.config.money
+    days = days.map((item)=>{
+      return item + '天'
+    })
+    money = money.map((item,index)=>{
+      return item + '元/天'
+    })
+    this.moneyRange = money
+    this.dayRange = days
+    this.price = money[0]
+    this.days = days[0]
+    this.$apply()
   }
 }
 </script>
