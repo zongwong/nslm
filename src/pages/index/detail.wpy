@@ -1,5 +1,6 @@
 <style lang="scss">
 .detail{
+  overflow: hidden;
   .player_block{
     padding-bottom: 26rpx;
     .player{
@@ -19,11 +20,27 @@
     margin-bottom: 160rpx;
   }
 }
+.me-block{
+  .active_block{
+    .userinfo{
+      .pk_num{
+        width: 362rpx;
+        view{
+          &:first-child{
+            padding-left: 42rpx;
+            background: #ff4a88 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAXCAYAAAARIY8tAAACJklEQVRIiZ2WzUtVURTF18tSEfogCQJFa1KTN+jDQURQDkJokPUPNGqiGFJQVIOmNSiCJkFQVPRBEE4EcVITEXJgRLPyg0iKEKQXqSE836/BOUfP3Z77nrrgDN4+a6/17r57b24BkEeXpGlJE9o8tkjqkLQsaTwEAg5L+irpi6R7kvZsQLgo6Ymkn5LGJO1YuQHCOUIWY8DO6D7vHARmo7wSsC3cx8QC8MOYvAeaqoi3AzMmZyDm2IQrrMUgUJ8Q3wtMGO4/oLOagYCrCZPXQF3E2Q18NpwF4LTVy3v0fqBiBB7hyrgd+GDu5oFTKa1qL68nYXIfeGdif4ATeTq1OuQisEw+SsCxahq1DARcAMoJ8TngaK389RgUgKGEwa115GYMWkn3/J2c8pSB8wl+O9CQMrgNDAONUeyGEf0FLEW/l8i2ZiswBZxNGUz6pCHcYPUa8e/AAeAMbqACFoDjXjwM3nNrUDRiH8m26Ddgf/RnurxwQInsVP/GD2b8Ih+TxhSurrbWnbgBs6jg2ntNieqAp4a8CLQlxMM5lxDvjTkxucGbvDBJr8juoXCagU+G2+/vVpZjILcA08BJL/bGJD4zJruAccO5zOoeGwkmwW3Uk+Zxe2Ur8NY8+qXI4KURv+bjfaw2x4Ng0BMRJ3EdFYwfAteBfYkSdQB3ces9xLqBv5HeoSA0gNuSzQmhjZ4irvNuAioAklQvqSKpvNnPCYMmSYuS9B9if2+nNuKNlAAAAABJRU5ErkJggg==) 12rpx center no-repeat;
+            background-size: 24rpx 23rpx;
+          }
+        }
+      }
+    } 
+  } 
+} 
 </style>
 <template>
   <view class="detail me-block">
     <view class="header">
-      <image mode="top" src="{{activity.img}}"></image>
+      <image mode="aspectFill" src="{{activity.img}}"></image>
       <view class="mask"></view>
       <view class="info_data">
         <view class="data_item">
@@ -57,7 +74,7 @@
       <view class="title">报名时间</view>
       <view class="desc">
         <view>报名截至：{{activity.end_time}}</view>
-        <view>开始时间：{{activity.start_time}} - {{activity.end_time}}</view>
+        <view>开始时间：{{start_time}} - {{end_time}}</view>
         <view>打卡时段：{{activity.sign_start_time}} - {{activity.sign_end_time}}</view>
         <view>打卡天数：<text class="pinklight">{{activity.days}}</text>天</view>
       </view>
@@ -65,15 +82,18 @@
     <view class="info_block player_block">
       <view class="title"><text class="pinklight">{{activity.join_num}}</text>人已报名</view>
        <view class="player">
-          <image src="{{item}}" wx:for="{{activity.head_imgs}}"></image>
+          <image src="{{item}}" wx:for="{{activity.head_imgs}}" wx:key="head_{{index}}"></image>
        </view>
     </view>
     <view class="info_block rule_block">
       <view class="title">活动规则</view>
       <view class="desc">{{activity.desrc}}</view>
     </view>
-    <view class="join">
+    <view class="join" wx:if="{{activity.is_join==0}}">
       <button @tap="join">立即报名 {{activity.price*activity.days}}元</button>
+    </view>
+    <view class="join" wx:if="{{activity.is_join==1}}">
+      <button @tap="toRecord">已报名 去打卡</button>
     </view>
   </view>
 </template>
@@ -82,6 +102,7 @@
 import wepy from "wepy";
 import interfaces from "../../interface/index";
 import http from "../../utils/request"
+import _ from "../../utils/tools"
 import api from "../../config"
 export default class Detail extends wepy.page {
   config = {
@@ -90,13 +111,10 @@ export default class Detail extends wepy.page {
 
   data = {
     activity: null,
+    end_time: '',
+    start_time: ''
   };
 
-  computed = {
-    now() {
-      return +new Date();
-    }
-  };
 
   methods = {
     //点击复制
@@ -105,6 +123,13 @@ export default class Detail extends wepy.page {
     },
     // 报名
     async join() {
+      if(_.timeDir(this.activity.end_time)!==2){
+        wepy.showModal({
+          title:'提示',
+          content:'报名时间已截止'
+        })
+        return false
+      }
       const { data } = await http({
         url: api.activity.join.url,
         method: api.activity.join.method,
@@ -117,16 +142,24 @@ export default class Detail extends wepy.page {
           title: '提示',
           content: '参加成功',
         })
+        this.activity.is_join = 1
+        this.$apply()
       }
+    },
+    // 去打卡
+    toRecord() {
+      wepy.redirectTo({
+        url:`/pages/index/record?id=${this.activity.id}`
+      })
     }
   };
-
-  events = {};
 
   async onLoad(options) {
     const data = await interfaces.getActivityInfo(options.id)
     if (data.code) {
       this.activity = data.info
+      this.end_time = _.getNextTime(data.info.start_time,data.info.days)
+      this.start_time = _.getDate(data.info.start_time)
       this.$apply()
     }
   }

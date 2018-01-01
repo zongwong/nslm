@@ -1,0 +1,70 @@
+<style lang="scss">
+.mood{}
+</style>
+<template>
+  <view class="mood">
+    <view class="mood_list">
+      <view class="mood_item" url="/pages/user/mooddetail?id={{item.id}}" wx:for="{{mood}}" wx:key="circle_{{index}}">
+        <view class="mood_item_avatar">
+          <image src="{{userInfo.avatarUrl}}"></image>
+        </view>
+        <view class="mood_item_detail">
+          <view class="detail_user">
+            <view class="name"><text>{{userInfo.nickName}}</text></view>
+            <view class="time"><text class="greyColor">{{item.c_time}}</text></view>
+          </view>
+          <view class="mood_item_text greyColor">{{item.content}}</view>
+          <view class="mood_item_imgs">
+            <image src="{{itemImg}}" wx:for="{{item.img}}" wx:key="img" wx:for-item="itemImg" @tap="previewImg({{itemImg}},{{item.img}})"></image>
+          </view>
+          <!-- <view class="mood_item_btns">
+            <view>
+              <text class="icon icon_pl"></text>
+              <text>{{item.comment}}</text>
+            </view>
+            <view>
+              <text class="icon icon_dz active"></text>
+              <text>{{item.zan}}</text>
+            </view>
+          </view> -->
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import http from "../../utils/request"
+  import interfaces from "../../interface/index"
+  import api from "../../config"
+  export default class Mymood extends wepy.page {
+      config = {
+        navigationBarTitleText: "我的心情"
+      };
+      data = {
+        mood: null,
+        userInfo: null
+      }
+      methods = {
+        previewImg(cur,urls) {
+          interfaces.previewImg(cur,urls)
+        }
+      }
+      onLoad() {
+        this.userInfo = this.$parent.globalData.userInfo
+        this.getMyMood()
+      }
+      async getMyMood() {
+        const { data } = await http({
+          url: api.users.mymood.url,
+          method: api.users.mymood.method,
+          data: {}
+        },true)
+        if (data.code) {
+          this.mood = data.info
+          this.$apply()
+        }
+      }
+  }
+</script>

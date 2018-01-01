@@ -1,5 +1,6 @@
 <style lang="scss">
 .doctor{
+  overflow: hidden;
   .doctor_box{
     border: 2rpx solid #efefef;
     border-radius: 30rpx;
@@ -39,6 +40,7 @@
   .reply{
     background: #fff;
     padding: 0 36rpx;
+    margin-bottom: 150rpx;
     .reply_item{
       display: flex;
       padding: 24rpx 0;
@@ -111,13 +113,13 @@
         <image class="doctor_avatar" src="{{doctor.img}}"></image>
         <view>
           <view class="name">{{doctor.name}}</view>
-          <view class="job">{{doctor.desrc}}</view>
+          <view class="job">{{doctor.type}}</view>
         </view>
       </view>
       <view class="doctor_desc">{{doctor.desrc}}</view>
     </view>
     <view class="reply">
-      <view class="reply_item" wx:for="{{comment}}">
+      <view class="reply_item" wx:for="{{comment}}" wx:key="dc_{{index}}">
         <image class="reply_avatar" src="{{item.u_avatarurl}}"></image>
         <view class="reply_info">
           <view class="name">{{item.u_nickname}}</view>
@@ -127,7 +129,7 @@
       </view>
     </view>
     <view class="join" @tap="createActive">
-      <input class="reply_input" type="text" value="{{myContent}}" @input="myContent"> <view class="reply_submit" @tap="toAsk">提交</view>
+      <input class="reply_input" type="text" value="{{myContent}}" @input="myContent" /> <view class="reply_submit" @tap="toAsk">提交</view>
     </view>
   </view>
 </template>

@@ -1,5 +1,6 @@
 <style lang="scss">
   .editinfo{
+    overflow: hidden;
     .me-block{
       .header{
         height: 376rpx;
@@ -33,7 +34,7 @@
           年龄(岁)
         </view>
         <view class="label_input">
-          <input type="text" value="{{age}}" id="age" @input="ageInput">
+          <input type="text" value="{{age}}" id="age" @input="ageInput" placeholder="请填写年龄" />
         </view>
       </label>
       <label class="form_item" for="height">
@@ -41,7 +42,7 @@
           身高(cm)
         </view>
         <view class="label_input">
-          <input type="text" value="{{height}}" id="height" @input="heightInput">
+          <input type="text" value="{{height}}" id="height" @input="heightInput" placeholder="请填写身高" />
         </view>
       </label>
       <label class="form_item" for="weight">
@@ -49,7 +50,7 @@
           体重(kg)
         </view>
         <view class="label_input">
-            <input type="text" value="{{weight}}" id="weight" @input="weightInput">
+            <input type="text" value="{{weight}}" id="weight" @input="weightInput" placeholder="请填写体重" />
         </view>
       </label>
     </view>
@@ -153,12 +154,18 @@ export default class Editinfo extends wepy.page {
           weight: this.weight,
           height: this.height,
           constellation: this.constellation,
-          pregnancy: this.pregnancy
+          is_pregnant: this.pregnancy,
+          pregnant_month: this.pregnancyStatus
         }
       },true)
       if (data.code){
         wepy.showToast({
           title: '修改成功'
+        })
+      }else{
+        wepy.showModal({
+          title: '提示',
+          content: data.msg
         })
       }
     }
@@ -180,8 +187,9 @@ export default class Editinfo extends wepy.page {
         this.age = data.info.age
         this.weight = data.info.weight
         this.height = data.info.height
-        this.constellation = data.info.constellation
-        // this.pregnancy = this.pregnancyRange.indexOf(data.info.pregnancyRange)
+        this.constellation = data.info.constellation || '白羊座'
+        this.pregnancy = data.info.is_pregnant || '未怀孕'
+        this.pregnancyStatus = data.info.pregnant_month || '无'
         this.$apply()
       }
   }

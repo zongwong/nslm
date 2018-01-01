@@ -21,6 +21,14 @@
     font-size: 32rpx;
     margin: 0 36rpx;
   }
+  .food_nav{
+    .tabNav{padding: 0 36rpx!important;}
+    .tabBox{
+      width: calc( 100% - 72rpx);
+      margin-left: 36rpx;
+    }
+    // border-bottom:2rpx solid #ebebeb;
+  }
   .banner_mood{
     height: 207rpx;
     width: 714rpx;
@@ -28,7 +36,7 @@
     display: block;
   }
   .food_box{
-    background: #f3f3f3;
+    // background: #f3f3f3;
     border-radius: 10rpx;
     margin: 26rpx 36rpx 29rpx;
     text-align: center;
@@ -72,6 +80,10 @@
       font-size: 28rpx;
       margin: 18rpx auto 12rpx;
       width: 182rpx;
+      position: absolute;
+      left: 50%;
+      bottom: 12rpx;
+      transform: translateX(-50%);
       .icon{
         display: inline-block;
         vertical-align: top;
@@ -106,16 +118,16 @@
       <tabNav :navs="navs"></tabNav>
     </view>
     <view class="food_box">
-      <image class="food_bg" src="../../images/foodbg.png"></image>
+      <image class="food_bg" src="{{food.img}}"></image>
       <view class="content_box">
-        <block wx:for="{{4}}" wx:key="food_{{index}}">
+        <!-- <block wx:for="{{foods}}" wx:key="food_{{index}}">
         <view class="food_item">
-          <text class="food_name">酸奶</text>
-          <text class="food_je">100kg</text>
+          <text class="food_name">{{item.name}}</text>
+          <text class="food_je">{{item.name}}</text>
         </view>
-        </block>
-        <view class="food_btn"><text class="icon"></text>换一换</view>
-        <view class="food_tips">*建议早餐摄入量不超过270千卡*</view>
+        </block> -->
+        <view class="food_btn" @tap="change"><text class="icon"></text>换一换</view>
+        <!-- <view class="food_tips">*建议早餐摄入量不超过270千卡*</view> -->
       </view>
     </view>
   </view>
@@ -129,6 +141,9 @@
 
 <script>
   import wepy from 'wepy'
+  import http from "../../utils/request"
+  import _ from "../../utils/tools"
+  import api from "../../config"
   import tabNav from "../../components/index/tabNav"
   export default class Course extends wepy.page {
       config = {
@@ -154,10 +169,43 @@
               selected:false,
           }
         ],
-        imgs: null
+        imgs: {},
+        type: 1,
+        foods: [],
+        food: {}
+      }
+      events = {
+        navTapEvent(index) {
+          this.type = index + 1
+          this.$apply()
+          this.getFood()
+        }
+      }
+      methods = {
+        change() {
+          let index = _.random(0,this.foods.length - 1)
+          this.food = this.foods[index]
+          
+        }
       }
       async onLoad() {
         this.imgs = this.$parent.globalData.imgs
+        this.$apply()
+        this.getFood()
+      }
+      async getFood() {
+        const { data } = await http({
+          url: api.mood.food.url,
+          method: api.mood.food.method,
+          data: {
+            type: this.type
+          }
+        })
+        if( data.code ){
+          this.foods = data.info
+          this.food = data.info[0]
+          this.$apply()
+        }
       }
   }
 </script>

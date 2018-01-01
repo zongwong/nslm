@@ -90,12 +90,14 @@
       transform: translate(-50%,-50%);
       text{
         display: inline-block;
+        vertical-align:top;
       }
       .btn_icon{
         width: 28rpx;
-        height: 28rpx;
+        height: 100%;
         margin-right: 6rpx;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjJGM0UxQkVBRTIzOTExRTdBM0VCQkU4OTlDMzkzMUYzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjJGM0UxQkVCRTIzOTExRTdBM0VCQkU4OTlDMzkzMUYzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MkYzRTFCRThFMjM5MTFFN0EzRUJCRTg5OUMzOTMxRjMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MkYzRTFCRTlFMjM5MTFFN0EzRUJCRTg5OUMzOTMxRjMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5DswsyAAABlklEQVR42uyWTShFQRTH5z6XwsJK6bFRPlbWNmwQkq/shJKNbCws9LJVkihJlrJ52Skf9SwkO1n6WJISRWy8YiFc/6n/1HS75b47M7t36ldn7sz079w558x4wfCKgPlgGnSDClG4XYJ58BsxVwJ+1EAKeeAI9Ijk1gU2wEPo+xqYBZMgqwQ7NLE7kAMfBQreRIhlwBz9Oj3CJm1RG3gW5jYOlugfgFU1kdIWvVsSGwQ7PKoLMKqfYUrYtVawy0S5BQPgU19gU7ABHDLLH0EveA0vsiWYZrJV82j6mIDKZsCUShpTqwLHjPALjIBrbb4ZbNHPmUZYBvZACwgYxWnEGmWlJoIyC7dZx4IFnv1vk4ngOhijvww242xKKphhRIJRLcTdmESwVusiJzy3wKVgPQVksgwxM2NbkrK4AjVRRe1KMG9SR7Z7aVGwKOhW0HekUR4W/KZfCdodCPZrfiCjOmerktfNGW/qvAUhjx0pzfE9ePL5ppTdfpG/tdFBlLINTsiXua/dZ/ugk7/Wpr3wZf8mB38CDABM9koVeIiOmgAAAABJRU5ErkJggg==) center / 100% no-repeat;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjJGM0UxQkVBRTIzOTExRTdBM0VCQkU4OTlDMzkzMUYzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjJGM0UxQkVCRTIzOTExRTdBM0VCQkU4OTlDMzkzMUYzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MkYzRTFCRThFMjM5MTFFN0EzRUJCRTg5OUMzOTMxRjMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MkYzRTFCRTlFMjM5MTFFN0EzRUJCRTg5OUMzOTMxRjMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5DswsyAAABlklEQVR42uyWTShFQRTH5z6XwsJK6bFRPlbWNmwQkq/shJKNbCws9LJVkihJlrJ52Skf9SwkO1n6WJISRWy8YiFc/6n/1HS75b47M7t36ldn7sz079w558x4wfCKgPlgGnSDClG4XYJ58BsxVwJ+1EAKeeAI9Ijk1gU2wEPo+xqYBZMgqwQ7NLE7kAMfBQreRIhlwBz9Oj3CJm1RG3gW5jYOlugfgFU1kdIWvVsSGwQ7PKoLMKqfYUrYtVawy0S5BQPgU19gU7ABHDLLH0EveA0vsiWYZrJV82j6mIDKZsCUShpTqwLHjPALjIBrbb4ZbNHPmUZYBvZACwgYxWnEGmWlJoIyC7dZx4IFnv1vk4ngOhijvww242xKKphhRIJRLcTdmESwVusiJzy3wKVgPQVksgwxM2NbkrK4AjVRRe1KMG9SR7Z7aVGwKOhW0HekUR4W/KZfCdodCPZrfiCjOmerktfNGW/qvAUhjx0pzfE9ePL5ppTdfpG/tdFBlLINTsiXua/dZ/ugk7/Wpr3wZf8mB38CDABM9koVeIiOmgAAAABJRU5ErkJggg==) 0 center no-repeat;
+        background-size: 28rpx 28rpx;
       }
     }
   }
@@ -108,7 +110,9 @@
     height: 88rpx;
     padding: 0 37rpx;
     &:last-child{
-      border-bottom: none;
+      .nav_item_box{
+        border-bottom: none;
+      }
     }
     .nav_item_box{
       border-bottom: 2rpx solid #efefef;
@@ -162,20 +166,20 @@
             <view class="edit"></view>
         </view>
       </navigator>
-      <view class="nickname">1231231</view>
-      <view class="desc">qweqweqwe</view>
+      <view class="nickname">{{userInfo.nickName}}</view>
+      <!-- <view class="desc">qweqweqwe</view> -->
       <view class="data">
         <view class="data_item">
-          <view>0723</view>
+          <view>{{myinfo.medal}}</view>
           <view>女神勋章</view>
           <view><navigator url="/pages/user/exchange" hover-class="none"><text>去兑换</text></navigator></view>
         </view>
         <view class="data_item">
-          <view>07</view>
+          <view>{{myinfo.clock_day}}</view>
           <view>累计打卡</view>
         </view>
         <view class="data_item">
-          <view>07</view>
+          <view>{{myinfo.total_money}}</view>
           <view>累计奖金 </view>
           <view><navigator url="/pages/user/money" hover-class="none"><text>去提现</text></navigator></view>
         </view>
@@ -194,19 +198,19 @@
           <text>我的发布</text>
         </view>
       </navigator>
-      <navigator class="nav_item" url="/pages/user/mypublish?type=join">
+      <navigator class="nav_item" url="/pages/user/myjoin?type=join">
         <view class="nav_item_box">
           <text class="nav_icon nav_cy"></text>
           <text>我的参与</text>
         </view>
       </navigator>
-      <navigator class="nav_item" url="/pages/user/myvideo">
+      <navigator class="nav_item" url="/pages/user/mysc">
         <view class="nav_item_box">
-          <text class="nav_icon nav_sp"></text>
-          <text>我的视频</text>
+          <text class="nav_icon nav_sc"></text>
+          <text>我的收藏</text>
         </view>
       </navigator>
-      <navigator class="nav_item" url="/pages/user/mood">
+      <navigator class="nav_item" url="/pages/user/mymood">
         <view class="nav_item_box">
           <text class="nav_icon nav_xq"></text>
           <text>我的心情</text>
@@ -224,30 +228,31 @@
           <text>完善资料</text>
         </view>
       </navigator>
-      <navigator class="nav_item" url="/pages/course/articlelist">
-        <view class="nav_item_box">
-          <text class="nav_icon nav_sc"></text>
-          <text>我的收藏</text>
-        </view>
-      </navigator>
     </view>
   </view>
 </template>
 
 <script>
   import wepy from "wepy"
+  import interfaces from "../../interface/index"
   export default class user extends wepy.page {
       config = {
         navigationBarTitleText: "我的"
       }
       data = {
         userInfo: null,
-        imgs: null
+        imgs: null,
+        myinfo: {}
       }
-      onLoad() {
+      async onLoad() {
         this.userInfo = this.$parent.globalData.userInfo
         this.imgs = this.$parent.globalData.imgs
+        const data = await interfaces.getMyinfo()
+        if( data.code ){
+          this.myinfo = data.info
+        }
         this.$apply()
       }
+      
   }
 </script>

@@ -1,5 +1,6 @@
 <style lang="scss">
 .coursedetail{
+  overflow: hidden;
   .video{
     width: 100%;
     height: 425rpx;
@@ -55,7 +56,8 @@
   </view>
   <view class="video_info">
     <text class="name singleTextOverflow">{{info.title}}</text>
-    <text class="collect" @tap="collect">{{collectText}}</text> 
+    <text class="collect" wx:if="{{info.is_collect == 1}}">已收藏</text> 
+    <text class="collect" @tap="collect" wx:if="{{info.is_collect == 0}}">收藏</text> 
   </view>
   <view class="course_info">
     <image class="post" src="{{info.img}}"></image>
@@ -66,44 +68,25 @@
   <view class="comment-block">
     <view class="comment-title">评论</view>
     <view class="mood_list">
-      <view class="mood_item">
+      <view class="mood_item" wx:for="{{info.comment}}" wx:key="ccomment_{{index}}">
         <view class="mood_item_avatar">
-          <image src="../../images/default_avatar.png"></image>
+          <image src="{{item.u_avatarurl}}"></image>
         </view>
         <view class="mood_item_detail">
           <view class="detail_user">
-            <view class="name"><text>王小花</text></view>
-            <view class="time"><text class="greyColor">2017/22/12</text></view>
+            <view class="name"><text>{{item.u_nickname}}</text></view>
+            <view class="time"><text class="greyColor">{{item.c_time}}</text></view>
           </view>
-          <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
+          <view class="mood_item_text greyColor">{{item.content}}</view>
           <view class="mood_item_imgs">
-            <image src="{{imgs.mood}}"></image>
-            <image src="{{imgs.mood}}"></image>
-            <image src="{{imgs.mood}}"></image>
-          </view>
-        </view>
-      </view>
-      <view class="mood_item">
-        <view class="mood_item_avatar">
-          <image src="../../images/default_avatar.png"></image>
-        </view>
-        <view class="mood_item_detail">
-          <view class="detail_user">
-            <view class="name"><text>王小花</text></view>
-            <view class="time"><text class="greyColor">2017/22/12</text></view>
-          </view>
-          <view class="mood_item_text greyColor">乔沃维奇翁群翁</view>
-          <view class="mood_item_imgs">
-            <image src="{{imgs.mood}}"></image>
-            <image src="{{imgs.mood}}"></image>
-            <image src="{{imgs.mood}}"></image>
+            <image src="{{itemImg}}" wx:for="{{item.img}}" wx:key="this*" wx:for-item="itemImg"></image>
           </view>
         </view>
       </view>
     </view>
   </view>
   <view class="join">
-    <button>评论</button>
+    <button @tap="toReply">评论</button>
   </view>
 </view>
 </template>
@@ -123,7 +106,7 @@ export default class Coursedetail extends wepy.page {
   data = {
     info: null,
     imgs: null,
-    collectText: '收藏'
+    // collectText: '收藏'
   };
 
   computed = {
@@ -143,16 +126,20 @@ export default class Coursedetail extends wepy.page {
         }
       },true)
       if ( data.code ) {
-        this.collectText = '已收藏'
+        this.info.is_collect = 1
         this.$apply()
         wepy.showToast({
           title: '收藏成功'
         })
       }
+    },
+    toReply() {
+      wepy.navigateTo({
+        url:`/pages/course/reply?type=course&id=${this.info.id}`
+      })
     }
   };
 
-  events = {};
   async onLoad(options) {
     this.imgs = this.$parent.globalData.imgs
     this.getDetail(options.id)

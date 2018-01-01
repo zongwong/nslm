@@ -38,15 +38,15 @@
 <template>
   <view class="articleList">
     <view class="pbcontent">    
-      <navigator class="list_item" url="/pages/course/articledetail" wx:for="{{4}}" wx:key="article_{{index}}">
+      <navigator class="list_item" url="/pages/course/articledetail?id={{item.id}}" wx:for="{{list}}" wx:key="article_{{index}}">
         <view class="list_item_info">
-          <image class="list_item_post" src="{{imgs.defaultlist}}"></image>
+          <image class="list_item_post" src="{{item.img}}"></image>
           <view class="list_item_detail">
-            <view class="title singleTextOverflow">一周塑形课程</view>
-            <view class="desc greyColor">描述内容</view>
+            <view class="title singleTextOverflow">{{item.title}}</view>
+            <view class="desc greyColor">{{item.content}}</view>
             <view class="data">
-              <view class="greyColor">2017/22/22</view>
-              <view class="pinklight"><text class="icon_view"></text><text>123</text></view>
+              <view class="greyColor">{{item.time}}</view>
+              <view class="pinklight"><text class="icon_view"></text><text>{{item.pv}}</text></view>
             </view>
           </view>
         </view>
@@ -57,15 +57,36 @@
 
 <script>
   import wepy from 'wepy'
+  import api from "../../config"
+  import http from "../../utils/request"
+  import _ from "../../utils/tools"
   export default class ArticleList extends wepy.page {
       config = {
         navigationBarTitleText: "文章列表"
       };
       data = {
-        imgs: null
+        imgs: null,
+        list: [],
       }
-      onLoad() {
+      async onLoad() {
         this.imgs = this.$parent.globalData.imgs
+        this.getArticle()
+      }
+      async getArticle() {
+        const { data } = await http({
+          url: api.mood.article.url,
+          method: api.mood.article.method,
+          data: {}
+        },true)
+        if (data.code){
+          if(data.info){
+            data.info.forEach((item)=>{
+              item.time = _.getDate(item.c_time)
+            })
+          }
+          this.list = data.info
+          this.$apply()
+        }
       }
   }
 </script>

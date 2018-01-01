@@ -37,17 +37,32 @@
       }
     }
     .info{
+      width: 100%;
+      height: 42rpx;
+      position: absolute;
+      bottom: 0;
+      left: 0;
       font-size:22rpx;
       display: flex;
       justify-content: space-between;
       padding: 0 16rpx;
+      box-sizing: border-box;
+      line-height: 1;
+      .greyColor{
+        padding: 10rpx 0;
+      }
       .pinklight{
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAUCAYAAACTQC2+AAACbUlEQVRIiZXVX4iOeRQH8M/7jsifElGjkQtpY4mMElJqsLtmtJklkhulpHChUFyIuJBF+ZNs064btghLCWE0k5SQ2JKU/BmbLebGvwal18X5vXnn6XlnOPX09Dy/c77n/M6f7ymUGnf6DumHYSigEx++1bDYy3kBs9GCRwn4PzxHF57iCOb1htWnh7OfsAuT0ncHTuEFShiBKViengfYhLPf6mggDibjT/gDh3G3SkDjsQorcAYnsBKvK5Wy1x2O9uSkrQKkmhO4j7UYiwtYjOuoq+ZoMC6KdOzBHFGXrNTIz0QHmrA1BdiWAu/mqIDjqMd2rMfnDFA9LuNjetoxI6NTwjZswBicLgdVdrQGP+MYtuREO0OkowFXcSn9a8PcHP3dOISZ2AiFUuPOISJFXRiHtzmG9/ADfkk3gam4glcp+lLGpn+yG4ExRVHIodhcxckoTMTfFU7gJv7EaFGTrHSl2wzCxiJGpoN/c5SJdoeXOWedGZ2s3EvvuqKY+hJ2VFF+LG76GwZU/O+LhaIxHlSxLWO2FHFLDFkTluYof8TvokbtWIRmtGIy9uNNjl0Z7yJaC4lUa0Xq+mMW7mSMarBXdGe5U0uiRqsFg1TKOFxLupPxrFDB3g1ist+IVs86I7qrIQG0y0/ZWNGNtViAc3Sf8KtYJmbpmuCrYxmQR/LZoizNgs0HJftz5YMs151EI97jaFKs7wG4LBPwj2CCgmiSvyoV8jirVayGA8mgSczMGdwWa4Kva2K+YAA4L+r4JAtabR/9L7prGtbhV8EEefIpBbFPUFKu9LT44AaWiPmZjh91X+UPBQe+6wXHF/ZBkUO3DPfsAAAAAElFTkSuQmCC) 0 center no-repeat;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAUCAYAAACTQC2+AAACbUlEQVRIiZXVX4iOeRQH8M/7jsifElGjkQtpY4mMElJqsLtmtJklkhulpHChUFyIuJBF+ZNs064btghLCWE0k5SQ2JKU/BmbLebGvwal18X5vXnn6XlnOPX09Dy/c77n/M6f7ymUGnf6DumHYSigEx++1bDYy3kBs9GCRwn4PzxHF57iCOb1htWnh7OfsAuT0ncHTuEFShiBKViengfYhLPf6mggDibjT/gDh3G3SkDjsQorcAYnsBKvK5Wy1x2O9uSkrQKkmhO4j7UYiwtYjOuoq+ZoMC6KdOzBHFGXrNTIz0QHmrA1BdiWAu/mqIDjqMd2rMfnDFA9LuNjetoxI6NTwjZswBicLgdVdrQGP+MYtuREO0OkowFXcSn9a8PcHP3dOISZ2AiFUuPOISJFXRiHtzmG9/ADfkk3gam4glcp+lLGpn+yG4ExRVHIodhcxckoTMTfFU7gJv7EaFGTrHSl2wzCxiJGpoN/c5SJdoeXOWedGZ2s3EvvuqKY+hJ2VFF+LG76GwZU/O+LhaIxHlSxLWO2FHFLDFkTluYof8TvokbtWIRmtGIy9uNNjl0Z7yJaC4lUa0Xq+mMW7mSMarBXdGe5U0uiRqsFg1TKOFxLupPxrFDB3g1ist+IVs86I7qrIQG0y0/ZWNGNtViAc3Sf8KtYJmbpmuCrYxmQR/LZoizNgs0HJftz5YMs151EI97jaFKs7wG4LBPwj2CCgmiSvyoV8jirVayGA8mgSczMGdwWa4Kva2K+YAA4L+r4JAtabR/9L7prGtbhV8EEefIpBbFPUFKu9LT44AaWiPmZjh91X+UPBQe+6wXHF/ZBkUO3DPfsAAAAAElFTkSuQmCC) no-repeat;
         background-size: 26rpx 20rpx;
+        background-position: 0 11rpx;
+        padding: 10rpx 0;
         padding-left: 30rpx;
       }
     }
   }
+}
+.tabNav .tabNav-item {
+  width: 300rpx!important;
 }
 </style>
 <template>
@@ -55,13 +70,13 @@
     <tabNav :navs="navs"></tabNav>
     <view class="listbox">
       <navigator class="list-item" wx:for="{{courseList}}" wx:key="item_{{index}}" url="/pages/course/clist?id={{item.id}}">
-        <image class="post" src="{{imgs.defaultlist}}"></image>
+        <image class="post" src="{{item.img}}"></image>
         <view class="text">
-          <view class="coursename">{{item.name}}</view>
+          <view class="coursename">{{item.name}}({{item.num}})</view>
         </view>
         <view class="info">
-          <text class="greyColor">2017/11/21</text>
-          <text class="pinklight">300</text>
+          <text class="greyColor">{{item.c_time}}</text>
+          <text class="pinklight">{{item.pv}}</text>
         </view>
       </navigator>
     </view>
@@ -84,6 +99,7 @@
         type:'',
         imgs: null,
         courseList: null,
+        sort: 1,
         navs: [
           {
             text:'按热度',
@@ -94,17 +110,27 @@
           }
         ]
       }
+      events = {
+        navTapEvent(index) {
+          this.sort = index+1
+          this.$apply()
+          this.getCourseList()
+        }
+      }
       onLoad(options) {
         this.imgs = this.$parent.globalData.imgs
         this.type = options.type
+        this.$apply()
         this.getCourseList(options.type)
       }
+      // 1按热度2时间
       async getCourseList(type) {
         const { data } = await http({
           url: api.course.list.url,
           method: api.course.list.method,
           data: {
-            parent_type: type
+            parent_type: this.type,
+            sort: this.sort
           }
         },true)
         if ( data.code ) {

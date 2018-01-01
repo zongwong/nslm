@@ -39,14 +39,14 @@
       margin-bottom: 30rpx;
     }
     .content {
-      font-size: 28rpx;
+      font-size: 26rpx;
       color: #a9a9a9;
       padding-left: 176rpx;
       text-indent: 2em;
       text-align: justify;
       padding-bottom: 10rpx;
       max-height: 410rpx;
-      overflow: hidden;
+      overflow-y: auto;
     }
   }
   .close {

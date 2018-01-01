@@ -32,6 +32,31 @@ const api = {
     join: {
       method: 'post',
       url: '/users/myJoinActivity'
+    },
+    // 我的心情
+    mymood: {
+      method: 'post',
+      url: '/users/myMood'
+    },
+    // 我的兑换
+    myex: {
+      method: 'post',
+      url: '/users/myExchange'
+    },
+    // 我的视频
+    myvideo: {
+      method: 'post',
+      url: '/users/myStudy'
+    },
+    // 我的文章
+    myarticle: {
+      method: 'post',
+      url: '/users/myArticle'
+    },
+    // 兑换详情
+    exdetail: {
+      method: 'post',
+      url: '/query/exchangeDetail'
     }
   },
   activity: {
@@ -65,6 +90,26 @@ const api = {
       method: 'post',
       url: '/activity/clockCircle'
     },
+    // 打卡排行榜
+    top: {
+      method: 'post',
+      url: '/activity/clockRank'
+    },
+    // 打卡详情
+    signDetail: {
+      method: 'post',
+      url: '/activity/clockDetail'
+    },
+    // 点赞
+    zan: {
+      method: 'post',
+      url: '/activity/clockZan'
+    },
+    // 评论打卡
+    comment: {
+      method: 'post',
+      url: '/activity/clockComment'
+    },
     // 我的打卡进度
     myprogress: {
       method: 'post',
@@ -83,6 +128,11 @@ const api = {
     // 发表心情
     pbmood: {
       url: '/query/createMood',
+      method: 'post'
+    },
+    // 课程评论
+    course: {
+      url: '/study/studyComment',
       method: 'post'
     }
   },
@@ -131,6 +181,11 @@ const api = {
       url: '/article/articleShow',
       method: 'post'
     },
+    // 文章收藏
+    articleCollect: {
+      url: '/article/articleCollect',
+      method: 'post'
+    },
     // 心理列表
     index: {
       url: '/query/index',
@@ -149,6 +204,11 @@ const api = {
     // 医生内页
     doctor: {
       url: '/query/doctorDetail',
+      method: 'post'
+    },
+    // 餐饮建议
+    food: {
+      url: '/study/food',
       method: 'post'
     }
   },

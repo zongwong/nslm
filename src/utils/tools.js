@@ -1,6 +1,6 @@
 const _ = {
   getNextTime(start, days) {
-    let now = new Date(new Date(start).getTime() + days * 24 * 3600 * 1000)
+    let now = new Date(new Date(start.replace(/-/g, '/')).getTime() + days * 24 * 3600 * 1000)
     return now.getFullYear() + '-' + _.addZero(now.getMonth() + 1) + '-' + _.addZero(now.getDate())
   },
   addZero(n) {
@@ -11,7 +11,7 @@ const _ = {
   },
   timeDir(data) {
     let today = new Date()
-    let time = new Date(data)
+    let time = new Date(data.replace(/-/g, '/'))
     let dir = today.getTime() - time.getTime()
     let num = 24 * 3600 * 1000
     if (dir > 0) {
@@ -38,11 +38,16 @@ const _ = {
     let arr2 = y.split(':')
     if (parseInt(arr1[0]) > parseInt(arr2[0])) {
       return false
-    } else if (parseInt(arr1[0]) === parseInt(arr2[0]) && parseInt(arr1[1]) > parseInt(arr2[1])) {
+    } else if (parseInt(arr1[0]) === parseInt(arr2[0]) && parseInt(arr1[1]) >= parseInt(arr2[1])) {
       return false
     } else {
       return true
     }
+  },
+  random(Min, Max) {
+    var Range = Max - Min
+    var Rand = Math.random()
+    return (Min + Math.round(Rand * Range))
   }
 }
 export default _

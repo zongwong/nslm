@@ -18,6 +18,7 @@
         line-height: 1;
         margin-top: 90rpx;
         margin-bottom: 16rpx;
+        font-family: 'Pakt';
       }
       .text{
         font-size: 24rpx;
@@ -37,8 +38,8 @@
     display: flex;
     background: #fff;
     padding: 30rpx 40rpx;
+    font-size: 28rpx;
     view{
-      font-size: 28rpx;
       line-height: 52.5rpx;
       &:first-child{
         width: 140rpx;
@@ -68,7 +69,7 @@
     </view>
     <label class="label" for="money">
       <view>提现金额</view>
-      <view><input type="number" id="money" @input="moneyInput" placeholder="请输入提现金额" placeholder-style="color:#a9a9a9;"></view>  
+      <view><input type="number" id="money" @input="moneyInput" placeholder="请输入提现金额" placeholder-style="color:#a9a9a9;font-size: 28rpx;line-height: 52.5rpx;" /></view>  
     </label>
     <view class="join">
       <button @tap="getMoney">确定提现</button>

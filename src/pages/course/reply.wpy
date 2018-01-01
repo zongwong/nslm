@@ -64,17 +64,17 @@
     <view class="block">
       <textarea class="reply_content" placeholder="编辑内容,限100字以内" value="{{content}}" @input="contentInput"></textarea>
     </view>
-    <view class="block img_block">
+    <view class="block img_block" wx:if="{{type!='course' && type!='comment'}}">
       <view class="img_box" wx:for="{{myImgs}}" wx:key="img_{{index}}">
         <image src="{{item}}"></image>
         <view class="close_btn" @tap="delImg({{index}})">X</view>
       </view>
-      <view class="img_box add" @tap="addImg">+</view>
+      <view class="img_box add" @tap="addImg" wx:if="{{myImgs.length<9}}">+</view>
     </view>
     <view class="tips" wx:if="{{type=='sign'}}">这是你坚持的第<text class="pinklight">{{query.days}}</text>天,请继续努力</view>
   </view>
   <view class="join" @tap="sign">
-    <button>打卡</button>
+    <button>发布</button>
   </view>
 </template>
 
@@ -126,36 +126,57 @@
             })
             return false;
           }
-          if(!this.myImgs){
-            wepy.showModal({
-              title: '提示',
-              content: '请上传图片'
-            })
-            return false;
+          if(this.type!=='course' && this.type!=='comment'){
+            if(!this.myImgs.length){
+              wepy.showModal({
+                title: '提示',
+                content: '请上传图片'
+              })
+              return false;
+            }
           }
-
           // return false;
-
+          let qdata = {
+            content: this.content,
+            img: this.myImgs
+          }
+          if (this.type=='comment') {
+            qdata.cid = this.query.id
+          }else if(this.type==='course'){
+            qdata.sid = this.query.id
+          }else{
+            qdata.aid = this.query.id
+          }
           const { data } = await http({
             url: api.activity[this.type].url,
             method: api.activity[this.type].method,
-            data: {
-              aid: this.query.id,
-              content: this.content,
-              img: this.myImgs
-            }
+            data: qdata
           },true)
           if( data.code ){
             await wepy.showToast({
               title: '发布成功'
             })
-            if(this.type=='sign'){            
+            
+            if(this.type=='sign'){     
+              // 打卡       
               wepy.redirectTo({
-                url: `/pages/user/mood?id=${this.query.id}`
+                url: `/pages/index/record?id=${this.query.id}`
               })
-            }else{
+            }else if(this.type=='pbmood'){
+              // 心情
               wepy.redirectTo({
                 url: `/pages/course/mentality`
+              })
+            }else if(this.type=='comment'){
+              // 心情评论
+              wepy.redirectTo({
+                url:  `/pages/user/mooddetail?id=${this.query.id}`
+                // delta: 1
+              })
+            }else{
+              // 课程评论
+              wepy.redirectTo({
+                url:  `/pages/course/coursedetail?id=${this.query.id}`
               })
             }
           }else{

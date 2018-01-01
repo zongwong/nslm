@@ -27,7 +27,7 @@
     padding: 20rpx 0;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     .searchbox{
         background:#f8f8f8;
         height: 60rpx;
@@ -38,16 +38,18 @@
         text-align: center;
         .search-icon{
             display: inline-block;
-            vertical-align: middle;
+            vertical-align: top;
             margin-right: 12rpx;
-            width: 38rpx;
-            height: 38rpx;
-            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFGRUE5MDc1REMxNDExRTdBQjFGODdFODVFMDU1MDZCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFGRUE5MDc2REMxNDExRTdBQjFGODdFODVFMDU1MDZCIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUZFQTkwNzNEQzE0MTFFN0FCMUY4N0U4NUUwNTUwNkIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUZFQTkwNzREQzE0MTFFN0FCMUY4N0U4NUUwNTUwNkIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5N+cWoAAADbElEQVR42syYbWiNYRjHn3M2Y5ptaWxmSVgzeRuTJsMIoSFiKUYRzdskzMon4oNaJMUHzTT7gA9bKMLEzkKE2LIZ+TCMzUvm/WUv/lf9T93d9pw95+w853HVr/t6zjnPc/7P/XLd13W7SorLDD8sDGSALDAWDAcxIBx8B29BA7gFroHXRoAWbvF3g8FmkAsSffxuJJgB1oMOcBMcBRW8DpqwPmA32AUilc+bQTWoBy3gJ4gGSWAMezWSPSvUgk2gKhjCRoOzIJXX8ucl4BS4Y+GFskEehcmzboAjoAD86k6Y2+TzOeA2RXWC05xPeRZEeV/iHJgJpoHHwAXywRUQG4iw2eACiAKtYAlYBZoCnMcekA4O8VqEVnLRWBaWyjeNAG/4kAqj5/YHbAcbQDuYwP8JM13+ixctVeeFdPMQ9pQMQ40RXLsP3oEFnBrtXLk+e2wnV5TMqZU2iPLaMVBMfw9DjKmwBFBIX266aNhrsggaQS9Q5EtYPuPOV8Ytu039n3kgrSthMgHX8Po4eG+Exs6AZwwj67oSlsmhNJSxD4V1MGCLLdcjhFzMol9HQmnlbOPAOF1YOv0qI/RWx31XbJIuLIX+E8MZq2ebrAvrT7/JIWHenG2gLsy7Z/1wSNhntn11YV/oRzgkLIrtb13YJ/rxDgmLY/tBF9ZAP8UhYaPYvtCFPaKf6YCoJGYzYg90YZX001h0hNKylb3zni5MyqyP9HNDLGw120t6VHBzNZTyeqtWDdlpshVOpn/CLO0posAEVjF2m2Q0B+k/BFfNhL0Eh+lLnjTeZmEFzPs7mTl3+kqt94HnoDcLhQE2iVoI9tI/qSw+U2GyMnJ4BjECXLYh6MrzyjiUUmtusVq+SSxZoZRYHhuGtU2pM4b6U/CeB8tYTSezIi8M0l7azCq/ldnEdeUIwtIRQTnrykbWmweYn2/T0xMTkzx+okmPSCCdS3HxFPdPCefq5nwslotio/ISbTy/8HCfbWGo6QeGcQeRlxrEwB2vDJ9qGQysMaz65fDlqVVh6tHBDhYNUX4MXS3naLvJ91MoLpqJapY3qXD7kZuvZS/ksMy7q6UqHYyHMjT7wfRuRInJyeN85oSJvDfZnx6zcs7W1oP7p7LnZDReSc+5gxwCArVq9tw3pkKlbuP/MQ/FyUKo+SvAACs1vgre/sNkAAAAAElFTkSuQmCC) center / 100% no-repeat;
+            width: 60rpx;
+            height: 60rpx;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFGRUE5MDc1REMxNDExRTdBQjFGODdFODVFMDU1MDZCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFGRUE5MDc2REMxNDExRTdBQjFGODdFODVFMDU1MDZCIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUZFQTkwNzNEQzE0MTFFN0FCMUY4N0U4NUUwNTUwNkIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUZFQTkwNzREQzE0MTFFN0FCMUY4N0U4NUUwNTUwNkIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5N+cWoAAADbElEQVR42syYbWiNYRjHn3M2Y5ptaWxmSVgzeRuTJsMIoSFiKUYRzdskzMon4oNaJMUHzTT7gA9bKMLEzkKE2LIZ+TCMzUvm/WUv/lf9T93d9pw95+w853HVr/t6zjnPc/7P/XLd13W7SorLDD8sDGSALDAWDAcxIBx8B29BA7gFroHXRoAWbvF3g8FmkAsSffxuJJgB1oMOcBMcBRW8DpqwPmA32AUilc+bQTWoBy3gJ4gGSWAMezWSPSvUgk2gKhjCRoOzIJXX8ucl4BS4Y+GFskEehcmzboAjoAD86k6Y2+TzOeA2RXWC05xPeRZEeV/iHJgJpoHHwAXywRUQG4iw2eACiAKtYAlYBZoCnMcekA4O8VqEVnLRWBaWyjeNAG/4kAqj5/YHbAcbQDuYwP8JM13+ixctVeeFdPMQ9pQMQ40RXLsP3oEFnBrtXLk+e2wnV5TMqZU2iPLaMVBMfw9DjKmwBFBIX266aNhrsggaQS9Q5EtYPuPOV8Ytu039n3kgrSthMgHX8Po4eG+Exs6AZwwj67oSlsmhNJSxD4V1MGCLLdcjhFzMol9HQmnlbOPAOF1YOv0qI/RWx31XbJIuLIX+E8MZq2ebrAvrT7/JIWHenG2gLsy7Z/1wSNhntn11YV/oRzgkLIrtb13YJ/rxDgmLY/tBF9ZAP8UhYaPYvtCFPaKf6YCoJGYzYg90YZX001h0hNKylb3zni5MyqyP9HNDLGw120t6VHBzNZTyeqtWDdlpshVOpn/CLO0posAEVjF2m2Q0B+k/BFfNhL0Eh+lLnjTeZmEFzPs7mTl3+kqt94HnoDcLhQE2iVoI9tI/qSw+U2GyMnJ4BjECXLYh6MrzyjiUUmtusVq+SSxZoZRYHhuGtU2pM4b6U/CeB8tYTSezIi8M0l7azCq/ldnEdeUIwtIRQTnrykbWmweYn2/T0xMTkzx+okmPSCCdS3HxFPdPCefq5nwslotio/ISbTy/8HCfbWGo6QeGcQeRlxrEwB2vDJ9qGQysMaz65fDlqVVh6tHBDhYNUX4MXS3naLvJ91MoLpqJapY3qXD7kZuvZS/ksMy7q6UqHYyHMjT7wfRuRInJyeN85oSJvDfZnx6zcs7W1oP7p7LnZDReSc+5gxwCArVq9tw3pkKlbuP/MQ/FyUKo+SvAACs1vgre/sNkAAAAAElFTkSuQmCC) center no-repeat;
+            background-size: 38rpx 38rpx;
         }
         input{
             font-size:26rpx;
             display: inline-block;
-            vertical-align: middle;
+            vertical-align: top;
+            height: 100%;
         }
     }
     .searchinfo{
@@ -75,7 +77,7 @@
     <view class="index-banner">
       <swiper autoplay="true" indicator-dots="true" indicator-active-color="#fff">
         <block wx:for="{{banner}}" wx:key="swiper_{{index}}">
-          <navigator url="/pages/index/detail" hover-class="none">
+          <navigator url="{{item.link}}" hover-class="none">
             <swiper-item>
                 <image src="{{item.img}}" />
             </swiper-item>
@@ -88,7 +90,7 @@
     <repeat for="{{activeList}}" key="index" index="index" item="item">
         <activityList :item="item"></activityList>
     </repeat>
-    <navigator url="/pages/index/start"><image class="openDaka" src="../../images/icon-dk.png"></image></navigator> 
+    <navigator url="/pages/index/start"><image class="openDaka" src="https://www.2p98.cn/src/images/icon-dk.png"></image></navigator> 
     <explain :status.sync="status"></explain>
   </view>
 </template>
@@ -129,12 +131,6 @@ export default class Index extends wepy.page {
     activeList: [],
     imgs: null,
     banner: null
-  };
-
-  computed = {
-    now() {
-      return +new Date();
-    }
   };
 
   methods = {
@@ -195,10 +191,10 @@ export default class Index extends wepy.page {
         sort: sort
       }
     })
-    if(data.code){
-      this.activeList = data.info
-      this.$apply()
-    }
+
+    this.activeList = data.info || []
+    this.$apply()
+
   }
 }
 </script>

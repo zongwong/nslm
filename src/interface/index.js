@@ -37,8 +37,9 @@ const interfaces = {
         key: '_token',
         data: userinfo.data.info._token
       })
+      console.log(userinfo)
     } catch (e) {
-      wx.showModal({
+      wepy.showModal({
         title: '提示',
         content: `获取用户信息失败，请关闭重新进入。${e.message}`
       })
@@ -50,7 +51,7 @@ const interfaces = {
     const {
       data
     } = await wepy.uploadFile({
-      url: 'http://www.2p98.cn/api/public/uploadImg',
+      url: 'https://www.2p98.cn/api/public/uploadImg',
       filePath: temp.tempFilePaths[0],
       name: 'filename'
     })
@@ -103,6 +104,23 @@ const interfaces = {
     const { data } = await http({
       url: api.activity.info.url,
       method: api.activity.info.method,
+      data: {
+        aid: id
+      }
+    }, true)
+    return data
+  },
+  // 图片预览
+  previewImg(current, urls) {
+    wepy.previewImage({
+      current: current,
+      urls: urls
+    })
+  },
+  async getProgress(id) {
+    const { data } = await http({
+      url: api.activity.myprogress.url,
+      method: api.activity.myprogress.method,
       data: {
         aid: id
       }

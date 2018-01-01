@@ -56,9 +56,9 @@
       view{
         color: #a9a9a9;
         &:first-child{
+          font-family: 'Pakt';
           font-weight: bold;
           font-size: 50rpx;
-          font-family: 'Pakt';
         }
       }
     }
@@ -71,17 +71,17 @@
 <template>
   <view class="activehistory">
     <tabNav :navs="navs"></tabNav>
-    <navigator class="pbcontent" url="/pages/index/record?id={{item.id}}" wx:for="{{activity}}" wx:key="item_{{index}}">    
+    <navigator class="pbcontent" url="/pages/index/record?id={{item.aid}}" wx:for="{{activity}}" wx:key="item_{{index}}">    
       <view class="list_item">
         <view class="list_item_info">
-          <image class="list_item_post" src="{{item.img}}"></image>
+          <image class="list_item_post" src="{{item.a_img}}"></image>
           <view class="list_item_detail">
-            <view class="title singleTextOverflow">{{item.title}}</view>
-            <view class="desc singleTextOverflow greyColor">{{item.content}}</view>
+            <view class="title singleTextOverflow">{{item.a_title}}</view>
+            <view class="desc singleTextOverflow greyColor">{{item.a_content}}</view>
             <view><text class="time">{{item.stime}}至{{item.etime}}</text></view>
             <view class="tags">
-              <view><text class="money">￥{{item.price}}</text></view>
-              <view><text class="greyColor">{{item.join_num}}人参与</text></view>
+              <view><text class="money">￥{{item.a_price}}</text></view>
+              <view><text class="greyColor">{{item.a_join_num}}人参与</text></view>
             </view>
           </view>
           <!-- <image wx:if="{{item.status==1}}" class="status" src="../../images/status_ok.png"></image> -->
@@ -89,15 +89,15 @@
         </view>
         <view class="list_item_data">
           <view class="data_item">
-            <view>{{item.join_num}}</view>
+            <view>{{item.a_join_num}}</view>
             <view>报名人数</view>
           </view>
           <view class="data_item">
-            <view>{{item.days}}</view>
+            <view>{{item.a_days}}</view>
             <view>参与天数</view>
           </view>
           <view class="data_item">
-            <view>{{item.total_price}}</view>
+            <view>{{item.a_total_price}}</view>
             <view>累计奖金</view>
           </view>
         </view>
@@ -113,9 +113,9 @@
   import api from "../../config"
   import http from "../../utils/request"
   import _ from "../../utils/tools"
-  export default class Mypublish extends wepy.page {
+  export default class Myjoin extends wepy.page {
       config = {
-        navigationBarTitleText: "我的发布"
+        navigationBarTitleText: "我的参与"
       };
       components = {
         tabNav: tabNav
@@ -159,10 +159,11 @@
             is_end: this.is_end
           }
         },true)
+
         if(data.info){
           data.info.forEach((item)=>{
-            item.stime = _.getDate(item.start_time)
-            item.etime = _.getNextTime(item.start_time,item.days)
+            item.stime = _.getDate(item.a_start_time)
+            item.etime = _.getNextTime(item.a_start_time,item.a_days)
           })
         }
         this.activity = data.info

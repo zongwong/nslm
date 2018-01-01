@@ -59,21 +59,13 @@ page{
       <image src="{{imgs.topbg}}"></image>
     </view>
     <view class="top_list">
-      <view class="top_item">
+      <view class="top_item" wx:for="{{list}}" wx:key="top_{{index}}">
         <view class="avatar">
-          <image src="../../images/default_avatar.png"></image>
-          <text class="topnum">1</text>
+          <image src="{{item.u_avatarurl}}"></image>
+          <text class="topnum">{{index + 1}}</text>
         </view>
-        <view class="name"><text>姓名</text></view>
-        <view class="count"><text class="pinklight">打卡5次</text></view>
-      </view>
-      <view class="top_item">
-        <view class="avatar">
-          <image src="../../images/default_avatar.png"></image>
-          <text class="topnum">1</text>
-        </view>
-        <view class="name"><text>姓名</text></view>
-        <view class="count"><text class="pinklight">打卡5次</text></view>
+        <view class="name"><text>{{item.u_nickname}}</text></view>
+        <view class="count"><text class="pinklight">打卡{{item.clock_day}}次</text></view>
       </view>
     </view>
   </view>
@@ -81,15 +73,32 @@ page{
 
 <script>
   import wepy from 'wepy'
+  import http from "../../utils/request"
+  import api from "../../config"
   export default class Top extends wepy.page {
       config = {
         navigationBarTitleText: "排行榜"
       };
       data = {
-        imgs: null
+        imgs: null,
+        list: []
       }
-      onLoad() {
+      async onLoad(options) {
         this.imgs = this.$parent.globalData.imgs
+        this.getData(options.id)
+      }
+      async getData(id) {
+        const { data } = await http({
+          url: api.activity.top.url,
+          method: api.activity.top.method,
+          data: {
+            aid: id
+          }
+        },true)
+        if (data.code){
+          this.list = data.info
+          this.$apply()
+        }
       }
   }
 </script>

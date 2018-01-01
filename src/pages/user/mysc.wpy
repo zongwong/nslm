@@ -1,0 +1,185 @@
+<style lang="scss">
+.articleList{
+  .pbcontent{
+    .list_item{
+      .list_item_info{
+        .list_item_post{
+          border-radius: 16rpx;
+        }
+      }
+      .list_item_detail{
+        .desc{
+          border-bottom: none;
+          height: 60rpx;
+          overflow: hidden;
+        }
+        .data{
+          display: flex;
+          justify-content: space-between;
+          .icon_view{
+            width:26rpx;
+            height: 20rpx;
+            display: inline-block;
+            margin-right: 4rpx;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAUCAYAAACTQC2+AAACbUlEQVRIiZXVX4iOeRQH8M/7jsifElGjkQtpY4mMElJqsLtmtJklkhulpHChUFyIuJBF+ZNs064btghLCWE0k5SQ2JKU/BmbLebGvwal18X5vXnn6XlnOPX09Dy/c77n/M6f7ymUGnf6DumHYSigEx++1bDYy3kBs9GCRwn4PzxHF57iCOb1htWnh7OfsAuT0ncHTuEFShiBKViengfYhLPf6mggDibjT/gDh3G3SkDjsQorcAYnsBKvK5Wy1x2O9uSkrQKkmhO4j7UYiwtYjOuoq+ZoMC6KdOzBHFGXrNTIz0QHmrA1BdiWAu/mqIDjqMd2rMfnDFA9LuNjetoxI6NTwjZswBicLgdVdrQGP+MYtuREO0OkowFXcSn9a8PcHP3dOISZ2AiFUuPOISJFXRiHtzmG9/ADfkk3gam4glcp+lLGpn+yG4ExRVHIodhcxckoTMTfFU7gJv7EaFGTrHSl2wzCxiJGpoN/c5SJdoeXOWedGZ2s3EvvuqKY+hJ2VFF+LG76GwZU/O+LhaIxHlSxLWO2FHFLDFkTluYof8TvokbtWIRmtGIy9uNNjl0Z7yJaC4lUa0Xq+mMW7mSMarBXdGe5U0uiRqsFg1TKOFxLupPxrFDB3g1ist+IVs86I7qrIQG0y0/ZWNGNtViAc3Sf8KtYJmbpmuCrYxmQR/LZoizNgs0HJftz5YMs151EI97jaFKs7wG4LBPwj2CCgmiSvyoV8jirVayGA8mgSczMGdwWa4Kva2K+YAA4L+r4JAtabR/9L7prGtbhV8EEefIpBbFPUFKu9LT44AaWiPmZjh91X+UPBQe+6wXHF/ZBkUO3DPfsAAAAAElFTkSuQmCC) center / 100% no-repeat;
+          }
+          text{
+            vertical-align: middle;
+          }
+          .pinklight{
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
+.video_item{
+  border: 2rpx solid #ebebeb;
+  border-radius: 15rpx;
+  background: #fff;
+  margin: 28rpx 37rpx;
+  overflow: hidden;
+  .video_box{
+    position: relative;
+    video{
+      width: 100%;
+      height: 320rpx;
+    }
+    image{
+      width: 100%;
+      height: 320rpx;
+    }
+    .mask{
+      width: 100%;
+      height: 320rpx;
+      background: rgba(0,0,0,.5);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    .play{
+      position: absolute;
+      left: 50%;
+      top:115rpx;
+      margin-left: -45rpx;
+      z-index: 2;
+      width: 90rpx;
+      height: 90rpx;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJEAAACRCAMAAAD0BqoRAAAAq1BMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Nr6iZAAAAOHRSTlMA+wkF3eYRM+/iLaAUWEuR19OWhj/Pt/bzx4u9N8tia+shCxwPrnYCfnooqEYaOjCZcFEWA2bCtB1vPh4AAAXOSURBVHjaxNnZbtNQFEbh/3h25smZ57lJ2qYtRev9nwwBohFQiB0P+S58ZUtLW1u25KM07ENtNjx2ozAIDCYIwmh0HM5qB1t3YPsv5cjwOROVX/xCs0rbUR8Ap9vaVk/+wvNs2Z638E/VbavrANAfbUsqwq7TCgEa5ffxUp9bjt/LDYCw1dkpX6W6C7jl6puueauWf9xbz3FS1nQAOENfcflDBxhMLeWhsp9D/zxWMuNzH+b7irL2WO9BNF0queU0gl79UVnyhj3onnSrUxd6Q09ZsWdz6PpKw+/CfGYrE50mDJ6U1tNXaHaUnneGsKosVEM4r5VSzcW0LWXDahvcmtKw6jB5VnZKE6hbutmhidl/UZa+7A3Ng270GuCMlbWxQ/9Vt9i1YbNW9tYbaO+UmHXEPCgfD4ajpYQqA/o15aXWZ1BRIo8N3Gfl59ml8agEFg6NlfK0auAsEgSFTCrKV2VCuIjd7zDxlDdvgrOKWd8g8pQ/L6JRUQzW4HJjvioNBpau2xCuVIxVyEZXtemVVJRSn7aueMXUVJya4co37hCwVZEeCA76D6vJUcXa0LT0b3WctYq1dqjrn2qYsYo2NtT+meuyV/H2uJ4+d2byRcX7MuGsT3Uwz7qHZ0NHn7CbtHUfbZq2/jYjtHQfVshMf/HmVHUvVebeJ5P7qvv5ylB/eOvzpPt5ov+m3w3pKj57sVS2utT1m0oPX7G9BzB4VZZ8epXfP8FJRnTih1Ep2yHtpQtrTifJwz+ZVkWZ6TC3dDElUnwBvwQzW1mJmOpiwFTxwUXzpIxMGehDiWB5YxFsFsrEss9lMeu0dHMRZrhUFlqXF8DOZZyiCNzpTumNcXcfa+4oVRFEY6Xn0PkYVzttERxXSqv9sTwufvoieg+W0vFx9UMJVxkUZfAj3qWk77aUsymC0bPSKLPVdyOqWRVhyhXdrspIkuweb5kVQfBi61Zv9GxJPg1lWATOSbdq4Et6oZxtEXQPNy/Sy4/re9ZFmBvPG98pS2rylHkRzGc7JfdEU7INyxyKIOoosaUxtko4SoiYNisl5VBSjW5eRfTaScffpaYZ59yKwK0qkRYzDdnmWASDsRLYMtSRaq5FmPKjYqty1IhTvkXQf7AV04mRIvy8i8B5VTw+E4Us8i+C0UFxLAgV4BVRhIl1zL8mUMC6kCJoPsYrMtgFFTHQVTZGoKKK8HUVFDkjanFmVOAeYb51c4a7CQJBEL7D9qRoSgo0Wo1NE2sAE8oPG7n3f7L+4MfEkKZwzNHFfQIlhN2dnfmqnm+2meoXFb3ebN/fI5Qu+32PPH+zUde65zeb3Nec1130NY+9H7Upgv69nzwfOcsmmI98zZCo169hMyR5znaW3zBn+9lFsEl+Dt9FFlrT9zXIuC77Gn+nhdTtstMS9n6KaoO9n66N4GTiqI3Q9SOclRz1I67Ghs3DrdZ2syDqkNjOghE6JE2rRa2qUVotTc/Glk/QswmaP1oGQfNn3EWgFhHuIoTbEVoG4XY0+r6Gesko9zXODdKSkiCJjcfeaSEyGMadNrQR4ZYNhZ9xy3a+99+2jGfevd/ZE6E7MwffE6GKIdP2Q0f0JFRjC3dvTWzbeqv53hpUPOAhXZ6wphL9R2M8WlW8X70vuB6tTWdI20nzsQn0+snzQwr0jKrM6kj9R0XaZjPxHivzaEs1ZcGfPRsPu0Cfv8AshDpvJ8+LbM8zy9QoldpwwtxRaFNx2ax8jvk1eRk/gTlIgVlRgXlagZljgblspYKT1+z6KRCW79/lbgyErSwGgidORAlOhEsFibUHNF4OSyMJ7oo34oHJYkjcmiuBW7OHokth+zQj2T4NFF0a/6jJ3B9zQ+UfgRF1cGREHcCIYtal+LA2TAZztJKQzNHqssbSAayxtAdrjMRj+/s/r8Fj81vfYNYtg98e5hLMumnUlqhsuX665frVR2NylRtzrFuun265fmXfme8e2Ye3fMg9lw/5Axkve+SZPbDkAAAAAElFTkSuQmCC) center / 100% no-repeat;
+    }
+  }
+  .video_info{
+    display: flex;
+    justify-content: space-between;
+    line-height: 60rpx;
+    padding: 0 26rpx;
+    .title{
+      font-size: 30rpx;
+      font-weight: bold;
+      max-width: 480rpx;
+    }
+    .time{
+      font-size: 24rpx;
+    }
+  }
+}
+.tabNav .tabNav-item {
+  width: 300rpx!important;
+}
+</style>
+<template>
+  <tabNav :navs="navs"></tabNav>
+  <view class="articleList" wx:if="{{type == 'myarticle'}}">
+    <view class="pbcontent">    
+      <navigator class="list_item" url="/pages/course/articledetail?id={{item.aid}}" wx:for="{{list}}" wx:key="article_{{index}}">
+        <view class="list_item_info">
+          <image class="list_item_post" src="{{item.a_img}}"></image>
+          <view class="list_item_detail">
+            <view class="title singleTextOverflow">{{item.a_title}}</view>
+            <view class="desc greyColor">{{item.a_desrc}}</view>
+            <view class="data">
+              <view class="greyColor">{{item.time}}</view>
+              <view class="pinklight"><text class="icon_view"></text><text>{{item.a_pv}}</text></view>
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  
+  <view class="myvideo" wx:if="{{type == 'myvideo'}}">
+    <navigator class="video_item" wx:for="{{list}}" wx:key="video_{{index}}" url="/pages/course/coursedetail?id={{item.sid}}">
+      <view class="video_box">
+        <image src="{{item.s_img}}" mode="aspectFill"></image>
+        <view class="mask"></view>
+        <view class="play"></view>
+        <!-- <video src="{{item.s_video}}" class="videoTag" poster="{{item.s_img}}" objectFit="cover"></video> -->
+      </view>
+      <view class="video_info">
+        <text class="title singleTextOverflow">{{item.s_title}}</text>
+        <text class="time greyColor">{{item.time}}</text>
+      </view>
+    </navigator>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from "../../config"
+  import http from "../../utils/request"
+  import _ from "../../utils/tools"
+  import tabNav from "../../components/index/tabNav"
+  export default class Mysc extends wepy.page {
+      config = {
+        navigationBarTitleText: "文章列表"
+      };
+      data = {
+        imgs: null,
+        list: [],
+        type: 'myvideo',
+        navs: [{
+            text:'我的视频',
+            selected:true,
+        },{
+            text:'我的文章',
+            selected:false,
+        }]
+      }
+      components = {
+          tabNav: tabNav
+      }
+      events = {
+        navTapEvent(index) {
+          if (index==0){
+              this.type = 'myvideo'
+          }else{
+              this.type = 'myarticle'
+          }
+          this.$apply()
+          this.getList(this.type)
+        }
+      }
+      async onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+        this.getList()
+      }
+      async getList() {
+        const { data } = await http({
+          url: api.users[this.type].url,
+          method: api.users[this.type].method,
+          data: {}
+        },true)
+        if (data.code){
+          if(data.info){
+              data.info.forEach((item)=>{
+                  item.time = _.getDate(item.c_time)
+              })
+          }
+          this.list = data.info
+          this.$apply()
+        }
+      }
+  }
+</script>

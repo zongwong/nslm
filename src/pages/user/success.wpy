@@ -55,26 +55,26 @@ page{
         <view class="info_data success_info">
           <image class="icon" src="../../images/ok.png"></image>
           <view class="text">恭喜兑换成功</view>
-          <view class="name">一周塑形课程</view>
+          <view class="name">{{info.title}}</view>
         </view>
       </view>
     </view>
     <view class="course_info">
       <view class="info_item">
         <view class="title">课程描述</view>
-        <view class="desc">气温气温</view>
+        <view class="desc">{{info.desrc}}</view>
       </view>
       <view class="info_item">
         <view class="title">领取方式</view>
-        <view class="desc">气温气温</view>
+        <view class="desc">{{info.method}}</view>
       </view>
-      <view class="info_item">
-        <view class="title">百度网盘地址</view>
-        <view class="desc">气温气温</view>
+      <view class="info_item" @tap="copy({{info.pan_url}})">
+        <view class="title">{{info.method}}地址</view>
+        <view class="desc">{{info.pan_url}}</view>
       </view>
-      <view class="info_item">
+      <view class="info_item" @tap="copy({{info.pan_code}})">
         <view class="title">网盘提取码</view>
-        <view class="desc">1234</view>
+        <view class="desc">{{info.pan_code}}</view>
       </view>
     </view>
   </view>
@@ -84,6 +84,7 @@ page{
 import wepy from "wepy"
 import api from "../../config"
 import http from "../../utils/request"
+import interfaces from "../../interface/index"
 export default class Success extends wepy.page {
   config = {
     navigationBarTitleText: "兑换成功"
@@ -96,7 +97,9 @@ export default class Success extends wepy.page {
   };
 
   methods = {
-
+    copy(text){
+      interfaces.copyText(text)
+    }
   };
 
 
@@ -106,10 +109,10 @@ export default class Success extends wepy.page {
   }
   async getData(id) {
     const { data } = await http({
-      url: api.activity.ex.url,
-      method: api.activity.ex.method,
+      url: api.users.exdetail.url,
+      method: api.users.exdetail.method,
       data: {
-        aid: id
+        exchange_id: id
       }
     },true)
     if ( data.code ){

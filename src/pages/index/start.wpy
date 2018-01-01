@@ -1,9 +1,9 @@
 <style lang="scss">
-.start{
+.start {
   overflow: hidden;
 }
 .post_box {
-  box-sizing:border-box;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -38,27 +38,27 @@
     }
   }
 }
-.power_block{
+.power_block {
   padding-bottom: 28rpx;
   margin-bottom: 100rpx;
 }
-.powerset{
+.powerset {
   border: 2rpx solid #ebebeb;
   border-radius: 10rpx;
   margin: 0 37rpx 18rpx 37rpx;
   padding: 22rpx 28rpx;
   position: relative;
-  .type{
+  .type {
     font-size: 28rpx;
     margin-bottom: 18rpx;
   }
-  .desc{
-    font-size:24rpx;
+  .desc {
+    font-size: 24rpx;
     line-height: 34rpx;
     color: #888;
     padding-right: 64rpx;
   }
-  .select{
+  .select {
     position: absolute;
     width: 36rpx;
     height: 36rpx;
@@ -68,11 +68,12 @@
     bottom: 14rpx;
     right: 16rpx;
   }
-  &.active{
+  &.active {
     border-color: #ff508a;
-    .select{
+    .select {
       border: none;
-      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAjCAYAAAD8BaggAAAC70lEQVRYhcXYW4jUZRjH8c/Mrq7oJoKIkZVLIouiiwlFHlIM3TxeKMiqG4IiFKIXFnjhhSIodiDRiwi6qQglDfFC8QCe8IAWaFmhwgqrkKUiZJKH3dTp4t2/DnOe3f/M/mCY//99n3mf77zz/p95nieRmv2xbqgGYzAKr6Ie/+FfXMVvuNadhWvLsE1iNt7DuxhUxP4a9uJbXCzHSSlajEvYh5YSYKABa/ALDuD1OICG4yh2orGUBfNoFn7CVtR1F2gazuOdHoCkq1bYsVN4sVyguTiIwTHBpOsNnMHLpQK9jV2KbG0P9RqOyfGFM4GGYjf6VxAm0kjhCUwUAvpSgd83NvWpia7mYEU+oBmYX3GYMa+wczUfzolGtkgLI+lA66sCs3Eh/euo7xeNDsbKTKBxmFwVmH59aL/NtgPpsysjlgiotaow677n3sN0i2FC3HsG1NyLMJGaI6B6jO1lGHgrAmqUEQt6AYaQykjKF3cGDagmDAxBIokXsqamjmbHKj6YUS2YSAOTyLZOpcL7vPEsnVItGHiUxN2s4ZOX2fNjuG6ZwII3qwHzEB1JIQfO1tcnONSVeS6fRnNTJWGgjXCob+BW1nQKXxzm9JXwDK6eyaQcSWM8MPBzBATHc5o8TfHZfi60k0ywdh7jGioBQ0iVnwH9kNfs8RM27eXyDWprWL+AxpfihunAfkh01WV98YcQC3JrQB2fttIwhPsd1CTjgiEUEa0836FOoSLIr/sdwfGffwe4+GBS+CS6Sc+HtqO94Ef/eRAAbt6l7WYcMPANfo1uEhml9HQcVqxeSySeB8+e6S804U40kOn4CDYXXSYemE4sSofJBQQb8F0cHgvoKZbjZOZELqAUlgkVSCXUiSXYkWsy31l5IuS57+NRjDDtmCoUojlVrNnwlXDoDvUQJAorTThXyLCUdkyb0L2YKET0cnbsNj7HCHwkNLQKqpyG1dmu10ChIzIZo4WKob7L5g6u43fh//EsHpfhw/+m1uvkLXReowAAAABJRU5ErkJggg==) center / 100% no-repeat;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAjCAYAAAD8BaggAAAC70lEQVRYhcXYW4jUZRjH8c/Mrq7oJoKIkZVLIouiiwlFHlIM3TxeKMiqG4IiFKIXFnjhhSIodiDRiwi6qQglDfFC8QCe8IAWaFmhwgqrkKUiZJKH3dTp4t2/DnOe3f/M/mCY//99n3mf77zz/p95nieRmv2xbqgGYzAKr6Ie/+FfXMVvuNadhWvLsE1iNt7DuxhUxP4a9uJbXCzHSSlajEvYh5YSYKABa/ALDuD1OICG4yh2orGUBfNoFn7CVtR1F2gazuOdHoCkq1bYsVN4sVyguTiIwTHBpOsNnMHLpQK9jV2KbG0P9RqOyfGFM4GGYjf6VxAm0kjhCUwUAvpSgd83NvWpia7mYEU+oBmYX3GYMa+wczUfzolGtkgLI+lA66sCs3Eh/euo7xeNDsbKTKBxmFwVmH59aL/NtgPpsysjlgiotaow677n3sN0i2FC3HsG1NyLMJGaI6B6jO1lGHgrAmqUEQt6AYaQykjKF3cGDagmDAxBIokXsqamjmbHKj6YUS2YSAOTyLZOpcL7vPEsnVItGHiUxN2s4ZOX2fNjuG6ZwII3qwHzEB1JIQfO1tcnONSVeS6fRnNTJWGgjXCob+BW1nQKXxzm9JXwDK6eyaQcSWM8MPBzBATHc5o8TfHZfi60k0ywdh7jGioBQ0iVnwH9kNfs8RM27eXyDWprWL+AxpfihunAfkh01WV98YcQC3JrQB2fttIwhPsd1CTjgiEUEa0836FOoSLIr/sdwfGffwe4+GBS+CS6Sc+HtqO94Ef/eRAAbt6l7WYcMPANfo1uEhml9HQcVqxeSySeB8+e6S804U40kOn4CDYXXSYemE4sSofJBQQb8F0cHgvoKZbjZOZELqAUlgkVSCXUiSXYkWsy31l5IuS57+NRjDDtmCoUojlVrNnwlXDoDvUQJAorTThXyLCUdkyb0L2YKET0cnbsNj7HCHwkNLQKqpyG1dmu10ChIzIZo4WKob7L5g6u43fh//EsHpfhw/+m1uvkLXReowAAAABJRU5ErkJggg==)
+        center / 100% no-repeat;
     }
   }
 }
@@ -83,11 +84,12 @@
       <view class="form_title">封面设置</view>
       <view class="form_item post_box">
         <view class="image {{post_id==index?'active':''}}" wx:for="{{cover}}" wx:key="post_{{index}}" @tap="selectPost({{index}},{{item.img}})">
-          <image src="{{item.img}}"></image>
+          <image src="{{item.img}}" mode="aspectFill"></image>
           <image class="select" src="../../images/post_select.png"></image>
         </view>
       </view>
     </view>
+
     <view class="form_block">
       <view class="form_title">活动设置</view>
       <label class="form_item" for="name">
@@ -95,19 +97,18 @@
           活动名称
         </view>
         <view class="label_input">
-          <input type="text" value="{{title}}" id="name" @input="titleInput" placeholder="请填写活动标题">
+          <input type="text" value="{{title}}" id="name" @input="titleInput" placeholder="请填写活动标题" placeholder-style="line-height: 52.5rpx;font-size:28rpx;" />
         </view>
-
       </label>
-      <label class="form_item" for="desc">
-        <view class="label_text">
+      <label class="form_item" for="desc" style="padding-top:0;">
+        <view class="label_text" style="line-height:50rpx;padding-top:10.5rpx;">
           活动描述
         </view>
         <view class="label_input">
-          <textarea type="text" value="{{desrc}}" id="desc" @input="desrcInput" placeholder="请填写活动描述"></textarea>
+          <textarea type="text" value="{{desrc}}" id="desc" @input="desrcInput" placeholder="请填写活动描述" style="line-height:50rpx;margin:0;padding:0;" placeholder-style="font-size:28rpx;"></textarea>
         </view>
       </label>
-      <label class="form_item" for="desc">
+      <label class="form_item">
         <view class="label_text">
           报名截止
         </view>
@@ -115,6 +116,7 @@
             <picker mode="date" value="{{signDate}}" @change="signDate" placeholder="日期">
               <view class="picker_input">
                 {{signDate}}
+                <view class="arrow"></view>
               </view>
             </picker>
         </view>
@@ -122,15 +124,17 @@
             <picker mode="time" value="{{signTime}}" @change="signTime" placeholder="时间">
               <view class="picker_input">
                 {{signTime}}
+                <view class="arrow"></view>
               </view>
             </picker>
         </view>
       </label>
     </view>
+
     <view class="form_block">
       <view class="form_title">任务设置</view>
       <label class="form_item" for="desc">
-        <view class="label_text">
+        <view class="label_text pinklight">
           保证金
         </view>
         <view class="label_input">
@@ -176,7 +180,7 @@
             <picker mode="time" value="{{sign_start_time}}" @change="signStartTime">
               <view class="picker_input">
                 {{sign_start_time}}
-                <!-- <view class="arrow"></view> -->
+                <view class="arrow"></view>
               </view>
             </picker>
         </view>
@@ -185,7 +189,7 @@
             <picker mode="time" value="{{sign_end_time}}" @change="signEndTime">
               <view class="picker_input">
                 {{sign_end_time}}
-                <!-- <view class="arrow"></view> -->
+                <view class="arrow"></view>
               </view>
             </picker>
         </view>
@@ -195,12 +199,12 @@
       <view class="form_title"><text class="pinklight">权限设置</text></view>
       <view class="powerset {{type==1?'active':''}}" @tap="slectAccess(1)">
         <view class="type">广场任务</view>
-        <view class="desc">广广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务广场任务场任务</view>
+        <view class="desc">广场任务：为公开活动，即所有用户都可见，且可以报名参加，完成打卡，即可活动奖金。</view>
         <view class="select"></view>
       </view>
       <view class="powerset {{type==2?'active':''}}" @tap="slectAccess(2)">
         <view class="type">好友PK</view>
-        <view class="desc">广场任务</view>
+        <view class="desc">好友PK：为私密活动，平台用户不可见，只有被邀请的好友才可见，并凭pk码进入活动，完成打卡赢奖金。</view>
         <view class="select"></view>
       </view>
     </view>
@@ -213,9 +217,9 @@
 <script>
 import wepy from "wepy";
 import interfaces from "../../interface/index";
-import api from "../../config"
-import http from "../../utils/request"
-import _ from "../../utils/tools"
+import api from "../../config";
+import http from "../../utils/request";
+import _ from "../../utils/tools";
 export default class Start extends wepy.page {
   config = {
     navigationBarTitleText: "发起打卡"
@@ -223,21 +227,21 @@ export default class Start extends wepy.page {
   components = {};
 
   data = {
-    moneyRange:[],
-    dayRange:[],
-    post_id:0,    
-    type:1,
-    img:'',
-    title:'',
-    desrc:'',
-    signDate: '日期',
-    signTime: '时间',
-    price:'',
-    end_time:'',
-    start_time:'任务开始日期',
-    days:'',
-    sign_start_time:'开始时间',
-    sign_end_time:'截止时间',
+    moneyRange: [],
+    dayRange: [],
+    post_id: 0,
+    type: 1,
+    img: "",
+    title: "",
+    desrc: "",
+    signDate: "日期",
+    signTime: "时间",
+    price: "",
+    end_time: "",
+    start_time: "任务开始日期",
+    days: "",
+    sign_start_time: "开始时间",
+    sign_end_time: "截止时间",
     imgs: null,
     cover: null
   };
@@ -251,27 +255,27 @@ export default class Start extends wepy.page {
   methods = {
     // 标题设置
     titleInput(e) {
-      this.title = e.detail.value
+      this.title = e.detail.value;
     },
     // 描述设置
     desrcInput(e) {
-      this.desrc = e.detail.value
+      this.desrc = e.detail.value;
     },
     // 封面选择
-    async selectPost(post_id,src){
-      this.img = src
-      this.post_id = post_id
+    async selectPost(post_id, src) {
+      this.img = src;
+      this.post_id = post_id;
     },
     // 权限选择
     slectAccess(access) {
       this.type = access;
     },
     // 报名日期
-    signDate(e){
+    signDate(e) {
       this.signDate = e.detail.value;
     },
     // 报名小时
-    signTime(e){
+    signTime(e) {
       this.signTime = e.detail.value;
     },
     // 保证金
@@ -297,81 +301,101 @@ export default class Start extends wepy.page {
     // 提交活动
     async createActive() {
       // 验证
-      if(!this.title){
+      if (!this.title) {
         wepy.showModal({
-          title:'提示',
-          content: '请填写活动名称'
-        })
-        return false
+          title: "提示",
+          content: "请填写活动名称"
+        });
+        return false;
       }
-      if(!this.desrc){
+      if (!this.desrc) {
         wepy.showModal({
-          title:'提示',
-          content: '请填写活动规则'
-        })
-        return false
+          title: "提示",
+          content: "请填写活动规则"
+        });
+        return false;
       }
-      if(this.signDate=='日期'){
+      if (this.signDate == "日期") {
         wepy.showModal({
-          title:'提示',
-          content: '请设置报名截止时间'
-        })
-        return false
+          title: "提示",
+          content: "请设置报名截止时间"
+        });
+        return false;
       }
-      if(this.start_time =='任务开始日期'){
-        wepy.showModal({
-          title:'提示',
-          content: '请设置任务开始日期'
-        })
-        return false
+      if (this.signTime == "时间") {
+        this.signTime = "00:00";
+        this.$apply();
       }
-      if(this.sign_start_time =='开始时间'){
+      if (_.timeDir(this.signDate + " " + this.signTime) !== 2) {
         wepy.showModal({
-          title:'提示',
-          content: '请设置打卡开始时段'
-        })
-        return false
+          title: "提示",
+          content: "报名截止时间必须大于当前时间"
+        });
+        return false;
       }
-      if(this.sign_end_time =='截止时间'){
+      if (this.start_time == "任务开始日期") {
         wepy.showModal({
-          title:'提示',
-          content: '请设置打卡截止时段'
-        })
-        return false
+          title: "提示",
+          content: "请设置任务开始日期"
+        });
+        return false;
       }
-      if(!_.cpTime(this.sign_start_time,this.sign_end_time)){
+      let stime = new Date(this.start_time).getTime();
+      let etime = new Date(this.signDate + " " + this.signTime).getTime();
+      if (stime - etime <= 0) {
         wepy.showModal({
-          title:'提示',
-          content: '打卡截止时间必须大于开始时间'
-        })
-        return false
+          title: "提示",
+          content: "任务开始日期必须大于报名截止时间"
+        });
+        return false;
+      }
+      if (this.sign_start_time == "开始时间") {
+        wepy.showModal({
+          title: "提示",
+          content: "请设置打卡开始时段"
+        });
+        return false;
+      }
+      if (this.sign_end_time == "截止时间") {
+        wepy.showModal({
+          title: "提示",
+          content: "请设置打卡截止时段"
+        });
+        return false;
+      }
+      if (!_.cpTime(this.sign_start_time, this.sign_end_time)) {
+        wepy.showModal({
+          title: "提示",
+          content: "打卡截止时间必须大于开始时间"
+        });
+        return false;
       }
 
-      const { data } =await http({
+      const { data } = await http({
         method: api.activity.add.method,
         url: api.activity.add.url,
         data: {
-          type:this.type,
-          img:this.img,
-          title:this.title,
-          desrc:this.desrc,
-          price:parseInt(this.price),
-          end_time:this.signDate+' '+this.signTime,
-          start_time:this.start_time,
-          days:parseInt(this.days),
-          sign_start_time:this.sign_start_time,
-          sign_end_time:this.sign_end_time
+          type: this.type,
+          img: this.img,
+          title: this.title,
+          desrc: this.desrc,
+          price: parseInt(this.price),
+          end_time: this.signDate + " " + this.signTime,
+          start_time: this.start_time,
+          days: parseInt(this.days),
+          sign_start_time: this.sign_start_time,
+          sign_end_time: this.sign_end_time
         }
-      },true)
+      },true);
 
       if (data.code) {
         await wepy.showModal({
-          title: '提示',
-          content: '活动创建成功',
-        })
+          title: "提示",
+          content: "活动创建成功"
+        });
         wepy.switchTab({
-          url: '/pages/index/index'
-        })
+          url: "/pages/index/index"
+        });
       }
     }
   };
@@ -379,22 +403,22 @@ export default class Start extends wepy.page {
   events = {};
 
   onLoad() {
-    this.imgs = this.$parent.globalData.imgs
-    this.cover = this.$parent.globalData.config.cover
-    this.img = this.$parent.globalData.config.cover[0]
-    let days = this.$parent.globalData.config.days
-    let money = this.$parent.globalData.config.money
-    days = days.map((item)=>{
-      return item + '天'
-    })
-    money = money.map((item,index)=>{
-      return item + '元/天'
-    })
-    this.moneyRange = money
-    this.dayRange = days
-    this.price = money[0]
-    this.days = days[0]
-    this.$apply()
+    this.imgs = this.$parent.globalData.imgs;
+    this.cover = this.$parent.globalData.config.cover;
+    this.img = this.$parent.globalData.config.cover[0].img;
+    let days = this.$parent.globalData.config.days;
+    let money = this.$parent.globalData.config.money;
+    days = days.map(item => {
+      return item + "天";
+    });
+    money = money.map((item, index) => {
+      return item + "元/天";
+    });
+    this.moneyRange = money;
+    this.dayRange = days;
+    this.price = money[0];
+    this.days = days[0];
+    this.$apply();
   }
 }
 </script>

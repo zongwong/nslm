@@ -1,0 +1,71 @@
+<style lang="scss">
+
+</style>
+<template>
+  <view class="pk">
+    <canvas canvas-id="myCanvas" style="width:90%;height:600rpx;border:1px solid #000;"/>
+    <image src="{{img}}"></image>
+
+    <view class="join">
+      <button @tap="saveToAlbem">保存图片</button>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy"
+import interfaces from "../../interface/index"
+import http from "../../utils/request"
+import api from "../../config"
+export default class Post extends wepy.page {
+  config = {
+    navigationBarTitleText: "Post"
+  };
+  data = {
+    img: null,
+    info: null
+  };
+  methods = {
+      saveToAlbem(){
+          console.log(123)
+          wx.saveImageToPhotosAlbum({
+            filePath: this.img,
+            success(res) {
+                console.log(res)
+            }
+          })
+      }
+  };
+
+  events = {};
+
+  async onLoad() {
+   const ctx = wx.createCanvasContext('myCanvas')
+
+    let that = this
+    wx.chooseImage({
+      success: function(res){
+        ctx.drawImage(res.tempFilePaths[0], 0, 0, 1150, 1000)
+        ctx.draw()
+
+        wx.canvasToTempFilePath({
+          x: 0,
+          y: 0,
+          width: 550,
+          height: 550,
+          destWidth: 500,
+          destHeight: 500,
+          canvasId: 'myCanvas',
+          success: function(res) {
+            console.log(res)
+
+              that.img = res.tempFilePath
+              that.$apply()
+
+          } 
+        })
+      }
+    })
+  }
+}
+</script>

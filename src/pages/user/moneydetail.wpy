@@ -21,6 +21,7 @@
   }
   .right{
     color: #888;
+    line-height: 78.4rpx;
   }
   &.add{
     .right{
@@ -46,9 +47,46 @@
 
 <script>
   import wepy from 'wepy'
+  import http from '../../utils/request'
+  import api from '../../config'
   export default class MoneyDetail extends wepy.page {
       config = {
         navigationBarTitleText: "奖金明细"
       };
+      data = {
+        query: null,
+        info: null,
+        zan: false
+      }
+      methods = {
+        async zan() {
+          const { data } = await http({
+            url: api.activity.zan.url,
+            method: api.activity.zan.method,
+            data: {
+              cid: this.query.id
+            }
+          },true)
+
+          if(data.code){
+            this.zan = true
+          }
+        }
+      }
+      async onLoad(options) {
+        this.query = options
+        const { data } = await http({
+          url: api.activity.signDetail.url,
+          method: api.activity.signDetail.method,
+          data: {
+            cid: options.id
+          }
+        },true)
+
+        if(data.code){
+          this.info = data.info
+        }
+        this.$apply()
+      }
   }
 </script>

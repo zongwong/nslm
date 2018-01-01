@@ -63,7 +63,7 @@
   <view class="activityList">
     <navigator url="/pages/index/detail?id={{item.id}}">
       <view class="list-item">
-          <image class="item-image" src="{{item.img}}"></image>
+          <image class="item-image" src="{{item.img}}" mode="aspectFill"></image>
           <view class="item-info">
               <view class="item-title">{{item.title}}</view>
               <view class="item-desc">{{item.desrc}}</view>
@@ -77,6 +77,7 @@
 </template>
 <script>
 import wepy from "wepy";
+
 export default class ActivityList extends wepy.component {
   props = {
     item:{

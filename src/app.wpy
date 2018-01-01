@@ -113,6 +113,7 @@ page{
       image{
         width: 86rpx;
         height: 86rpx;
+        border-radius: 50%;
       }
     }
     .mood_item_detail{
@@ -198,7 +199,7 @@ page{
     padding: 25rpx 0;
   }
   .form_item {
-    font-size: 26rpx;
+    font-size: 28rpx;
     padding: 28rpx 37rpx;
     border-bottom: 2rpx solid #f2f2f2;
     display: block;
@@ -206,7 +207,6 @@ page{
   label.form_item {
     display: flex;
     .label_text {
-      text-align: center;
       width: 4em;
       margin-right: 20rpx;
       line-height: 52.5rpx;
@@ -315,7 +315,7 @@ page{
     .title{
       border-bottom: 2rpx solid #f2f2f2;
       padding: 15rpx 0;
-      font-weight: bold;
+      font-weight: 500;
     }
     .desc{
       color: #888;
@@ -416,6 +416,9 @@ export default class extends wepy.app {
   config = {
     pages: [
       "pages/index/index", 
+      "pages/user/mymood", 
+      "pages/user/myjoin", 
+      "pages/user/mysc",
       "pages/index/pk", 
       "pages/course/reply",
       "pages/course/clist",
@@ -430,7 +433,6 @@ export default class extends wepy.app {
       "pages/course/course", 
       "pages/course/articlelist", 
       "pages/course/articledetail", 
-      "pages/user/myvideo", 
       "pages/user/mooddetail", 
       "pages/user/mood", 
       "pages/user/top", 
@@ -454,20 +456,20 @@ export default class extends wepy.app {
         {
           pagePath: "pages/index/index",
           text: "首页",
-          iconPath: "images/icon-list.png",
-          selectedIconPath: "images/icon-list-on.png"
+          iconPath: "icon/aa.png",
+          selectedIconPath: "icon/a.png"
         },
         {
           pagePath: "pages/course/course",
           text: "产后恢复课",
-          iconPath: "images/icon-course.png",
-          selectedIconPath: "images/icon-course-on.png"
+          iconPath: "icon/bb.png",
+          selectedIconPath: "icon/b.png"
         },
-        {
+        { 
           pagePath: "pages/user/user",
           text: "我的",
-          iconPath: "images/icon-user.png",
-          selectedIconPath: "images/icon-user-on.png"
+          iconPath: "icon/cc.png",
+          selectedIconPath: "icon/c.png"
         }
       ]
     }
@@ -516,7 +518,7 @@ export default class extends wepy.app {
     if ( data.code ){
       this.globalData.config = data.info
     }
-    // console.log(this.globalData)
+    // this.$apply()
   }
 }
 </script>

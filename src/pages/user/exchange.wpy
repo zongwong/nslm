@@ -104,6 +104,7 @@
       .need_num {
         font-size: 70rpx;
         margin: 86rpx 0 10rpx 0;
+        font-family: 'Pakt';
         text {
           font-size: 22rpx;
         }
@@ -179,7 +180,7 @@
     <!-- 内容 -->
     <view class="content">    
       <view class="item" wx:for="{{list}}" wx:key="list_{{index}}">
-        <image class="post_image" src="{{item.img}}"></image>
+        <image class="post_image" mode="aspectFill" src="{{item.img}}"></image>
         <view class="title singleTextOverflow">{{item.title}}</view>
         <view class="desc greyColor">{{item.desrc}}</view>
         <view class="btn">
@@ -207,19 +208,19 @@
       <view class="modal_body">
         <label for="name">
           <view class="label_text">姓名</view>
-          <view class="label_input"><input type="text" id="name" placeholder="请输入姓名" value="{{name}}" @input="nameInput"></view>
+          <view class="label_input"><input type="text" id="name" placeholder="请输入姓名" value="{{name}}" @input="nameInput" /></view>
         </label>
         <label for="phone">
           <view class="label_text">电话</view>
-          <view class="label_input"><input type="text" id="phone" placeholder="请输入电话" value="{{phone}}" @input="phoneInput"></view>
+          <view class="label_input"><input type="text" id="phone" placeholder="请输入电话" value="{{phone}}" @input="phoneInput" /></view>
         </label>
         <label for="wx">
           <view class="label_text">微信</view>
-          <view class="label_input"><input type="text" id="wx" placeholder="请输入微信" value="{{wx}}" @input="wxInput"></view>
+          <view class="label_input"><input type="text" id="wx" placeholder="请输入微信" value="{{wx}}" @input="wxInput" /></view>
         </label>
         <label for="address">
           <view class="label_text">地址</view>
-          <view class="label_input"><input type="text" id="address" placeholder="请输入地址" value="{{address}}" @input="addressInput"></view>
+          <view class="label_input"><input type="text" id="address" placeholder="请输入地址" value="{{address}}" @input="addressInput" /></view>
         </label>
       </view>
       <button class="ex_btn" @tap="submitChange">确认兑换</button>
