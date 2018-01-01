@@ -6,7 +6,7 @@
     border-radius: 30rpx;
     background: #fff;
     margin: 22rpx 36rpx;
-    height: 330rpx;
+    // height: 330rpx;
     padding: 0 26rpx;
     .doctor_info{
       border-bottom: 2rpx solid #efefef;
@@ -110,7 +110,7 @@
   <view class="doctor">
     <view class="doctor_box">
       <view class="doctor_info">
-        <image class="doctor_avatar" src="{{doctor.img}}"></image>
+        <image class="doctor_avatar" mode="aspectFill" src="{{doctor.img}}"></image>
         <view>
           <view class="name">{{doctor.name}}</view>
           <view class="job">{{doctor.type}}</view>
