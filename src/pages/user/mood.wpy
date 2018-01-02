@@ -4,7 +4,7 @@
 <template>
   <view class="mood">
     <view class="mood_list">
-      <navigator class="mood_item" url="/pages/user/mooddetail?id={{item.id}}" wx:for="{{circle}}" wx:key="circle_{{index}}">
+      <navigator class="mood_item" url="/pages/user/mooddetail?id={{item.id}}&aid={{item.aid}}" wx:for="{{circle}}" wx:key="circle_{{index}}">
         <view class="mood_item_avatar">
           <image src="{{item.u_avatarurl}}"></image>
         </view>

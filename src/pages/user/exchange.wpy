@@ -343,7 +343,8 @@ export default class Exchange extends wepy.page {
       },true)
       if( data.code ){
         wepy.navigateTo({
-          url: `/pages/user/success?id=${this.courseId}`
+          // url: `/pages/user/success?id=${this.courseId}`
+          url: `/pages/index/post?type=exchange&title=${this.course.title}&id=${this.courseId}`
         })
       }else{
         wepy.showModal({

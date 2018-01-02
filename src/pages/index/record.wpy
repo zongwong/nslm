@@ -402,7 +402,7 @@ export default class Record extends wepy.page {
   methods = {
     toSign(e) {
       wepy.navigateTo({
-        url: `/pages/course/reply?type=sign&id=${this.id}&days=${this.dayed}`
+        url: `/pages/course/reply?type=sign&id=${this.id}&dayed=${this.dayed}&days=${this.activity.days}&title=${this.activity.title}`
       })
     },
     lookMoreRecord() {
@@ -456,7 +456,7 @@ export default class Record extends wepy.page {
     }
     this.recordList = recordList
 
-    let index = _.getDateDiff(_.getDate(this.activity.start_time),'2018-02-05')
+    let index = _.getDateDiff(_.getDate(this.activity.start_time),_.getToday())
     let start = 0,end=30;
     if(index<=10){
 

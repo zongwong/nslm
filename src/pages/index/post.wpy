@@ -7,9 +7,8 @@ page{
 </style>
 <template>
   <view class="pk">
-    <canvas canvas-id="myCanvas" style="width:100%;height:{{sysInfo.screenHeight}}px;"/>
-    <image src="{{img}}" style="width:100%;height:{{sysInfo.screenHeight}}px;"></image>
-
+    <canvas canvas-id="myCanvas" style="width:100%;height:{{sysInfo.cheight}}px;"/>
+    <!-- <image src="{{img}}" style="width:100%;height:{{sysInfo.cheight}}px;"></image> -->
     <view class="join">
       <button @tap="saveToAlbem">保存到相册</button>
     </view>
@@ -23,28 +22,122 @@ import http from "../../utils/request"
 import api from "../../config"
 export default class Post extends wepy.page {
   config = {
-    navigationBarTitleText: "Post"
+    navigationBarTitleText: "女神联盟"
   };
   data = {
     img: null,
     info: null,
     sysInfo: {},
     query: {
-      title: '我是标题我有很多个字'
+      title: '我是标题我有很多个字',
+      time: '时间',
     },
+    type: 'sign',
     userInfo: {},
+    month: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    week: ['星期日','星期一','星期二','星期三','星期三','星期五','星期六'],
     config:{
       create:{
-        top:'',
-        left: '',
-        size: '',
-        color: '',
+        bg: 'https://www.2p98.cn/Uploads/image/5a4b87a97e92e.png',
+        avatar:{
+          top: 324,
+          left: 118,
+          width: 102
+        },
+        qrcode:{
+          top: 833,
+          left: 486,
+          width: 162
+        },
+        title:{
+          top: 654,
+          left: 118,
+          size: 40,
+          color: 'black',
+        },
+        name:{
+          top: 478,
+          left: 118,
+          size: 32,
+          color: 'black',
+        },
+        time:{
+          top: 712,
+          left: 142,
+          size: 22,
+          color: 'white',
+        }
       },
       sign:{
-
+        bg: 'https://www.2p98.cn/Uploads/image/5a4ba1284fd45.png',
+        avatar:{
+          top: 494,
+          left: 56,
+          width: 102
+        },
+        qrcode:{
+          top: 824,
+          left: 490,
+          width: 162
+        },
+        title:{
+          top: 700,
+          left: 56,
+          size: 44,
+          color: 'black',
+        },
+        name:{
+          top: 634,
+          left: 56,
+          size: 32,
+          color: 'black',
+        },
+        time:{
+          top: 768,
+          left: 56,
+          size: 30,
+          color: '#d5d5d5',
+        },
+        date:{
+          top: 120,
+          right: 700,
+          size: 106,
+        },
+        month:{
+          top:156,
+          right: 700,
+          size: 28,
+        },
+        week:{
+          top:200,
+          right: 700,
+          size: 32,
+        }
       },
       exchange:{
-
+        bg: 'https://www.2p98.cn/Uploads/image/5a4b8aa9b87e7.png',
+        avatar:{
+          top: 250,
+          left: 98,
+          width: 102
+        },
+        qrcode:{
+          top: 850,
+          left: 134,
+          width: 162
+        },
+        title:{
+          top: 518,
+          left: 96,
+          size: 50,
+          color: '#ff508a',
+        },
+        name:{
+          top: 394,
+          left: 98,
+          size: 32,
+          color: 'black',
+        }
       }
     }
   };
@@ -71,48 +164,73 @@ export default class Post extends wepy.page {
     const userInfo = wepy.getStorageSync('userInfo')
     this.userInfo = userInfo
     this.query = options
-    const sysInfo = await wepy.getSystemInfo()
+    this.type = options.type
+    let sysInfo = await wepy.getSystemInfo()
+    const rate = sysInfo.screenWidth / 375
+    sysInfo.cheight = 1126 * rate / 2
     this.sysInfo = sysInfo
     this.$apply()
-    const rate = sysInfo.screenWidth / 375
+    
     const ctx = wx.createCanvasContext('myCanvas')
     // 素材下载
-    const tempUrl = await interfaces.downFile('http://www.2p98.cn/Uploads/image/5a4aef068b663.jpg')
+    const tempUrl = await interfaces.downFile(this.config[this.type].bg)
     const avaUrl = await interfaces.downFile(userInfo.avatarUrl)
     // 背景
-    ctx.drawImage(tempUrl, 0, 0, sysInfo.screenWidth, sysInfo.screenHeight)
+    ctx.drawImage(tempUrl, 0, 0, sysInfo.screenWidth, sysInfo.cheight)
     // 头像绘制
-    const avaTop = 440 / sysInfo.pixelRatio * rate
-    const avaLeft = 54 / sysInfo.pixelRatio * rate
-    const avaWidth = 100 / sysInfo.pixelRatio * rate
+    const avaTop = this.config[this.type].avatar.top / 2 * rate
+    const avaLeft = this.config[this.type].avatar.left / 2 * rate
+    const avaWidth = this.config[this.type].avatar.width / 2 * rate
     ctx.drawImage(avaUrl, avaLeft, avaTop,avaWidth,avaWidth)
     // 二维码绘制
-    const qrCodeTop = 926 / sysInfo.pixelRatio * rate
-    const qrCodeLeft = 186 / sysInfo.pixelRatio * rate
-    const qrCodeWidth = 162 / sysInfo.pixelRatio * rate
+    const qrCodeTop = this.config[this.type].qrcode.top / 2 * rate
+    const qrCodeLeft = this.config[this.type].qrcode.left / 2 * rate
+    const qrCodeWidth = this.config[this.type].qrcode.width / 2 * rate
     ctx.drawImage(avaUrl, qrCodeLeft, qrCodeTop,qrCodeWidth,qrCodeWidth)
     // 姓名绘制
-    ctx.setFillStyle('black')
-    ctx.setFontSize(30 / sysInfo.pixelRatio * rate)
-    const nameTop = 484 / sysInfo.pixelRatio * rate
-    const nameLeft = 183 / sysInfo.pixelRatio * rate
+    ctx.setFillStyle(this.config[this.type].name.color)
+    ctx.setFontSize(this.config[this.type].name.size / 2 * rate)
+    const nameTop = this.config[this.type].name.top / 2 * rate
+    const nameLeft = this.config[this.type].name.left / 2 * rate
     ctx.fillText(userInfo.nickName, nameLeft, nameTop)
     // 活动标题绘制
-    ctx.setFontSize(40 / sysInfo.pixelRatio * rate)
-    const titleTop = 664 / sysInfo.pixelRatio * rate
-    const titleLeft = 183 / sysInfo.pixelRatio * rate
+    ctx.setFillStyle(this.config[this.type].title.color)
+    ctx.setFontSize(this.config[this.type].title.size / 2 * rate)
+    const titleTop = this.config[this.type].title.top / 2 * rate
+    const titleLeft = this.config[this.type].title.left / 2 * rate
     ctx.fillText(this.query.title, titleLeft, titleTop)
     // 时间绘制
-    ctx.setFontSize(20 / sysInfo.pixelRatio * rate)
-    ctx.setFillStyle('white')
-    const timeTop = 720 / sysInfo.pixelRatio * rate
-    const timeLeft = 200 / sysInfo.pixelRatio * rate
-    ctx.fillText('2019-01-01 - 2019-02-09', timeLeft, timeTop)
+    if(this.type !== 'exchange'){
+      ctx.setFontSize(this.config[this.type].time.size / 2 * rate)
+      ctx.setFillStyle(this.config[this.type].time.color)
+      const timeTop = this.config[this.type].time.top / 2 * rate
+      const timeLeft = this.config[this.type].time.left / 2 * rate
+      ctx.fillText(this.query.time||'', timeLeft, timeTop)
+    }
+    // 打卡日期
+    if(this.type === 'sign'){
+      ctx.setTextAlign('right')
+      // 日
+      ctx.setFontSize(this.config[this.type].date.size / 2 * rate)
+      ctx.setFillStyle('white')
+      const DateTop = this.config[this.type].date.top / 2 * rate
+      const DateLeft = this.config[this.type].date.right / 2 * rate
+      ctx.fillText(new Date().getDate(), DateLeft, DateTop)
+      // 月
+      ctx.setFontSize(this.config[this.type].month.size / 2 * rate)
+      ctx.setFillStyle('white')
+      const monthTop = this.config[this.type].month.top / 2 * rate
+      const monthLeft = this.config[this.type].month.right / 2 * rate
+      ctx.fillText(this.month[new Date().getMonth()], monthLeft, monthTop)
+      // 星期
+      ctx.setFontSize(this.config[this.type].week.size / 2 * rate)
+      ctx.setFillStyle('white')
+      const weekTop = this.config[this.type].week.top / 2 * rate
+      const weekLeft = this.config[this.type].week.right / 2 * rate
+      ctx.fillText(this.week[new Date().getDay()], weekLeft, weekTop)
+    }
     ctx.draw()
-    // wx.drawCanvas({
-    //   canvasId: 'myCanvas',
-    //   actions: ctx.getActions()
-    // })
+
     setTimeout(function(){    
       wx.canvasToTempFilePath({
         x: 0,
@@ -128,9 +246,9 @@ export default class Post extends wepy.page {
       })
     },1000)
   }
-  onShareAppMessage: function (res) {
+  onShareAppMessage(res) {
     return {
-      title: '自定义转发标题',
+      title: '女神联盟',
       // path: '/page/user?id=123',
       success: function(res) {
         wx.showToast({

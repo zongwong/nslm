@@ -51,7 +51,7 @@ const interfaces = {
     const {
       data
     } = await wepy.uploadFile({
-      url: 'https://www.2p98.cn/api/public/uploadImg',
+      url: 'http://www.2p98.cn/api/public/uploadImg',
       filePath: temp.tempFilePaths[0],
       name: 'filename'
     })

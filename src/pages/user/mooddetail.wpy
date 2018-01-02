@@ -222,7 +222,7 @@
 
           if(data.code){
             this.zan = true
-            this.info.clock.zan += 1
+            this.info.clock.zan = parseInt(this.info.clock.zan) + 1
           }else{
             if (data.msg == '不能重复点赞'){
               this.zan = true
@@ -254,10 +254,10 @@
 
         if(data.code){
           this.info = data.info
-          this.zan = Boolean(data.info.clock.is_zan)
+          this.zan = Boolean(+data.info.clock.is_zan)
         }
-        const activityData = await interfaces.getActivityInfo(options.id)
-        const getProgressData = await interfaces.getProgress(options.id)
+        const activityData = await interfaces.getActivityInfo(options.aid)
+        const getProgressData = await interfaces.getProgress(options.aid)
         this.days = activityData.info.days
         this.dayed = getProgressData.info?getProgressData.info.length:0
         this.$apply()

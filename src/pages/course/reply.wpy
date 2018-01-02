@@ -71,7 +71,7 @@
       </view>
       <view class="img_box add" @tap="addImg" wx:if="{{myImgs.length<9}}">+</view>
     </view>
-    <view class="tips" wx:if="{{type=='sign'}}">这是你坚持的第<text class="pinklight">{{query.days}}</text>天,请继续努力</view>
+    <view class="tips" wx:if="{{type=='sign'}}">这是你坚持的第<text class="pinklight">{{query.dayed}}</text>天,请继续努力</view>
   </view>
   <view class="join" @tap="sign">
     <button>发布</button>
@@ -159,8 +159,11 @@
             
             if(this.type=='sign'){     
               // 打卡       
+              // wepy.redirectTo({
+              //   url: `/pages/index/record?id=${this.query.id}`
+              // })
               wepy.redirectTo({
-                url: `/pages/index/record?id=${this.query.id}`
+                url: `/pages/index/post?type=sign&title=${this.query.title}&time=第${this.query.dayed}/${this.query.days}天打卡`
               })
             }else if(this.type=='pbmood'){
               // 心情
