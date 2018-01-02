@@ -222,6 +222,11 @@ const api = {
     global: {
       method: 'post',
       url: '/public/globalData'
+    },
+    // 获取支付参数
+    pay: {
+      method: 'post',
+      url: '/public/pay'
     }
   }
 }

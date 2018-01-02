@@ -268,6 +268,12 @@
     right: 5rpx;
   }
 }
+.lookMoreRecord{
+  text-align: center;
+  font-size: 22rpx;
+  color: #ff508a;
+  margin-top: 10rpx;
+}
 </style>
 <template>
   <view class="record me-block">
@@ -334,7 +340,8 @@
           </view>
         </view> 
       </view> -->
-      <view class="item {{item.status==2?'success':''}} {{item.status==0?'error':''}}" wx:for="{{recordList}}" wx:key="record_{{index}}">
+      <view @tap="lookMoreRecord" class="lookMoreRecord" wx:if="{{start>0}}">查看更多记录</view>
+      <view class="item {{item.status==2?'success':''}} {{item.status==0?'error':''}}" wx:for="{{showList}}" wx:key="record_{{index}}">
         <view class="item_title">
           <view class="item_title_left">
             <text class="status_icon"></text>
@@ -377,10 +384,13 @@ export default class Record extends wepy.page {
     id: '',
     activity: null,
     recordList: [],
+    showList: [],
     recorded: {},
     dayed: 0,
     width: '40rpx',
-    per: '0'
+    per: '0',
+    start: 0,
+    end: 30,
   };
 
   computed = {
@@ -394,12 +404,18 @@ export default class Record extends wepy.page {
       wepy.navigateTo({
         url: `/pages/course/reply?type=sign&id=${this.id}&days=${this.dayed}`
       })
+    },
+    lookMoreRecord() {
+      if(this.start>0){
+        let start = this.start-10
+        start = start<0?0:start
+        let list = this.recordList.slice(start,this.start)
+        this.showList = list.concat(this.showList)
+        this.start = start
+        this.$apply()
+      }
     }
-
-    
   };
-
-  events = {};
 
   async onLoad(options) {
     // 数据获取
@@ -440,6 +456,19 @@ export default class Record extends wepy.page {
     }
     this.recordList = recordList
 
+    let index = _.getDateDiff(_.getDate(this.activity.start_time),'2018-02-05')
+    let start = 0,end=30;
+    if(index<=10){
+
+    }else{
+      start = index-11
+      end = index + 20
+    }
+
+    this.showList = recordList.slice(start,end)
+    this.start = start
+    this.end = end
+
     // 进度条
     this.width = Math.floor(this.dayed / data.info.days * 420) + 40
     this.per = Math.floor(this.dayed / data.info.days * 100)
@@ -468,6 +497,17 @@ export default class Record extends wepy.page {
       }
       this.$apply()
     }
+  }
+  onReachBottom() {
+    if(this.end<=this.recordList.length){
+      let list = this.recordList.slice(this.end,this.end+10)
+      this.showList = this.showList.concat(list)
+      this.end+=10
+      this.$apply()
+    }
+  }
+  onShareAppMessage() {
+    return interfaces.activityShare(this.activity.title, this.activity.id, this.activity.img)
   }
 }
 </script>

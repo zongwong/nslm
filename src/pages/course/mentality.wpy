@@ -286,5 +286,14 @@
         })
       }
     }
+    onShareAppMessage(res) {
+      return {
+        success: function(res) {
+          wx.showToast({
+            title: '分享成功'
+          })
+        }
+      }
+    }
   }
 </script>

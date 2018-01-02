@@ -211,7 +211,7 @@
         <view>{{info.share_user}} 邀请您一起参加</view>
         <view>{{info.title}}</view>
       </view>
-      <view class="pk_num">
+      <view class="pk_num" wx:if="{{info.pk!=''}}">
         <view><image src="../../images/pk.png"></image>PK码</view>
         <view class="pinklight">{{info.pk}}</view>
         <view>[点击复制]</view>
@@ -220,20 +220,20 @@
     
     <view class="info_block rule_block">
       <view class="title">活动规则</view>
-      <view class="desc">{{info.content}}</view>
+      <view class="desc">{{info.desrc}}</view>
     </view>
     <view class="info_block">
       <view class="title">报名时间</view>
       <view class="desc">
         <view>报名截至：{{info.end_time}}</view>
-        <view>开始时间：{{info.start_time}} - </view>
-        <view>打卡时段：{{info.sign_start_time}}:00 - {{info.sign_end_time}}:00</view>
+        <view>开始时间：{{info.sTime}} - {{info.eTime}}</view>
+        <view>打卡时段：{{info.sign_start_time}} - {{info.sign_end_time}}</view>
         <view>打卡天数：<text class="pinklight">{{info.days}}</text>天</view>
       </view>
     </view>
 
     <view class="join">
-      <button>立即挑战他</button>
+      <button @tap="goToActivity">立即挑战他</button>
     </view>
   </view>
 </template>
@@ -242,6 +242,7 @@
 import wepy from "wepy"
 import interfaces from "../../interface/index"
 import http from "../../utils/request"
+import _ from "../../utils/tools"
 import api from "../../config"
 export default class Pk extends wepy.page {
   config = {
@@ -249,15 +250,21 @@ export default class Pk extends wepy.page {
   };
   data = {
     imgs: null,
-    info: null
+    info: null,
+    id: 23
   };
-  methods = {};
-
-  events = {};
-
-  async onLoad() {
+  methods = {
+    goToActivity() {
+      wepy.navigateTo({
+        url: `/pages/index/detail?id=${this.id}`
+      })
+    }
+  };
+  async onLoad(options) {
    this.imgs = this.$parent.globalData.imgs
-   this.getShareData(5)
+  //  this.id = options.id
+   this.$apply()
+   this.getShareData(23)
   }
   async getShareData(aid) {
     const { data } = await http({
@@ -269,8 +276,13 @@ export default class Pk extends wepy.page {
     },true)  
     if ( data.code ){
       this.info = data.info
+      this.info.eTime = _.getNextTime(data.info.start_time,data.info.days)
+      this.info.sTime = _.getDate(data.info.end_time)
       this.$apply()
     }
+  }
+  onShareAppMessage() {
+    return interfaces.activityShare(this.info.title, this.info.id, this.info.img)
   }
 }
 </script>

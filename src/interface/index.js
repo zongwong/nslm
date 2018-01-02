@@ -117,6 +117,7 @@ const interfaces = {
       urls: urls
     })
   },
+  // 获取打卡记录
   async getProgress(id) {
     const { data } = await http({
       url: api.activity.myprogress.url,
@@ -126,6 +127,31 @@ const interfaces = {
       }
     }, true)
     return data
+  },
+  // 下载图片
+  async downFile(url) {
+    const data = await wepy.downloadFile({
+      url: url
+    })
+    return data.tempFilePath
+  },
+  // 微信支付
+  async wxPay(data) {
+    const res = await wepy.requestPayment(data)
+    return res
+  },
+  // 活动分享
+  activityShare(title, id, url) {
+    return {
+      title: title,
+      path: `/pages/index/pk?id=${id}`,
+      imageUrl: url,
+      success: (res) => {
+        wepy.showToast({
+          title: '分享成功'
+        })
+      }
+    }
   }
 }
 export default interfaces

@@ -164,5 +164,8 @@ export default class Detail extends wepy.page {
     }
   }
 
+  onShareAppMessage() {
+    return interfaces.activityShare(this.activity.title, this.activity.id, this.activity.img)
+  }
 }
 </script>

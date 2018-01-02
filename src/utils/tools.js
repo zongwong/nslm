@@ -3,6 +3,10 @@ const _ = {
     let now = new Date(new Date(start.replace(/-/g, '/')).getTime() + days * 24 * 3600 * 1000)
     return now.getFullYear() + '-' + _.addZero(now.getMonth() + 1) + '-' + _.addZero(now.getDate())
   },
+  getToday() {
+    let now = new Date()
+    return now.getFullYear() + '-' + _.addZero(now.getMonth() + 1) + '-' + _.addZero(now.getDate())
+  },
   addZero(n) {
     return n.toString()[1] ? n : '0' + n
   },
@@ -48,6 +52,12 @@ const _ = {
     var Range = Max - Min
     var Rand = Math.random()
     return (Min + Math.round(Rand * Range))
+  },
+  getDateDiff(startDate, endDate) {
+    let startTime = new Date(startDate.replace(/-/g, '/')).getTime()
+    let endTime = new Date(endDate.replace(/-/g, '/')).getTime()
+    let dates = (endTime - startTime) / (1000 * 60 * 60 * 24)
+    return dates
   }
 }
 export default _

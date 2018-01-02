@@ -1,13 +1,17 @@
 <style lang="scss">
-
+page{
+  // overflow-x: auto;
+  // position: absolute;
+  // left: -100%;
+}
 </style>
 <template>
   <view class="pk">
-    <canvas canvas-id="myCanvas" style="width:90%;height:600rpx;border:1px solid #000;"/>
-    <image src="{{img}}"></image>
+    <canvas canvas-id="myCanvas" style="width:100%;height:{{sysInfo.screenHeight}}px;"/>
+    <image src="{{img}}" style="width:100%;height:{{sysInfo.screenHeight}}px;"></image>
 
     <view class="join">
-      <button @tap="saveToAlbem">保存图片</button>
+      <button @tap="saveToAlbem">保存到相册</button>
     </view>
   </view>
 </template>
@@ -23,7 +27,26 @@ export default class Post extends wepy.page {
   };
   data = {
     img: null,
-    info: null
+    info: null,
+    sysInfo: {},
+    query: {
+      title: '我是标题我有很多个字'
+    },
+    userInfo: {},
+    config:{
+      create:{
+        top:'',
+        left: '',
+        size: '',
+        color: '',
+      },
+      sign:{
+
+      },
+      exchange:{
+
+      }
+    }
   };
   methods = {
       saveToAlbem(){
@@ -32,40 +55,89 @@ export default class Post extends wepy.page {
             filePath: this.img,
             success(res) {
                 console.log(res)
+                wepy.showToast({
+                  title:'保存成功'
+                })
             }
           })
       }
   };
-
-  events = {};
-
-  async onLoad() {
-   const ctx = wx.createCanvasContext('myCanvas')
-
+  async onLoad(options) {
+    wx.showLoading({
+      title: '生成分享图中...',
+      mask: true
+    })
     let that = this
-    wx.chooseImage({
-      success: function(res){
-        ctx.drawImage(res.tempFilePaths[0], 0, 0, 1150, 1000)
-        ctx.draw()
-
-        wx.canvasToTempFilePath({
-          x: 0,
-          y: 0,
-          width: 550,
-          height: 550,
-          destWidth: 500,
-          destHeight: 500,
-          canvasId: 'myCanvas',
-          success: function(res) {
-            console.log(res)
-
-              that.img = res.tempFilePath
-              that.$apply()
-
-          } 
+    const userInfo = wepy.getStorageSync('userInfo')
+    this.userInfo = userInfo
+    this.query = options
+    const sysInfo = await wepy.getSystemInfo()
+    this.sysInfo = sysInfo
+    this.$apply()
+    const rate = sysInfo.screenWidth / 375
+    const ctx = wx.createCanvasContext('myCanvas')
+    // 素材下载
+    const tempUrl = await interfaces.downFile('http://www.2p98.cn/Uploads/image/5a4aef068b663.jpg')
+    const avaUrl = await interfaces.downFile(userInfo.avatarUrl)
+    // 背景
+    ctx.drawImage(tempUrl, 0, 0, sysInfo.screenWidth, sysInfo.screenHeight)
+    // 头像绘制
+    const avaTop = 440 / sysInfo.pixelRatio * rate
+    const avaLeft = 54 / sysInfo.pixelRatio * rate
+    const avaWidth = 100 / sysInfo.pixelRatio * rate
+    ctx.drawImage(avaUrl, avaLeft, avaTop,avaWidth,avaWidth)
+    // 二维码绘制
+    const qrCodeTop = 926 / sysInfo.pixelRatio * rate
+    const qrCodeLeft = 186 / sysInfo.pixelRatio * rate
+    const qrCodeWidth = 162 / sysInfo.pixelRatio * rate
+    ctx.drawImage(avaUrl, qrCodeLeft, qrCodeTop,qrCodeWidth,qrCodeWidth)
+    // 姓名绘制
+    ctx.setFillStyle('black')
+    ctx.setFontSize(30 / sysInfo.pixelRatio * rate)
+    const nameTop = 484 / sysInfo.pixelRatio * rate
+    const nameLeft = 183 / sysInfo.pixelRatio * rate
+    ctx.fillText(userInfo.nickName, nameLeft, nameTop)
+    // 活动标题绘制
+    ctx.setFontSize(40 / sysInfo.pixelRatio * rate)
+    const titleTop = 664 / sysInfo.pixelRatio * rate
+    const titleLeft = 183 / sysInfo.pixelRatio * rate
+    ctx.fillText(this.query.title, titleLeft, titleTop)
+    // 时间绘制
+    ctx.setFontSize(20 / sysInfo.pixelRatio * rate)
+    ctx.setFillStyle('white')
+    const timeTop = 720 / sysInfo.pixelRatio * rate
+    const timeLeft = 200 / sysInfo.pixelRatio * rate
+    ctx.fillText('2019-01-01 - 2019-02-09', timeLeft, timeTop)
+    ctx.draw()
+    // wx.drawCanvas({
+    //   canvasId: 'myCanvas',
+    //   actions: ctx.getActions()
+    // })
+    setTimeout(function(){    
+      wx.canvasToTempFilePath({
+        x: 0,
+        y: 0,
+        canvasId: 'myCanvas',
+        success: function(res) {
+          console.log('生成图片完成')
+          console.log(res.tempFilePath)
+          that.img = res.tempFilePath
+          that.$apply()
+          wx.hideLoading()
+        }
+      })
+    },1000)
+  }
+  onShareAppMessage: function (res) {
+    return {
+      title: '自定义转发标题',
+      // path: '/page/user?id=123',
+      success: function(res) {
+        wx.showToast({
+          title: '分享成功'
         })
       }
-    })
+    }
   }
 }
 </script>

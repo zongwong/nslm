@@ -196,5 +196,14 @@ export default class Index extends wepy.page {
     this.$apply()
 
   }
+  onShareAppMessage(res) {
+    return {
+      success: function(res) {
+        wx.showToast({
+          title: '分享成功'
+        })
+      }
+    }
+  }
 }
 </script>
