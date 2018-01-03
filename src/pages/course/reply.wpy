@@ -66,7 +66,7 @@
     </view>
     <view class="block img_block" wx:if="{{type!='course' && type!='comment'}}">
       <view class="img_box" wx:for="{{myImgs}}" wx:key="img_{{index}}">
-        <image src="{{item}}"></image>
+        <image src="{{item}}" mode="aspectFill"></image>
         <view class="close_btn" @tap="delImg({{index}})">X</view>
       </view>
       <view class="img_box add" @tap="addImg" wx:if="{{myImgs.length<9}}">+</view>

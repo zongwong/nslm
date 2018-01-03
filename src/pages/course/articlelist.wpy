@@ -68,15 +68,22 @@
         imgs: null,
         list: [],
       }
-      async onLoad() {
+      async onLoad(options) {
         this.imgs = this.$parent.globalData.imgs
-        this.getArticle()
+        if(options.type==3){
+          wx.setNavigationBarTitle({
+            title: '心理测试'
+          })
+        }
+        this.getArticle(options.type)
       }
-      async getArticle() {
+      async getArticle(type) {
         const { data } = await http({
           url: api.mood.article.url,
           method: api.mood.article.method,
-          data: {}
+          data: {
+            type:type
+          }
         },true)
         if (data.code){
           if(data.info){

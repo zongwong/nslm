@@ -1,97 +1,96 @@
 <style lang="scss">
-.mentality{
+.mentality {
   overflow: hidden;
-  .banner{
+  .banner {
     height: 392rpx;
     padding: 24rpx 19rpx;
-    swiper{
-      width:100%;
+    swiper {
+      width: 100%;
       height: 100%;
-      image{
-        width:100%;
+      image {
+        width: 100%;
         height: 100%;
       }
     }
   }
-  .area-block{
+  .area-block {
     background: #fff;
     padding: 0 37.5rpx;
     margin-bottom: 12rpx;
-    .title{
+    .title {
       font-size: 32rpx;
       line-height: 80rpx;
       border-bottom: 2rpx solid #efefef;
-      .more{
+      .more {
         float: right;
         font-size: 26rpx;
         color: #888;
         padding-right: 17rpx;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAA3UlEQVQ4jZXRP0oEMRQH4G93xwO5nQcQG2tRd4RFVASx8A5ewBsIVnMACysbO0HwAh7BwlZ0LJLIGudPNk3yXvJBfrxJ0zQz7OABXwrWFFu4xx1mpegJNzgohVXcr+L5ItZHQ19NqMUlNnA2BquVc4vz2DvGBHUXrLK6xamQdRl7/2CO4Bsn8a7ugl1IfLAUMu7nsA8luBBG8AcOoQQPhYy/cDqC4FMY/HOEuyUI9jDHCx5LUI1bvGIbH2MoB++EgGuBIdQL+tAg6EKjIEdFYBUVg4Q21wEJveG6FMAPWulBX70S/lsAAAAASUVORK5CYII=) right center no-repeat;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAA3UlEQVQ4jZXRP0oEMRQH4G93xwO5nQcQG2tRd4RFVASx8A5ewBsIVnMACysbO0HwAh7BwlZ0LJLIGudPNk3yXvJBfrxJ0zQz7OABXwrWFFu4xx1mpegJNzgohVXcr+L5ItZHQ19NqMUlNnA2BquVc4vz2DvGBHUXrLK6xamQdRl7/2CO4Bsn8a7ugl1IfLAUMu7nsA8luBBG8AcOoQQPhYy/cDqC4FMY/HOEuyUI9jDHCx5LUI1bvGIbH2MoB++EgGuBIdQL+tAg6EKjIEdFYBUVg4Q21wEJveG6FMAPWulBX70S/lsAAAAASUVORK5CYII=)
+          right center no-repeat;
         background-size: 13rpx 23rpx;
       }
     }
   }
-  .articlelist{
-    .article{
+  .articlelist {
+    .article {
       padding: 20rpx 0;
       border-bottom: 2rpx solid #efefef;
       display: flex;
-      &:last-child{
+      &:last-child {
         border-bottom: none;
       }
-      .article_post{
+      .article_post {
         width: 160rpx;
         height: 90rpx;
         margin-right: 18rpx;
       }
-      .article_info{
-        flex:1;
+      .article_info {
+        flex: 1;
         padding-top: 12rpx;
         overflow: hidden;
-        .article_title{
+        .article_title {
           font-size: 26rpx;
         }
-        .article_desc{
+        .article_desc {
           color: #888;
           font-size: 24rpx;
         }
       }
-
     }
-
   }
-  .action-block{
+  .action-block {
     padding: 26rpx 37.5rpx;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    image{
-      width:100%;
+    image {
+      width: 100%;
       height: 100%;
     }
-    .test{
-      width:100%;
+    .test {
+      width: 100%;
       height: 159rpx;
       margin-bottom: 14rpx;
     }
-    .course{
-      width:330rpx;
+    .course {
+      width: 330rpx;
       height: 160rpx;
     }
-    .fm{
-      width:330rpx;
+    .fm {
+      width: 330rpx;
       height: 160rpx;
     }
   }
-  .doctors{
+  .doctors {
     width: 100%;
     padding: 28rpx 0;
-    .scroll{
+    .scroll {
       height: 100%;
       width: 100%;
       white-space: nowrap;
     }
-    .adoctor{
+    .adoctor {
       display: inline-block;
       border-radius: 10rpx;
       overflow: hidden;
@@ -100,12 +99,12 @@
       border: 2rpx solid #efefef;
       margin-right: 38rpx;
       box-sizing: border-box;
-      .doctor_avatar{
+      .doctor_avatar {
         width: 100%;
         height: 170rpx;
         display: block;
       }
-      .doctor_name{
+      .doctor_name {
         width: 100%;
         height: 40rpx;
         font-size: 28rpx;
@@ -132,7 +131,7 @@
       </swiper>
     </view> 
     <view class="area-block">
-      <view class="title">热门文章 <navigator class="more" url="/pages/course/articlelist?type=hot">更多</navigator></view>
+      <view class="title">热门文章 <navigator class="more" url="/pages/course/articlelist?type=2">更多</navigator></view>
       <view class="articlelist">
         <navigator class="article" url="/pages/course/articledetail?id={{item.id}}" wx:for="{{info.articles}}" wx:key="article_{{index}}">
           <image class="article_post" src="{{item.img}}"></image>
@@ -144,15 +143,15 @@
       </view>
     </view>
     <view class="area-block action-block">
-      <view class="test" @tap="alertModal('心理测试')">
+      <navigator class="test" url="/pages/course/articlelist?type=3">
         <image src="{{imgs.testbg}}"></image>
-      </view>
-      <view class="course" @tap="alertModal('心理课程')">
+      </navigator>
+      <navigator class="course" url="/pages/course/courselist?type=4">
         <image src="{{imgs.coursebg}}"></image>
-      </view>
-      <view class="fm" @tap="alertModal('心理FM')">
+      </navigator>
+      <navigator class="fm" url="/pages/course/fm">
         <image src="{{imgs.fmbg}}"></image>
-      </view>
+      </navigator>
     </view>
     <view class="area-block">
       <view class="title">心理咨询师—在线咨询</view>
@@ -178,7 +177,7 @@
             </view>
             <view class="mood_item_text greyColor">{{item.content}}</view>
             <view class="mood_item_imgs">
-              <image src="{{itemImg}}" wx:for="{{item.img}}" wx:for-item="itemImg" wx:fkey="this*" @tap="previewImg({{itemImg}},{{item.img}})"></image>
+              <image mode="aspectFill" src="{{itemImg}}" wx:for="{{item.img}}" wx:for-item="itemImg" wx:key="this*" @tap="previewImg({{itemImg}},{{item.img}})"></image>
             </view>
             <!-- <view class="mood_item_btns">
               <view>
@@ -198,102 +197,84 @@
       <button>发布心情</button>
     </view>
   </view>
-  <alert 
+  <!-- <alert 
     :status.sync = "status" 
     :icon = "icon"
     :title.sync = "title"
     :content = "content"
     :btn = "btn"
-  ></alert>
+  ></alert> -->
 </template>
 
 <script>
-  import wepy from 'wepy'
-  import alert from "../../components/public/alert"
-  import http from "../../utils/request"
-  import api from "../../config"
-  import interfaces from "../../interface/index"
-  export default class Mentality extends wepy.page {
-    config = {
-      navigationBarTitleText: "心理课程"
-    }
-    components = {
-      alert: alert
-    }
-    data = {
-      imgs: null,
-      status: 'close',
-      icon: '../../images/waiting.png',
-      title: '心理FM正在开发中',
-      content: '精彩功能 敬请期待!',
-      btn: '确定',
-      articleList: [],
-      info: null,
-      banner: null
-    }
-    methods = {
-      alertModal(title) {
-        this.title = title+'正在开发中'
-        this.status = 'open'
-      },
-      toMood() {
-        wepy.navigateTo({
-          url: `/pages/course/reply?type=pbmood`
-        })
-      },
-      previewImg(cur,urls) {
-        interfaces.previewImg(cur,urls)
-      }
-    }
+import wepy from "wepy";
+import alert from "../../components/public/alert";
+import http from "../../utils/request";
+import api from "../../config";
+import interfaces from "../../interface/index";
+export default class Mentality extends wepy.page {
+  config = {
+    navigationBarTitleText: "心理课程"
+  };
 
-    async onLoad(options) {
-      this.imgs = this.$parent.globalData.imgs
-      this.banner = this.$parent.globalData.config.heart_banner
-      this.getData()
-      this.$apply()
+  data = {
+    imgs: null,
+    status: "close",
+    icon: "../../images/waiting.png",
+    title: "心理FM正在开发中",
+    content: "精彩功能 敬请期待!",
+    btn: "确定",
+    info: null,
+    banner: null
+  };
+  methods = {
+    alertModal(title) {
+      this.title = title + "正在开发中";
+      this.status = "open";
+    },
+    toMood() {
+      wepy.navigateTo({
+        url: `/pages/course/reply?type=pbmood`
+      });
+    },
+    previewImg(cur, urls) {
+      interfaces.previewImg(cur, urls);
     }
-    async getArticleList() {
-      const { data } = await http({
-        url: api.mood.article.url,
-        method: api.mood.article.method,
-        data: {
-        }
-      },true)
-      if ( data.code ) {
-        this.articleList = data.info
-        this.$apply()
-      }else{
-        wepy.showModal({
-          title: '提示',
-          content: data.msg
-        })
-      }
-    }
-    async getData() {
-      const { data } = await http({
+  };
+
+  async onLoad(options) {
+    this.imgs = this.$parent.globalData.imgs;
+    this.banner = this.$parent.globalData.config.heart_banner;
+    this.getData();
+    this.$apply();
+  }
+  async getData() {
+    const { data } = await http(
+      {
         url: api.mood.index.url,
         method: api.mood.index.method,
-        data: {
-        }
-      },true)
-      if ( data.code ) {
-        this.info = data.info
-        this.$apply()
-      }else{
-        wepy.showModal({
-          title: '提示',
-          content: data.msg
-        })
-      }
-    }
-    onShareAppMessage(res) {
-      return {
-        success: function(res) {
-          wx.showToast({
-            title: '分享成功'
-          })
-        }
-      }
+        data: {}
+      },
+      true
+    );
+    if (data.code) {
+      this.info = data.info;
+      this.$apply();
+    } else {
+      wepy.showModal({
+        title: "提示",
+        content: data.msg
+      });
     }
   }
+  onShareAppMessage(res) {
+    return {
+      success: function(res) {
+        wx.showToast({
+          title: "分享成功"
+        });
+      }
+    };
+  }
+}
 </script>

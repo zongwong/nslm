@@ -120,6 +120,11 @@
       onLoad(options) {
         this.imgs = this.$parent.globalData.imgs
         this.type = options.type
+        if(options.type==4){
+          wx.setNavigationBarTitle({
+            title: '心理课程'
+          })
+        }
         this.$apply()
         this.getCourseList(options.type)
       }

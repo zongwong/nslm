@@ -168,6 +168,16 @@ const api = {
     exchange: {
       url: '/query/exchange',
       method: 'post'
+    },
+    // fm列表
+    fm: {
+      url: '/query/fm',
+      method: 'post'
+    },
+    // fm列表
+    dfm: {
+      url: '/query/fmDetail',
+      method: 'post'
     }
   },
   mood: {

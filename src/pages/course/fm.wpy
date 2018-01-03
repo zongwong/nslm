@@ -1,0 +1,115 @@
+<style lang="scss">
+    .fmcontent{
+        margin: 12rpx 18rpx;
+        .item{
+            border-radius: 12rpx;
+            border: 2rpx solid #efefef;
+            background: #fff;
+            height: 116rpx;
+            display: flex;
+            padding: 16rpx 0;
+            box-sizing: border-box;
+            .imgbox{
+                width: 80rpx;
+                height: 80rpx;
+                border-radius: 12rpx;
+                margin: 0 16rpx 0 20rpx;
+                position: relative;
+                overflow: hidden;
+                image{
+                    width: 100%;
+                    height: 100%;
+                }
+                .icon_play{
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    background: rgba(0,0,0,.6) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAcCAYAAAB/E6/TAAABWElEQVRIibXWMWvUYBzH8c+VTtrNqcsN7h0EheLQzn0JdSkquDno5NhBxMW+BEfp1BfQqUtLpxYEwVWHdisoQgeRX4fL2dLmcpfcky88JISEL//nG0gkkeRtkqMk20mWqmtFlyQPkvzNNWdJXiRZKC1aST0nSdZKiRZM5hEO8AXDhvtmokkEA2ziO95jqbOpYevqOEvyPMmg5NbVsYzPOMJqmwfbisasVrKZ+3UVcbff/ca7WzZq4keSzUn95pnoNkOjraztV1I0prZfHyKu+33DKxgkWcHXnoQQPOxropv8wu++RcdYx0Vfop94hqeqLIuFBZf4hA/V+X9KiYJdvDOa5g4lRMd4Ux0nMk+jc2wZdWiU0G2iS+zgI/7M+lAb0dQOJUSneI3DtoIx0xqd4yUezyNhNNG/muudOjSS5F6SixsfsL0kw7Y/H9PWIAk8wQb2zfCqduEKsp425oALykkAAAAASUVORK5CYII=) center no-repeat;
+                    background-size: 26rpx 28rpx;
+                    top: 0;
+                    left:0;
+                }
+            }
+            .infobox{
+                flex: 1;
+                line-height: 1;
+                .title{
+                    margin-top: 4rpx;
+                    width: 590rpx;
+                    font-size: 28rpx;
+                }
+                .info{
+                    margin-top: 24rpx;
+                    display: flex;
+                    font-size: 22rpx;
+                    color: #888;
+                    .pv{
+                        margin-right: 46rpx;
+                        padding-left: 20rpx;
+                        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAARCAYAAAAG/yacAAAA+ElEQVQokY3Sr0tDYRTG8c8us40Fg2gzrAiygcE/wGAwGNQ0s1kEMYjBJBeTFk1DmxaLySALkyEKBn8EQQwm/ws1vPeVMfTe+9Rzvs9zzvueSpqmbezhHuv4VKAEKU5RwwtWy0B1XGMBWzjCBcbyoEF10MyMnrFSBoIPzGM3G/sMo0UQfOMYLUwIuy4WQVHvmMM+znGCWhEEXzjADGbRKQNFveISzWpJYAQ72MBaGagl7FIXXrWXN14V27jDbQb3YuEvTWXu48KldAeLw0kJNvGAR+E6ukM9v0kVNDL3SSzh6r+5E7zhEE/CZ07nATFpGW3coJ/XHPUDyEcsleEPlkQAAAAASUVORK5CYII=) 0 center no-repeat;
+                        background-size: 13rpx 17rpx;
+                    }
+                    .time{
+
+                    }
+                }
+            }
+        }
+    }
+</style>
+<template>
+  <view class="fm">
+    <view class="fmcontent">
+        <navigator class="item" url="/pages/course/fmdetail?id={{item.id}}" wx:for="{{list}}" wx:key="fm_{{index}}">
+            <view class="imgbox">
+                <image src="{{item.img}}" class="img"></image>
+                <view class="icon_play"></view>
+            </view>
+            <view class="infobox">
+                <view class="singleTextOverflow title">{{item.title}}</view>
+                <view class="info">
+                    <view class="pv">{{item.pv}}</view>
+                    <view class="time">{{item.time}}</view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from "../../config"
+  import http from "../../utils/request"
+  import _ from "../../utils/tools"
+  export default class Fm extends wepy.page {
+      config = {
+        navigationBarTitleText: "心理FM"
+      };
+      data = {
+        imgs: null,
+        list: [],
+      }
+      async onLoad() {
+        this.imgs = this.$parent.globalData.imgs
+        this.getFm()
+      }
+      async getFm() {
+        const { data } = await http({
+          url: api.course.fm.url,
+          method: api.course.fm.method,
+          data: {
+          }
+        },true)
+        if (data.code){
+          if(data.info){
+            data.info.forEach((item)=>{
+              item.time = _.getDate(item.c_time)
+            })
+          }
+          this.list = data.info
+          this.$apply()
+        }
+      }
+  }
+</script>

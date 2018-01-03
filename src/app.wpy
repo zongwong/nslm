@@ -415,7 +415,9 @@ import interfaces from "./interface/index";
 export default class extends wepy.app {
   config = {
     pages: [
-      "pages/index/index", 
+      "pages/index/index",
+      "pages/course/fmdetail", 
+      "pages/course/fm", 
       "pages/index/post",
       "pages/index/pk",
       "pages/user/mymood", 
