@@ -354,8 +354,8 @@ view {
                 margin-bottom: 15rpx;
             }
             .music{
-                width: 22rpx;
-                height: 10rpx;
+                width: 44rpx;
+                height: 20rpx;
             }
         }
     }

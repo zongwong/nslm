@@ -32,13 +32,13 @@ export default class Post extends wepy.page {
       title: '我是标题我有很多个字',
       time: '时间',
     },
-    type: 'sign',
+    type:'sign',
     userInfo: {},
     month: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
     week: ['星期日','星期一','星期二','星期三','星期三','星期五','星期六'],
     config:{
       create:{
-        bg: 'https://www.2p98.cn/Uploads/image/5a4b87a97e92e.png',
+        bg: 'https://www.2p98.cn/Uploads/image/5a4dc103b461c.png',
         avatar:{
           top: 324,
           left: 118,
@@ -69,7 +69,7 @@ export default class Post extends wepy.page {
         }
       },
       sign:{
-        bg: 'https://www.2p98.cn/Uploads/image/5a4ba1284fd45.png',
+        bg: 'https://www.2p98.cn/Uploads/image/5a4dc11596887.png',
         avatar:{
           top: 494,
           left: 56,
@@ -115,7 +115,7 @@ export default class Post extends wepy.page {
         }
       },
       exchange:{
-        bg: 'https://www.2p98.cn/Uploads/image/5a4b8aa9b87e7.png',
+        bg: 'https://www.2p98.cn/Uploads/image/5a4dc12639514.png',
         avatar:{
           top: 250,
           left: 98,
@@ -156,6 +156,7 @@ export default class Post extends wepy.page {
       }
   };
   async onLoad(options) {
+    console.log(options)
     wx.showLoading({
       title: '生成分享图中...',
       mask: true
@@ -173,62 +174,64 @@ export default class Post extends wepy.page {
     
     const ctx = wx.createCanvasContext('myCanvas')
     // 素材下载
-    const tempUrl = await interfaces.downFile(this.config[this.type].bg)
+    const tempUrl = await interfaces.downFile(this.config[options.type].bg)
     const avaUrl = await interfaces.downFile(userInfo.avatarUrl)
+    console.log('素材下载')
     // 背景
     ctx.drawImage(tempUrl, 0, 0, sysInfo.screenWidth, sysInfo.cheight)
     // 头像绘制
-    const avaTop = this.config[this.type].avatar.top / 2 * rate
-    const avaLeft = this.config[this.type].avatar.left / 2 * rate
-    const avaWidth = this.config[this.type].avatar.width / 2 * rate
+    const avaTop = this.config[options.type].avatar.top / 2 * rate
+    const avaLeft = this.config[options.type].avatar.left / 2 * rate
+    const avaWidth = this.config[options.type].avatar.width / 2 * rate
     ctx.drawImage(avaUrl, avaLeft, avaTop,avaWidth,avaWidth)
     // 二维码绘制
-    const qrCodeTop = this.config[this.type].qrcode.top / 2 * rate
-    const qrCodeLeft = this.config[this.type].qrcode.left / 2 * rate
-    const qrCodeWidth = this.config[this.type].qrcode.width / 2 * rate
+    const qrCodeTop = this.config[options.type].qrcode.top / 2 * rate
+    const qrCodeLeft = this.config[options.type].qrcode.left / 2 * rate
+    const qrCodeWidth = this.config[options.type].qrcode.width / 2 * rate
     ctx.drawImage(avaUrl, qrCodeLeft, qrCodeTop,qrCodeWidth,qrCodeWidth)
     // 姓名绘制
-    ctx.setFillStyle(this.config[this.type].name.color)
-    ctx.setFontSize(this.config[this.type].name.size / 2 * rate)
-    const nameTop = this.config[this.type].name.top / 2 * rate
-    const nameLeft = this.config[this.type].name.left / 2 * rate
+    ctx.setFillStyle(this.config[options.type].name.color)
+    ctx.setFontSize(this.config[options.type].name.size / 2 * rate)
+    const nameTop = this.config[options.type].name.top / 2 * rate
+    const nameLeft = this.config[options.type].name.left / 2 * rate
     ctx.fillText(userInfo.nickName, nameLeft, nameTop)
     // 活动标题绘制
-    ctx.setFillStyle(this.config[this.type].title.color)
-    ctx.setFontSize(this.config[this.type].title.size / 2 * rate)
-    const titleTop = this.config[this.type].title.top / 2 * rate
-    const titleLeft = this.config[this.type].title.left / 2 * rate
+    ctx.setFillStyle(this.config[options.type].title.color)
+    ctx.setFontSize(this.config[options.type].title.size / 2 * rate)
+    const titleTop = this.config[options.type].title.top / 2 * rate
+    const titleLeft = this.config[options.type].title.left / 2 * rate
     ctx.fillText(this.query.title, titleLeft, titleTop)
     // 时间绘制
-    if(this.type !== 'exchange'){
-      ctx.setFontSize(this.config[this.type].time.size / 2 * rate)
-      ctx.setFillStyle(this.config[this.type].time.color)
-      const timeTop = this.config[this.type].time.top / 2 * rate
-      const timeLeft = this.config[this.type].time.left / 2 * rate
+    if(options.type !== 'exchange'){
+      ctx.setFontSize(this.config[options.type].time.size / 2 * rate)
+      ctx.setFillStyle(this.config[options.type].time.color)
+      const timeTop = this.config[options.type].time.top / 2 * rate
+      const timeLeft = this.config[options.type].time.left / 2 * rate
       ctx.fillText(this.query.time||'', timeLeft, timeTop)
     }
     // 打卡日期
-    if(this.type === 'sign'){
+    if(options.type === 'sign'){
       ctx.setTextAlign('right')
       // 日
-      ctx.setFontSize(this.config[this.type].date.size / 2 * rate)
+      ctx.setFontSize(this.config[options.type].date.size / 2 * rate)
       ctx.setFillStyle('white')
-      const DateTop = this.config[this.type].date.top / 2 * rate
-      const DateLeft = this.config[this.type].date.right / 2 * rate
+      const DateTop = this.config[options.type].date.top / 2 * rate
+      const DateLeft = this.config[options.type].date.right / 2 * rate
       ctx.fillText(new Date().getDate(), DateLeft, DateTop)
       // 月
-      ctx.setFontSize(this.config[this.type].month.size / 2 * rate)
+      ctx.setFontSize(this.config[options.type].month.size / 2 * rate)
       ctx.setFillStyle('white')
-      const monthTop = this.config[this.type].month.top / 2 * rate
-      const monthLeft = this.config[this.type].month.right / 2 * rate
+      const monthTop = this.config[options.type].month.top / 2 * rate
+      const monthLeft = this.config[options.type].month.right / 2 * rate
       ctx.fillText(this.month[new Date().getMonth()], monthLeft, monthTop)
       // 星期
-      ctx.setFontSize(this.config[this.type].week.size / 2 * rate)
+      ctx.setFontSize(this.config[options.type].week.size / 2 * rate)
       ctx.setFillStyle('white')
-      const weekTop = this.config[this.type].week.top / 2 * rate
-      const weekLeft = this.config[this.type].week.right / 2 * rate
+      const weekTop = this.config[options.type].week.top / 2 * rate
+      const weekLeft = this.config[options.type].week.right / 2 * rate
       ctx.fillText(this.week[new Date().getDay()], weekLeft, weekTop)
     }
+    console.log('文本绘制')
     ctx.draw()
 
     setTimeout(function(){    

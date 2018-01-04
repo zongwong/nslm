@@ -120,9 +120,11 @@
     </view>
     <view class="reply">
       <view class="reply_item" wx:for="{{comment}}" wx:key="dc_{{index}}">
-        <image class="reply_avatar" src="{{item.u_avatarurl}}"></image>
+        <image wx:if="{{item.is_doctor=='0'}}" class="reply_avatar" src="{{item.u_avatarurl}}"></image>
+        <image wx:if="{{item.is_doctor=='1'}}" class="reply_avatar" src="{{doctor.img}}"></image>
         <view class="reply_info">
-          <view class="name">{{item.u_nickname}}</view>
+          <view wx:if="{{item.is_doctor=='0'}}" class="name">{{item.u_nickname}}</view>
+          <view wx:if="{{item.is_doctor=='1'}}" class="name">{{doctor.name}}</view>
           <view class="conent">{{item.content}}</view>
           <view class="time">{{item.c_time}}</view>
         </view>

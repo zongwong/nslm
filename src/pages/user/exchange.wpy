@@ -134,11 +134,16 @@
   }
   .modal_body {
     label {
-      display: flex;
+      display:-webkit-box;
+      display:-webkit-flex;
+      display:flex;
+      -webkit-box-align:center;
+      -webkit-align-items:center;
+      align-items:center;
       border-bottom: 2rpx solid #ececec;
       padding: 12rpx 24rpx;
       font-size: 28rpx;
-      line-height: 52.5rpx;
+      // line-height: 52.5rpx;
       &:last-child {
         border-bottom: none;
       }
@@ -151,6 +156,7 @@
         color: #888;
         input {
           width: 100%;
+          line-height:2.58823529em;
         }
       }
     }
@@ -207,19 +213,19 @@
       </view>
       <view class="modal_body">
         <label for="name">
-          <view class="label_text">姓名</view>
+          <view><view class="label_text">姓名</view></view>
           <view class="label_input"><input type="text" id="name" placeholder="请输入姓名" value="{{name}}" @input="nameInput" /></view>
         </label>
         <label for="phone">
-          <view class="label_text">电话</view>
+          <view><view class="label_text">电话</view></view>
           <view class="label_input"><input type="text" id="phone" placeholder="请输入电话" value="{{phone}}" @input="phoneInput" /></view>
         </label>
         <label for="wx">
-          <view class="label_text">微信</view>
+          <view><view class="label_text">微信</view></view>
           <view class="label_input"><input type="text" id="wx" placeholder="请输入微信" value="{{wx}}" @input="wxInput" /></view>
         </label>
         <label for="address">
-          <view class="label_text">地址</view>
+          <view><view class="label_text">地址</view></view>
           <view class="label_input"><input type="text" id="address" placeholder="请输入地址" value="{{address}}" @input="addressInput" /></view>
         </label>
       </view>

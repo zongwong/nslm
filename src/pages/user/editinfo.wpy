@@ -30,24 +30,24 @@
     </view>
     <view class="form_block">
       <label class="form_item" for="age">
-        <view class="label_text">
-          年龄(岁)
+        <view>
+          <view class="label_text">年龄(岁)</view>
         </view>
         <view class="label_input">
           <input type="text" value="{{age}}" id="age" @input="ageInput" placeholder="请填写年龄" />
         </view>
       </label>
       <label class="form_item" for="height">
-        <view class="label_text">
-          身高(cm)
+        <view>
+          <view class="label_text">身高(cm)</view>
         </view>
         <view class="label_input">
           <input type="text" value="{{height}}" id="height" @input="heightInput" placeholder="请填写身高" />
         </view>
       </label>
       <label class="form_item" for="weight">
-        <view class="label_text">
-          体重(kg)
+        <view>
+          <view class="label_text">体重(kg)</view>
         </view>
         <view class="label_input">
             <input type="text" value="{{weight}}" id="weight" @input="weightInput" placeholder="请填写体重" />
@@ -57,7 +57,7 @@
     <view class="form_block bottom-block">
       <label class="form_item" for="constellation">
         <view class="label_text">
-          星座
+            星座
         </view>
         <view class="label_input">
             <picker mode="selector" value="{{constellation}}" @change="constellation" range="{{constellationRange}}">
@@ -174,6 +174,7 @@ export default class Editinfo extends wepy.page {
   async onLoad() {
     this.userInfo = this.$parent.globalData.userInfo
     this.imgs = this.$parent.globalData.imgs
+    this.$apply()
     await this.getMyinfo()
   }
   async getMyinfo() {

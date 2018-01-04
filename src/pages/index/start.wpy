@@ -93,19 +93,23 @@
     <view class="form_block">
       <view class="form_title">活动设置</view>
       <label class="form_item" for="name">
-        <view class="label_text">
-          活动名称
+        <view>
+          <view class="label_text">
+            活动名称
+          </view>
         </view>
         <view class="label_input">
-          <input type="text" value="{{title}}" id="name" @input="titleInput" placeholder="请填写活动标题" placeholder-style="line-height: 52.5rpx;font-size:28rpx;" />
+          <input type="text" value="{{title}}" id="name" @input="titleInput" placeholder="请填写活动标题" />
         </view>
       </label>
-      <label class="form_item" for="desc" style="padding-top:0;">
-        <view class="label_text" style="line-height:50rpx;padding-top:10.5rpx;">
-          活动描述
+      <label class="form_item" for="desc">
+        <view>
+          <view class="label_text">
+            活动描述
+          </view>
         </view>
         <view class="label_input">
-          <textarea type="text" value="{{desrc}}" id="desc" @input="desrcInput" placeholder="请填写活动描述" style="line-height:50rpx;margin:0;padding:0;" placeholder-style="font-size:28rpx;"></textarea>
+          <textarea type="text" value="{{desrc}}" id="desc" @input="desrcInput" placeholder="请填写活动描述" placeholder-style="font-size:28rpx;line-height:58823529em"></textarea>
         </view>
       </label>
       <label class="form_item">

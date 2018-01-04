@@ -205,11 +205,17 @@ page{
     display: block;
   }
   label.form_item {
-    display: flex;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:flex;
+    -webkit-box-align:center;
+    -webkit-align-items:center;
+    align-items:center;
     .label_text {
       width: 4em;
       margin-right: 20rpx;
-      line-height: 52.5rpx;
+      // line-height: 52.5rpx;
+      line-height:2.58823529em;
       white-space: nowrap;
     }
     .label_input {
@@ -217,13 +223,17 @@ page{
       max-width: 546rpx;
       overflow: hidden;
       input {
+        height:2.58823529em;
+        min-height:2.58823529em;
+        line-height:2.58823529em;
         width: 100%;
         color:#888;
       }
       textarea {
-        line-height: 52.5rpx;
+        // line-height: 52.5rpx;
+        line-height:1.8em;
         width: 100%;
-        height: 157.5rpx;
+        height: 158rpx;
         color:#888;
       }
       .picker_input {
@@ -416,9 +426,12 @@ export default class extends wepy.app {
   config = {
     pages: [
       "pages/index/index",
+      "pages/index/post",
+      "pages/user/exchange", 
+      "pages/index/start",
+      "pages/user/editinfo",
       "pages/course/fmdetail", 
       "pages/course/fm", 
-      "pages/index/post",
       "pages/index/pk",
       "pages/user/mymood", 
       "pages/user/myjoin", 
@@ -432,7 +445,6 @@ export default class extends wepy.app {
       "pages/user/success",
       "pages/course/coursedetail",
       "pages/course/courselist",
-      "pages/user/editinfo", 
       "pages/course/course", 
       "pages/course/articlelist", 
       "pages/course/articledetail", 
@@ -441,10 +453,8 @@ export default class extends wepy.app {
       "pages/user/top", 
       "pages/user/mypublish", 
       "pages/user/myexchange", 
-      "pages/user/exchange", 
       "pages/user/money", 
       "pages/user/moneydetail",
-      "pages/index/start", 
       "pages/index/detail"
     ],
     window: {
