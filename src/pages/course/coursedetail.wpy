@@ -101,18 +101,12 @@ export default class Coursedetail extends wepy.page {
   config = {
     navigationBarTitleText: "课程详情"
   };
-  components = {};
-
+  
   data = {
     info: null,
     imgs: null,
+    id: ''
     // collectText: '收藏'
-  };
-
-  computed = {
-    now() {
-      return +new Date();
-    }
   };
 
   methods = {
@@ -142,7 +136,12 @@ export default class Coursedetail extends wepy.page {
 
   async onLoad(options) {
     this.imgs = this.$parent.globalData.imgs
+    this.id = options.id
+    this.$apply()
     this.getDetail(options.id)
+  }
+  onShow() {
+    this.getDetail(this.id)
   }
   async getDetail(id) {
     const { data } = await http({

@@ -245,8 +245,11 @@ export default class Mentality extends wepy.page {
   async onLoad(options) {
     this.imgs = this.$parent.globalData.imgs;
     this.banner = this.$parent.globalData.config.heart_banner;
-    this.getData();
+    // this.getData();
     this.$apply();
+  }
+  onShow() {
+    this.getData();
   }
   async getData() {
     const { data } = await http(

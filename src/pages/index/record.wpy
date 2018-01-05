@@ -359,7 +359,7 @@
         <view class="item_detail" wx:if="{{item.status==2}}">
           <view class="desc greyColor">{{item.data.content}}</view>
           <image mode="aspectFill" src="{{item.data.img}}" wx:if="{{item.data.img}}"></image>
-          <view class="pinklight">任务进度 {{index + 1}}/30</view>
+          <view class="pinklight">任务进度 {{index + 1}}/{{activity.days}}</view>
         </view>  
       </view>
     </view>
@@ -416,18 +416,20 @@ export default class Record extends wepy.page {
       }
     }
   };
-
-  async onLoad(options) {
-    // 数据获取
+  async onLoad(options){
     this.imgs = this.$parent.globalData.imgs
     this.userInfo = this.$parent.globalData.userInfo
     this.id = options.id
-    const data = await interfaces.getActivityInfo(options.id)
+    this.$apply()
+  }
+  async onShow() {
+    // 数据获取
+    const data = await interfaces.getActivityInfo(this.id)
     if (data.code) {
       this.activity = data.info
       this.$apply()
     }
-    await this.getProgress(options.id)
+    await this.getProgress(this.id)
     
     // 记录构建
     let recordList = []

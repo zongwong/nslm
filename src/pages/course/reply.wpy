@@ -167,19 +167,21 @@
               })
             }else if(this.type=='pbmood'){
               // 心情
-              wepy.redirectTo({
-                url: `/pages/course/mentality`
+              wepy.navigateBack({
+                // url: `/pages/course/mentality`
+                delta: 1
               })
             }else if(this.type=='comment'){
               // 心情评论
-              wepy.redirectTo({
-                url:  `/pages/user/mooddetail?id=${this.query.id}`
-                // delta: 1
+              wepy.navigateBack({
+                // url:  `/pages/user/mooddetail?id=${this.query.id}`
+                delta: 1
               })
             }else{
               // 课程评论
-              wepy.redirectTo({
-                url:  `/pages/course/coursedetail?id=${this.query.id}`
+              wepy.navigateBack({
+                delta: 1
+                // url:  `/pages/course/coursedetail?id=${this.query.id}`
               })
             }
           }else{

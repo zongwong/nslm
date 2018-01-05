@@ -49,6 +49,7 @@ page{
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 111;
   button{
     width: 100%;
     background-color: #ff508a;
@@ -426,6 +427,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       "pages/index/index",
+      "pages/user/money", 
       "pages/index/post",
       "pages/user/exchange", 
       "pages/index/start",
@@ -453,7 +455,6 @@ export default class extends wepy.app {
       "pages/user/top", 
       "pages/user/mypublish", 
       "pages/user/myexchange", 
-      "pages/user/money", 
       "pages/user/moneydetail",
       "pages/index/detail"
     ],

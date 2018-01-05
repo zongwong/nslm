@@ -244,23 +244,29 @@
         this.query = options
         this.imgs = this.$parent.globalData.imgs
         this.userInfo = this.$parent.globalData.userInfo
-        const { data } = await http({
-          url: api.activity.signDetail.url,
-          method: api.activity.signDetail.method,
-          data: {
-            cid: options.id
-          }
-        },true)
-
-        if(data.code){
-          this.info = data.info
-          this.zan = Boolean(+data.info.clock.is_zan)
-        }
+        // await this.getData(options.id)
         const activityData = await interfaces.getActivityInfo(options.aid)
         const getProgressData = await interfaces.getProgress(options.aid)
         this.days = activityData.info.days
         this.dayed = getProgressData.info?getProgressData.info.length:0
         this.$apply()
+      }
+      onShow() {
+        this.getData(this.query.id)
+      }
+      async getData(id){
+        const { data } = await http({
+          url: api.activity.signDetail.url,
+          method: api.activity.signDetail.method,
+          data: {
+            cid: id
+          }
+        },true)
+        if(data.code){
+          this.info = data.info
+          this.zan = Boolean(+data.info.clock.is_zan)
+          this.$apply()
+        }
       }
   }
 </script>

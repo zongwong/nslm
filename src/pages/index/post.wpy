@@ -4,11 +4,167 @@ page{
   // position: absolute;
   // left: -100%;
 }
+.abs{
+  position: absolute;
+}
+.box{
+  width: 100%;
+  height: 100%;
+  .bg{
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .avatar{
+    z-index: 2;
+    width: 102rpx;
+    height: 102rpx;
+  }
+  .qrcode{
+    z-index: 2;
+    width: 162rpx;
+    height: 162rpx;
+  }
+  .title{
+    z-index: 2;
+    font-size: 40rpx,
+  }
+  .time{
+    z-index: 2;
+    color: #fff;
+    font-size: 22rpx,
+  }
+  .name{
+    z-index: 2;
+    font-size: 32rpx,
+  }
+}
+.create{
+  .avatar{
+    top: 324rpx;
+    left: 118rpx;
+  }
+  .qrcode{
+    top: 833rpx;
+    left: 486rpx;
+  }
+  .title{
+    top: 616rpx;
+    left: 118rpx;
+  }
+  .name{
+    top: 436rpx;
+    left:118rpx;
+  }
+  .time{
+    top: 688rpx;
+    left:142rpx;
+  }
+
+}
+.sign{
+  .avatar{
+    top: 494rpx;
+    left: 56rpx;
+  }
+  .qrcode{
+    top: 824rpx;
+    left: 490rpx;
+  }
+  .title{
+    top: 664rpx;
+    left: 56rpx;
+    font-size:44rpx;
+  }
+  .name{
+    top: 604rpx;
+    left:56rpx;
+    font-size:32rpx;
+  }
+  .time{
+    top: 738rpx;
+    left: 56rpx;
+    color: #d5d5d5;
+    font-size:30rpx;
+  }
+  .date{
+    top: 30rpx;
+    font-size: 106rpx;
+    font-family: 'Pakt';
+    line-height: 1;
+  }
+  .month{
+    top:126rpx;
+    font-size: 28rpx;
+  }
+  .week{
+    top:170rpx;
+    font-size: 32rpx;
+  }
+  .dateInfo{
+    width:100%;
+    box-sizing:border-box;
+    padding-right: 50rpx;
+    text-align: right;
+    z-index: 2;
+    color: #fff;
+    left: 0;
+  }
+}
+.exchange{
+  .avatar{
+    top: 250rpx;
+    left: 95rpx;
+  }
+  .qrcode{
+    top: 850rpx;
+    left: 134rpx;
+  }
+  .title{
+    top: 480rpx;
+    left: 95rpx;
+    color: #ff508a;
+    font-size:50rpx;
+  }
+  .name{
+    top: 360rpx;
+    left:95rpx;
+    font-size:32rpx;
+  }
+}
 </style>
 <template>
   <view class="pk">
-    <canvas canvas-id="myCanvas" style="width:100%;height:{{sysInfo.cheight}}px;"/>
+    <canvas canvas-id="myCanvas" style="width:100%;height:{{sysInfo.cheight}}px;position: absolute;left: -100%;"/>
     <!-- <image src="{{img}}" style="width:100%;height:{{sysInfo.cheight}}px;"></image> -->
+    <view class="showbox" style="width:100%;height:{{sysInfo.cheight}}px;">
+      <view class="box create" wx:if="{{type=='create'}}">
+        <image class="abs bg" src="{{current.bg}}"></image>
+        <image class="abs avatar" src="{{userInfo.avatarUrl}}"></image>
+        <image class="abs qrcode" src="{{userInfo.avatarUrl}}"></image>
+        <text class="abs title">{{query.title}}</text>
+        <text class="abs time">{{query.time}}</text>
+        <text class="abs name">{{userInfo.nickName}}</text>
+      </view>
+      <view class="box sign" wx:if="{{type=='sign'}}">
+        <image class="abs bg" src="{{current.bg}}"></image>
+        <image class="abs avatar" src="{{userInfo.avatarUrl}}"></image>
+        <image class="abs qrcode" src="{{userInfo.avatarUrl}}"></image>
+        <text class="abs title">{{query.title}}</text>
+        <text class="abs time">{{query.time}}</text>
+        <text class="abs name">{{userInfo.nickName}}</text>
+        <text class="abs dateInfo date">{{dateInfo.date}}</text>
+        <text class="abs dateInfo month">{{dateInfo.month}}</text>
+        <text class="abs dateInfo week">{{dateInfo.week}}</text>
+      </view>
+      <view class="box exchange" wx:if="{{type=='exchange'}}">
+        <image class="abs bg" src="{{current.bg}}"></image>
+        <image class="abs avatar" src="{{userInfo.avatarUrl}}"></image>
+        <image class="abs qrcode" src="{{userInfo.avatarUrl}}"></image>
+        <text class="abs title">{{query.title}}</text>
+        <text class="abs name">{{userInfo.nickName}}</text>
+      </view>
+    </view>
     <view class="join">
       <button @tap="saveToAlbem">保存到相册</button>
     </view>
@@ -32,7 +188,7 @@ export default class Post extends wepy.page {
       title: '我是标题我有很多个字',
       time: '时间',
     },
-    type:'sign',
+    type:'',
     userInfo: {},
     month: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
     week: ['星期日','星期一','星期二','星期三','星期三','星期五','星期六'],
@@ -139,46 +295,72 @@ export default class Post extends wepy.page {
           color: 'black',
         }
       }
-    }
+    },
+    current:{},
+    isOk:false,
+    dateInfo:{}
   };
   methods = {
       saveToAlbem(){
-          console.log(123)
-          wx.saveImageToPhotosAlbum({
-            filePath: this.img,
-            success(res) {
-                console.log(res)
-                wepy.showToast({
-                  title:'保存成功'
-                })
-            }
+          wx.showLoading({
+            title: '生成分享图中...',
+            mask: true
           })
+          let that = this
+          let check = setInterval(()=>{
+            console.log(1)
+            if(that.isOk){ 
+              clearInterval(check);
+              wx.hideLoading()
+              wx.saveImageToPhotosAlbum({
+                filePath: that.img,
+                success(res) {
+                    wepy.showToast({
+                      title:'保存成功'
+                    })
+                }
+              })
+            }
+          },100)
       }
   };
   async onLoad(options) {
     console.log(options)
-    wx.showLoading({
-      title: '生成分享图中...',
-      mask: true
-    })
+    options = {
+      type: 'create',
+      title: '123123',
+      time: '123'
+    }
     let that = this
-    const userInfo = wepy.getStorageSync('userInfo')
-    this.userInfo = userInfo
+    // this.userInfo = this.$parent.globalData.userInfo
+    const { userInfo } = await interfaces.getUserInfo()
+    this.userInfo = JSON.parse(userInfo)
     this.query = options
     this.type = options.type
+    this.current = this.config[options.type]
     let sysInfo = await wepy.getSystemInfo()
     const rate = sysInfo.screenWidth / 375
     sysInfo.cheight = 1126 * rate / 2
     this.sysInfo = sysInfo
+    this.dateInfo = {
+      date:new Date().getDate(),
+      month:this.month[new Date().getMonth()],
+      week:this.week[new Date().getDay()],
+    }
     this.$apply()
-    
+    if(!this.type){
+      return false;
+    }
     const ctx = wx.createCanvasContext('myCanvas')
     // 素材下载
-    const tempUrl = await interfaces.downFile(this.config[options.type].bg)
-    const avaUrl = await interfaces.downFile(userInfo.avatarUrl)
     console.log('素材下载')
+    const tempUrl = await interfaces.downFile(this.config[options.type].bg)
+    console.log('背景下载完成')
+    const avaUrl = await interfaces.downFile(this.userInfo.avatarUrl)
+    console.log('头像下载完成')
     // 背景
     ctx.drawImage(tempUrl, 0, 0, sysInfo.screenWidth, sysInfo.cheight)
+    console.log('背景绘制')
     // 头像绘制
     const avaTop = this.config[options.type].avatar.top / 2 * rate
     const avaLeft = this.config[options.type].avatar.left / 2 * rate
@@ -194,7 +376,7 @@ export default class Post extends wepy.page {
     ctx.setFontSize(this.config[options.type].name.size / 2 * rate)
     const nameTop = this.config[options.type].name.top / 2 * rate
     const nameLeft = this.config[options.type].name.left / 2 * rate
-    ctx.fillText(userInfo.nickName, nameLeft, nameTop)
+    ctx.fillText(this.userInfo.nickName, nameLeft, nameTop)
     // 活动标题绘制
     ctx.setFillStyle(this.config[options.type].title.color)
     ctx.setFontSize(this.config[options.type].title.size / 2 * rate)
@@ -243,22 +425,12 @@ export default class Post extends wepy.page {
           console.log('生成图片完成')
           console.log(res.tempFilePath)
           that.img = res.tempFilePath
+          that.isOk = true
           that.$apply()
           wx.hideLoading()
         }
       })
     },1000)
-  }
-  onShareAppMessage(res) {
-    return {
-      title: '女神联盟',
-      // path: '/page/user?id=123',
-      success: function(res) {
-        wx.showToast({
-          title: '分享成功'
-        })
-      }
-    }
   }
 }
 </script>

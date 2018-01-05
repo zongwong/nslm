@@ -35,12 +35,16 @@
     }
   }
   .label{
-    display: flex;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:flex;
+    -webkit-box-align:center;
+    -webkit-align-items:center;
     background: #fff;
-    padding: 30rpx 40rpx;
+    padding: 10rpx 40rpx;
     font-size: 28rpx;
     view{
-      line-height: 52.5rpx;
+      // line-height: 52.5rpx;
       &:first-child{
         width: 140rpx;
       }
@@ -49,6 +53,9 @@
         input{
           width: 100%;
           color: #a9a9a9;
+          height:2.58823529em;
+          min-height:2.58823529em;
+          line-height:2.58823529em;
         }
       }
     }
@@ -60,7 +67,7 @@
     <view class="header">
       <image class="bg" src="{{imgs.moneybg}}"></image>
       <view class="info">
-        <view class="mymoney">200.00</view>
+        <view class="mymoney">{{mymoney}}</view>
         <view class="text">可提现金额</view>
         <navigator class="detial" url="/pages/user/moneydetail">
           奖金明细
@@ -68,7 +75,7 @@
       </view>
     </view>
     <label class="label" for="money">
-      <view>提现金额</view>
+      <view><view>提现金额</view></view>
       <view><input type="number" id="money" @input="moneyInput" placeholder="请输入提现金额" placeholder-style="color:#a9a9a9;font-size: 28rpx;line-height: 52.5rpx;" /></view>  
     </label>
     <view class="join">
@@ -79,6 +86,7 @@
 
 <script>
   import wepy from 'wepy'
+  import interfaces from '../../interface/index'
   export default class Money extends wepy.page {
       config = {
         navigationBarTitleText: "提现"
@@ -86,6 +94,7 @@
       data = {
         imgs: null,
         money: '',
+        mymoney: 0
       }
       methods = {
         moneyInput(e) {
@@ -94,6 +103,14 @@
         // 提现
         async getMoney() {
           if (this.money) {
+            if(this.money>this.mymoney){
+              wepy.showModal({
+                title: '提示',
+                content: '余额不足'
+              })
+              return false
+            }
+
             const res = await wepy.showModal({
               title: '提示',
               content: `确定提现${this.money}元?`
@@ -111,6 +128,8 @@
                 await wepy.showToast({
                   title:'提现成功'
                 })
+                this.mymoney -= this.money
+                this.$apply()
               }
 
             }
@@ -118,8 +137,13 @@
           }
         },
       }
-      onLoad() {
+      async onLoad() {
         this.imgs = this.$parent.globalData.imgs
+        const data = await interfaces.getMyinfo()
+        if( data.code ){
+          this.mymoney = data.info.total_money
+          this.$apply()
+        }
       }
   }
 </script>

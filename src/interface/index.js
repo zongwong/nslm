@@ -133,6 +133,10 @@ const interfaces = {
     const data = await wepy.downloadFile({
       url: url
     })
+    // console.log(data)
+    // data.onProgressUpdate((res) => {
+    //   console.log(res)
+    // })
     return data.tempFilePath
   },
   // 微信支付
