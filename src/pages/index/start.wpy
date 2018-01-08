@@ -393,15 +393,26 @@ export default class Start extends wepy.page {
       },true);
 
       if (data.code) {
-        await wepy.showModal({
-          title: "提示",
-          content: "活动创建成功"
-        });
 
-        let sTime = _.getDate(this.start_time)
-        let eTime = _.getNextTime(sTime,parseInt(this.days))
-        wepy.navigateTo({
-          url: `/pages/index/post?type=create&title=${this.title}&time=${sTime}-${eTime}`
+        const payRes =  interfaces.wxPay(data.info).then((res)=>{
+          
+          wepy.showModal({
+            title: "提示",
+            content: "活动创建成功"
+          });
+
+          let sTime = _.getDate(this.start_time)
+          let eTime = _.getNextTime(sTime,parseInt(this.days))
+          wepy.redirectTo({
+            url: `/pages/index/post?type=create&title=${this.title}&time=${sTime}-${eTime}`
+          })
+        
+        }).catch((res)=>{
+          wepy.showModal({
+            title: '提示',
+            content: '支付失败'
+          })
+
         })
       }
     }

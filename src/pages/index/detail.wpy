@@ -137,13 +137,32 @@ export default class Detail extends wepy.page {
           aid: this.activity.id
         }
       },true)
-      if( data.code ){
-        wepy.showModal({
-          title: '提示',
-          content: '参加成功',
+      if (data.code) {
+
+        const payRes =  interfaces.wxPay(data.info).then((res)=>{
+          this.activity.is_join = 1
+          this.$apply()
+          
+          wepy.showModal({
+            title: "提示",
+            content: "活动参加成功"
+          });
+          wepy.redirectTo({
+            url:`/pages/index/record?id=${this.activity.id}`
+          })
+          // let sTime = _.getDate(this.start_time)
+          // let eTime = _.getNextTime(sTime,parseInt(this.days))
+          // wepy.redirectTo({
+          //   url: `/pages/index/post?type=create&title=${this.title}&time=${sTime}-${eTime}`
+          // })
+        
+        }).catch((res)=>{
+          wepy.showModal({
+            title: '提示',
+            content: '支付失败'
+          })
+
         })
-        this.activity.is_join = 1
-        this.$apply()
       }
     },
     // 去打卡

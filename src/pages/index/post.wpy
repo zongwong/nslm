@@ -302,15 +302,22 @@ export default class Post extends wepy.page {
   };
   methods = {
       saveToAlbem(){
+          let that = this
           wx.showLoading({
             title: '生成分享图中...',
             mask: true
           })
-          let that = this
-          let check = setInterval(()=>{
-            console.log(1)
-            if(that.isOk){ 
-              clearInterval(check);
+
+          wx.canvasToTempFilePath({
+            x: 0,
+            y: 0,
+            canvasId: 'myCanvas',
+            success: function(res) {
+              console.log('生成图片完成')
+              console.log(res.tempFilePath)
+              that.img = res.tempFilePath
+              that.isOk = true
+              that.$apply()
               wx.hideLoading()
               wx.saveImageToPhotosAlbum({
                 filePath: that.img,
@@ -321,7 +328,15 @@ export default class Post extends wepy.page {
                 }
               })
             }
-          },100)
+          })
+          // let check = setInterval(()=>{
+          //   console.log(1)
+          //   if(that.isOk){ 
+          //     clearInterval(check);
+          //     wx.hideLoading()
+ 
+          //   }
+          // },100)
       }
   };
   async onLoad(options) {
@@ -416,21 +431,9 @@ export default class Post extends wepy.page {
     console.log('文本绘制')
     ctx.draw()
 
-    setTimeout(function(){    
-      wx.canvasToTempFilePath({
-        x: 0,
-        y: 0,
-        canvasId: 'myCanvas',
-        success: function(res) {
-          console.log('生成图片完成')
-          console.log(res.tempFilePath)
-          that.img = res.tempFilePath
-          that.isOk = true
-          that.$apply()
-          wx.hideLoading()
-        }
-      })
-    },1000)
+    // setTimeout(function(){    
+
+    // },1000)
   }
 }
 </script>

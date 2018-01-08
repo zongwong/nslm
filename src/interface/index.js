@@ -51,7 +51,7 @@ const interfaces = {
     const {
       data
     } = await wepy.uploadFile({
-      url: 'http://www.2p98.cn/api/public/uploadImg',
+      url: 'https://www.2p98.cn/api/public/uploadImg',
       filePath: temp.tempFilePaths[0],
       name: 'filename'
     })
@@ -140,9 +140,21 @@ const interfaces = {
     return data.tempFilePath
   },
   // 微信支付
-  async wxPay(data) {
-    const res = await wepy.requestPayment(data)
-    return res
+  wxPay(data) {
+    // const res = await wepy.requestPayment(data)
+    // return res
+    return new Promise((resolve, reject) => {
+      wx.requestPayment({
+        ...data,
+        complete: res => {
+          if (res.errMsg === 'requestPayment:ok') {
+            resolve(res)
+          } else {
+            reject(res)
+          }
+        }
+      })
+    })
   },
   // 活动分享
   activityShare(title, id, url) {
