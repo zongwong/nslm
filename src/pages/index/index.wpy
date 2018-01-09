@@ -171,9 +171,9 @@ export default class Index extends wepy.page {
     }
   };
   async onLoad() {
-    this.getActiveList(this.tabIndex)
     this.imgs = this.$parent.globalData.imgs
     let data = await interfaces.globalConfig()
+    await this.getActiveList(this.tabIndex)
     if ( data.code ){
       this.banner = data.info.index_banner
       this.$apply()
@@ -190,7 +190,7 @@ export default class Index extends wepy.page {
       data: {
         sort: sort
       }
-    })
+    },true)
 
     this.activeList = data.info || []
     this.$apply()

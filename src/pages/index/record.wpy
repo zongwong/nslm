@@ -287,7 +287,7 @@
       <view class="userdata">
         <view class="days">{{dayed}}</view>
         <view class="txt">累计打卡</view>
-        <view class="alldata">总计天数:{{activity.days}}天   |   打卡完成将获得 女神勋章*1 <text class="ns_icon"></text> </view>
+        <view class="alldata">总计天数:{{activity.days}}天   |   打卡完成将获得 女神勋章*1 <text class="ns_icon" @tap="exModal"></text> </view>
         <view class="progress">
           <view class="progressinner" style="width:{{width}}rpx"><text class="perNum">{{per}}%</text></view>
         </view>
@@ -364,6 +364,7 @@
       </view>
     </view>
   </view>
+  <explain :status.sync="status" :title="exTitle" :desc="exDesc" :content="exContent"></explain>
 </template>
 
 <script>
@@ -372,13 +373,20 @@ import interfaces from "../../interface/index";
 import http from "../../utils/request"
 import _ from "../../utils/tools"
 import api from "../../config"
+import explain from "../../components/public/explain"
 export default class Record extends wepy.page {
   config = {
     navigationBarTitleText: "打卡记录"
   };
-  components = {};
+  components = {
+    explain:explain
+  };
 
   data = {
+    status: false,
+    exTitle: "女神勋章",
+    exDesc: "用于兑换课程和礼物",
+    exContent: "1、女神勋章是女神们自律积极、年轻活力、变美蜕变、尊贵身份的象征；2、女神勋章可通过参加活动，并完成打卡任务获得；3、女神勋章可以用来兑换女神蜕变课程和礼物；",
     imgs: null,
     info: [],
     id: '',
@@ -400,9 +408,13 @@ export default class Record extends wepy.page {
   };
 
   methods = {
+    exModal() {
+      this.status = true;
+    },
     toSign(e) {
+      let dayed = this.dayed + 1
       wepy.navigateTo({
-        url: `/pages/course/reply?type=sign&id=${this.id}&dayed=${this.dayed}&days=${this.activity.days}&title=${this.activity.title}`
+        url: `/pages/course/reply?type=sign&id=${this.id}&dayed=${dayed}&days=${this.activity.days}&title=${this.activity.title}`
       })
     },
     lookMoreRecord() {

@@ -301,14 +301,15 @@ export default class Post extends wepy.page {
     dateInfo:{}
   };
   methods = {
-      saveToAlbem(){
+      async saveToAlbem(){
           let that = this
           wx.showLoading({
             title: '生成分享图中...',
             mask: true
           })
-          setTimeout(() => {
-          
+
+          await this.postDraw()
+          setTimeout(() => {          
             wx.canvasToTempFilePath({
               x: 0,
               y: 0,
@@ -330,16 +331,8 @@ export default class Post extends wepy.page {
                 })
               }
             })
+          }, 100);
 
-          }, 500);
-          // let check = setInterval(()=>{
-          //   console.log(1)
-          //   if(that.isOk){ 
-          //     clearInterval(check);
-          //     wx.hideLoading()
- 
-          //   }
-          // },100)
       }
   };
   async onLoad(options) {
@@ -356,14 +349,16 @@ export default class Post extends wepy.page {
       month:this.month[new Date().getMonth()],
       week:this.week[new Date().getDay()],
     }
-    this.$apply()
-  }
-  async onReady() {
     let sysInfo = await wepy.getSystemInfo()
     const rate = sysInfo.screenWidth / 375
     sysInfo.cheight = 1126 * rate / 2
+    this.rate = rate
     this.sysInfo = sysInfo
     this.$apply()
+  }
+  async postDraw() {
+    const sysInfo = this.sysInfo
+    const rate = this.rate
     const ctx = wx.createCanvasContext('myCanvas')
     // 素材下载
     console.log('素材下载')
