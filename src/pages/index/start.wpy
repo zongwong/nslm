@@ -266,7 +266,7 @@ export default class Start extends wepy.page {
       this.desrc = e.detail.value;
     },
     // 封面选择
-    async selectPost(post_id, src) {
+    selectPost(post_id, src) {
       this.img = src;
       this.post_id = post_id;
     },

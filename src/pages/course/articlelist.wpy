@@ -43,7 +43,7 @@
           <image class="list_item_post" src="{{item.img}}"></image>
           <view class="list_item_detail">
             <view class="title singleTextOverflow">{{item.title}}</view>
-            <view class="desc greyColor">{{item.content}}</view>
+            <view class="desc greyColor">{{item.desrc}}</view>
             <view class="data">
               <view class="greyColor">{{item.time}}</view>
               <view class="pinklight"><text class="icon_view"></text><text>{{item.pv}}</text></view>

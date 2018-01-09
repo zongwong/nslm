@@ -59,6 +59,7 @@
 </style>
 <template>
   <view class="fm">
+    <tabNav :navs="navs"></tabNav>
     <view class="fmcontent">
         <navigator class="item" url="/pages/course/fmdetail?id={{item.id}}" wx:for="{{list}}" wx:key="fm_{{index}}">
             <view class="imgbox">
@@ -79,6 +80,7 @@
 
 <script>
   import wepy from 'wepy'
+  import tabNav from '../../components/index/tabNav'
   import api from "../../config"
   import http from "../../utils/request"
   import _ from "../../utils/tools"
@@ -89,6 +91,21 @@
       data = {
         imgs: null,
         list: [],
+        navs:[{
+            text:'情感',
+            selected:true,
+        },{
+            text:'心理',
+            selected:false,
+        }]
+      }
+      events = {
+          navTapEvent(index) {
+              console.log(index)
+          }
+      }
+      components = {
+        tabNav:tabNav
       }
       async onLoad() {
         this.imgs = this.$parent.globalData.imgs
