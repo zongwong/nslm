@@ -101,7 +101,7 @@
       }
       events = {
           navTapEvent(index) {
-              console.log(index)
+            this.getFm(index + 1)
           }
       }
       components = {
@@ -109,13 +109,14 @@
       }
       async onLoad() {
         this.imgs = this.$parent.globalData.imgs
-        this.getFm()
+        this.getFm(1)
       }
-      async getFm() {
+      async getFm(type) {
         const { data } = await http({
           url: api.course.fm.url,
           method: api.course.fm.method,
           data: {
+              type:type
           }
         },true)
         if (data.code){

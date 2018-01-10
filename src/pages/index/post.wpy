@@ -135,6 +135,7 @@ page{
 </style>
 <template>
   <view class="pk">
+    <!-- position: absolute;left: -100%; -->
     <canvas canvas-id="myCanvas" style="width:100%;height:{{sysInfo.cheight}}px;position: absolute;left: -100%;"/>
     <!-- <image src="{{img}}" style="width:100%;height:{{sysInfo.cheight}}px;"></image> -->
     <view class="showbox" style="width:100%;height:{{sysInfo.cheight}}px;">
@@ -331,12 +332,17 @@ export default class Post extends wepy.page {
                 })
               }
             })
-          }, 100);
+          }, 1010);
 
       }
   };
   async onLoad(options) {
     console.log(options)
+    // options = {
+    //   title:'123123',
+    //   time:'123123',
+    //   type:'exchange'
+    // }
     let that = this
     // this.userInfo = this.$parent.globalData.userInfo
     const { userInfo } = await interfaces.getUserInfo()
@@ -380,12 +386,14 @@ export default class Post extends wepy.page {
     const qrCodeWidth = this.config[this.type].qrcode.width / 2 * rate
     ctx.drawImage(avaUrl, qrCodeLeft, qrCodeTop,qrCodeWidth,qrCodeWidth)
     // 姓名绘制
+    ctx.setTextAlign('left')
     ctx.setFillStyle(this.config[this.type].name.color)
     ctx.setFontSize(this.config[this.type].name.size / 2 * rate)
     const nameTop = this.config[this.type].name.top / 2 * rate
     const nameLeft = this.config[this.type].name.left / 2 * rate
     ctx.fillText(this.userInfo.nickName, nameLeft, nameTop)
     // 活动标题绘制
+    ctx.setTextAlign('left')
     ctx.setFillStyle(this.config[this.type].title.color)
     ctx.setFontSize(this.config[this.type].title.size / 2 * rate)
     const titleTop = this.config[this.type].title.top / 2 * rate
@@ -393,6 +401,7 @@ export default class Post extends wepy.page {
     ctx.fillText(this.query.title, titleLeft, titleTop)
     // 时间绘制
     if(this.type !== 'exchange'){
+      ctx.setTextAlign('left')
       ctx.setFontSize(this.config[this.type].time.size / 2 * rate)
       ctx.setFillStyle(this.config[this.type].time.color)
       const timeTop = this.config[this.type].time.top / 2 * rate
@@ -424,7 +433,7 @@ export default class Post extends wepy.page {
     console.log('文本绘制')
     setTimeout(function(){    
       ctx.draw()
-    },100)
+    },1000)
   }
 }
 </script>

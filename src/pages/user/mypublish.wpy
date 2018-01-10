@@ -71,7 +71,7 @@
 <template>
   <view class="activehistory">
     <tabNav :navs="navs"></tabNav>
-    <navigator class="pbcontent" url="/pages/index/record?id={{item.id}}" wx:for="{{activity}}" wx:key="item_{{index}}">    
+    <navigator class="pbcontent" url="/pages/index/detail?id={{item.id}}" wx:for="{{activity}}" wx:key="item_{{index}}">    
       <view class="list_item">
         <view class="list_item_info">
           <image class="list_item_post" src="{{item.img}}"></image>

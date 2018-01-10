@@ -412,6 +412,23 @@ export default class Record extends wepy.page {
       this.status = true;
     },
     toSign(e) {
+      let nowTime = new Date()
+      let nowMin = parseInt(nowTime.getHours()) * 3600 + parseInt(nowTime.getMinutes())
+
+      let startArr = this.activity.sign_start_time.split(':')
+      let endArr = this.activity.sign_end_time.split(':')
+
+      let startMin = parseInt(startArr[0]) * 3600 + parseInt(startArr[1])
+      let endMin = parseInt(endArr[0]) * 3600 + parseInt(endArr[1])
+      console.log(nowMin,startMin,endMin)
+      if(nowMin<startMin || nowMin>endMin){
+        wepy.showModal({
+          title: '提示',
+          content: '不在打卡时段内'
+        })
+        return false
+      }
+
       let dayed = this.dayed + 1
       wepy.navigateTo({
         url: `/pages/course/reply?type=sign&id=${this.id}&dayed=${dayed}&days=${this.activity.days}&title=${this.activity.title}`

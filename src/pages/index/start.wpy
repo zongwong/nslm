@@ -92,24 +92,24 @@
 
     <view class="form_block">
       <view class="form_title">活动设置</view>
-      <label class="form_item" for="name">
+      <label class="form_item" for="title">
         <view>
           <view class="label_text">
             活动名称
           </view>
         </view>
         <view class="label_input">
-          <input type="text" value="{{title}}" id="name" @input="titleInput" placeholder="请填写活动标题" />
+          <input type="text" value="{{title}}" id="title" @input="titleInput" placeholder="请填写活动标题" />
         </view>
       </label>
-      <label class="form_item" for="desc">
+      <label class="form_item" for="desrc">
         <view>
           <view class="label_text">
             活动描述
           </view>
         </view>
         <view class="label_input">
-          <textarea type="text" value="{{desrc}}" id="desc" @input="desrcInput" placeholder="请填写活动描述" placeholder-style="font-size:28rpx;line-height:58823529em"></textarea>
+          <textarea type="text" value="{{desrc}}" id="desrc" @blur="desrcInput" placeholder="请填写活动描述" placeholder-style="font-size:28rpx;line-height:58823529em;padding:0;"></textarea>
         </view>
       </label>
       <label class="form_item">
@@ -259,11 +259,11 @@ export default class Start extends wepy.page {
   methods = {
     // 标题设置
     titleInput(e) {
-      this.title = e.detail.value;
+      this.title = e.detail.value
     },
     // 描述设置
     desrcInput(e) {
-      this.desrc = e.detail.value;
+      this.desrc = e.detail.value
     },
     // 封面选择
     selectPost(post_id, src) {
