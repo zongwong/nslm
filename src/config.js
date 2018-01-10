@@ -57,6 +57,16 @@ const api = {
     exdetail: {
       method: 'post',
       url: '/query/exchangeDetail'
+    },
+    // 绑定银行卡
+    card: {
+      method: 'post',
+      url: '/users/card'
+    },
+    // 提现
+    withdraw: {
+      method: 'post',
+      url: '/users/withdraw'
     }
   },
   activity: {

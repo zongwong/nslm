@@ -60,7 +60,122 @@
       }
     }
   }
-
+  .modal_mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 111;
+  background: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+}
+.modal {
+  width: 588rpx;
+  height: 800rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  overflow: hidden;
+  position: fixed;
+  top: 150rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  .modal_header {
+    height: 324rpx;
+    width: 100%;
+    border-bottom: 4rpx solid #ff4a88;
+    position: relative;
+    .h_item {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+    image {
+      z-index: 2;
+    }
+    .post_mask {
+      z-index: 3;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .info {
+      color: #fff;
+      z-index: 4;
+      text-align: center;
+      font-size: 24rpx;
+      line-height: 1;
+      .need_num {
+        font-size: 70rpx;
+        margin: 86rpx 0 10rpx 0;
+        font-family: 'Pakt';
+        text {
+          font-size: 22rpx;
+        }
+      }
+      .tips_text {
+        margin-bottom: 35rpx;
+      }
+      .tags {
+        text {
+          display: inline-block;
+          border-radius: 30rpx;
+          line-height: 36rpx;
+          border: 2rpx solid #fff;
+          padding: 0 24rpx;
+          max-width: 260rpx;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          &:first-child {
+            border-color: #ff4a88;
+            background: #ff4a88;
+            margin-right: 20rpx;
+          }
+        }
+      }
+    }
+  }
+  .modal_body {
+    label {
+      display:-webkit-box;
+      display:-webkit-flex;
+      display:flex;
+      -webkit-box-align:center;
+      -webkit-align-items:center;
+      align-items:center;
+      border-bottom: 2rpx solid #ececec;
+      padding: 12rpx 24rpx;
+      font-size: 28rpx;
+      // line-height: 52.5rpx;
+      &:last-child {
+        border-bottom: none;
+      }
+      .label_text {
+        width: 5em;
+      }
+      .label_input {
+        flex: 1;
+        color: #888;
+        input {
+          width: 100%;
+          line-height:2.58823529em;
+        }
+      }
+    }
+  }
+  .ex_btn {
+    width: 460rpx;
+    background: #ff4a88;
+    color: #fff;
+    line-height: 64rpx;
+    font-size: 26rpx;
+    position: absolute;
+    bottom: 24rpx;
+    left: 50%;
+    margin-left: -230rpx;
+    border-radius: 40rpx;
+  }
+}
 </style>
 <template>
   <view class="money">
@@ -82,11 +197,34 @@
       <button @tap="getMoney">确定提现</button>
     </view>
   </view>
+  <!-- 提现资料填写-->
+  <view class="modal_mask" wx:if="{{changeModal==1}}">
+    <view class="modal" style="padding-top:50rpx;height:400rpx;">
+      <view class="modal_body">
+        <label for="name">
+          <view><view class="label_text">姓名</view></view>
+          <view class="label_input"><input type="text" id="name" placeholder="请输入姓名" value="{{name}}" @input="nameInput" /></view>
+        </label>
+        <label for="card">
+          <view><view class="label_text">银行卡号</view></view>
+          <view class="label_input"><input type="number" id="card" placeholder="请输入银行卡号" value="{{card}}" @input="cardInput" /></view>
+        </label>
+        <label for="bank">
+          <view><view class="label_text">开户行</view></view>
+          <view class="label_input"><input type="text" id="bank" placeholder="请输入开户行名称" value="{{bank}}" @input="bankInput" /></view>
+        </label>
+      </view>
+      <button class="ex_btn" @tap="submitChange">绑定银行卡</button>
+    </view>
+    <view class="close" @tap="exChange(0)" style="top:700rpx;"></view>
+  </view>
 </template>
 
 <script>
   import wepy from 'wepy'
   import interfaces from '../../interface/index'
+  import http from '../../utils/request'
+  import api from '../../config'
   export default class Money extends wepy.page {
       config = {
         navigationBarTitleText: "提现"
@@ -94,35 +232,98 @@
       data = {
         imgs: null,
         money: '',
-        mymoney: 0
+        mymoney: 0,
+        changeModal: 0,
+        name: '',
+        card: '',
+        bank: '',
       }
       methods = {
+        nameInput(e) {
+          this.name = e.detail.value
+        },
+        cardInput(e) {
+          this.card = e.detail.value
+        },
+        bankInput(e) {
+          this.bank = e.detail.value
+        },
+        // 资料框
+        exChange(status) {
+          this.changeModal = status
+          this.$apply()
+        },
+        // 绑定银行卡
+        async submitChange() {
+          if(!this.name){
+            wepy.showModal({
+              title: '提示',
+              content: '请填写姓名'
+            })
+            return false
+          }
+          if(!this.card){
+            wepy.showModal({
+              title: '提示',
+              content: '请填写银行卡号'
+            })
+            return false
+          }
+          if(!this.bank){
+            wepy.showModal({
+              title: '提示',
+              content: '请填写开户行名称'
+            })
+            return false
+          }
+          const { data } = await http({
+            method:api.users.card.method,
+            url:api.users.card.url,
+            data:{
+              name:this.name,
+              card:this.card,
+              bank:this.bank,
+            }
+          },true)
+          if(data.code){
+            wepy.showToast({
+              title:'绑定成功'
+            })
+            this.changeModal = 0
+          }
+        },
         moneyInput(e) {
           this.money = e.detail.value
         },
         // 提现
         async getMoney() {
-          if (this.money) {
-            if(this.money>this.mymoney){
+          if (this.money ) {
+            if(this.money<=0){
+              wepy.showModal({
+                title: '提示',
+                content: '提现金额错误'
+              })
+              return false
+            } 
+            if( this.money > this.mymoney ){
               wepy.showModal({
                 title: '提示',
                 content: '余额不足'
               })
               return false
             }
-
             const res = await wepy.showModal({
               title: '提示',
               content: `确定提现${this.money}元?`
             })
             if(res.confirm){
               const { data } = await http({
-                url: '',
-                method: '',
+                url: api.users.withdraw.url,
+                method: api.users.withdraw.method,
                 data: {
-
+                  amount:this.money
                 }
-              })
+              },true)
 
               if(data.code){
                 await wepy.showToast({
@@ -130,10 +331,12 @@
                 })
                 this.mymoney -= this.money
                 this.$apply()
+              }else{
+                this.changeModal = 1
+                this.$apply()
               }
 
             }
-            
           }
         },
       }
