@@ -61,12 +61,17 @@ const api = {
     // 绑定银行卡
     card: {
       method: 'post',
-      url: '/users/card'
+      url: '/users/bindBankAccount'
     },
     // 提现
     withdraw: {
       method: 'post',
       url: '/users/withdraw'
+    },
+    // 奖金明细
+    moneydetail: {
+      method: 'post',
+      url: '/users/accountDetail'
     }
   },
   activity: {

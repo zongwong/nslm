@@ -33,13 +33,13 @@
 </style>
 <template>
   <view class="money">
-    <view class="item add">
+    <view class="item {{ item.pre == '-' ? '':'add'}}" wx:for="{{list}}" wx:key="md*">
       <view class="left">
-        <view class="text">原因说明</view>
-        <view class="time">2017/11/26 16:11</view>
+        <view class="text">{{item.type_note}}</view>
+        <view class="time">{{item.c_time}}</view>
       </view>
       <view class="right">
-        +300
+        {{item.amount}}
       </view>
     </view>
   </view>
@@ -54,37 +54,22 @@
         navigationBarTitleText: "奖金明细"
       };
       data = {
-        query: null,
-        info: null,
-        zan: false
-      }
-      methods = {
-        async zan() {
-          const { data } = await http({
-            url: api.activity.zan.url,
-            method: api.activity.zan.method,
-            data: {
-              cid: this.query.id
-            }
-          },true)
-
-          if(data.code){
-            this.zan = true
-          }
-        }
+        list: []
       }
       async onLoad(options) {
         this.query = options
         const { data } = await http({
-          url: api.activity.signDetail.url,
-          method: api.activity.signDetail.method,
+          url: api.users.moneydetail.url,
+          method: api.users.moneydetail.method,
           data: {
-            cid: options.id
           }
         },true)
 
         if(data.code){
-          this.info = data.info
+          data.info.forEach(function(item,index){
+            item.pre = item.amount.slice(0,1)
+          })
+          this.list = data.info
         }
         this.$apply()
       }

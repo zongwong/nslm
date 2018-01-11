@@ -191,7 +191,7 @@
     </view>
     <label class="label" for="money">
       <view><view>提现金额</view></view>
-      <view><input type="number" id="money" @input="moneyInput" placeholder="请输入提现金额" placeholder-style="color:#a9a9a9;font-size: 28rpx;line-height: 52.5rpx;" /></view>  
+      <view><input type="number" id="money" value="{{money}}" @input="moneyInput" placeholder="请输入提现金额" placeholder-style="color:#a9a9a9;font-size: 28rpx;line-height: 52.5rpx;" /></view>  
     </label>
     <view class="join">
       <button @tap="getMoney">确定提现</button>
@@ -280,8 +280,8 @@
             method:api.users.card.method,
             url:api.users.card.url,
             data:{
-              name:this.name,
-              card:this.card,
+              bank_name:this.name,
+              bank_card:this.card,
               bank:this.bank,
             }
           },true)
@@ -290,10 +290,11 @@
               title:'绑定成功'
             })
             this.changeModal = 0
+            this.$apply()
           }
         },
         moneyInput(e) {
-          this.money = e.detail.value
+          this.money = parseInt(e.detail.value)
         },
         // 提现
         async getMoney() {
@@ -305,7 +306,7 @@
               })
               return false
             } 
-            if( this.money > this.mymoney ){
+            if( parseInt(this.money) > parseInt(this.mymoney) ){
               wepy.showModal({
                 title: '提示',
                 content: '余额不足'
@@ -326,10 +327,12 @@
               },true)
 
               if(data.code){
-                await wepy.showToast({
-                  title:'提现成功'
+                await wepy.showModal({
+                  title:'提示',
+                  content:data.msg
                 })
                 this.mymoney -= this.money
+                this.money = ''
                 this.$apply()
               }else{
                 this.changeModal = 1
@@ -344,7 +347,7 @@
         this.imgs = this.$parent.globalData.imgs
         const data = await interfaces.getMyinfo()
         if( data.code ){
-          this.mymoney = data.info.total_money
+          this.mymoney = data.info.remain
           this.$apply()
         }
       }
