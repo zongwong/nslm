@@ -347,7 +347,7 @@
             <text class="status_icon"></text>
             <text>{{item.date}}</text>
             <text wx:if="{{item.status==2}}" class="greenColor">获得奖金：{{item.data.reward}}元</text>
-            <text wx:if="{{item.status==0}}" class="greenColor">扣除奖金：{{item.data.reward}}元</text>
+            <text wx:if="{{item.status==0}}" class="greenColor">扣除奖金：{{activity.price}}元</text>
             <text wx:if="{{item.status==1 || item.status == 3}}" class="greyColor">任务进度：{{index + 1}}/{{activity.days}}</text>
           </view>
           <view class="item_title_right">

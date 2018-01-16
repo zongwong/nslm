@@ -346,6 +346,11 @@ view {
             .title{
                 color: #fff;
                 font-size: 50rpx;
+                max-width:80%;
+                margin:0 auto;
+                // white-space:nowrap;
+                overflow:hidden;
+                text-overflow: ellipsis;
             }
             .play{
                 width: 80rpx;
@@ -369,7 +374,7 @@ view {
         <audio src="{{info.url}}" id="myAudio"></audio>
         <view class="databox">
             <image src="{{btn}}" class="play" @tap="music"></image>
-            <view class="title">心灵测试标题</view>
+            <view class="title">{{info.title}}</view>
             <image src="../../images/0.gif" class="music"></image>
         </view>
     </view>
