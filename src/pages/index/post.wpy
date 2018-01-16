@@ -372,6 +372,8 @@ export default class Post extends wepy.page {
     console.log('背景下载完成')
     const avaUrl = await interfaces.downFile(this.userInfo.avatarUrl)
     console.log('头像下载完成')
+    const qrCode = await interfaces.downFile('https://www.2p98.cn/Uploads/image/5a5d90f01258f.jpg')
+    console.log('二维码下载完成')
     // 背景
     ctx.drawImage(tempUrl, 0, 0, sysInfo.screenWidth, sysInfo.cheight)
     console.log('背景绘制')
@@ -384,7 +386,7 @@ export default class Post extends wepy.page {
     const qrCodeTop = this.config[this.type].qrcode.top / 2 * rate
     const qrCodeLeft = this.config[this.type].qrcode.left / 2 * rate
     const qrCodeWidth = this.config[this.type].qrcode.width / 2 * rate
-    ctx.drawImage(avaUrl, qrCodeLeft, qrCodeTop,qrCodeWidth,qrCodeWidth)
+    ctx.drawImage(qrCode, qrCodeLeft, qrCodeTop,qrCodeWidth,qrCodeWidth)
     // 姓名绘制
     ctx.setTextAlign('left')
     ctx.setFillStyle(this.config[this.type].name.color)
