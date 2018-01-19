@@ -427,8 +427,8 @@ export default class extends wepy.app {
   config = {
     pages: [
       "pages/index/index",
-      "pages/user/money", 
       "pages/index/post",
+      "pages/user/money", 
       "pages/user/exchange", 
       "pages/index/start",
       "pages/user/editinfo",

@@ -142,7 +142,7 @@ page{
       <view class="box create" wx:if="{{type=='create'}}">
         <image class="abs bg" src="{{current.bg}}"></image>
         <image class="abs avatar" src="{{userInfo.avatarUrl}}"></image>
-        <image class="abs qrcode" src="{{userInfo.avatarUrl}}"></image>
+        <image class="abs qrcode" src="https://www.2p98.cn/Uploads/image/5a5d90f01258f.jpg"></image>
         <text class="abs title">{{query.title}}</text>
         <text class="abs time">{{query.time}}</text>
         <text class="abs name">{{userInfo.nickName}}</text>
@@ -150,7 +150,7 @@ page{
       <view class="box sign" wx:if="{{type=='sign'}}">
         <image class="abs bg" src="{{current.bg}}"></image>
         <image class="abs avatar" src="{{userInfo.avatarUrl}}"></image>
-        <image class="abs qrcode" src="{{userInfo.avatarUrl}}"></image>
+        <image class="abs qrcode" src="https://www.2p98.cn/Uploads/image/5a5d90f01258f.jpg"></image>
         <text class="abs title">{{query.title}}</text>
         <text class="abs time">{{query.time}}</text>
         <text class="abs name">{{userInfo.nickName}}</text>
@@ -161,7 +161,7 @@ page{
       <view class="box exchange" wx:if="{{type=='exchange'}}">
         <image class="abs bg" src="{{current.bg}}"></image>
         <image class="abs avatar" src="{{userInfo.avatarUrl}}"></image>
-        <image class="abs qrcode" src="{{userInfo.avatarUrl}}"></image>
+        <image class="abs qrcode" src="https://www.2p98.cn/Uploads/image/5a5d90f01258f.jpg"></image>
         <text class="abs title">{{query.title}}</text>
         <text class="abs name">{{userInfo.nickName}}</text>
       </view>
@@ -182,6 +182,7 @@ export default class Post extends wepy.page {
     navigationBarTitleText: "女神联盟"
   };
   data = {
+    qrcode:'https://www.2p98.cn/Uploads/image/5a6186d4afcf8.jpg',
     img: null,
     info: null,
     sysInfo: {},
@@ -332,19 +333,17 @@ export default class Post extends wepy.page {
                 })
               }
             })
-          }, 1010);
+          }, 1110);
 
       }
   };
   async onLoad(options) {
-    console.log(options)
-    // options = {
-    //   title:'123123',
-    //   time:'123123',
-    //   type:'exchange'
-    // }
+    options = {
+      title:'123123',
+      time:'123123',
+      type:'exchange'
+    }
     let that = this
-    // this.userInfo = this.$parent.globalData.userInfo
     const { userInfo } = await interfaces.getUserInfo()
     this.userInfo = JSON.parse(userInfo)
     this.query = options
@@ -366,14 +365,15 @@ export default class Post extends wepy.page {
     const sysInfo = this.sysInfo
     const rate = this.rate
     const ctx = wx.createCanvasContext('myCanvas')
+    console.log('准备素材下载')
     // 素材下载
-    console.log('素材下载')
+    const qrCode = await interfaces.downFile(this.qrcode)
+    console.log('二维码下载完成')
     const tempUrl = await interfaces.downFile(this.config[this.type].bg)
     console.log('背景下载完成')
     const avaUrl = await interfaces.downFile(this.userInfo.avatarUrl)
-    console.log('头像下载完成')
-    const qrCode = await interfaces.downFile('https://www.2p98.cn/Uploads/image/5a5d90f01258f.jpg')
-    console.log('二维码下载完成')
+    console.log(this.userInfo.avatarUrl,'头像下载完成')
+    
     // 背景
     ctx.drawImage(tempUrl, 0, 0, sysInfo.screenWidth, sysInfo.cheight)
     console.log('背景绘制')
@@ -433,9 +433,9 @@ export default class Post extends wepy.page {
       ctx.fillText(this.week[new Date().getDay()], weekLeft, weekTop)
     }
     console.log('文本绘制')
-    setTimeout(function(){    
-      ctx.draw()
-    },1000)
+    // setTimeout(function(){    
+    await ctx.draw()
+    // },1000)
   }
 }
 </script>

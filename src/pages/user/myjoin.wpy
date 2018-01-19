@@ -84,8 +84,8 @@
               <view><text class="greyColor">{{item.a_join_num}}人参与</text></view>
             </view>
           </view>
-          <!-- <image wx:if="{{item.status==1}}" class="status" src="../../images/status_ok.png"></image> -->
-          <!-- <image wx:if="{{item.status==2}}" class="status" src="../../images/status_no.png"></image> -->
+          <image wx:if="{{item.is_success && item.is_success==1}}" class="status" src="../../images/status_ok.png"></image>
+          <image wx:if="{{item.is_success && item.is_success==0}}" class="status" src="../../images/status_no.png"></image>
         </view>
         <view class="list_item_data">
           <view class="data_item">
