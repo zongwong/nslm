@@ -2,7 +2,7 @@ const env = 'production'
 
 const hosts = {
   development: 'http://lady.zdgphp.cn/api',
-  production: 'https://www.2p98.cn/api'
+  production: 'https://www.nskcb.com/api'
 }
 
 // api列表

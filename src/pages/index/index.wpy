@@ -90,7 +90,7 @@
     <repeat for="{{activeList}}" key="index" index="index" item="item">
         <activityList :item="item"></activityList>
     </repeat>
-    <navigator url="/pages/index/start"><image class="openDaka" src="https://www.2p98.cn/src/images/icon-dk.png"></image></navigator> 
+    <navigator url="/pages/index/start"><image class="openDaka" src="https://www.nskcb.com/src/images/icon-dk.png"></image></navigator> 
     <explain :status.sync="status"></explain>
   </view>
 </template>
