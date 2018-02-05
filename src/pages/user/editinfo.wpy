@@ -19,7 +19,7 @@
   <view class="editinfo">
     <view class="me-block">
       <view class="header">
-        <image mode="top" src="{{imgs.editbg}}"></image>
+        <image mode="aspectFill" src="{{imgs.editbg}}"></image>
       </view>
       <view class="info_block active_block">
         <view class="userinfo">

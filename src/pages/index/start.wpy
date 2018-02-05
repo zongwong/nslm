@@ -109,7 +109,7 @@
           </view>
         </view>
         <view class="label_input">
-          <textarea type="text" value="{{desrc}}" id="desrc" @blur="desrcInput" placeholder="请填写活动描述" placeholder-style="font-size:28rpx;line-height:58823529em;padding:0;"></textarea>
+          <textarea maxlength="-1" type="text" value="{{desrc}}" id="desrc" @blur="desrcInput" placeholder="请填写活动描述" placeholder-style="font-size:28rpx;line-height:58823529em;padding:0;"></textarea>
         </view>
       </label>
       <label class="form_item">

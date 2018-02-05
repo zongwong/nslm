@@ -504,7 +504,7 @@ export default class extends wepy.app {
       'fmbg': 'https://www.nskcb.com/src/images/fmbg.png',
       'testbg': 'https://www.nskcb.com/src/images/testbg.png',
       'banner': 'https://www.nskcb.com/src/images/banner.png',
-      'editbg': 'https://www.nskcb.com/src/images/editbg.png',
+      'editbg': 'http://www.2p98.cn/Uploads/image/5a618b0b7b2c0.jpg',
       'moodbg': 'https://www.nskcb.com/src/images/moodbg.png',
       'pkpost': 'https://www.nskcb.com/src/images/pkpost.png',
       'topbg': 'https://www.nskcb.com/src/images/topbg.png',

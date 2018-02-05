@@ -338,11 +338,11 @@ export default class Post extends wepy.page {
       }
   };
   async onLoad(options) {
-    options = {
-      title:'123123',
-      time:'123123',
-      type:'exchange'
-    }
+    // options = {
+    //   title:'123123',
+    //   time:'123123',
+    //   type:'exchange'
+    // }
     let that = this
     const { userInfo } = await interfaces.getUserInfo()
     this.userInfo = JSON.parse(userInfo)

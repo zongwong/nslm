@@ -244,13 +244,16 @@
         imgs: null,
         myinfo: {}
       }
-      async onLoad() {
-        this.userInfo = this.$parent.globalData.userInfo
-        this.imgs = this.$parent.globalData.imgs
+      async onShow(){
         const data = await interfaces.getMyinfo()
         if( data.code ){
           this.myinfo = data.info
+          this.$apply()
         }
+      }
+      async onLoad() {
+        this.userInfo = this.$parent.globalData.userInfo
+        this.imgs = this.$parent.globalData.imgs
         this.$apply()
       }
       

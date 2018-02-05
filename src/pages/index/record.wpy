@@ -351,8 +351,9 @@
             <text wx:if="{{item.status==1 || item.status == 3}}" class="greyColor">任务进度：{{index + 1}}/{{activity.days}}</text>
           </view>
           <view class="item_title_right">
-            <text wx:if="{{item.status==0||item.status==1}}">未打卡</text>
-            <text wx:if="{{item.status==2}}">已打卡</text>
+            <text wx:if="{{item.status==0}}" style="background-color: #e90000;">未打卡</text>
+             <text wx:if="{{item.status==1}}">未打卡</text>
+            <text wx:if="{{item.status==2}}" style="background-color: #52b700;">已打卡</text>
             <text wx:if="{{item.status==3}}" class="today" @tap="toSign">打卡</text>
           </view>
         </view> 

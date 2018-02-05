@@ -174,7 +174,7 @@ export default class Detail extends wepy.page {
   };
 
   async onLoad(options) {
-    const data = await interfaces.getActivityInfo(options.id)
+    const data = await interfaces.getActivityInfo(135||options.id)
     if (data.code) {
       this.activity = data.info
       this.end_time = _.getNextTime(data.info.start_time,data.info.days)

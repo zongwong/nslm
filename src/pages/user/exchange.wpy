@@ -404,13 +404,15 @@ export default class Exchange extends wepy.page {
   }
   async onLoad() {
     this.imgs = this.$parent.globalData.imgs
+    await this.getCat()
+    await this.getList()
+  }
+  async onShow() {
     const data = await interfaces.getMyinfo()
     if ( data.code ){
       this.myInfo = data.info
       this.$apply()
     }
-    await this.getCat()
-    await this.getList()
   }
 }
 </script>
